@@ -1,0 +1,733 @@
+@media (min-width: 300px) and (max-width: 1661px) {
+  .menuLink {
+    /* background-color: #045662; */
+    /* padding: 20px 0 14px; */
+    background-color: #10122e;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 1414px) {
+  .right-menu {
+    width: 389px;
+  }
+
+  .mainDetailView {
+    width: auto;
+    height: calc(100vh - 50px);
+    transition: all 0.3s;
+    padding: 0 6px;
+  }
+
+  .matchdetailpage .mainDetailView {
+    width: auto;
+  }
+}
+/* new change */
+
+@media (min-width: 300px) and (max-width: 1356px) {
+  .inplayHourseNDogB {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    margin-right: 15px;
+    width: 500px !important;
+    text-align: center;
+  }
+
+  .detailContant {
+    min-height: 100vh;
+    overflow-x: scroll;
+  }
+
+  .inplayHeadSecBox {
+    text-align: center;
+    padding: 10px 7px;
+    min-width: 80px;
+  }
+
+  .inplayHeadSecBox h3 {
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+
+  .inplayHeadSecBox img {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 4px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 991px) {
+  .tabback_lay ul {
+    width: auto;
+  }
+
+  .tabback_lay02 ul {
+    width: auto;
+  }
+
+  .all__match__input p {
+    display: none;
+  }
+
+  .menuLink {
+    background-color: #045662;
+    /* padding: 20px 0 14px; */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #000;
+  }
+
+  .header-time {
+    width: 203px;
+    display: block;
+  }
+
+  .header-time span {
+    font-size: 11px;
+  }
+
+  .servicesSec {
+    margin: 5px 0;
+  }
+
+  .brand-logo a img {
+    width: 120px;
+    display: none;
+  }
+
+  .gameAMI {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .gameAMI img {
+    margin-bottom: 6px;
+  }
+
+  .topGame {
+    margin-top: 0rem;
+  }
+
+  .center-box {
+    padding: 0px 8px;
+  }
+
+  .matchMainBox {
+    padding: 7px 2px;
+  }
+
+  .matchTopCatT {
+    display: none;
+  }
+
+  .bottom-sticky {
+    display: block !important;
+  }
+
+  .modTxt {
+    display: block !important;
+  }
+
+  .modTxt span {
+    color: #000;
+    font-size: 12px;
+  }
+
+  .matchDeailHide:first {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .right-menu {
+    display: none;
+  }
+
+  .mainDetailView {
+    width: calc(100vw - 0px);
+    /* height: calc(100vh - 50px); */
+    transition: all 0.3s;
+    /* overflow-y: auto; */
+    background: #10122e;
+  }
+
+  .matchdetailpage .mainDetailView {
+    width: calc(100vw - 0px);
+  }
+
+  .all__match__bar__right-box ul li:not(:nth-child(3)):not(:nth-child(4)) {
+    display: none !important;
+  }
+
+  .mobilemenuactiv {
+    display: block !important;
+  }
+
+  .maxBtn {
+    display: block;
+  }
+
+  .maxtxt {
+    display: none;
+  }
+
+  .ball_running {
+    margin-left: 0px;
+    padding: 9px 0;
+  }
+
+  .footer-providers__list {
+    display: none;
+  }
+
+  .footer {
+    background: #fff;
+    margin-top: 10px;
+    padding: 10px 5px 86px 5px;
+    text-align: justify;
+  }
+
+  .rules {
+    color: #000;
+    text-align: justify;
+  }
+
+  .all__match__content__container {
+    width: 360px;
+    margin-left: auto;
+  }
+
+  .all__match__input {
+    display: flex;
+    align-items: inherit;
+    gap: 10px;
+  }
+
+  .bgfirstBDbox {
+    padding: 10px 14px;
+  }
+
+  .all__match__content__tag button.all__match__content__tag--clear-btn,
+  .all__match__content__tag button.btn-success {
+    display: block;
+  }
+
+  .all__match__content__tag.button {
+    display: flex;
+  }
+
+  .all__match__content__tag.button button {
+    display: block;
+  }
+
+  .matchDetailTooltip {
+    position: relative;
+    left: 11rem;
+  }
+
+  .datePicker {
+    padding: 0;
+  }
+
+  .tableMV {
+    padding: 0px;
+  }
+
+  .bBalanceTxt p {
+    margin-bottom: -8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .mainHead {
+    padding: 20px 5px 20px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .casinogames .single-slider {
+    border-radius: 16px;
+    margin: 6px;
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important;
+    background-color: #222124;
+    border: 0.2px solid #fff;
+    color: #fff;
+    text-align: center;
+    min-height: auto;
+    min-width: 92px;
+  }
+
+  .bg-lightTheme {
+    padding: 0.8rem !important;
+  }
+
+  .servicesSec.casinogames {
+    padding: 16px 3px;
+  }
+
+  .game-slider {
+    gap: 7px;
+  }
+
+  .game-img {
+    height: 80px;
+    width: 100px;
+    max-width: 100px;
+  }
+
+  .links li a img {
+    width: 24px;
+    height: 24px;
+    display: block !important;
+    margin: 0 auto;
+  }
+
+  .tag-live {
+    top: 9px !important;
+  }
+
+  .menuLink {
+    background-color: #15172b;
+    padding: 0px 0 0px !important;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #000;
+  }
+
+  .links li a {
+    font-size: 11px;
+  }
+
+  .bFooter {
+    padding-bottom: 78px;
+  }
+
+  .placebet_button {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 7px;
+  }
+
+  .placebet_button button {
+    width: 48%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+  }
+
+  .maxBtn img {
+    width: 16px;
+    margin-top: 10px;
+    margin-right: 1px;
+  }
+
+  .EditStack input {
+    padding: 0 0rem;
+    height: 26px;
+    text-align: center;
+    border-radius: 0;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 776px) {
+  .matchTxt h1 {
+    max-width: 190px !important;
+    margin-right: 8px;
+  }
+  .topGame img {
+    height: 80px !important;
+    border-radius: 10px !important;
+    object-fit: cover;
+  }
+  .livenow {
+    color: #18adc5 !important;
+    font-size: 12px;
+    font-weight: 800;
+    margin-left: 2px;
+  }
+
+  .mobileTMatch {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mtime {
+    display: none;
+  }
+
+  .bm1 img,
+  .fancy1 img,
+  .l-tv img {
+    cursor: default;
+    height: 15px !important;
+    width: 25px !important;
+  }
+
+  .mainContant {
+    padding: 0px 6px;
+  }
+
+  .center-box span {
+    padding: 10px 0;
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .f-right {
+    width: 100px;
+  }
+
+  .web-show {
+    display: none;
+  }
+
+  .mobile-show {
+    display: block;
+  }
+
+  .footer-providers__list {
+    display: none;
+  }
+
+  .footer {
+    background: #10122e;
+    margin-top: 10px;
+    padding: 10px 5px 25px 5px;
+    text-align: justify;
+  }
+
+  .rules {
+    color: #000;
+    text-align: justify;
+  }
+
+  .all__match__content__container {
+    width: 360px;
+    margin-left: auto;
+  }
+
+  .all__match__input {
+    display: flex;
+    align-items: inherit;
+    gap: 10px;
+  }
+
+  .bgfirstBDbox {
+    padding: 10px 14px;
+  }
+
+  .all__match__content__tag button.all__match__content__tag--clear-btn,
+  .all__match__content__tag button.btn-success {
+    display: block;
+  }
+
+  .all__match__content__tag.button {
+    display: flex;
+  }
+
+  .all__match__content__tag.button button {
+    display: block;
+  }
+
+  .datePicker {
+    padding: 0;
+  }
+
+  .tableMV {
+    padding: 0px;
+  }
+
+  .bBalanceTxt p {
+    margin-bottom: -8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .mainHead {
+    padding: 20px 5px 20px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .casinogames .single-slider {
+    border-radius: 16px;
+    margin: 6px;
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important;
+    background-color: #222124;
+    border: 0.2px solid #fff;
+    color: #fff;
+    text-align: center;
+    min-height: auto;
+    min-width: 92px;
+  }
+
+  .casinogames .service-img img {
+    width: 28px !important;
+    margin-top: 10px !important;
+    margin: 0 auto;
+  }
+
+  .casinogames .service-img p {
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    margin-top: 10px !important;
+  }
+
+  .card-wrapper {
+    border-radius: 5px;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    height: 100%;
+    width: 46%;
+    background-color: #252525;
+  }
+
+  .content-container .img-container {
+    min-height: auto;
+  }
+
+  .content-container img {
+    height: 38vw;
+    min-height: 38vw;
+  }
+
+  .game-desc {
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .game-desc .details {
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    display: none;
+  }
+
+  .game-desc p {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .servicesSec.casinogames {
+    padding: 16px 3px;
+  }
+
+  .bg-lightTheme div:first-child {
+    margin-left: 0px !important;
+  }
+
+  .game-slider {
+    gap: 7px;
+  }
+
+  .game-img {
+    height: 80px;
+    width: 100px;
+    max-width: 100px;
+  }
+
+  .bFooter {
+    padding-bottom: 78px;
+  }
+
+  .livestreaming {
+    display: block !important;
+  }
+
+  .placebet_button {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 7px;
+  }
+
+  .placebet_button button {
+    width: 48%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+  }
+
+  .maxBtn img {
+    width: 16px;
+    margin-top: 10px;
+    margin-right: 1px;
+  }
+
+  .dtablink {
+    display: block;
+    padding: 8px 16px !important;
+    color: #fff;
+    font-size: 13px !important;
+    margin-right: 0 !important;
+    text-decoration: none;
+    width: 132px;
+  }
+
+  .nav-pills {
+    margin-left: 5px;
+    flex-wrap: revert;
+    overflow: auto;
+  }
+
+  .EditStack input {
+    padding: 0 0rem;
+    height: 26px;
+    text-align: center;
+    border-radius: 0;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 426px) {
+  .matchTxt h1 {
+    max-width: 175px !important;
+    margin-right: 0px;
+  }
+
+  .bm1 img,
+  .fancy1 img,
+  .l-tv img {
+    cursor: default;
+    height: 15px !important;
+    width: 22px !important;
+  }
+
+  .datePicker {
+    padding: 0;
+  }
+
+  .tableMV {
+    padding: 0px;
+  }
+
+  .bBalanceTxt p {
+    margin-bottom: -8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .EditStack input {
+    padding: 0 0rem;
+    height: 26px;
+    text-align: center;
+    border-radius: 0;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 481px) {
+  .matchDetailTooltip {
+    position: relative;
+    left: 7rem;
+  }
+
+  .btnBalance {
+    padding: 0px !important;
+  }
+
+  .mainHead {
+    padding: 20px 5px 20px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bBalanceTxt p {
+    margin-bottom: -8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .btnBalance img {
+    width: 17px;
+    height: 20px;
+    margin-top: 6px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .mobilemenuactiv {
+    margin-right: 0.4rem !important;
+  }
+
+  .dataListV label {
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .dataTables_filter {
+    display: flex;
+    align-items: center;
+  }
+
+  .tableMV {
+    padding: 0 2px;
+  }
+
+  .searchBox {
+    padding: 15px 2px;
+  }
+
+  .datePicker {
+    padding: 0 2px !important;
+  }
+
+  .mmt-2 {
+    margin-bottom: 10px;
+  }
+
+  .mainHead {
+    padding: 20px 5px 20px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 111;
+  }
+
+  .EditStack input {
+    padding: 0 0rem;
+    height: 26px;
+    text-align: center;
+    border-radius: 0;
+    font-size: 13px;
+  }
+}
+@media (max-width: 600px) {
+  .row-parallel {
+    flex-direction: column;
+  }
+}
