@@ -1,0 +1,890 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content login-popup">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="login-main-bx-inner" (ngSubmit)="login()" name="loginForm" novalidate>
+        <div class="modal-body">
+          <div class="titelModal text-center">
+            <h2>Login</h2>
+          </div>
+          <div class>
+            <label for="exampleFormControlInput1" class="form-label">User
+              ID</label>
+            <input type="email" class="form-control" id="username" placeholder="User ID"
+              style="    background: #B9B9B3;">
+            <div class="error_txt"
+              *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+              [ngClass]="error"> Enter valid user name.</div>
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Paswsword</label>
+            <input type="password" class="form-control" id="password" placeholder="Password"
+              style="    background: #B9B9B3;">
+            <div class="error_txt"
+              *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+              [ngClass]="error"> Enter valid password.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="signBTn w-100 pt-2 pb-2 lm1" type="submit" (click)="this.LoginFroms()">
+            <i class="fa fa-user mr1" aria-hidden="true" (click)="this.LoginFroms()"></i> LOG IN
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="login-main-bx-inner" [formGroup]="register_form" (ngSubmit)="registerSave()" name="registerForm"
+        novalidate>
+        <div class="modal-body " style="background: #10122e;">
+          <div class="titelModal text-center">
+            <h2>REGISTRATION</h2>
+          </div>
+          <!-- <div class>
+            <label for="exampleFormControlInput1"
+              class="form-label">Name</label>
+            <input type="text" formControlName="name"
+              class="form-control formsty"
+              placeholder="Name"
+              id="name"
+              aria-describedby="nameHelp">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['name'].valid && register_form.controls['name'].touched) || (register_form.controls['name'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error"> Enter valid name.</div>
+
+          </div> -->
+          <div class="mt-4">
+
+            <input type="text" formControlName="username" (keypress)="keyPressAlphaNumericWithCharacters($event)"
+              (blur)="CheckUserNameExist($event)" class="form-control formsty" placeholder="User Name" id="username"
+              aria-describedby="usernameHelp" style="    background: #B9B9B3;">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['username'].valid && register_form.controls['username'].touched) || (register_form.controls['username'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Enter valid user name.</div>
+          </div>
+
+          <div class="mt-4">
+
+            <input type="text" (keyup)="onlyNumber($event)" formControlName="mobile" class="form-control formsty"
+              placeholder="Phone Number" id="phone" aria-describedby="phoneHelp" style="    background: #B9B9B3;">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['mobile'].valid && register_form.controls['mobile'].touched) || (register_form.controls['mobile'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Enter valid mobile number.</div>
+            <div class="error_txt existnumber"></div>
+          </div>
+          <div class="mt-4">
+
+            <input type="password" formControlName="newPassword" [(ngModel)]="newPassword" class="form-control formsty"
+              placeholder="Password" id="newPassword" aria-describedby="newPasswordHelp"
+              style="    background: #B9B9B3;">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['newPassword'].valid && register_form.controls['newPassword'].touched) || (register_form.controls['newPassword'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Enter Password.</div>
+          </div>
+          <div class="mt-4">
+
+            <input type="password" formControlName="confPassword" [(ngModel)]="confPassword"
+              class="form-control formsty" placeholder="Repeat Password" id="confPassword"
+              aria-describedby="confPasswordHelp" style="    background: #B9B9B3;">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['confPassword'].valid && register_form.controls['confPassword'].touched) || (register_form.controls['confPassword'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Password Mismatch.</div>
+          </div>
+
+          <div class="mt-4 mb-3 form-check">
+            <input type="checkbox" formControlName="ageagree" name="option1" class="form-check-input" id="check1">
+            <label class="form-check-label formlabelTxt" for="exampleCheck1">I
+              confirm that I am over 18
+              years old and accept the
+              terms and
+              conditions*</label>
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['ageagree'].valid && register_form.controls['ageagree'].touched) || (register_form.controls['ageagree'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error"> Please check if you are 18+.
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="signBTn w-100 pt-2 pb-2" type="submit" id="continue_btn" (click)="registerSave()"
+            (click)="getBalance()">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Modal -->
+<div class="dashboard-nav">
+  <nav class="dashboard-nav-list">
+    <div class="menuHead">
+      <h4>Popular</h4>
+      <img class="menu-toggle" src="./assets/img/close_icon.png" />
+    </div>
+    <ul class="sidebar__menu">
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/inplay-matches">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/inplay.png" />
+            In-Play
+          </div>
+        </a>
+      </li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li id="menu" *ngIf="sport.sport_id!=111&&sport.sport_id!=222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="/game/{{sport.sport_id}}">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+        <li id="menu" *ngIf="sport.sport_id==222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+
+      </ng-container>
+      <!-- <li id="menu">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Diamond Casino
+          </div>
+        </a>
+      </li> -->
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Casino
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/aviator-icon.svg" />
+            Aviator
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            AE SEXY
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            EZUGI
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Live Casino
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+<!-- Mobile Modal -->
+<!-- header start -->
+<header class="header">
+  <div class="breaking-box">
+    <div class="d-flex w-100 mr5">
+      <img src="./assets/img/voice_d.png">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseleave="this.start();">
+        <a class="h6 fw-normal mr-5" href="javascript:void(0)" style="color: white; font-weight: bold;">WELCOME TO
+          Naikbook</a>
+      </marquee>
+    </div>
+    <div class="header-time"><span style="color: white;font-weight: bold;">{{ time | date: 'd MMM,y hh:mm:ss a'
+        }}</span></div>
+
+  </div>
+  <div class="mainHead">
+
+    <div class="brand-logo d-flex align-items-center">
+      <!-- <button id="toggle-menu" class="me-3 active mobilemenuactiv menu-toggle">
+        <img src="../../assets/images/majestic-casino.png" />
+
+      </button> -->
+      <a href="/home">
+        <img src="../../assets/logo/logo.png" alt class="dark-version-logo">
+      </a>
+    </div>
+    <div class="loginSide">
+      <button class="signBTn" type="button" data-bs-toggle="modal" data-bs-target="#registerModal"
+        style="margin-right: 12px;">
+        <!-- *ngIf="signUpStatus==1" -->
+        <i class="fa fa-user mr1" aria-hidden="true"></i> SIGN UP
+      </button>
+
+      <button class="signBTn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-user mr1" aria-hidden="true" (click)="this.LoginFroms()"></i> LOG IN
+      </button>
+
+
+    </div>
+  </div>
+  <div class="menuLink">
+    <ul class="links">
+      <li><a href="/home"><img src="./assets/img/home.png" />
+          <p>Home</p>
+        </a></li>
+      <li><a href="/inplay-matches"><img src="./assets/img/inplay.png" />
+          <p>In-Play</p>
+        </a></li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li *ngIf="sport.sport_id!=111&&sport.sport_id!=222"><a href="/game/{{sport.sport_id}}"><img
+              src="{{sport.image}}" /><span id="tagLive" class="tag-live">
+              <strong></strong>0
+            </span>
+            <p>{{sport.name}}</p>
+          </a></li>
+      </ng-container>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Live Casino</p>
+        </a>
+      </li>
+      <li>
+        <a class="aviator" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <img src="./assets/img/aviator-icon.svg" />
+          Aviator
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>AE SEXY</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>EZUGI</p>
+        </a>
+      </li>
+
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Virtual Sports</p>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</header>
+<!-- header end -->
+
+<!-- Slider Start -->
+<section class="slider">
+  <!-- Desktop View -->
+  <div id="carouselExampleIndicators" class="carousel slide web-show" data-ride="carousel">
+    <div class="carousel-indicators">
+      <ng-container>
+        <button type="button" class="active" attr.data-target="#carouselExampleIndicators"></button>
+      </ng-container>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let image of imagess; let i = index" [class.active]="i === 0">
+        <img [src]="image.attachment" class="d-block w-100" [alt]="'Slide ' + (i + 1)"
+          >
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mobile View -->
+  <div id="carouselExampleSlidesOnly" class="carousel slide mobile-show" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <ng-container>
+        <button type="button" class="active" attr.data-target="#carouselExampleSlidesOnly"></button>
+      </ng-container>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let image of imagess; let i = index" [class.active]="i === 0">
+        <img [src]="image.attachment" class="d-block w-100" [alt]="'Slide ' + (i + 1)"
+          style="filter: hue-rotate(205deg);">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Slider Start -->
+<section class="mainContant">
+  <!-- short slider Start-->
+  <section class="servicesSec homeimage">
+    <div class="partner-slider owl-carousel owl-loaded owl-drag">
+      <div class="single-slider">
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="service-img">
+            <img src="../../assets/Banner/Av1.webp" alt="Image">
+          </div>
+        </a>
+      </div>
+      <div class="single-slider">
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="service-img">
+            <img src="../../assets/Banner/club1.webp" alt="Image">
+          </div>
+        </a>
+      </div>
+      <div class="single-slider">
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="service-img">
+            <img src="../../assets/Banner/horse1.webp" alt="Image">
+          </div>
+        </a>
+      </div>
+      <div class="single-slider">
+        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="service-img">
+            <!-- <img src="./assets/img/bonus-1.webp" alt="Image"> -->
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- short slider End -->
+  <!-- short slider End -->
+  <section class="gameAMI">
+    <img class="mmr" src="./assets/img/RDGIF-1.gif" />
+    <img src="./assets/img/RDGIF-2.gif" />
+  </section>
+  <!-- short slider End -->
+  <!-- Top Games Start-->
+  <section class="topGame">
+    <div class="title">
+      <h2 style="color: white;">Top Games</h2>
+    </div>
+    <div class="banner-container" (mouseenter)="pauseAutoSlide()" (mouseleave)="resumeAutoSlide()"
+      style="overflow: hidden;width: 100%;height:auto">
+      <div class="banner" [style.transitionDuration]="transitionDuration"
+        [style.transform]="'translateX(' + currentPosition + 'px)'" style="display: flex;">
+        <img *ngFor="let item of slides" [src]="item.Image" alt="Banner" class="banner-image" style="width:20%;height:110px;margin-right:10px;
+        border-radius:25px;">
+      </div>
+    </div>
+
+
+
+  </section>
+  <!-- Live Casino Game End -->
+  <!-- Match View Start -->
+  <section class="matchDetail">
+    <!-- matchBox start-->
+    <ng-container *ngFor="let sport of sportsList; let i=index">
+      <div class="matchboxBB" *ngIf="sport.sport_id!=111&&sport.sport_id!=222&&sport.sport_id!=7&&sport.sport_id!=4339">
+        <div class="matchDView">
+          <div class="sub_path center-box">
+            <p>{{sport.name}}</p>
+          </div>
+          <div class="matchMainBox matchTopCatT">
+            <div class="row align-items-center">
+              <div class="col-lg-8 col-12 ja">
+              </div>
+              <div class="col-lg-4 col-12">
+                <div class="row">
+                  <div class="col-lg-4 text-center pl-0 pr-0 matchDetTTxt">
+                    <span>1</span>
+                  </div>
+                  <div class="col-lg-4 text-center pl-0 pr-0 matchDetTTxt">
+                    <span>X</span>
+                  </div>
+                  <div class="col-lg-4 text-center pl-0 pr-0 matchDetTTxt">
+                    <span>2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-container
+            *ngFor="let slist of this._sportService._ListMatchbySport.InplayMatches; let i=index; let isLast = last">
+            <div class="matchMainBox" *ngIf="slist.sport_id==sport.sport_id" (click)="GoToDetailPage(slist)">
+              <div class="row align-items-center">
+                <div class="col-lg-8 col-12 ja">
+                  <div class="eventInfo">
+                    <div class="matchTxt">
+                      <p class="mtime">{{ slist.start_date+'000' | date:
+                        'd MMM hh:mm'}} | </p>
+                      <span class="lvnow" *ngIf="slist.InplayStatus=='OPEN'"></span>
+                      <h1>{{slist.name}} </h1>
+                      <div class="livenow ml-2 livenownew" *ngIf="slist.InplayStatus=='OPEN'">Live Now</div>
+                    </div>
+                    <div class>
+                      <span class="l-tv"><img alt="TV" src="./assets/img/tv.svg"></span>
+                      <span class="bm1" *ngIf="slist.sport_id==4">
+                        <img alt="BM" src="./assets/img/bm-icon1.svg">
+                      </span>
+                      <span class="fancy1 mr-1" *ngIf="slist.sport_id==4">
+                        <img alt="Fancy" src="./assets/img/fancy-icon1.svg">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mobileTMatch">
+                  <div class="matchTxt mobMtxt">
+                    <p><img src="./assets/img/clock.png" /> {{
+                      slist.start_date+'000' | date: 'd MMM hh:mm'}} |
+                      {{slist.seriesName}}</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                  <div class="matchodds" *ngIf="slist.runner_json!=null">
+                    <div
+                      *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N')"
+                      class="ball-start-overly">
+                      <span>{{slist.adminMessage!=''?slist.adminMessage:
+                        (slist.InplayStatus=='CLOSE'
+                        ||
+                        slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                        (slist.IsBetAllow=='N')?'Bet locked':''+
+                        slist.remainTime}}</span>
+                    </div>
+                    <div class="oddstxt">
+                      <span>{{slist.runner_json[0]!=undefined
+                        &&
+                        slist.runner_json[0].ex!=undefined
+                        &&
+                        slist.runner_json[0].ex.availableToBack!=undefined
+                        ?
+                        retrunValue('back',slist,(slist.runner_json[0].ex.availableToBack.length>
+                        0) ?
+                        slist.runner_json[0].ex.availableToBack[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxtgray">
+                      <span>{{slist.runner_json[0]!=undefined
+                        &&
+                        slist.runner_json[0].ex!=undefined
+                        &&
+                        slist.runner_json[0].ex.availableToLay!=undefined
+                        ?
+                        retrunValue('lay',slist,(slist.runner_json[0].ex.availableToLay.length>
+                        0) ?
+                        slist.runner_json[0].ex.availableToLay[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxt">
+                      <span>{{slist.runner_json[2]!=undefined
+                        &&
+                        slist.runner_json[2].ex!=undefined
+                        &&
+                        slist.runner_json[2].ex.availableToBack!=undefined
+                        ?
+                        retrunValue('back',slist,(slist.runner_json[2].ex.availableToBack.length>
+                        0) ?
+                        slist.runner_json[2].ex.availableToBack[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxtgray">
+                      <span>{{slist.runner_json[2]!=undefined
+                        &&
+                        slist.runner_json[2].ex!=undefined
+                        &&
+                        slist.runner_json[2].ex.availableToLay!=undefined
+                        ?
+                        retrunValue('lay',slist,(slist.runner_json[2].ex.availableToLay.length>
+                        0) ?
+                        slist.runner_json[2].ex.availableToLay[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxt">
+                      <span>{{slist.runner_json[1]!=undefined
+                        &&
+                        slist.runner_json[1].ex!=undefined
+                        &&
+                        slist.runner_json[1].ex.availableToBack!=undefined
+                        ?
+                        retrunValue('back',slist,(slist.runner_json[1].ex.availableToBack.length>
+                        0) ?
+                        slist.runner_json[1].ex.availableToBack[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxtgray">
+                      <span>{{slist.runner_json[1]!=undefined
+                        &&
+                        slist.runner_json[1].ex!=undefined
+                        &&
+                        slist.runner_json[1].ex.availableToLay!=undefined
+                        ?
+                        retrunValue('lay',slist,(slist.runner_json[1].ex.availableToLay.length>
+                        0) ?
+                        slist.runner_json[1].ex.availableToLay[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container
+            *ngFor="let slist of this._sportService._ListMatchbySport.UpCommingMatches; let i=index; let isLast2 = last">
+            <div class="matchMainBox" *ngIf="slist.sport_id==sport.sport_id && slist.InplayStatus=='OPEN'"
+              (click)="GoToDetailPage(slist)">
+              <div class="row align-items-center">
+                <div class="col-lg-8 col-12 ja">
+                  <div class="eventInfo">
+                    <div class="matchTxt">
+                      <p class="mtime">{{ slist.start_date+'000' | date:
+                        'd MMM hh:mm'}} |&nbsp;</p>
+                      <h1>{{slist.name}} </h1>
+                    </div>
+                    <div class>
+                      <span class="l-tv"><img alt="TV" src="./assets/img/tv.svg"></span>
+                      <span class="bm1" *ngIf="slist.sport_id==4">
+                        <img alt="BM" src="./assets/img/bm-icon1.svg">
+                      </span>
+                      <span class="fancy1 mr-1" *ngIf="slist.sport_id==4">
+                        <img alt="Fancy" src="./assets/img/fancy-icon1.svg">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mobileTMatch">
+                  <div class="matchTxt mobMtxt">
+                    <p><img src="./assets/img/clock.png" /> {{
+                      slist.start_date+'000' | date: 'd MMM hh:mm'}} |
+                      {{slist.seriesName}}</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                  <div class="matchodds" *ngIf="slist.runner_json!=null">
+                    <div
+                      *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N')"
+                      class="ball-start-overly">
+                      <span>{{slist.adminMessage!=''?slist.adminMessage:
+                        (slist.InplayStatus=='CLOSE'
+                        ||
+                        slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                        (slist.IsBetAllow=='N')?'Bet locked':''+
+                        slist.remainTime}}</span>
+                    </div>
+                    <div class="oddstxt">
+                      <span>{{slist.runner_json[0]!=undefined
+                        &&
+                        slist.runner_json[0].ex!=undefined
+                        &&
+                        slist.runner_json[0].ex.availableToBack!=undefined
+                        ?
+                        retrunValue('back',slist,(slist.runner_json[0].ex.availableToBack.length>
+                        0) ?
+                        slist.runner_json[0].ex.availableToBack[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxtgray">
+                      <span>{{slist.runner_json[0]!=undefined
+                        &&
+                        slist.runner_json[0].ex!=undefined
+                        &&
+                        slist.runner_json[0].ex.availableToLay!=undefined
+                        ?
+                        retrunValue('lay',slist,(slist.runner_json[0].ex.availableToLay.length>
+                        0) ?
+                        slist.runner_json[0].ex.availableToLay[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxt">
+                      <span>{{slist.runner_json[2]!=undefined
+                        &&
+                        slist.runner_json[2].ex!=undefined
+                        &&
+                        slist.runner_json[2].ex.availableToBack!=undefined
+                        ?
+                        retrunValue('back',slist,(slist.runner_json[2].ex.availableToBack.length>
+                        0) ?
+                        slist.runner_json[2].ex.availableToBack[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxtgray">
+                      <span>{{slist.runner_json[2]!=undefined
+                        &&
+                        slist.runner_json[2].ex!=undefined
+                        &&
+                        slist.runner_json[2].ex.availableToLay!=undefined
+                        ?
+                        retrunValue('lay',slist,(slist.runner_json[2].ex.availableToLay.length>
+                        0) ?
+                        slist.runner_json[2].ex.availableToLay[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxt">
+                      <span>{{slist.runner_json[1]!=undefined
+                        &&
+                        slist.runner_json[1].ex!=undefined
+                        &&
+                        slist.runner_json[1].ex.availableToBack!=undefined
+                        ?
+                        retrunValue('back',slist,(slist.runner_json[1].ex.availableToBack.length>
+                        0) ?
+                        slist.runner_json[1].ex.availableToBack[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                    <div class="oddstxtgray">
+                      <span>{{slist.runner_json[1]!=undefined
+                        &&
+                        slist.runner_json[1].ex!=undefined
+                        &&
+                        slist.runner_json[1].ex.availableToLay!=undefined
+                        ?
+                        retrunValue('lay',slist,(slist.runner_json[1].ex.availableToLay.length>
+                        0) ?
+                        slist.runner_json[1].ex.availableToLay[0].price
+                        :
+                        '--') : '--'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="this._sportService._ListMatchbySport.UpCommingMatches.length==0">
+                No match in live.
+              </div>
+            </div>
+
+          </ng-container>
+
+          <div
+            *ngIf="this._sportService._ListMatchbySport.InplayMatches.length==0 && this._sportService._ListMatchbySport.UpCommingMatches.length==0">
+            Please wait real-time records coming soon.
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- matchBox end-->
+
+    <!-- matchBox start-->
+    <div class="sadsdasd">
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <div class="matchboxBB"
+          *ngIf="sport.sport_id!=4&&sport.sport_id!=2&&sport.sport_id!=1&&sport.sport_id!=111&&sport.sport_id!=222">
+          <div class="matchDView">
+            <div class="sub_path center-box">
+              <p>{{sport.name}}</p>
+            </div>
+            <!-------------------IN-Play Hourse Racing & Greyhound Racing------------------------------->
+            <div class="hourseMatchView">
+              <ng-container
+                *ngFor="let slist of this._sportService._ListMatchbySport.InplayMatches; let i=index; let isLast = last">
+
+                <div class="hourseMView" *ngIf="slist.sport_id==7">
+                  <img src="./assets/img/horse-login.svg">
+                  <div class="hTView">
+                    <h4>{{slist.name}} {{ slist.start_date+'000' | date:
+                      'd MMM'}}</h4>
+                    <span>{{ slist.start_date+'000' | date:
+                      'd MMM hh:mm'}}</span>
+                  </div>
+                </div>
+
+                <div class="hourseMView" *ngIf="slist.sport_id==4339">
+                  <img src="./assets/img/horse-login.svg">
+                  <div class="hTView">
+                    <h4>{{slist.name}} {{ slist.start_date+'000' | date:
+                      'd MMM'}}</h4>
+                    <span>{{ slist.start_date+'000' | date:
+                      'd MMM hh:mm'}}</span>
+                  </div>
+                </div>
+
+              </ng-container>
+              <!-------------------IN-Play Hourse Racing & Greyhound Racing End------------------------------->
+
+              <!-------------------Upcoming Hourse Racing & Greyhound Racing------------------------------->
+              <ng-container
+                *ngFor="let slist of this._sportService._ListMatchbySport.UpCommingMatches; let i=index; let isLast2 = last">
+
+                <div class="hourseMView" *ngIf="slist.sport_id==7 && slist.InplayStatus=='OPEN'">
+                  <img src="./assets/img/horse-login.svg">
+                  <div class="hTView">
+                    <h4>{{slist.name}} {{ slist.start_date+'000' | date:
+                      'd MMM'}}</h4>
+                    <span>{{ slist.start_date+'000' | date:
+                      'd MMM hh:mm'}}</span>
+                  </div>
+                </div>
+
+                <div class="hourseMView" *ngIf="slist.sport_id==4339 && slist.InplayStatus=='OPEN'">
+                  <img src="./assets/img/horse-login.svg">
+                  <div class="hTView">
+                    <h4>{{slist.name}} {{ slist.start_date+'000' | date:
+                      'd MMM'}}</h4>
+                    <span>{{ slist.start_date+'000' | date:
+                      'd MMM hh:mm'}}</span>
+                  </div>
+                </div>
+
+              </ng-container>
+              <!-------------------Upcoming Hourse Racing & Greyhound Racing End------------------------------->
+            </div>
+            <div
+              *ngIf="this._sportService._ListMatchbySport.InplayMatches.length==0 && this._sportService._ListMatchbySport.UpCommingMatches.length==0">
+              Please wait real-time records coming soon.
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <!-- matchBox end-->
+  </section>
+  <!-- Match View Start -->
+  <!-- App Down Banner Start -->
+  <!-- <section class="appBanner">
+    <img src="../../assets/Banner/banner.jpg" alt="banner" />
+  </section> -->
+  <!-- App Down Banner End -->
+
+</section>
+
+<!-- Footer start -->
+<section class="footer">
+  <ul class="footer-providers__list footer-icon-desktop">
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/evolution.png" alt="Evolution">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/ezugi.png" alt="Ezugi">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/pragmatic-live.png" alt="Pragmatic Live">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/betgames.png" alt="Betgames">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/ssg.png" alt="Super Spade Games">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/betsoft.png" alt="Betsoft">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/spribe.png" alt="Spribe">
+      </a>
+    </li>
+    <li class="footer-providers__list-item">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/Evoplay.png" alt="Evoplay">
+      </a>
+    </li>
+    <li class="footer-providers__list-item lastli">
+      <a class="footer-providers__list-item-link" href="#">
+        <img src="https://images.staticcontent.io/casino/banner/loginimages/logo-18plus.svg" alt="+18">
+      </a>
+    </li>
+  </ul>
+  <div class="rules" style="border: 2px solid #000;padding: 20px;background-color: #f5f5f5;border-radius: 10px;
+  background:#F9D40A; width:95%; margin:10px auto 10px;color:white;">You
+    must be over 18 years
+    old, or the legal age at which
+    gambling or gaming activities are allowed under the law or jurisdiction that
+    applies to you. You must reside in a country in which access to online
+    gambling to its residents.</div>
+</section>
+
+<section class="bFooter">
+  <div class="bottom-sticky">
+    <div class="navigation">
+      <ul class="listWrap">
+        <li class="list blt active">
+          <span class="mobile-btn">
+            <a href="/home" class="doflex">
+              <img src="./assets/img/home.svg" alt="Image" />
+
+            </a>
+
+          </span>
+        </li>
+        <li class="list">
+          <span class="mobile-btn">
+            <a href="/inplay-matches">
+              <img src="./assets/img/inplay.svg" alt="Image" />
+
+            </a>
+
+          </span>
+        </li>
+        <li class="list">
+          <span class="mobile-btn">
+            <a href="/casinos/games/roulette">
+              <img src="./assets/img/mini_games.gif" alt="Image" />
+
+            </a>
+            <!-- <h6>Casino</h6> -->
+          </span>
+        </li>
+        <li class="list brt">
+          <span class="mobile-btn menu-toggle">
+            <img src="./assets/img/menu.svg" alt="Image" />
+
+          </span>
+
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,348 @@
+<div class="row no-gutters">
+  <ngx-loading [show]="this._sportService._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <div class="center_screen_main nopadding">
+    <div class="all-category-bx">
+      <div class="card">
+        <ul class="nav nav-tabs justify-content-center" role="tablist">
+          <li role="presentation" class="active"><a href="#All"
+              (click)="this._sportService._selectedSportId='';this._sportService._selectedSport='All';this._sportService.resetSportData();this._sportService.GetFavoriteMatchList(0)"
+              aria-controls="All" role="tab" class="active show" data-toggle="tab"><img
+                src="/assets/images/all-icon.png" alt=""><span> All </span></a></li>
+          
+                <li class="s{{sport.sport_id}}" *ngFor="let sport of this._sportService.SportList"
+            (click)="this._sportService._selectedSportId=sport.sport_id;this._sportService.resetSportData();this._sportService.GetFavoriteMatchList(sport.sport_id)"
+            role="presentation"><a href="#{{sport.name}}" aria-controls="sport.name" role="tab" data-toggle="tab"><img
+                src="{{sport.image}}" alt=""><span>{{sport.name}} </span></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content tab-content-2">
+
+          <div role="tabpanel" class="tab-pane active" id="All">
+            <div class="tab-content-tsp tab-table-data">
+              <div class="inplay-bx"><span><img src="/assets/images/fav-icon.png" alt="timer"></span>Favorites</div>
+              <div class="bg-black-bx table-data-inn mb-3">
+                <ng-container *ngFor="let sport of this._sportService.SportList">
+                  <table class="table mb-2" *ngIf="CheckSportExist(sport.sport_id)==true">
+                    <thead class="thead-yello">
+                      <tr *ngIf="sport.sport_id!=HorseId && sport.sport_id!=GreyHoundId">
+                        <th class="wd-bx"><span class="bg-bx"> {{sport.name}}</span> <button 
+                          class="view_all_matchs_btn"
+                            (click)="this._sportService.callTabNameSport(sport);this._sportService.resetSportData();this._sportService.GetFavoriteMatchList(sport.sport_id)">View
+                            All Matches <i class="fa fa-caret-right" aria-hidden="true"></i></button></th>
+                        <th colspan="2" class="text-center wd-13">1</th>
+                        <th colspan="2" class="text-center wd-13">X</th>
+                        <th colspan="2" class="text-center wd-13">2 <span><a class="collapsed faq-links link-arrow"
+                              data-toggle="collapse" data-parent="#accordion"
+                              href="#{{sport.name+'_a_'+sport.sport_id}}" aria-expanded="true"
+                              [attr.aria-controls]="sport.name+'_a_'+sport.sport_id"><i
+                                class="fa fa-caret-up fa-2x"></i></a></span></th>
+                      </tr>
+                      <tr *ngIf="sport.sport_id==HorseId || sport.sport_id==GreyHoundId">
+                        <th class="wd-bx"><span class="bg-bx"> {{sport.name}}</span> <button
+                           class="view_all_matchs_btn"
+                            (click)="this._sportService.callTabNameSport(sport);this._sportService.resetSportData();this._sportService.GetFavoriteMatchList(sport.sport_id)">View
+                            All Matches <i class="fa fa-caret-right" aria-hidden="true"></i></button></th>
+                        <th colspan="6" class="text-center wd-13"> <span><a class="collapsed faq-links link-arrow"
+                              data-toggle="collapse" data-parent="#accordion"
+                              href="#{{sport.name+'_a_'+sport.sport_id}}" aria-expanded="true"
+                              [attr.aria-controls]="sport.name+'_a_'+sport.sport_id"><i
+                                class="fa fa-caret-up fa-2x"></i></a></span></th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <div id="{{sport.name+'_a_'+sport.sport_id}}" class="panel-collapse collapse in show HorseId"
+                  role="tabpanel" aria-labelledby="headingFive">
+                    <table class="table no-mar">
+                      <tbody *ngIf="sport.sport_id!=HorseId && sport.sport_id!=GreyHoundId">
+                        <tr *ngFor="let slist of this._sportService._ListFavoriteMatch">
+                          <ng-container *ngIf="slist.sport_id==sport.sport_id">
+                            <th>
+                              <div *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N' || !isBetAllowPopular(slist))"
+                                class="betbat">
+                                <span>{{slist.adminMessage!=''?slist.adminMessage:
+                                (slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                                (slist.IsBetAllow=='N')?'Bet locked':''+ slist.remainTime}}</span>
+                              </div>
+
+
+                              <div class="match_name_td"> <span class="star-bx yellow-star">
+                                <a href="javascript:void(0)" (click)="this._sportService.updateFavorite(slist)">
+                                    <img src="/assets/images/heart-red.svg" alt="heart">
+                                  </a></span><a href="javascript:void(0)" (click)="GoToDetailPage(slist)">{{slist.name}}
+                                </a><span
+                                  class="time-time">{{this._sportService.timeConverter(slist.start_date) | date:'medium'}}</span>
+                                <div class="fancy_dx_ribbon">
+                                  <span *ngIf="slist.sport_id==4 && slist.IsFancyAllow=='Y'"></span>
+                                </div>
+                              </div>
+
+                            </th>
+
+                            <td>
+                              <div class="bg-blue mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,0,0,'back')">
+
+                                <h6>
+                                  {{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToBack!=undefined ? retrunValue('back',slist,(slist.runner_json[0].ex.availableToBack.length> 0) ? slist.runner_json[0].ex.availableToBack[0].price : '--')  : '--'}}
+                                </h6>
+                                <span>{{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToBack!=undefined ? retrunValue('size',slist,(slist.runner_json[0].ex.availableToBack.length>0) ? slist.runner_json[0].ex.availableToBack[0].size : '--') : '--'}}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="bg-red mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,0,0,'lay')">
+                                <h6>
+                                  {{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToLay!=undefined ? retrunValue('lay',slist,(slist.runner_json[0].ex.availableToLay.length> 0) ? slist.runner_json[0].ex.availableToLay[0].price : '--') : '--'}}
+                                </h6>
+                                <span>{{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToLay!=undefined ? retrunValue('size',slist,(slist.runner_json[0].ex.availableToLay.length>0) ? slist.runner_json[0].ex.availableToLay[0].size : '--') : '--'}}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="bg-blue mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,2,0,'back')">
+                                <h6>
+                                  {{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToBack!=undefined ? retrunValue('back',slist,(slist.runner_json[2].ex.availableToBack.length> 0) ? slist.runner_json[2].ex.availableToBack[0].price : '--') : '--'}}
+                                </h6>
+                                <span>{{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToBack!=undefined ? retrunValue('size',slist,(slist.runner_json[2].ex.availableToBack.length> 0) ? slist.runner_json[2].ex.availableToBack[0].size : '--') : '--'}}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="bg-red mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,2,0,'lay')">
+                                <h6>
+                                  {{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToLay!=undefined ? retrunValue('lay',slist,(slist.runner_json[2].ex.availableToLay.length> 0) ? slist.runner_json[2].ex.availableToLay[0].price : '--') : '--'}}
+                                </h6>
+                                <span>{{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToLay!=undefined ? retrunValue('size',slist,(slist.runner_json[2].ex.availableToLay.length> 0) ? slist.runner_json[2].ex.availableToLay[0].size : '--') : '--'}}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="bg-blue mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,1,0,'back')">
+                                <h6>
+                                  {{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToBack!=undefined ? retrunValue('back',slist,(slist.runner_json[1].ex.availableToBack.length> 0) ? slist.runner_json[1].ex.availableToBack[0].price : '--') : '--'}}
+                                </h6>
+                                <span>{{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToBack!=undefined ? retrunValue('size',slist,(slist.runner_json[1].ex.availableToBack.length> 0) ? slist.runner_json[1].ex.availableToBack[0].size : '--') : '--'}}</span>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="bg-red mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,1,0,'lay')">
+                                <h6>
+                                  {{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToLay!=undefined ? retrunValue('lay',slist,(slist.runner_json[1].ex.availableToLay.length> 0) ? slist.runner_json[1].ex.availableToLay[0].price : '--') : '--'}}
+                                </h6>
+                                <span>{{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToLay!=undefined ? retrunValue('size',slist,(slist.runner_json[1].ex.availableToLay.length> 0) ? slist.runner_json[1].ex.availableToLay[0].size : '--') : '--'}}</span>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                        </tr>
+                      </tbody>
+                      
+                      <tbody *ngIf="sport.sport_id==HorseId || sport.sport_id==GreyHoundId">
+                        <tr *ngFor="let slist of this._sportService._ListFavoriteMatch">
+                          <ng-container *ngIf="slist.sport_id==sport.sport_id">
+                            <th colspan="1">
+                              <div *ngIf="slist.adminMessage!=''" class="betbat"><span>{{slist.adminMessage}}</span>
+                              </div>
+
+                              <div class="match_name_td"> <span class="star-bx yellow-star"><a href="javascript:void(0)"
+                                    (click)="this._sportService.updateFavorite(slist)">
+                                    <img src="/assets/images/heart-red.svg" alt="heart">
+                                  </a></span><a href="javascript:void(0)" (click)="GoToDetailPage(slist)">{{slist.name}}
+                                </a><span
+                                  class="time-time">{{this._sportService.timeConverter(slist.start_date) | date:'medium'}}</span>
+                                <div class="fancy_dx_ribbon">
+                                  <span *ngIf="slist.sport_id==4 && slist.IsFancyAllow=='Y'"></span>
+                                </div>
+                              </div>
+
+                            </th>
+
+
+                          </ng-container>
+
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                  <div *ngIf="this._sportService._ListFavoriteMatch.length==0 && sport.sport_id==4"
+                    >
+                    <table class="table no-mar" style="margin-top: 3px !important;">
+                      <tbody>
+                      <tr>
+                        <td class="no-match-fount-txt" colspan="7"> No Favorites Matches Found </td>
+                      </tr>
+                    </tbody>
+                    </table>
+                  </div>
+
+                </ng-container>
+
+
+              </div>
+
+            </div>
+          </div>
+          <div role="tabpanel" *ngFor="let sport of this._sportService.SportList" class="tab-pane" id="{{sport.name}}">
+            <div class="tab-content-tsp tab-table-data">
+              <div class="inplay-bx"><span><img src="/assets/images/fav-icon.png" alt="timer"></span>Favorites</div>
+              <div class="bg-black-bx table-data-inn mb-3">
+                <table class="table mb-2">
+                  <thead class="thead-yello" *ngIf="this._sportService._ListFavoriteMatch.length>0">
+                    <tr *ngIf="sport.sport_id!=HorseId && sport.sport_id!=GreyHoundId">
+                      <th class="wd-bx"><span class="bg-bx"> {{sport.name}}</span></th>
+                      <th colspan="2" class="text-center wd-13">1</th>
+                      <th colspan="2" class="text-center wd-13">X</th>
+                      <th colspan="2" class="text-center wd-13">2 <span><a class="collapsed faq-links link-arrow"
+                            data-toggle="collapse" data-parent="#accordion" href="#{{sport.name+'_f_'+sport.sport_id}}"
+                            aria-expanded="true" [attr.aria-controls]="sport.name+'_f_'+sport.sport_id"><i
+                              class="fa fa-caret-up fa-2x"></i></a></span></th>
+                    </tr>
+                    <tr *ngIf="sport.sport_id==HorseId || sport.sport_id==GreyHoundId">
+                      <th class="wd-bx"><span class="bg-bx"> {{sport.name}}</span> </th>
+
+                      <th colspan="6" class="text-center wd-13"> <span><a class="collapsed faq-links link-arrow"
+                            data-toggle="collapse" data-parent="#accordion" href="#{{sport.name+'_f_'+sport.sport_id}}"
+                            aria-expanded="true" [attr.aria-controls]="sport.name+'_f_'+sport.sport_id"><i
+                              class="fa fa-caret-up fa-2x"></i></a></span></th>
+                    </tr>
+                  </thead>
+                </table>
+                <div id="{{sport.name+'_f_'+sport.sport_id}}" class="panel-collapse collapse in show HorseId"
+                role="tabpanel" aria-labelledby="headingFive">
+                  <table class="table no-mar">
+                    <tbody *ngIf="sport.sport_id!=HorseId && sport.sport_id!=GreyHoundId">
+                      <tr *ngFor="let slist of this._sportService._ListFavoriteMatch">
+                        <ng-container *ngIf="slist.runner_json!=null">
+                          <th>
+
+
+                            <div
+                              *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N' || !isBetAllowPopular(slist))"
+                              class="betbat">
+                              <span>{{slist.adminMessage!=''?slist.adminMessage:
+                                (slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                                (slist.IsBetAllow=='N')?'Bet locked':''+ slist.remainTime}}</span>
+                            </div>
+
+                            <div class="match_name_td"><span class="star-bx yellow-star"><a href="javascript:void(0)"
+                                  (click)="this._sportService.updateFavorite(slist)">
+                                  <img src="/assets/images/heart-red.svg" alt="heart"></a></span><a
+                                href="javascript:void(0)" (click)="GoToDetailPage(slist)">{{slist.name}} </a><span
+                                class="time-time">{{this._sportService.timeConverter(slist.start_date) | date:'medium'}}</span>
+                              <div class="fancy_dx_ribbon">
+                                <span *ngIf="slist.sport_id==4 && slist.IsFancyAllow=='Y'"></span>
+                              </div>
+                            </div>
+                          </th>
+
+                          <td>
+                            <div class="bg-blue mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,0,0,'back')">
+
+                              <h6>
+                                {{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToBack!=undefined ? retrunValue('back',slist,slist.runner_json[0].ex.availableToBack.length> 0 ? slist.runner_json[0].ex.availableToBack[0].price : '--')  : '--'}}
+                              </h6>
+                              <span>{{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToBack!=undefined ? retrunValue('size',slist,slist.runner_json[0].ex.availableToBack.length>0 ? slist.runner_json[0].ex.availableToBack[0].size : '--') : '--'}}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="bg-red mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,0,0,'lay')">
+                              <h6>
+                                {{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToLay!=undefined ? retrunValue('lay',slist,slist.runner_json[0].ex.availableToLay.length> 0 ? slist.runner_json[0].ex.availableToLay[0].price : '--') : '--'}}
+                              </h6>
+                              <span>{{slist.runner_json[0]!=undefined && slist.runner_json[0].ex!=undefined && slist.runner_json[0].ex.availableToLay!=undefined ? retrunValue('size',slist,slist.runner_json[0].ex.availableToLay.length>0 ? slist.runner_json[0].ex.availableToLay[0].size : '--') : '--'}}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="bg-blue mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,2,0,'back')">
+                              <h6>
+                                {{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToBack!=undefined ? retrunValue('back',slist,slist.runner_json[2].ex.availableToBack.length> 0 ? slist.runner_json[2].ex.availableToBack[0].price : '--') : '--'}}
+                              </h6>
+                              <span>{{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToBack!=undefined ? retrunValue('size',slist,slist.runner_json[2].ex.availableToBack.length> 0 ? slist.runner_json[2].ex.availableToBack[0].size : '--') : '--'}}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="bg-red mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,2,0,'lay')">
+                              <h6>
+                                {{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToLay!=undefined ? retrunValue('lay',slist,slist.runner_json[2].ex.availableToLay.length> 0 ? slist.runner_json[2].ex.availableToLay[0].price : '--') : '--'}}
+                              </h6>
+                              <span>{{slist.runner_json[2]!=undefined && slist.runner_json[2].ex!=undefined && slist.runner_json[2].ex.availableToLay!=undefined ? retrunValue('size',slist,slist.runner_json[2].ex.availableToLay.length> 0 ? slist.runner_json[2].ex.availableToLay[0].size : '--') : '--'}}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="bg-blue mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,1,0,'back')">
+                              <h6>
+                                {{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToBack!=undefined ? retrunValue('back',slist,slist.runner_json[1].ex.availableToBack.length> 0 ? slist.runner_json[1].ex.availableToBack[0].price : '--') : '--'}}
+                              </h6>
+                              <span>{{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToBack!=undefined ? retrunValue('size',slist,slist.runner_json[1].ex.availableToBack.length> 0 ? slist.runner_json[1].ex.availableToBack[0].size : '--') : '--'}}</span>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="bg-red mx-wd click-bx" [ngClass]="this._sportService.needBlink(slist,1,0,'lay')">
+                              <h6>
+                                {{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToLay!=undefined ? retrunValue('lay',slist,slist.runner_json[1].ex.availableToLay.length> 0 ? slist.runner_json[1].ex.availableToLay[0].price : '--') : '--'}}
+                              </h6>
+                              <span>{{slist.runner_json[1]!=undefined && slist.runner_json[1].ex!=undefined && slist.runner_json[1].ex.availableToLay!=undefined ? retrunValue('size',slist,slist.runner_json[1].ex.availableToLay.length> 0 ? slist.runner_json[1].ex.availableToLay[0].size : '--') : '--'}}</span>
+                            </div>
+                          </td>
+                        </ng-container>
+                      </tr>
+                      
+                      <tr *ngIf="this._sportService._ListFavoriteMatch.length==0">
+                        <td colspan="7" class="no-match-fount-txt">
+                          No Favorites Matches Found
+                        </td>
+                      </tr>
+                    </tbody>
+                                        
+                    <tbody *ngIf="sport.sport_id==HorseId || sport.sport_id==GreyHoundId">
+                      <tr *ngFor="let slist of this._sportService._ListFavoriteMatch">
+                        <ng-container *ngIf="slist.runner_json!=null">
+                          <th colspan="1">
+
+
+                            <div *ngIf="(slist.adminMessage!='')" class="betbat">
+                              <span>{{slist.adminMessage}}</span>
+                            </div>
+
+                            <div class="match_name_td"><span class="star-bx yellow-star"><a href="javascript:void(0)"
+                                  (click)="this._sportService.updateFavorite(slist)">
+                                  <img src="/assets/images/heart-red.svg" alt="heart"></a></span><a
+                                href="javascript:void(0)" (click)="GoToDetailPage(slist)">{{slist.name}} </a><span
+                                class="time-time">{{this._sportService.timeConverter(slist.start_date) | date:'medium'}}</span>
+                              <div class="fancy_dx_ribbon">
+                                <span *ngIf="slist.sport_id==4 && slist.IsFancyAllow=='Y'"></span>
+                              </div>
+                            </div>
+                          </th>
+
+
+                        </ng-container>
+                      </tr>
+                      <tr *ngIf="this._sportService._ListFavoriteMatch.length==0">
+                        <td colspan="7" class="no-match-fount-txt">
+                          No Favorites Matches Found
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right_screen_main">
+    <div class="patti-main-bx mx-auto text-center">
+      <div class="patti-baner-img">
+        <div class=""> <a class="patti-img" href="javascript:void(0)"> <img src="/assets/images/teen-patti.png" alt="">
+          </a> </div>
+        <div class=""> <a class="patti-img" href="javascript:void(0)"> <img src="/assets/images/under-bhar.png" alt="">
+          </a> </div>
+        <div class=""> <a class="patti-img" href="javascript:void(0)"> <img src="/assets/images/4-pok.png" alt=""> </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

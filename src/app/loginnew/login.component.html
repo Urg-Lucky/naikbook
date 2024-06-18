@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="landing_bg">
+  <div class="homemain">
+    <div class="header_landing">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 col-4">
+            <div class="logo"><a class="navbar-brand"><img src="assets/images/login_logo.png"
+                  alt="logo"></a></div>
+          </div>
+          <div class="col-md-8 col-8 landing_right_top">
+            <nav class="navbar navbar-expand-lg navbar-light">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form class="form-inline login-set" [formGroup]="login_form" (ngSubmit)="login()" name="loginForm"
+                      novalidate>
+                      <div>
+                        <input class="form-control mr-sm-2 set-m" type="text" placeholder="Enter Username"
+                          spellcheck="false" formControlName="username" autocomplete="username" value="">
+                        <div class="error_txt">
+                          <div
+                            *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)">
+                            Enter username
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <input class="form-control mr-sm-2" type="password" placeholder="Enter Password"
+                          spellcheck="false" formControlName="password" autocomplete="current-password">
+                        <div class="error_txt">
+                          <div *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched)
+                            || (login_form.controls['password'].invalid && !isValidFormSubmitted &&
+                            isValidFormSubmitted!=null)">
+                            Enter password
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <button class="btn btn-outline-warning my-2 my-sm-0 btn_login" type="submit">LOGIN</button>
+                      </div>
+                      <ngx-loading [show]="loginLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+                    </form>
+
+                  </div>
+                  <div *ngIf="IsRegistration=='Y'" class="col-md-12">
+                    <div class="login-text">
+                      <span class="text-muted">Didn't have an account? <a (click)="IsRegistrationShow=true;formReset()"
+                          class="gold-color">Signup</a></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid theme_color">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="text-white marquee_bx">
+              <marquee class="marquee" onMouseOver="this.stop()" onMouseOut="this.start()">{{marqueeMessage}}</marquee>
+            </div>
+          </div>
+          <div class="col-md-3 ">
+            <div class="dropdown">
+              <div class="select2 custom-select-home">
+                <select *ngIf="timeZoneList!=null && timeZoneList.length>0" id="slct" [name]="selectedTimeZone">
+                  <option selected disabled><span><strong>{{selectedTimeZone.name}}</strong></span></option>
+                  <option *ngFor="let zone of timeZoneList"><span [id]="zone.value"><strong> {{zone.name}}</strong></span> </option>
+                </select>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="center_content">
+      <div class="tab_content_left">
+        <div class="live_mtch_tab">
+          <div class="tab">
+            <button class="tablinks" [ngClass]="{'active':!showInPlayData}" (click)="showSportsView()">Sports</button>
+            <button class="tablinks" [ngClass]="{'active':showInPlayData}" (click)="showInPlayView()">In-Play</button>
+          </div>
+        </div>
+        <div id="Live" class="tabcontent" [ngStyle]="{'display':(showInPlayData?'none':'flex')}">
+          <div class="left_sidemenu">
+            <ul *ngIf="sportsListData!=null && sportsListData.length>0" class="menu-list">
+              <li>
+              <a href="javascript:void(0)" (click)="currentSelectedSport=null;reloadMatchData()">
+                  <div class="m_name" [ngClass]="{'active':(currentSelectedSport==null)}">All</div><i class="fa fa-star" aria-hidden="true"></i>
+                </a> 
+              </li>
+              <li *ngFor="let item of sportsListData" >
+                <a href="javascript:void(0)" (click)="currentSelectedSport=item;reloadMatchData()">
+                  <div class="m_name" [ngClass]="{'active':(currentSelectedSport!=null && currentSelectedSport.sport_id==item.sport_id)}">{{item.name}}</div><i class="fa fa-star" aria-hidden="true"></i>
+                </a> 
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="middle_data mt-4" [style.min-height.px]="screenHeight*0.80">
+            <section class="md_bg_color ">
+              <div class="container-fluid mt-0">
+                <div class="row">
+                  <div *ngIf="sliderListData!=null && sliderListData.length>0" class="col-md-12 slider_box">
+                    <div class="slider">
+                      <div *ngFor="let item of sliderListData">
+                        <img src="{{item.attachment}}" alt="slider">
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="matchesListData!=null && getObjectKeys(matchesListData).length>0" class="col-md-12">
+
+                    <div *ngFor="let itemKey of getObjectKeys(matchesListData)" class="match_list_bx">
+                      <div class="match_heading">
+                        <div class="m_name"> <i class="fa fa-futbol-o" aria-hidden="true"></i>{{matchesListData[itemKey].SportName}}</div>
+                      </div>
+                      <div class="table-data">
+                        <table class="table">
+                          <thead class="thead-red">
+                            <tr>
+                              <th class="wd-bx"><span class="md-text"> Matches </span> </th>
+                              
+                              <th  class="text-center wd-13">1</th>
+                              <th  class="text-center wd-13">X</th>
+                              <th  class="text-center wd-13">2</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngIf="matchesListData[itemKey].matches.length>0">
+                            <tr *ngFor="let itemMatch of matchesListData[itemKey].matches">
+                              <th>
+                                <div class="match_name_td"><span class="heart-bx gray-heart"><a href="javascript:void(0)"><i
+                                        class="fa fa-heart" aria-hidden="true"></i></a></span><a href="javascript:void(0)">{{itemMatch.name}}</a>
+                                  <span *ngIf="itemMatch.inplay=='Y'" class="inpay_link">IN-PLAY</span>
+
+                                  <span class="time-time">{{timeConverter(itemMatch.start_date) | date:'medium'}}</span></div>
+                              </th>
+                              
+                              <td>
+                                <div class="bg-blue click-bx">
+                                  <h6>1.99</h6>
+                                  <span>79,72</span>
+                                </div>
+                              </td>
+                             
+                              <td>
+                                <div class="bg-blue click-bx">
+                                  <h6>1.99</h6>
+                                  <span>79,72</span>
+                                </div>
+                              </td>
+                              
+                              <td>
+                                <div class="bg-blue click-bx">
+                                  <h6>1.99</h6>
+                                  <span>79,72</span>
+                                </div>
+                              </td>
+                              
+                            </tr>
+                          </tbody>
+
+                          <tbody *ngIf="matchesListData[itemKey].matches.length==0">
+                              <tr>
+                                <td class="nomatchfound"> No Matches Found </td>
+                              </tr>
+                          </tbody>
+                        </table>
+
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div id="InPlay" class="tabcontent InPlay_tab" *ngIf="showInPlayData" style="display: block;">
+
+          <div class="middle_data" [style.min-height.px]="screenHeight*0.80">
+
+            <section class="md_bg_color InPlay_bx_sec">
+              <div class="container-fluid pd0">
+                <div class="row">
+                  <div class="col-md-12 getliveSport">
+                    <div class="frame" id="basic" style="overflow: hidden;">
+                      <ul *ngIf="sportsListData!=null && sportsListData.length>0" class="clearfix" style="transform: translateZ(0px) translateX(0px); width: 2662px;">
+                        <li *ngFor="let item of sportsListData" [ngClass]="{'active':(matchesListDataInPlay!=null && item.sport_id==matchesListDataInPlay.sport_id)}">
+                          <a style="display: block; color: inherit;" href="javascript:void(0)" (click)="currentSelectedSportInPlay=item;reloadMatchDataInPlay()"> 
+                            <span class="category_icon">
+                              <img src="{{item.image}}" alt="icon">
+                            </span>
+                            <div class="BarButton_Text">{{item.name}}</div>
+                          </a>
+                        </li>
+                        
+
+                      </ul>
+                    </div>
+                    <div class="controls center">
+                      <button class="btn prevPage disabled" disabled=""><i class="icon-chevron-left"></i><i
+                          class="fa fa-angle-left"></i></button>
+                      <button class="btn nextPage"><i class="icon-chevron-right"></i><i
+                          class="fa fa-angle-right"></i></button>
+                    </div>
+                  </div>
+
+
+                  <div *ngIf="matchesListDataInPlay!=null && getObjectKeys(matchesListDataInPlay).length>0" class="col-md-12">
+
+                    <div *ngFor="let itemKey of getObjectKeys(matchesListDataInPlay)" class="match_list_bx">
+                      <div class="match_heading">
+                        <div class="m_name"> <i class="fa fa-futbol-o" aria-hidden="true"></i>{{matchesListDataInPlay[itemKey].SportName}}</div>
+                      </div>
+                      <div class="table-data">
+                        <table class="table">
+                          <thead class="thead-red">
+                            <tr>
+                              <th class="wd-bx"><span class="md-text"> Matches </span> </th>
+                              <th  class="text-center wd-13">1</th>
+                              <th  class="text-center wd-13">X</th>
+                              <th  class="text-center wd-13">2</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngIf="matchesListDataInPlay[itemKey].matches.length>0">
+                            <tr *ngFor="let itemMatch of matchesListDataInPlay[itemKey].matches">
+                              <th>
+                                <div class="match_name_td"><span class="heart-bx gray-heart"><a href="javascript:void(0)"><i
+                                        class="fa fa-heart" aria-hidden="true"></i></a></span><a href="javascript:void(0)">{{itemMatch.name}}</a>
+                                  <span *ngIf="itemMatch.inplay=='Y'" class="inpay_link">IN-PLAY</span>
+
+                                  <span class="time-time">{{timeConverter(itemMatch.start_date) | date:'medium'}}</span></div>
+                              </th>
+                              <td>
+                                <div class="bg-blue click-bx">
+                                  <h6>1.99</h6>
+                                  <span>79,72</span>
+                                </div>
+                              </td>
+                              
+                              <td>
+                                <div class="bg-blue click-bx">
+                                  <h6>1.99</h6>
+                                  <span>79,72</span>
+                                </div>
+                              </td>
+                              
+                              <td>
+                                <div class="bg-blue click-bx">
+                                  <h6>1.99</h6>
+                                  <span>79,72</span>
+                                </div>
+                              </td>
+                              
+                            </tr>
+                          </tbody>
+
+                          <tbody *ngIf="matchesListDataInPlay[itemKey].matches.length==0">
+                            <tr>
+                              <td class="nomatchfound"> No Matches Found </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div *ngIf="newsListData!=null && newsListData.length>0" class="right_side_list">
+        <div *ngFor="let item of newsListData" class="match_ad_list">
+          <a href="javascript:void(0)">
+            <h4>{{item.title}}</h4>
+            <div class="mtch_img"><img src="{{item.attachment}}" alt="ad"></div>
+            <div class="ad_txt">{{item.sort_description}}</div>
+          </a>
+        </div>
+      </div>
+
+    </section>
+    <div class="clearfix"></div>
+    <footer class="bg-footer pt-5 mt-5">
+      <div class="container-fluid">
+        <div *ngIf="outerPagesListData!=null && outerPagesListData.length>0" class="row">
+          <div *ngFor="let item of outerPagesListData" class="col">
+            <h6 class="text-white">{{item.mainTitle}}</h6>
+            <ul *ngIf="item.data!=null && item.data.length>0"v class="list-inline">
+              <li *ngFor="let subitem of item.data">
+                <a href="javascript:void(0)" (click)="openCmsPage(subitem)">{{subitem.title}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="f_about_company">
+          <div class="container-fluid">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="f_logo"> <img src="assets/images/login_logo2.png" height="100px" alt=""></div>
+                <div class="p-2 text-white">
+                  <p>
+                    Gambling can be addictive, please play responsibly. For information on support measures, please
+                    visit our Responsible Gambling Help page </p>
+                  <p>Hillside (Sports) ENC, registration number P1811, Office 1/2373, Level G, Quantum House, 75 Abate
+                    Rigord Street, Ta’ Xbiex XBX 1120, Malta. Hillside (Sports) ENC is licensed and regulated by the
+                    Malta Gaming Authority (MGA), Licence number </p>
+                  <p>© 2020-2021 {{this._sessionService.websiteName}}. All rights reserved.</p>
+                  <p>Server Time 13:02:06 GMT+6</p>
+
+                </div>
+              </div>
+              <div class="col-md-12">
+                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam voluptate dolorum
+                  debitis a asperiores commodi omnis quod eligendi deleniti, dicta totam quos voluptates nemo qui, ex ut
+                  ad, praesentium nobis!</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <hr class="hr_line">
+      <div class="media-icon">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+
+    <div *ngIf="IsRegistrationShow" class="signup_data" (click)="IsRegistrationShow=false;formReset()">
+      <div (click)="$event.stopPropagation();">
+        <ngx-loading [show]="signupLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+        <form [formGroup]="register_form" (ngSubmit)="registerSave()" name="registerForm" novalidate
+          class="login-main-bx">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label for="name" class="lab-user-signup"><span>Your Name </span> <input type="input"
+                  formControlName="name" class="input-bx-signup" id="name">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['name'].valid && register_form.controls['name'].touched) || (register_form.controls['name'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid name
+                </div>
+              </label>
+            </div>
+
+            <div class="col-md-6">
+              <label for="mobile" class="lab-user-signup"><span>Mobile Number </span> <input type="input"
+                  (keyup)="onlyNumber($event)" minlength="10" maxlength="10" formControlName="mobile"
+                  class="input-bx-signup" id="mobile">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['mobile'].valid && register_form.controls['mobile'].touched) || (register_form.controls['mobile'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid mobile number
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="email" class="lab-user-signup"><span>Email Address </span> <input type="email"
+                  formControlName="email" class="input-bx-signup" id="email">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['email'].valid && register_form.controls['email'].touched) || (register_form.controls['email'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid email
+                </div>
+              </label> </div>
+            <div class="col-md-12">
+              <label for="usernamesignup" class="lab-user-signup"><span>User Name </span> <input type="input"
+                  minlength="6" formControlName="usernamesignup" (blur)="CheckUserExist($event)" class="input-bx-signup"
+                  id="usernamesignup" autocomplete="off">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['usernamesignup'].valid && register_form.controls['usernamesignup'].touched) || (register_form.controls['usernamesignup'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid user name
+                </div>
+              </label></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="passwordsignup" class="lab-user-signup"><span>Password </span> <input type="password"
+                  formControlName="newPassword" [(ngModel)]="newPassword" class="input-bx-signup" id="passwordsignup"
+                  autocomplete="off">
+                <span class="error_txt"
+                  *ngIf="(!register_form.controls['newPassword'].valid && register_form.controls['newPassword'].touched) || (register_form.controls['newPassword'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter password
+                </span>
+              </label></div>
+            <div class="col-md-6">
+              <label for="cPassword" class="lab-user-signup"><span>Confirm Password </span> <input type="password"
+                  formControlName="confPassword" [(ngModel)]="confPassword" class="input-bx-signup" id="cPassword">
+                <span class="error_txt"
+                  *ngIf="(!register_form.controls['confPassword'].valid && register_form.controls['confPassword'].touched) || (register_form.controls['confPassword'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null) ||(confPassword != newPassword && confPassword!='' && newPassword!='')"
+                  [ngClass]="error">
+                  {{(confPassword != newPassword && confPassword!='' && newPassword!='')?'Password Mismatch':'Enter Confirm Password'}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-in-bx-signup" [disabled]="!isUser">REGISTER</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

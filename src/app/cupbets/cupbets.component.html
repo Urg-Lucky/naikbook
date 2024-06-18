@@ -1,0 +1,303 @@
+<div class="row no-gutters">
+  <ngx-loading [show]="this._sportService._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <div class="center_screen_main nopadding">
+    <div class="all-category-bx">
+      <h5 class="team-time-bx" *ngIf="cupBetMatchMarkets!=null"><img style="width: 20px; height: auto;" _ngcontent-c5=""
+          alt="" src="/assets/images/cup.svg"> {{cupBetMatchMarkets.name}}<span class="time-top-bx"><img
+            src="/assets/images/time-icon.png"
+            alt="">{{cupBetMatchMarkets.start_date!=undefined ? (this._sportService.timeConverter(cupBetMatchMarkets.start_date) | date:'medium') : ''}}
+        </span></h5>
+      <div class="card">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-content-tsp tab-table-data">
+            <div class="draggable-element1">
+              <div class="bg-black-bx centerscrool_box table-data-inn table-data-inn-2 mb-2">
+                <div class="drag-list">
+                  <table class="table">
+                    <thead class="thead-yello">
+                      <tr>
+                        <th class="wd-bx"><span class="bg-bx"> Odds </span></th>
+                        <th colspan="2" class="text-center wd-13"><span class="w-5 text-center">{{this._sessionService.backTitleName}}</span><span
+                            class="w-5 text-center">{{this._sessionService.layTitleName}}</span></th>
+                        <th *ngIf="!this._sessionService.hideExtraOdds" colspan="2" class="text-center wd-13">&nbsp;<span><a class="collapsed faq-links link-arrow"
+                              data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true"
+                              aria-controls="collapseFive"><i class="fa fa-caret-up fa-2x"></i></a></span></th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <div id="collapseFive" class="panel-collapse collapse in show" role="tabpanel"
+                    aria-labelledby="headingFive">
+                    <table class="table no-mar" *ngIf="cupBetMatchMarkets!=null">
+                      <tbody *ngIf="cupBetMatchMarkets.runner_json!=undefined && cupBetMatchMarkets.runner_json!=null">
+
+                        <ng-container *ngFor="let cuprenners of cupBetMatchMarkets.runner_json; let i=index">
+                          <tr>
+                            <th class="com-bx">
+                              
+                              <h6>{{cuprenners.selectionName}}</h6>
+                              <div
+                                *ngIf="(cuprenners.WinAndLoss +(this._sportService.stake2['field_' + cuprenners.selectionId +'_'+ cupBetMatchMarkets.match_id+'_'+cupBetMatchMarkets.market_id]))!=0"
+                                [ngClass]="{'green-txt':(cuprenners.WinAndLoss +(this._sportService.stake2['field_' + cuprenners.selectionId +'_'+ cupBetMatchMarkets.match_id+'_'+cupBetMatchMarkets.market_id]))>=0,'red-txt':(cuprenners.WinAndLoss +(this._sportService.stake2['field_' + cuprenners.selectionId +'_'+ cupBetMatchMarkets.match_id+'_'+cupBetMatchMarkets.market_id]))<0}"
+                                class="green-txt"><i class="fa fa-caret-right" aria-hidden="true"></i>
+                                {{cuprenners.WinAndLoss +(this._sportService.stake2["field_" + cuprenners.selectionId +"_"+ cupBetMatchMarkets.match_id+"_"+cupBetMatchMarkets.market_id]) | number : '1.0-2'}}
+                              </div>
+                            </th>
+                            <td *ngIf="!this._sessionService.hideExtraOdds">
+                              <div class="bg-light-blue mx-wd click-bx">
+                                <h6>{{retrunValue('back',cupBetMatchMarkets,cuprenners.ex.availableToBack[2].price)}}
+                                </h6>
+                                <span>{{retrunValue('size',cupBetMatchMarkets,cuprenners.ex.availableToBack[2].size)}}</span>
+                              </div>
+                            </td>
+                            <td *ngIf="!this._sessionService.hideExtraOdds">
+                              <div class="bg-light-blue mx-wd click-bx">
+                                <h6>{{retrunValue('back',cupBetMatchMarkets,cuprenners.ex.availableToBack[1].price)}}
+                                </h6>
+                                <span>{{retrunValue('size',cupBetMatchMarkets,cuprenners.ex.availableToBack[1].size)}}</span>
+                              </div>
+                            </td>
+                            <td><a href="javascript:void(0)" (click)="setBetBox('back',cuprenners);isShow=i">
+                                <div class="bg-blue mx-wd click-bx {{cuprenners.isbackClass}}">
+                                  <h6>{{retrunValue('back',cupBetMatchMarkets,cuprenners.ex.availableToBack[0].price)}}
+                                  </h6>
+                                  <span>{{retrunValue('size',cupBetMatchMarkets,cuprenners.ex.availableToBack[0].size)}}</span>
+                                  <i [ngClass]="{'blue-bdr':isShow==i && !this._sportService.oneClickShow}"></i>
+                                </div>
+                              </a></td>
+                            <td><a href="javascript:void(0)" (click)="setBetBox('lay',cuprenners);isShow=i">
+                                <div class="bg-red mx-wd click-bx {{cuprenners.islayClass}}">
+                                  <h6>{{retrunValue('lay',cupBetMatchMarkets,cuprenners.ex.availableToLay[0].price)}}
+                                  </h6>
+                                  <span>{{retrunValue('size',cupBetMatchMarkets,cuprenners.ex.availableToLay[0].size)}}</span>
+                                  <i [ngClass]="{'red-bdr':isShow==i && !this._sportService.oneClickShow}"></i>
+                                </div>
+                              </a></td>
+                            <td *ngIf="!this._sessionService.hideExtraOdds">
+                              <div class="bg-light-red mx-wd click-bx">
+                                <h6>{{retrunValue('lay',cupBetMatchMarkets,cuprenners.ex.availableToLay[1].price)}}</h6>
+                                <span>{{retrunValue('size',cupBetMatchMarkets,cuprenners.ex.availableToLay[1].size)}}</span>
+                              </div>
+                            </td>
+                            <td *ngIf="!this._sessionService.hideExtraOdds">
+                              <div class="bg-light-red mx-wd click-bx">
+                                <h6>{{retrunValue('lay',cupBetMatchMarkets,cuprenners.ex.availableToLay[2].price)}}</h6>
+                                <span>{{retrunValue('size',cupBetMatchMarkets,cuprenners.ex.availableToLay[2].size)}}</span>
+                              </div>
+                            </td>
+
+                            <div
+                              *ngIf="cuprenners.GameStatus!=undefined && cuprenners.GameStatus!=''"
+                              class="bookmaker_detsil betbat" [ngClass]="{'betbatsmall':this._sessionService.hideExtraOdds}">
+                              <span>{{cuprenners.GameStatus}}</span>
+                              </div>
+                          </tr>
+
+                          <tr *ngIf="(cuprenners.isBackBox==1 || cuprenners.isLayBox==1) && isShow==i && !this._sportService.oneClickShow" >
+                            <td colspan="8">
+                              <div [ngClass]="{'bg-blue':cuprenners.isBackBox==1,'bg-red-box':cuprenners.isLayBox==1}"
+                                class="p-2 bdr-black editstakeform bet_buttons_main cup_bets_f"
+                                >
+                                <div class="drop-panel-bx">
+                                  <ul class="d-flex flex-wrap new-btn-set" *ngIf="!isEditStack">
+                                    <li><strong>Odds</strong><span (click)="updateOdds('min',cuprenners)"
+                                        class="input-number-decrement">–</span>
+                                      <input class="input-number" type="text" readonly [(ngModel)]="cuprenners.odds"
+                                        min="0" max="10">
+                                      <span class="input-number-increment"
+                                        (click)="updateOdds('max',cuprenners)">+</span></li>
+                                    <li>
+                                      <div class=" d-flex"><strong>Stake</strong>
+                                        <input type="number" class="form-control width allownumericwithdecimal"
+                                          (change)="updatePL(cuprenners)" [(ngModel)]="cuprenners.stack"
+                                          placeholder="0.00">
+                                      </div>
+                                    </li>
+                                    <li class="profit_bx_dv">
+                                      <strong>{{cuprenners.type==1 ? 'Profit' : 'Liability'}}</strong><span
+                                        class="pro-txt">{{(cuprenners.odds*cuprenners.stack)-cuprenners.stack | number : '1.0-2'}}</span>
+                                    </li>
+                                    <li *ngFor="let stack of matchStack">
+                                      <a class="wid-70" href="javascript:void(0)"
+                                        (click)="updateStack(stack,cuprenners)"><span
+                                          class="amount-bx">+{{stack}}</span></a></li>
+                                    <li><button type="button" [disabled]="cuprenners.odds<=0" class="btn btn-green"
+                                        href="javascript:void(0)" (click)="saveSportBetData(cuprenners)"><span><img
+                                            src="assets/images/check-box-wht.png" alt="Place Bet"></span>Place</button>
+                                    </li>
+
+                                    <li><a class="btn btn-rad edit-stake" (click)="isEditStack=true"><span><img src=""
+                                            alt=""></span>Edit Stake</a></li>
+                                  </ul>
+                                  <a class="btn btn-rad close-btn close_icon_btn"
+                                    (click)="cuprenners.isBackBox=0;cuprenners.isbackClass='';cuprenners.isLayBox=0;;isShow=-1;this._sportService.removeBackLay(cuprenners)"><span
+                                      class="fa fa-close"></span></a>
+
+
+
+
+                                  <ul class="d-flex flex-wrap" *ngIf="isEditStack">
+                                    <li>
+                                      <form [formGroup]="oneMatchStack" (ngSubmit)="updateMatchStack()">
+                                        <div class="editstakeform">
+                                          <input *ngFor="let stack of matchStack; let i = index;" type="text"
+                                            formControlName="matchStack{{i+1}}"
+                                            class="form-control inp-bx allownumericwithoutdecimal" [(ngModel)]="stack"
+                                            value="{{stack}}" required>
+                                          <button id="Button" type="submit" [disabled]="!oneMatchStack.valid"
+                                            value="Click" class="btn btn-green"><i class="fa fa-check-circle-o"
+                                              aria-hidden="true"></i> Save
+                                          </button>
+
+                                        </div>
+                                      </form>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+
+                            </td>
+                          </tr>
+                        </ng-container>
+
+
+                        <div
+                          *ngIf="(cupBetMatchMarkets.InplayStatus=='CLOSE' || cupBetMatchMarkets.InplayStatus=='SUSPENDED' || cupBetMatchMarkets.adminMessage!='' || cupBetMatchMarkets.IsBetAllow=='N'|| !isBetAllowPopular(cupBetMatchMarkets))"
+                          class="betbat_multy_matchodds"  [ngClass]="{'betbat_multy_matchodds_small':this._sessionService.hideExtraOdds}">
+                          <span>{{cupBetMatchMarkets.adminMessage!=''?cupBetMatchMarkets.adminMessage:
+                            (cupBetMatchMarkets.InplayStatus=='CLOSE' || cupBetMatchMarkets.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                            (cupBetMatchMarkets.IsBetAllow=='N')?'Bet locked':'bet start in  '+ cupBetMatchMarkets.remainTime}}</span>
+                        </div>
+
+
+                      </tbody>
+
+                    </table>
+
+
+
+                  </div>
+
+
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right_screen_main ">
+    <div class="patti-main-bx mx-auto text-center mCustomScrollbar light" data-mcs-theme="minimal-dark">
+
+      <div class="check-content-bx" id="dvPassport" [hidden]="!this._sportService.oneClickShow">
+        <div class=" d-fl btn-main-box bod-pad clearfix" *ngIf="!isOneEdit">
+          <div class="btn-inner-bx">
+            <button *ngFor="let oneclkstack of UserOneClickStack;let i = index"
+              (click)="isOneActive=i;selectedOneClick=oneclkstack" [ngClass]="{'osactive':isOneActive==i}"
+              class="btn box-btn btn-bg-act">{{oneclkstack}}</button>
+
+          </div>
+
+          <button id="Button1" type="button" value="Click" (click)="isOneEdit=true;" class="btn btn-icon-bx">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+          </button>
+        </div>
+        <div class=" d-fl bod-pad clearfix" *ngIf="isOneEdit">
+          <form [formGroup]="oneClickStackUpdate" (ngSubmit)="updateDataOneClick()">
+            <div class="inp-inner-bx">
+              <input *ngFor="let oneclkstack of UserOneClickStack let i = index;" type="text"
+                formControlName="stackvalue{{i+1}}" class="form-control inp-bx allownumericwithoutdecimal"
+                [(ngModel)]="oneclkstack" value="{{oneclkstack}}" required>
+
+            </div>
+            <button id="Button1" type="submit" [disabled]="!oneClickStackUpdate.valid" value="Click"
+              class="btn btn-icon-bx"> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Save
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+      <!--*************-->
+
+      <div class="main-drop-colps">
+        <div class="pad-2">
+          <ul class="drag-list">
+            <li>
+              <div class="live-score-bx">
+                <div class="live-inner">
+                  <h5><span class="bg-bx"> My Bets ({{MatchBetList.MatchAndBetfair?.length}}) </span> <span><a
+                        class="collapsed faq-links" data-toggle="collapse" data-parent="#accordion"
+                        href="#collapseFive8" aria-expanded="true" aria-controls="collapseFive8"><i
+                          class="fa fa-caret-up fa-2x"></i></a></span></h5>
+                </div>
+                <div id="collapseFive8" class="panel-collapse collapse show" role="tabpanel"
+                  aria-labelledby="headingFive8">
+                  <div class="match-bea-sec" *ngIf="MatchBetList.MatchAndBetfair?.length > 0 ">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="wd-5">S.N</th>
+                          <th class="wd-50">Runner</th>
+                          <th class="wd-20">Odds</th>
+                          <th class="wd-20">Stake</th>
+                          <th class="wd-30">P&amp;L </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="scr-bx">
+                    <div class="scrol-table testDiv mCustomScrollbar light" data-mcs-theme="minimal-dark">
+                      <table class="table">
+                        <tbody *ngIf="MatchBetList.MatchAndBetfair?.length > 0 ">
+                          <tr *ngFor="let list of MatchBetList.MatchAndBetfair; let i = index"
+                            [ngClass]="{'bg-blue':list.is_back==1,'bg-red-box':list.is_back==0}">
+                            <td class="wd-5">{{i+1}}</td>
+                            <td class="wd-50">{{list.selectionName}}
+                              <p>
+                                {{list.created_at!=undefined ? (this._sportService.timeConverter(list.created_at) | date:'medium') : ''}}
+                              </p>
+                            </td>
+                            <td class="wd-20">{{list.odds}}</td>
+                            <td class="wd-20">{{ list.stack }} </td>
+                            <td class="wd-20">{{list.p_l}}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="MatchBetList.MatchAndBetfair?.length ==0 ">
+                          <tr>
+                            <td colspan="6" class="wd-50">
+                              <p class="pagddingParag">No Record Found!</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div _ngcontent-c4="" class="patti-baner-img mCustomScrollbar light" data-mcs-theme="minimal-dark">
+        <div _ngcontent-c4="" class="">
+          <a _ngcontent-c4="" class="patti-img" href="javascript:void(0)"><img _ngcontent-c4="" alt=""
+              src="/assets/images/teen-patti.png"></a>
+        </div>
+        <div _ngcontent-c4="" class="">
+          <a _ngcontent-c4="" class="patti-img" href="javascript:void(0)"><img _ngcontent-c4="" alt=""
+              src="/assets/images/under-bhar.png"></a>
+        </div>
+        <div _ngcontent-c4="" class=""><a _ngcontent-c4="" class="patti-img" href="javascript:void(0)"><img
+              _ngcontent-c4="" alt="" src="/assets/images/4-pok.png"></a></div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+/* FOOTER CSS */
+footer {
+    width: 100%;
+    position: relative;
+    background: rgb(67, 68, 74);
+}
+
+.mb-footer {
+    border-top: 8px solid rgb(197, 26, 27);
+    background: #2b2f35;
+    padding: 30px
+}
+
+.mb-footer .match-logo {
+    width: auto;
+    height: 24px;
+    margin-bottom: 20px;
+}
+
+.mb-footer h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 30px 0 10px;
+    color: #fff;
+}
+
+.mb-footer p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.mb-footer p img {
+    height: 18px;
+    margin-right: 8px;
+}
+
+.mb-footer-nav {
+    width: 100%;
+    position: relative;
+}
+
+.mb-footer-nav h5 {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px 0px;
+    color: #fff;
+}
+
+.mb-footer-nav li a {
+    display: block;
+    color: rgb(163, 161, 167);
+    font-size: 14px;
+    padding: 6px 0;
+}
+
+.footerMobile {
+    display: none;
+}

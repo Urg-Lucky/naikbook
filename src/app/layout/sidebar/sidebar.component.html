@@ -1,0 +1,106 @@
+<aside class="sidebar active" *ngIf="isSidebarShow">
+  <h6>Popular</h6>
+  <ul class="sidebar__menu">
+
+    <li id="menu">
+      <a id="menu-btn"
+        class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+        href="/inplay">
+        <div class="menuLView d-flex align-items-center gap-2">
+          <img src="./assets/img/inplay.png" />
+          In-Play
+        </div>
+      </a>
+    </li>
+
+    <ng-container
+      *ngFor="let sport of this._sportService.SportList; let i=index">
+      <li id="menu"
+        *ngIf="sport.sport_id!=9994&&sport.sport_id!=9999&&sport.sport_id!=2224">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/sport/{{sport.sport_id}}">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="{{sport.image}}" />
+            {{sport.name}}
+          </div>
+        </a>
+      </li>
+      <li id="menu"
+        *ngIf="sport.sport_id==9994">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" (click)="getDiamondCasino('3031');">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="{{sport.image}}" />
+            {{sport.name}}
+          </div>
+        </a>
+      </li>
+      <li id="menu"
+        *ngIf="sport.sport_id==2224">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/matka-matches">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="{{sport.image}}" />
+            {{sport.name}}
+          </div>
+        </a>
+      </li>
+    </ng-container>
+    <li id="menu">
+      <a id="menu-btn"
+        class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+        href="/casino/games/live-casino">
+        <div class="menuLView d-flex align-items-center gap-2">
+          <img src="./assets/img/poker.png" />
+          Live Casino
+        </div>
+      </a>
+    </li>
+    <li id="menu">
+      <a id="menu-btn"
+        class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+        href="javascript:void(0)"
+        (click)="casinoLobby(201206, 'AVIATOR')">
+        <div class="menuLView d-flex align-items-center gap-2">
+          <img src="./assets/img/aviator-icon.svg" />
+          Aviator
+        </div>
+      </a>
+    </li>
+    <li id="menu">
+      <a id="menu-btn"
+        class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+        href="javascript:void(0)"
+        (click)="casinoLobby(400000, 'AE SEXY')">
+        <div class="menuLView d-flex align-items-center gap-2">
+          <img src="./assets/img/poker.png" />
+          AE SEXY
+        </div>
+      </a>
+    </li>
+    <li id="menu">
+      <a id="menu-btn"
+        class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+        href="javascript:void(0)" (click)="casinoLobby(100000, 'EZUGI')">
+        <div class="menuLView d-flex align-items-center gap-2">
+          <img src="./assets/img/poker.png" />
+          EZUGI
+        </div>
+      </a>
+    </li>
+
+    <li id="menu">
+      <a id="menu-btn"
+        class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+        href="/casino/games/virtual">
+        <div class="menuLView d-flex align-items-center gap-2">
+          <img src="./assets/img/poker.png" />
+          Virtual Sports
+        </div>
+      </a>
+    </li>
+  </ul>
+</aside>

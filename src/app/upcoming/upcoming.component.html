@@ -1,0 +1,232 @@
+ <div class="play__match__head__bar">
+  <p>Upcoming Matches</p>
+</div>
+<div class="play__match__collapse">
+  <ng-container *ngFor="let sport of this._sportService.SportList">
+    <div class="accordion mb-2" id="accordionExample"
+      *ngIf="sport.sport_id!=111 && this.CheckSportExist(sport.sport_id)==true">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="play__match__head accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#'+sport.name"
+            aria-expanded="true"
+            [attr.aria-controls]="sport.name">
+            <img src="./assets/images/icon{{sport.name}}.webp" alt
+              *ngIf="sport.name!='Election'">
+            <img src="./assets/images/icon{{sport.name}}.png" alt
+              *ngIf="sport.name=='Election'">
+            {{sport.name}}
+          </button>
+        </h2>
+
+        <div id="{{sport.name}}" class="accordion-collapse collapse
+          show ProductNav_Wrapper"
+          [attr.data-bs-parent]="'#'+accordionExample">
+          <div class="bgwrapp matchodds matchoddsli overflowwrappin">
+            <ul>
+              <ng-container *ngFor="let slist of
+            this._sportService._ListUpcomingMatch; let
+            i=index">
+                <li
+                  class="matchtop d-flex align-items-center justify-content-between"
+                  *ngIf="slist.InplayStatus=='CLOSE' &&
+                slist.sport_id==sport.sport_id ||
+                slist.sport_id==sport.sport_id &&
+                slist.InplayStatus=='OPEN'"
+                  (click)="GoToDetailPage(slist)">
+                  <div class="matchoddslft d-flex upCommingMatches">
+                    <div class="timedatetxtb2">
+                      <div class="timedatetxt mobile-show">
+                        <span class="text-uppercase"> {{
+                          slist.start_date+'000' | date:
+                          'd MMM hh:mm a'}} </span>
+                      </div>
+                      <div class="timedatetxt web-show close">
+                        <ul>
+                          <li> <span>{{ slist.start_date+'000' | date:
+                              'hh:mm a'}}</span>
+                            <span>{{slist.start_date+'000' | date:'d
+                              MMM'}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="countryname2 d-flex flex-wrap">
+                      <h6><span>{{slist.name.toString().split(" v ")[0]}}</span>
+                        <em class="vstxt">Vs</em>
+                        {{slist.name.toString().split(" v ")[1]}}</h6>
+                      <span>{{slist.seriesName}}</span>
+                    </div>
+                  </div>
+                  <div
+                    class="matchoddsryt d-flex justify-content-end">
+                    <div class="tagwrapp d-flex web-show">
+                      <div class="tagtxt">
+                        <div class="tagno">
+                          1
+                        </div>
+                        <p>MO</p>
+                      </div>
+                      <div class="tagtxt">
+                        <div class="tagno">
+                          1
+                        </div>
+                        <p>F</p>
+                      </div>
+                      <div class="tagtxt">
+                        <div class="tagno">
+                          1
+                        </div>
+                        <p>M</p>
+                      </div>
+                    </div>
+                    <div class="matchodds"
+                      *ngIf="slist.runner_json!=null">
+                      <div
+                        *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N')"
+                        class="ball-start-overly">
+                        <span>{{slist.adminMessage!=''?slist.adminMessage:
+                          (slist.InplayStatus=='CLOSE'
+                          ||
+                          slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                          (slist.IsBetAllow=='N')?'Bet locked':''+
+                          slist.remainTime}}</span>
+                      </div>
+                      <div class="oddstxt">
+                        <em>{{slist.runner_json[0]!=undefined
+                          &&
+                          slist.runner_json[0].ex!=undefined
+                          &&
+                          slist.runner_json[0].ex.availableToBack!=undefined
+                          ?
+                          retrunValue('back',slist,(slist.runner_json[0].ex.availableToBack.length>
+                          0) ?
+                          slist.runner_json[0].ex.availableToBack[0].price
+                          :
+                          '--') : '--'}} </em>
+
+                        <span>{{slist.runner_json[0]!=undefined &&
+                          slist.runner_json[0].ex!=undefined &&
+                          slist.runner_json[0].ex.availableToBack!=undefined
+                          ? retrunValue('size',slist,slist.runner_json[0].ex.availableToBack.length>0
+                          ?
+                          slist.runner_json[0].ex.availableToBack[0].size
+                          : '--') : '--'}}</span>
+                      </div>
+                      <div
+                        class="oddstxt oddstxtgray">
+                        <em>{{slist.runner_json[0]!=undefined
+                          &&
+                          slist.runner_json[0].ex!=undefined
+                          &&
+                          slist.runner_json[0].ex.availableToLay!=undefined
+                          ?
+                          retrunValue('lay',slist,(slist.runner_json[0].ex.availableToLay.length>
+                          0) ?
+                          slist.runner_json[0].ex.availableToLay[0].price
+                          :
+                          '--') : '--'}} </em>
+                        <span>{{slist.runner_json[0]!=undefined &&
+                          slist.runner_json[0].ex!=undefined &&
+                          slist.runner_json[0].ex.availableToLay!=undefined
+                          ? retrunValue('size',slist,slist.runner_json[0].ex.availableToLay.length>0
+                          ?
+                          slist.runner_json[0].ex.availableToLay[0].size
+                          : '--') : '--'}}</span>
+                      </div>
+                      <div class="oddstxt">
+                        <em>{{slist.runner_json[2]!=undefined
+                          &&
+                          slist.runner_json[2].ex!=undefined
+                          &&
+                          slist.runner_json[2].ex.availableToBack!=undefined
+                          ?
+                          retrunValue('back',slist,(slist.runner_json[2].ex.availableToBack.length>
+                          0) ?
+                          slist.runner_json[2].ex.availableToBack[0].price
+                          :
+                          '--') : '--'}} </em>
+                        <span>{{slist.runner_json[2]!=undefined &&
+                          slist.runner_json[2].ex!=undefined &&
+                          slist.runner_json[2].ex.availableToBack!=undefined
+                          ? retrunValue('size',slist,slist.runner_json[2].ex.availableToBack.length>
+                          0 ?
+                          slist.runner_json[2].ex.availableToBack[0].size
+                          : '--') : '--'}}</span>
+                      </div>
+                      <div
+                        class="oddstxt oddstxtgray">
+                        <em>{{slist.runner_json[2]!=undefined
+                          &&
+                          slist.runner_json[2].ex!=undefined
+                          &&
+                          slist.runner_json[2].ex.availableToLay!=undefined
+                          ?
+                          retrunValue('lay',slist,(slist.runner_json[2].ex.availableToLay.length>
+                          0) ?
+                          slist.runner_json[2].ex.availableToLay[0].price
+                          :
+                          '--') : '--'}} </em>
+                        <span>{{slist.runner_json[2]!=undefined &&
+                          slist.runner_json[2].ex!=undefined &&
+                          slist.runner_json[2].ex.availableToLay!=undefined
+                          ? retrunValue('size',slist,slist.runner_json[2].ex.availableToLay.length>
+                          0 ?
+                          slist.runner_json[2].ex.availableToLay[0].size
+                          : '--') : '--'}}</span>
+                      </div>
+                      <div class="oddstxt">
+                        <em>{{slist.runner_json[1]!=undefined
+                          &&
+                          slist.runner_json[1].ex!=undefined
+                          &&
+                          slist.runner_json[1].ex.availableToBack!=undefined
+                          ?
+                          retrunValue('back',slist,(slist.runner_json[1].ex.availableToBack.length>
+                          0) ?
+                          slist.runner_json[1].ex.availableToBack[0].price
+                          :
+                          '--') : '--'}} </em>
+                        <span>{{slist.runner_json[1]!=undefined &&
+                          slist.runner_json[1].ex!=undefined &&
+                          slist.runner_json[1].ex.availableToBack!=undefined
+                          ? retrunValue('size',slist,slist.runner_json[1].ex.availableToBack.length>
+                          0 ?
+                          slist.runner_json[1].ex.availableToBack[0].size
+                          : '--') : '--'}}</span>
+                      </div>
+                      <div
+                        class="oddstxt oddstxtgray">
+                        <em>{{slist.runner_json[1]!=undefined
+                          &&
+                          slist.runner_json[1].ex!=undefined
+                          &&
+                          slist.runner_json[1].ex.availableToLay!=undefined
+                          ?
+                          retrunValue('lay',slist,(slist.runner_json[1].ex.availableToLay.length>
+                          0) ?
+                          slist.runner_json[1].ex.availableToLay[0].price
+                          :
+                          '--') : '--'}} </em>
+                        <span>{{slist.runner_json[1]!=undefined &&
+                          slist.runner_json[1].ex!=undefined &&
+                          slist.runner_json[1].ex.availableToLay!=undefined
+                          ? retrunValue('size',slist,slist.runner_json[1].ex.availableToLay.length>
+                          0 ?
+                          slist.runner_json[1].ex.availableToLay[0].size
+                          : '--') : '--'}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

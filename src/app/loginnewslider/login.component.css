@@ -1,0 +1,29 @@
+.reg_bx {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.reg_bx span {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0px;
+    align-content: center;
+    color: #fff;
+    display: block;
+}
+
+.reg_bx .btn {
+    text-transform: uppercase;
+    background-color: #fff;
+    color: #000;
+    border: 0px;
+    width: 100%;
+    font-weight: 700;
+    font-family: Montserrat, sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
+}
+
+.reg_title {
+    color: #fff;
+    text-transform: uppercase;
+}

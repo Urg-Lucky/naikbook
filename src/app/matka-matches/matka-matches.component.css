@@ -1,0 +1,105 @@
+.completedBxRed {
+  border: 1px solid red !important;
+  padding: 2px 10px;
+  border-radius: 7px;
+  color: red !important;
+}
+
+.casino_image .images-box {
+  transition: transform 0.2s;
+}
+
+.casino_image .images-box:hover {
+  transform: scale(1.05);
+}
+
+.casino_image img {
+  width: 100%;
+}
+
+.casino_image.matka_image .images-box .box-desk-in {
+  text-align: center;
+  background-color: #fff;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f1f1f1 50%,
+    #e1e1e1 51%,
+    #f6f6f6 100%
+  );
+  border-radius: 5px;
+  box-shadow: 0 0 6px #8a8989;
+  padding: 10px 10px;
+  min-height: 250px;
+}
+
+.casino_image.matka_image .images-box .box-desk-in p.text-info {
+  font-size: 12px;
+  color: #000 !important;
+  line-height: 2;
+  margin-bottom: 1px;
+}
+
+.casino_image.matka_image .images-box .box-desk-in span.text-info1 {
+  color: #22199c;
+  font-size: 23px;
+  line-height: 2;
+  font-weight: bold;
+  margin-top: -31px;
+}
+
+.casino_image.matka_image .images-box .box-desk-in p.text-info2 {
+  margin-top: 0px;
+  color: #2c2d6d;
+  line-height: 1.2;
+  font-size: 13px;
+  margin-bottom: 0px;
+}
+
+.casino_image.matka_image .images-box .box-desk-in p.text-button {
+  background-color: #008000;
+  color: #fff;
+  width: auto;
+  margin-left: 15%;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 1px 5px;
+  margin-bottom: 0px;
+}
+
+.casino_image.matka_image
+  .images-box
+  .box-desk-in
+  p.text-button.text-button-close {
+  background-color: #be0707;
+}
+
+.casino_image.matka_image
+  .images-box
+  .box-desk-in
+  p.text-button.text-button-upcoming {
+  background-color: #c9710e;
+}
+
+.casino_image.matka_image .images-box .box-desk-in hr {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.casino_image.matka_image .images-box .box-desk-in .for_mobile_result {
+  margin-top: 0px;
+  color: #2c2d6d;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.casino_image.matka_image .images-box .box-desk-in .for_mobile_result {
+  margin-top: 0px;
+  color: #2c2d6d;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}

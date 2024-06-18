@@ -1,0 +1,92 @@
+<div class="row no-gutters" style="height: calc(100vh - 87px);" id="home-component-head">
+    <div class="nopadding matkadetail" style="width: 100%;">
+        <div style="float: left;width: 100%;">
+            <div class="matkadetail_header">
+                <h5>Titli</h5>
+            </div>
+        </div>
+        <div class="titli-main-outer">
+            <div class="game-outer">
+                <div class="game-left-outer left_box_scroll">
+                  <div id=currentdraw_time_div></div>
+                  <ul class="" id="currentdraw_time" *ngIf="titliResultDataList!=null">
+                        <li *ngFor="let titliResult of titliResultDataList">
+                            <img src="/assets/images/titli_photos/{{titliResult.winner_name}}" style="width:50px; height:50px">
+                            <div class="time-outer">
+                                <p><strong>{{this._sportService.timeConverter(titliResult.draw_time) | date:'hh:mm a'}}</strong></p>
+                              </div>
+                        </li>
+                        
+                  </ul>
+                </div>
+                <div class="game-middle-outer" id="currentdraw_circle1">
+                    <div align="center">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td  align="center" valign="center">
+                                    <div  class="the_wheel">
+                                    <div class="pointer_p"><img src="/assets/images/spinner/pointer_icon.png"></div>
+            
+                                        <canvas id="canvas" class="canvas_web" width="420" height="420">
+                                            <p style="color: white" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+                                        </canvas>
+                                    <div class="spinner_p"><img src="/assets/images/spinner/roulette_top.png"></div>
+                                    </div>
+            
+                                </td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+                    <div class="opverlap_bg1"></div>
+                </div>
+                <div class="game-right-outer">
+                    <div class="time-outer">
+                        <div class="next-outer">
+                            <h4>Next</h4>
+                        </div>
+                        <div class="countdown-outer">
+                            <div class="hour-outer">
+                                <h6 id="nextdraw_start" style="color: #e6a64c;font-size: 18px;font-weight: bold;" *ngIf="matchDetail!=null">
+                                    Next Draw <br>
+                                    {{this._sportService.timeConverter(matchDetail.draw_date) | date:'hh:mm a'}}
+                                </h6>
+                            </div>
+                            <div class="mint-outer">
+                                <h3 id="remain_min">{{tsTme < 10 ? '0'+tsTme : tsTme }}:</h3>
+                                <p>minutes</p>
+                            </div>
+                            <div class="sec-outer">
+                                <h3 id="remain_sec">{{tsTme2 < 10 ? '0'+tsTme2 : tsTme2}}</h3>
+                                <p>seconds</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-list-outer suspend1" *ngIf="matchDetail!=null">
+                        <ul>
+                            <li *ngFor="let selection of matchDetail.open_market.runner_json">
+                                <div class="img-outer">
+                                    <a href="javascript:void(0)" (click)="drawRemaingTime > 10 ? (updatePopupTtiliData(selection) ) : '' "  [ngStyle]="{'cursor': (drawRemaingTime > 10 ? 'pointer':'not-allowed')}" class="titlidraw_image">
+                                        <img src="/assets/images/titli_photos/{{selection.SelectionName}}" style="width:70px; height:70px">
+                                        
+                                    </a>
+                                </div>
+                                <div class="text-outer" *ngIf="titliBetDataList!=null">
+                                    <div *ngFor="let betdata of titliBetDataList">
+                                        <p *ngIf="selection.selectionId == betdata.selection_id && betdata.totalStack != '' ">
+                                            <strong>{{ betdata.totalStack }}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <!-- <ngx-loading [show]="this._sportService._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading> -->
+</div>
+<div class="jodi_popup_container" style="position: relative;" *ngIf="showPopupTitli!= null">
+    <app-titlipopup [titliPopupNumberdata]= "matchDetail" [selectionData] = "showPopupTitli"  (dialogClose)="($event == 'SUCCESS' ? callGetTitliBets() : ''); showPopupTitli = null;"></app-titlipopup>
+</div>

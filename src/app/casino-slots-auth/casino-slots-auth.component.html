@@ -1,0 +1,216 @@
+<div class="mainDetailView">
+  <!-- Slider Start -->
+  <section class="slider" style="display: none;">
+    <div id="carouselExampleIndicators" class="carousel slide web-show" data-ride="carousel">
+      <div class="carousel-indicators">
+        <ng-container *ngFor="let bannerlist of banner; let i=index">
+          <button type="button" attr.data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}"
+            [ngClass]="{'active':i==0}"></button>
+        </ng-container>
+      </div>
+      <div class="carousel-inner">
+        <ng-container *ngFor="let bannerlist of banner; let j=index">
+          <div class="carousel-item" [ngClass]="{'active':j==0}">
+            <img src="{{bannerlist.attachment}}" class="d-block w-100 bannerStyle" alt="{{bannerlist.title}}">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide mobile-show" data-ride="carousel">
+      <div class="carousel-indicators">
+        <ng-container *ngFor="let bannerlist of bannerMobile; let i=index">
+          <button type="button" attr.data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}"
+            [ngClass]="{'active':i==0}"></button>
+        </ng-container>
+      </div>
+      <div class="carousel-inner">
+        <ng-container *ngFor="let bannerlist of bannerMobile; let j=index">
+          <div class="carousel-item" [ngClass]="{'active':j==0}">
+            <img src="{{bannerlist.attachment}}" class="d-block w-100 bannerStyle" alt="{{bannerlist.title}}">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+  <!-- Slider Start -->
+  <section class="servicesSec row" *ngIf="showCasino">
+    <!-- <div
+      class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/Evolution.jpg"
+        class="img-fluid border-radius7" alt
+        (click)="casinoLobby(200215, 'Evolution')" />
+    </div> -->
+
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/Supernova.jpg" class="img-fluid border-radius7" alt
+        (click)="casinoLobby(500001, 'Supernova')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/AVIATORBANNER.png" class="img-fluid border-radius7" alt
+        (click)="casinoLobby(201206, 'AVIATOR')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/EZUGIBANNER.png" class="img-fluid border-radius7" alt
+        (click)="casinoLobby(100001, 'EZUGI')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/RoyalGaming.png" class="img-fluid border-radius7" alt
+        (click)="casinoLobby(900000, 'Royal Gaming')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/HotnSexy.jpg" class="img-fluid border-radius7" alt
+        (click)="casinoLobby(400000, 'AE SEXY')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/Jilli.jpg" class="img-fluid border-radius7" alt (click)="casinoLobby(600000, 'Jilli')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/LUDO.jpg" class="img-fluid border-radius7" alt (click)="casinoLobby(600113, 'LUDO')" />
+    </div>
+    <div class="col-lg-2 col-md-6 col-6 mb-3 box-card-shadow">
+      <img src="./assets/img/WHEELOFFORTUNEBANNER.png" class="img-fluid border-radius7" alt
+        (click)="casinoLobby(201153, 'Wheel')" />
+    </div>
+  </section>
+  <!-- Services Start-->
+  <section class="servicesSec casinogames">
+    <div class="partner-slider casinocategory">
+      <div class="single-slider roulette">
+        <a href="javascript:void(0);" (click)="GetCasinoList('roulette')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/roulette.svg" alt="Image">
+            <p>ROULETTE</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider lightning">
+        <a href="javascript:void(0);" (click)="GetCasinoList('lightning')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/lightning.svg" alt="Image">
+            <p>LIGHTNING</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider live-casino">
+        <a href="javascript:void(0);" (click)="GetCasinoList('live-casino')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/live-casino.svg" alt="Image">
+            <p>LIVE CASINO</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider teen-patti">
+        <a href="javascript:void(0);" (click)="GetCasinoList('teen-patti')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/CardGames.svg" alt="Image">
+            <p>TEEN PATTI</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider andhar-bahar">
+        <a href="javascript:void(0);" (click)="GetCasinoList('andar-bahar')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/andhar-bahar.svg" alt="Image">
+            <p>ANDHAR BAHAR</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider dragon-tiger">
+        <a href="javascript:void(0);" (click)="GetCasinoList('dragon-tiger')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/Dragon.svg" alt="Image">
+            <p>DRAGON TIGER</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider baccarat">
+        <a href="javascript:void(0);" (click)="GetCasinoList('baccarat')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/baccarat.svg" alt="Image">
+            <p>BACCARAT</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider blackjack">
+        <a href="javascript:void(0);" (click)="GetCasinoList('blackjack')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/blackjack.svg" alt="Image">
+            <p>BLACK JACK</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider table-games">
+        <a href="javascript:void(0);" (click)="GetCasinoList('table-games')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/board.svg" alt="Image">
+            <p>TABLE GAME</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider poker">
+        <a href="javascript:void(0);" (click)="GetCasinoList('poker')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/poker.svg" alt="Image">
+            <p>POKER</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider holdem">
+        <a href="javascript:void(0);" (click)="GetCasinoList('holdem')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/holdem.svg" alt="Image">
+            <p>HOLD'EM</p>
+          </div>
+        </a>
+      </div>
+      <div class="single-slider lottery">
+        <a href="javascript:void(0);" (click)="GetCasinoList('lottery')">
+          <div class="service-img">
+            <img src="./assets/img/casinogameimage/lottery.svg" alt="Image">
+            <p>LOTTERY GAMES</p>
+          </div>
+        </a>
+      </div>
+      <!-- <div class="single-slider">
+      <a href="/sports">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/roulette.svg"
+            alt="Image">
+          <p>PROVIDER</p>
+        </div>
+      </a>
+    </div> -->
+    </div>
+  </section>
+  <!-- Services End -->
+
+  <section class="bg-lightTheme">
+    <div style="position: relative; width: 250px; margin-left: 2px; margin-bottom: 17px;">
+      <input type="text" name="serachcasino" id="serachcasino" class="form-control" placeholder="Search"
+        (keyup)="searchCasino($event)" style="background: #FFF; color: #000;">
+      <img src="./assets/img/search.png" style="position: absolute; right: 12px; top: 11px; width: 19px;">
+    </div>
+    <div class="content-container ng-star-inserted" style="position: relative;">
+      <ng-container *ngFor="let casinoData of casinoGames; let i=index">
+        <div class="card-wrapper ng-star-inserted">
+          <div class="card-container">
+            <div class="img-container">
+              <img alt src="{{casinoData.Url}}">
+            </div>
+            <div class="game-desc">
+              <div class="details">
+                <span>{{casinoData.category}}</span>
+              </div>
+              <p>{{casinoData.game_name}}</p>
+            </div>
+            <div class="detail-content">
+              <button class="btn m-auto d-block demo ng-star-inserted" (click)="GoToLobbyPage(casinoData)">
+                Play</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</div>

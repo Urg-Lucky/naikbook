@@ -1,0 +1,1250 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content login-popup">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="login-main-bx-inner" [formGroup]="login_form" (ngSubmit)="login()" name="loginForm" novalidate>
+        <div class="modal-body">
+          <div class="titelModal text-center">
+            <h2>Login</h2>
+          </div>
+          <div class>
+            <label for="exampleFormControlInput1" class="form-label">User
+              ID</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="User ID"
+              formControlName="username">
+            <div class="error_txt"
+              *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+              [ngClass]="error"> Enter valid user name.</div>
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password"
+              formControlName="password">
+            <div class="error_txt"
+              *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+              [ngClass]="error"> Enter valid password.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="signBTn w-100 pt-2 pb-2" type="submit">
+            <i class="fa fa-user mr1" aria-hidden="true"></i> LOG IN
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Mobile Modal -->
+<div class="dashboard-nav">
+  <nav class="dashboard-nav-list">
+    <div class="menuHead">
+      <h4>Popular</h4>
+      <img class="menu-toggle" src="./assets/img/close_icon.png" />
+    </div>
+    <ul class="sidebar__menu">
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/inplay-matches">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/inplay.png" />
+            In-Play
+          </div>
+        </a>
+      </li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li id="menu" *ngIf="sport.sport_id!=111&&sport.sport_id!=222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="/game/{{sport.sport_id}}">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+        <li id="menu" *ngIf="sport.sport_id==222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+
+      </ng-container>
+      <!-- <li id="menu">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Diamond Casino
+          </div>
+        </a>
+      </li> -->
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Casino
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/aviator-icon.svg" />
+            Aviator
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            AE SEXY
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            EZUGI
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Live Casino
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+<!-- Mobile Modal -->
+<!-- header start -->
+<header class="header">
+  <div class="breaking-box">
+    <div class="d-flex w-100 mr5">
+      <img src="./assets/img/voice_d.png">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseleave="this.start();">
+        <a class="h6 fw-normal mr-5" href="javascript:void(0)">{{siteMessage}}</a>
+      </marquee>
+    </div>
+    <div class="header-time"><span>{{ time | date: 'd MMM, y hh:mm:ss a'
+        }}</span></div>
+  </div>
+  <div class="mainHead">
+
+    <div class="brand-logo d-flex align-items-center">
+      <button id="toggle-menu" class="me-3 active mobilemenuactiv menu-toggle">
+        <img src="./assets/img/menu-icon.png" />
+      </button>
+      <a href="/home">
+        <img src="{{adminLink}}{{sitelogo}}" alt class="dark-version-logo">
+      </a>
+    </div>
+    <div class="loginSide">
+      <button class="signBTn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-user mr1" aria-hidden="true"></i> LOG IN
+      </button>
+    </div>
+  </div>
+  <div class="menuLink">
+    <ul class="links">
+      <li><a href="/home"><img src="./assets/img/home.png" />
+          <p>Home</p>
+        </a></li>
+      <li><a href="/inplay-matches"><img src="./assets/img/inplay.png" />
+          <p>In-Play</p>
+        </a></li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li *ngIf="sport.sport_id!=111&&sport.sport_id!=222"><a href="/game/{{sport.sport_id}}"><img
+              src="{{sport.image}}" /><span id="tagLive" class="tag-live">
+              <strong></strong>0
+            </span>
+            <p>{{sport.name}}</p>
+          </a></li>
+      </ng-container>
+      <li>
+        <a class="aviator" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/aviator-icon.svg" />
+          Aviator
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>AE SEXY</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>EZUGI</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Live Casino</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Vivo</p>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</header>
+<!-- header end -->
+
+<section class="detailContant">
+  <aside class="sidebar active">
+    <h6>Popular</h6>
+    <ul class="sidebar__menu">
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/inplay-matches">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/inplay.png" />
+            In-Play
+          </div>
+        </a>
+      </li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li id="menu" *ngIf="sport.sport_id!=111&&sport.sport_id!=222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="/game/{{sport.sport_id}}">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+        <li id="menu" *ngIf="sport.sport_id==222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+
+      </ng-container>
+      <!-- <li id="menu">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Diamond Casino
+          </div>
+        </a>
+      </li> -->
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Casino
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/aviator-icon.svg" />
+            Aviator
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            AE SEXY
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            EZUGI
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Live Casino
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </aside>
+  <div class="mainDetailView">
+    <div class="center-box">
+      <span>{{cricketBetMatchMarkets.name}} -
+        {{cricketBetMatchMarkets.seriesName}}</span>
+      <span class="f-right">{{ cricketBetMatchMarkets.start_date | date:
+        'd MMM hh:mm a'}}</span>
+    </div>
+    <div class="accordion pt-3" id="accordionPanelsStayOpenExample"
+      *ngIf="((cricketBetMatchMarkets.start_date - _serverTime)<(2*60))">
+      <div class="accordion-item score"
+        *ngIf="cricketBetMatchMarkets.sportScore=='Y' && scoreMatch.length>0 && cricketBetMatchMarkets != undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets != '' && ((cricketBetMatchMarkets.start_date - _serverTime)<(2*60))">
+        <h2 class="accordion-header" id="scorepanelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#scorepanelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="scorepanelsStayOpen-collapseOne">
+            Score Board <i class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="scorepanelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="scorepanelsStayOpen-headingOne">
+          <div class="accordion-body allcommantable match-list-bx livescore"
+            *ngIf="cricketBetMatchMarkets.sportScore=='Y' && scoreMatch.length>0 && cricketBetMatchMarkets != undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets != '' && ((cricketBetMatchMarkets.start_date - _serverTime)<(2*60))">
+            <table class="table">
+              <thead class="thead-yellos">
+                <tr>
+                  <td colspan="6" class="align-left">
+                    <div class="live_sd">
+                      <div class="teamone live_leftteam d-flex">
+                        <div class="teamone_text">
+                          <strong>{{scoreMatch[2].team1}}{{scoreMatch[1].st==scoreMatch[2].team1?'*':''}}</strong>
+                          <p>{{getScroboard('p1')}}</p>
+                          <strong>CRR {{getCRR('p1')}}</strong>
+                        </div>
+                      </div>
+                      <div class="teamone live_rightteam d-flex">
+                        <div class="teamtow_text">
+                          <strong>{{scoreMatch[2].team2}}
+                            {{scoreMatch[1].st==scoreMatch[2].team2?'*':''}}</strong>
+                          <p>{{getScroboard('p2')}}</p>
+                          <strong>CRR {{getCRR('p2')}}</strong>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    {{scoreMatch[1].c}}
+                  </td>
+                </tr>
+              </thead>
+            </table>
+            <div class="bg-black-bx cricket-scoreboard">
+              <!-- <div *ngIf="scoreMatch[0].cb!='' &&
+                        getScoreboardOverlayMessage(scoreMatch[0].cb)!=''"
+                        class="betbat_multy_matchodds">
+                        <span>{{scoreMatch[0].cb}}</span>
+                      </div> -->
+              <table class="table">
+                <thead class="thead-yellos">
+                  <tr>
+                    <!-- <th colspan="1" class="text-left t1col">Last overs</th> -->
+                    <th class="text-left t1col" colspan="1" *ngIf="scoreMatch[0].cb!='' &&
+                              getScoreboardOverlayMessage(scoreMatch[0].cb)==''"><i class="fa
+                                fa-bullhorn
+                                mr-1"></i>
+                      {{(getScoreboardOverlayMessage(scoreMatch[0].cb)==''
+                      &&
+                      scoreMatch[0].cb!='') ? (scoreMatch[0].cb):''}}
+                    </th>
+                    <th class="text-left t1col" colspan="1" *ngIf="scoreMatch[0].cb!='' &&
+                              getScoreboardOverlayMessage(scoreMatch[0].cb)!=''"><i class="fa
+                                fa-bullhorn
+                                mr-1"></i>
+                      {{scoreMatch[0].cb}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="in_canter_cl">
+                  <tr *ngFor="let ove of scoreMatch[0].recentBalls;let
+                            i=index">
+                    <td class="text-left t1col" style="float: left;
+                              margin-left: 5px;">Over
+                      {{scoreMatch[0].totalOver-i}}</td>
+                    <td class="badge" *ngFor="let inov of ove" [ngStyle]="{'background':getColor(inov)}">{{inov}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item"
+        *ngIf="cricketBetMatchMarkets.sportGraphic=='Y' && safeGrapicSrc!= null && cricketBetMatchMarkets !=undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets!= ''">
+        <h2 class="accordion-header" id="scoreGpanelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#scoreGpanelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="scoreGpanelsStayOpen-collapseOne">
+            Score Board <i class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="scoreGpanelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="scoreGpanelsStayOpen-headingOne">
+          <div class="accordion-body"
+            *ngIf="cricketBetMatchMarkets.sportGraphic=='Y' && safeGrapicSrc!= null && cricketBetMatchMarkets !=undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets!= ''">
+            <iframe [src]="safeGrapicSrc" width="100%" height="280" frameborder="0" scrolling="no" marginwidth="0"
+              frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item livestreaming mobile-show"
+        *ngIf="cricketBetMatchMarkets.sportShowTV=='Y' && safeSrc!= null && cricketBetMatchMarkets!=undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets!= '' &&((cricketBetMatchMarkets.start_date-_serverTime)<(2*60))">
+        <h2 class="accordion-header" id="TvpanelsStayOpenL-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="Tv#panelsStayOpenL-collapseOne" aria-expanded="true"
+            aria-controls="TvpanelsStayOpenL-collapseOne">
+            Live Streaming <i class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="TvpanelsStayOpenL-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="TvpanelsStayOpenL-headingOne">
+          <div class="accordion-body"
+            *ngIf="cricketBetMatchMarkets.sportShowTV=='Y' && safeSrc!= null && cricketBetMatchMarkets!=undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets!= '' &&((cricketBetMatchMarkets.start_date-_serverTime)<(2*60))">
+            <iframe [src]="safeSrc" width="100%" height="270" frameborder="0" scrolling="no" marginwidth="0"
+              frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--Match View-->
+    <div class="accordion " id="accordionPanelsStayOpenExample">
+      <div class="accordion-item" *ngIf="cricketBetMatchMarkets!=null">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">{{cricketBetMatchMarkets.marketName}}</li>
+              <li class="all__match__tab__right d-flex align-items-center">
+                <div class="all__match__info infoBL">
+                  <p>Min: {{cricketBetMatchMarkets.marketMinStack}} |
+                    Max:{{cricketBetMatchMarkets.marketMaxStack}} </p>
+                </div>
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <!-- matchBox start-->
+            <div class="matchboxBB">
+              <div class="matchDView">
+                <div class="matchMainBox mathcDetailView matDetailPadd">
+                  <div class="all__match__list">
+                    <div class="all__match__bar">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="all__match__bar__left">
+                        </div>
+                        <div class="tabback_lay">
+
+                          <ul class="d-flex align-items-center">
+                            <li id="all-match-tab" class="d-flex align-items-center justify-content-center bordertopLR">
+                              <div class="text-center">
+                                <p>Back</p>
+                              </div>
+                            </li>
+                            <li id="all-match-tab" class="d-flex align-items-center justify-content-center bordertopRR">
+                              <div class="text-center">
+                                <p>Lay</p>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container *ngFor="let cricketrunners of cricketBetMatchMarkets.runner_json; let i=index">
+                  <div class="matchMainBox mathcDetailView matDetailPadd">
+                    <div class="all__match__list">
+                      <div class="all__match__bar">
+                        <div class="d-flex justify-content-between">
+                          <div class="all__match__bar__left">
+                            <p>{{cricketrunners.selectionName}}</p>
+                            <p *ngIf="(cricketrunners.WinAndLoss
+                                      +(this._sportService.stake2['field_'
+                                      +
+                                      cricketrunners.selectionId
+                                      +'_'+
+                                      cricketBetMatchMarkets.match_id+'_'+cricketBetMatchMarkets.market_id]))!=0"
+                              [ngClass]="{'green-txt':(cricketrunners.WinAndLoss
+                                      +(this._sportService.stake2['field_'
+                                      +
+                                      cricketrunners.selectionId
+                                      +'_'+
+                                      cricketBetMatchMarkets.match_id+'_'+cricketBetMatchMarkets.market_id]))>=0,'red-txt':(cricketrunners.WinAndLoss
+                                      +(this._sportService.stake2['field_'
+                                      +
+                                      cricketrunners.selectionId
+                                      +'_'+
+                                      cricketBetMatchMarkets.match_id+'_'+cricketBetMatchMarkets.market_id]))<0}">
+                              {{cricketrunners.WinAndLoss
+                              +(this._sportService.stake2["field_"
+                              +
+                              cricketrunners.selectionId
+                              +"_"+
+                              cricketBetMatchMarkets.match_id+"_"+cricketBetMatchMarkets.market_id])
+                              |
+                              number
+                              :
+                              '1.2-2'}}
+                            </p>
+                          </div>
+                          <div class="all__match__bar__right all__match__bar__right-box">
+                            <div
+                              *ngIf="(cricketBetMatchMarkets.InplayStatus=='CLOSE' || cricketBetMatchMarkets.InplayStatus=='SUSPENDED' || cricketBetMatchMarkets.adminMessage!='' || cricketBetMatchMarkets.IsBetAllow=='N' || matchStatus=='Stumps' || !isBetAllowPopular(cricketBetMatchMarkets)) && i==0"
+                              class="ball-start-overly matchodds suspend-overly"
+                              [ngClass]="{'betbat_multy_matchodds_small':this._sessionService.hideExtraOdds}">
+                              <span>{{cricketBetMatchMarkets.adminMessage!=''?cricketBetMatchMarkets.adminMessage:
+                                (cricketBetMatchMarkets.InplayStatus=='CLOSE'
+                                ||
+                                cricketBetMatchMarkets.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                                (cricketBetMatchMarkets.IsBetAllow=='N'
+                                ||
+                                matchStatus=='Stumps')?'Bet
+                                locked':cricketBetMatchMarkets.remainTime}}</span>
+                            </div>
+                            <ul class="d-flex align-items-center">
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center back2"
+                                [ngClass]="this._sportService.needBlink(cricketBetMatchMarkets,i,2,'back')">
+                                <div class="text-center">
+                                  <p>
+                                    {{retrunValue('back',cricketBetMatchMarkets,cricketrunners.ex.availableToBack[2].price)}}
+                                  </p>
+                                  <span>{{retrunValue('size',cricketBetMatchMarkets,cricketrunners.ex.availableToBack[2].size)}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center back1"
+                                [ngClass]="this._sportService.needBlink(cricketBetMatchMarkets,i,1,'back')">
+                                <div class="text-center">
+                                  <p>
+                                    {{retrunValue('back',cricketBetMatchMarkets,cricketrunners.ex.availableToBack[1].price)}}
+                                  </p>
+                                  <span>{{retrunValue('size',cricketBetMatchMarkets,cricketrunners.ex.availableToBack[1].size)}}</span>
+                                </div>
+                              </li>
+                              <li data-color="#CFF1FF" id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center bidboxOP back"
+                                [ngClass]="this._sportService.needBlink(cricketBetMatchMarkets,i,0,'back')"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div class="text-center">
+                                  <p>
+                                    {{retrunValue('back',cricketBetMatchMarkets,cricketrunners.ex.availableToBack[0].price)}}
+                                  </p>
+                                  <span>{{retrunValue('size',cricketBetMatchMarkets,cricketrunners.ex.availableToBack[0].size)}}</span>
+                                </div>
+                              </li>
+                              <li data-color="#FBD7E5" id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center lay"
+                                [ngClass]="this._sportService.needBlink(cricketBetMatchMarkets,i,0,'lay')"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div class="text-center">
+                                  <p>
+                                    {{retrunValue('lay',cricketBetMatchMarkets,cricketrunners.ex.availableToLay[0].price)}}
+                                  </p>
+                                  <span>{{retrunValue('size',cricketBetMatchMarkets,cricketrunners.ex.availableToLay[0].size)}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center lay1"
+                                [ngClass]="this._sportService.needBlink(cricketBetMatchMarkets,i,1,'lay')">
+                                <div class="text-center">
+                                  <p>
+                                    {{retrunValue('lay',cricketBetMatchMarkets,cricketrunners.ex.availableToLay[1].price)}}
+                                  </p>
+                                  <span>{{retrunValue('size',cricketBetMatchMarkets,cricketrunners.ex.availableToLay[1].size)}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center lay2"
+                                [ngClass]="this._sportService.needBlink(cricketBetMatchMarkets,i,2,'lay')">
+                                <div class="text-center">
+                                  <p>
+                                    {{retrunValue('lay',cricketBetMatchMarkets,cricketrunners.ex.availableToLay[2].price)}}
+                                  </p>
+                                  <span>{{retrunValue('size',cricketBetMatchMarkets,cricketrunners.ex.availableToLay[2].size)}}</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-container>
+
+                <!-- <div class="matchTopCatT">
+                  <div class="row align-items-center">
+                    <div class="col-lg-8 col-12 ja">
+                    </div>
+                    <div class="col-lg-4 col-12 viewBTn matchDetailRed">
+                      <a href> Lok Sabha Election 2024 Bet Started In Our
+                        Exchange...</a>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <!-- matchBox end-->
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" *ngIf="BookerMakerMarket!=null">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseTwo">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">{{BookerMakerMarket.marketName}}</li>
+              <li class="all__match__tab__right d-flex align-items-center">
+                <div class="all__match__info infoBL">
+                  <p>Min: {{BookerMakerMarket.marketMinStack}} | Max:
+                    {{BookerMakerMarket.marketMaxStack}} </p>
+                </div>
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="accordion-body">
+            <!-- matchBox start-->
+
+            <div class="matchboxBB">
+              <div class="matchDView">
+                <div class="matchMainBox mathcDetailView matDetailPadd">
+                  <div class="all__match__list">
+                    <div class="all__match__bar">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="all__match__bar__left">
+
+                        </div>
+                        <div class="tabback_lay">
+                          <ul class="d-flex align-items-center">
+                            <li id="all-match-tab" class="d-flex align-items-center justify-content-center bordertopLR">
+                              <div class="text-center">
+                                <p>Back</p>
+                              </div>
+                            </li>
+                            <li id="all-match-tab" class="d-flex align-items-center justify-content-center bordertopRR">
+                              <div class="text-center">
+                                <p>Lay</p>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container *ngFor="let cricketrunners of BookerMakerMarket.runner_json; let i=index">
+                  <div class="matchMainBox mathcDetailView matDetailPadd">
+                    <div class="all__match__list">
+                      <div class="all__match__bar">
+                        <div class="d-flex justify-content-between">
+                          <div class="all__match__bar__left">
+                            <p>{{cricketrunners.selectionName}}</p>
+                            <p *ngIf="(cricketrunners.WinAndLoss
+                                 +(this._sportService.stake2['field_'
+                                 +
+                                 cricketrunners.selectionId
+                                 +'_'+
+                                 BookerMakerMarket.match_id+'_'+BookerMakerMarket.market_id]))!=0" [ngClass]="{'green-txt':(cricketrunners.WinAndLoss
+                                 +(this._sportService.stake2['field_'
+                                 +
+                                 cricketrunners.selectionId
+                                 +'_'+
+                                 BookerMakerMarket.match_id+'_'+BookerMakerMarket.market_id]))>=0,'red-txt':(cricketrunners.WinAndLoss
+                                 +(this._sportService.stake2['field_'
+                                 +
+                                 cricketrunners.selectionId
+                                 +'_'+
+                                 BookerMakerMarket.match_id+'_'+BookerMakerMarket.market_id]))<0}">
+                              {{cricketrunners.WinAndLoss
+                              +(this._sportService.stake2["field_"
+                              +
+                              cricketrunners.selectionId
+                              +"_"+
+                              BookerMakerMarket.match_id+"_"+BookerMakerMarket.market_id])
+                              |
+                              number
+                              :
+                              '1.2-2'}}
+                            </p>
+                          </div>
+                          <div class="all__match__bar__right all__match__bar__right-box">
+                            <div style="z-index: 3;"
+                              *ngIf="(BookerMakerMarket.InplayStatus=='CLOSE' || BookerMakerMarket.InplayStatus=='SUSPENDED' || BookerMakerMarket.adminMessage!='' || BookerMakerMarket.IsBetAllow=='N'|| !isBetAllowPopular(BookerMakerMarket)) && i==0"
+                              class="ball-start-overly suspend-overly"
+                              [ngClass]="{'ball-start-overly_small':this._sessionService.hideExtraOdds}">
+                              <span>{{BookerMakerMarket.adminMessage!=''?BookerMakerMarket.adminMessage:
+                                (BookerMakerMarket.InplayStatus=='CLOSE'
+                                ||
+                                BookerMakerMarket.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                                (BookerMakerMarket.IsBetAllow=='N')?'Bet
+                                locked':BookerMakerMarket.remainTime}}</span>
+                            </div>
+                            <ul class="d-flex align-items-center">
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center back2"
+                                [ngClass]="this._sportService.needBlink(BookerMakerMarket,i,2,'back')">
+                                <div class="text-center">
+                                  <p>{{cricketrunners.ex.availableToBack[2].price}}</p>
+                                  <span>{{cricketrunners.ex.availableToBack[2].size}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center back1"
+                                [ngClass]="this._sportService.needBlink(BookerMakerMarket,i,1,'back')">
+                                <div class="text-center">
+                                  <p>{{cricketrunners.ex.availableToBack[1].price}}</p>
+                                  <span>{{cricketrunners.ex.availableToBack[1].size}}</span>
+                                </div>
+                              </li>
+                              <li data-color="#CFF1FF" id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center bidboxOP back"
+                                [ngClass]="this._sportService.needBlink(BookerMakerMarket,i,0,'back')"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div class="text-center">
+                                  <p>{{cricketrunners.ex.availableToBack[0].price}}</p>
+                                  <span>{{cricketrunners.ex.availableToBack[0].size}}</span>
+                                </div>
+                              </li>
+                              <li data-color="#FBD7E5" id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center lay"
+                                [ngClass]="this._sportService.needBlink(BookerMakerMarket,i,0,'lay')"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <div class="text-center">
+                                  <p>{{cricketrunners.ex.availableToLay[0].price}}</p>
+                                  <span>{{cricketrunners.ex.availableToLay[0].size}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center lay1"
+                                [ngClass]="this._sportService.needBlink(BookerMakerMarket,i,1,'lay')">
+                                <div class="text-center">
+                                  <p>{{cricketrunners.ex.availableToLay[1].price}}</p>
+                                  <span>{{cricketrunners.ex.availableToLay[1].size}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab" class="d-flex align-items-center justify-content-center lay2"
+                                [ngClass]="this._sportService.needBlink(BookerMakerMarket,i,2,'lay')">
+                                <div class="text-center">
+                                  <p>{{cricketrunners.ex.availableToLay[2].price}}</p>
+                                  <span>{{cricketrunners.ex.availableToLay[2].size}}</span>
+                                </div>
+                              </li>
+                              <div *ngIf="cricketrunners.GameStatus!=undefined && cricketrunners.GameStatus!=''"
+                                class="ball-start-overly bookmakers suspend-overly"
+                                [ngClass]="{'betbatsmall':this._sessionService.hideExtraOdds}">
+                                <span>{{cricketrunners.GameStatus}}</span>
+                              </div>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-container>
+
+                <!-- <div class="matchTopCatT">
+                    <div class="row align-items-center">
+                      <div class="col-lg-8 col-12 ja">
+                      </div>
+                      <div class="col-lg-4 col-12 viewBTn matchDetailRed">
+                        <a href> Lok Sabha Election 2024 Bet Started In Our
+                          Exchange...</a>
+                      </div>
+                    </div>
+                  </div> -->
+              </div>
+            </div>
+
+            <!-- matchBox end-->
+          </div>
+        </div>
+      </div>
+      <div *ngIf="betFairMarket.length>0 && betFairMarketShow">
+        <ng-container *ngFor="let betfair of betFairMarket; let k=index">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseThree">
+                <ul class="allMatchTView d-flex align-items-center">
+                  <li class="all__match__tab__left">{{betfair.marketName}}</li>
+                  <li class="all__match__tab__right d-flex align-items-center">
+                    <div class="all__match__info infoBL">
+                      <p>Min: {{betfair.marketMinStack}} | Max:
+                        {{betfair.marketMaxStack}} </p>
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+              aria-labelledby="panelsStayOpen-headingThree">
+              <div class="accordion-body">
+                <!-- matchBox start-->
+                <div class="matchboxBB">
+                  <div class="matchDView">
+                    <div class="matchMainBox mathcDetailView matDetailPadd">
+                      <div class="all__match__list">
+                        <div class="all__match__bar">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <div class="all__match__bar__left">
+
+                            </div>
+                            <div class="tabback_lay">
+
+                              <ul class="d-flex align-items-center">
+                                <li id="all-match-tab"
+                                  class="d-flex align-items-center justify-content-center bordertopLR">
+                                  <div class="text-center">
+                                    <p>Back</p>
+                                  </div>
+                                </li>
+                                <li id="all-match-tab"
+                                  class="d-flex align-items-center justify-content-center bordertopRR">
+                                  <div class="text-center">
+                                    <p>Lay</p>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-container *ngFor="let betFairRunner of betfair.runner_json; let i=index">
+                      <div class="matchMainBox mathcDetailView matDetailPadd">
+                        <div class="all__match__list">
+                          <div class="all__match__bar">
+                            <div class="d-flex justify-content-between">
+                              <div class="all__match__bar__left">
+                                <p [ngClass]="{'betno':(betFairRunner.WinAndLoss
+                            +(this._sportService.stake2['field_'
+                            +
+                            betFairRunner.selectionId
+                            +'_'+
+                            betfair.match_id+'_'+betfair.market_id]))==0,'betyes':(betFairRunner.WinAndLoss
+                            +(this._sportService.stake2['field_'
+                            +
+                            betFairRunner.selectionId
+                            +'_'+
+                            betfair.match_id+'_'+betfair.market_id]))!=0}">{{betFairRunner.selectionName}}</p>
+                                <p *ngIf="(betFairRunner.WinAndLoss
+                                                +(this._sportService.stake2['field_'
+                                                +
+                                                betFairRunner.selectionId
+                                                +'_'+
+                                                betfair.match_id+'_'+betfair.market_id]))!=0" [ngClass]="{'green-txt-betfairmarket':(betFairRunner.WinAndLoss
+                                                +(this._sportService.stake2['field_'
+                                                +
+                                                betFairRunner.selectionId
+                                                +'_'+
+                                                betfair.match_id+'_'+betfair.market_id]))>=0,'red-txt-betfairmarket':(betFairRunner.WinAndLoss
+                                                +(this._sportService.stake2['field_'
+                                                +
+                                                betFairRunner.selectionId
+                                                +'_'+
+                                                betfair.match_id+'_'+betfair.market_id]))<0}">
+                                  {{betFairRunner.WinAndLoss
+                                  +(this._sportService.stake2["field_"
+                                  +
+                                  betFairRunner.selectionId
+                                  +"_"+
+                                  betfair.match_id+"_"+betfair.market_id])
+                                  |
+                                  number
+                                  :
+                                  '1.2-2'}}</p>
+                              </div>
+                              <div class="all__match__bar__right all__match__bar__right-box">
+                                <div style="z-index:3;"
+                                  *ngIf="(betfair.InplayStatus=='CLOSE' || betfair.InplayStatus=='SUSPENDED' || betfair.adminMessage!='' || betfair.IsBetAllow=='N'|| !isBetAllowPopular(betfair)) && i==0"
+                                  class="ball-start-overly suspend-overly"
+                                  [ngClass]="{'ball-start-overly_small':this._sessionService.hideExtraOdds}">
+                                  <span>{{betfair.adminMessage!='' ?
+                                    betfair.adminMessage:
+                                    (betfair.InplayStatus=='CLOSE'
+                                    ||
+                                    betfair.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                                    (betfair.IsBetAllow=='N')?'Bet locked':betfair.remainTime}}</span>
+                                </div>
+                                <ul class="d-flex align-items-center">
+                                  <li id="all-match-tab" class="d-flex align-items-center justify-content-center back2">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <li id="all-match-tab" class="d-flex align-items-center justify-content-center back1">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <li data-color="#CFF1FF" id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center bidboxOP back"
+                                    [ngClass]="this._sportService.needBlink(betfair,0,0,'back')" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    <div class="text-center">
+                                      <p>{{retrunValue('back',betfair,betFairRunner.ex.availableToBack[0].price)}}</p>
+                                      <span>{{retrunValue('size',betfair,betFairRunner.ex.availableToBack[0].size)}}</span>
+                                    </div>
+                                  </li>
+                                  <li data-color="#FBD7E5" id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center lay"
+                                    [ngClass]="this._sportService.needBlink(betfair,k,1,'lay')" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    <div class="text-center">
+                                      <p>{{retrunValue('lay',betfair,betFairRunner.ex.availableToLay[0].price)}}</p>
+                                      <span>{{retrunValue('size',betfair,betFairRunner.ex.availableToLay[0].size)}}</span>
+                                    </div>
+                                  </li>
+                                  <li id="all-match-tab" class="d-flex align-items-center justify-content-center lay1">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <li id="all-match-tab" class="d-flex align-items-center justify-content-center lay2">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <div *ngIf="betFairRunner.GameStatus!=undefined && betFairRunner.GameStatus!=''"
+                                    class="ball-start-overly bookmakers suspend-overly text-center"
+                                    [ngClass]="{'betbatsmall':this._sessionService.hideExtraOdds}">
+                                    <span>{{betFairRunner.GameStatus}}</span>
+                                  </div>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- <div class="matchTopCatT">
+                      <div class="row align-items-center">
+                        <div class="col-lg-8 col-12 ja">
+                        </div>
+                        <div class="col-lg-4 col-12 viewBTn matchDetailRed">
+                          <a href> Lok Sabha Election 2024 Bet Started In Our
+                            Exchange...</a>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+                <!-- matchBox end-->
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="accordion-item mt-3"
+        *ngIf="cricketBetMatchMarkets.runner_json!=undefined && cricketBetMatchMarkets.runner_json!=null && fancyList.length>0">
+        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseThree">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">Fancy</li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingThree">
+          <div class="accordion-body">
+            <!-- matchBox start-->
+            <div class="matchboxBB">
+              <div class="matchDView">
+                <div class="matchMainBox mathcDetailView matDetailPadd">
+                  <div class="all__match__list">
+                    <div class="all__match__bar">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="all__match__bar__left">
+
+                        </div>
+                        <div class="tabback_lay">
+                          <ul class="d-flex align-items-center">
+                            <li id="all-match-tab" class="d-flex align-items-center justify-content-center bordertopLR">
+                              <div class="text-center">
+                                <p>Back</p>
+                              </div>
+                            </li>
+                            <li id="all-match-tab" class="d-flex align-items-center justify-content-center bordertopRR">
+                              <div class="text-center">
+                                <p>Lay</p>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container *ngFor="let fancy of fancyList; let i=index">
+                  <div class="matchMainBox mathcDetailView matDetailPadd">
+                    <div class="all__match__list">
+                      <div class="all__match__bar">
+                        <div class="d-flex justify-content-between">
+                          <div class="all__match__bar__left">
+                            <p>{{fancy.RunnerName}}</p>
+                          </div>
+                          <div class="d-flex">
+                            <div class="popover-body" style="display: none;">
+                              <div class="w-200 mrl-0">
+                                <span class="mr-2">Max :
+                                  {{fancy.maxStack}}</span>
+                                <span class="mr-2">| Max Profit :
+                                  {{fancy.maxProfit}}</span>
+                              </div>
+                            </div>
+                            <div class="tabback_lay02">
+                              <div class="maxBtn tooltipOP"><img src="./assets/img/infoImg.png"></div>
+
+                              <ul class="d-flex align-items-center">
+                                <li id="all-match-tab" class="d-flex align-items-center justify-content-center"
+                                  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                  <div class="text-center">
+                                    <p>{{fancy.LayPrice1==""?"--":fancy.LayPrice1|number:'1.0-0'}}</p>
+                                    <span>[{{fancy.LaySize1==""?"--":fancy.LaySize1}}]</span>
+                                  </div>
+                                </li>
+                                <li id="all-match-tab" class="d-flex align-items-center justify-content-center"
+                                  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                  <div class="text-center">
+                                    <p>{{fancy.BackPrice1==""?"--":fancy.BackPrice1|number:'1.0-0'}}</p>
+                                    <span>[{{fancy.BackSize1==""?"--":fancy.BackSize1}}]</span>
+                                  </div>
+                                </li>
+                                <div
+                                  *ngIf="fancy.inplayStatus=='CLOSE' || fancy.inplayStatus=='SUSPENDED' || fancy.adminMessage!='' || fancy.IsBetAllow=='N' || fancy.inplayStatus!=''|| !isBetAllowPopular(fancy)"
+                                  class="session_detsil status ball_running"
+                                  [ngClass]="{'session_detsil_withoutmarketinfo':this._sessionService.showMarketInfo}">
+                                  <span>{{fancy.adminMessage!=''?
+                                    fancy.adminMessage :
+                                    (fancy.inplayStatus=='CLOSE' ||
+                                    fancy.inplayStatus=='SUSPENDED'
+                                    )?'SUSPENDED':
+                                    (fancy.IsBetAllow=='N')?'Bet locked':
+                                    (!isBetAllowPopular(fancy))?fancy.remainTime:
+                                    fancy.inplayStatus}}</span>
+                                </div>
+                              </ul>
+
+                              <div class="maxtxt">
+                                <p>Max:{{fancy.maxStack}}</p>
+                                <p>MKT:{{fancy.maxProfit}}</p>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-container>
+                <!-- <div class="matchTopCatT">
+                  <div class="row align-items-center">
+                    <div class="col-lg-8 col-12 ja">
+                    </div>
+                    <div class="col-lg-4 col-12 viewBTn matchDetailRed">
+                      <a href> Lok Sabha Election 2024 Bet Started In Our
+                        Exchange...</a>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <!-- matchBox end-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion livestreaming" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item web-show">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+            Live Streaming <i class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOne"
+          *ngIf="cricketBetMatchMarkets.sportShowTV=='Y' && safeSrc != null &&
+        cricketBetMatchMarkets != undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets != '' && ((cricketBetMatchMarkets.start_date - _serverTime)<(2*60))">
+          <div class="accordion-body">
+            <iframe [src]="safeSrc" width="100%" height="280" frameborder="0" scrolling="no" marginwidth="0"
+              frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed all__match__tab__head" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-betcollapseTwo" aria-expanded="true"
+            aria-controls="panelsStayOpen-betcollapseTwo">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">
+                MY BETS
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-betcollapseTwo" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="accordion-body">
+            <b>India Women v Australia Women</b>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Market</th>
+                  <th scope="col">ODDS</th>
+                  <th scope="col">Stake</th>
+                  <th scope="col">P/L</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-menu">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item web-show">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+            Live Streaming <i class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOne"
+          *ngIf="cricketBetMatchMarkets.sportShowTV=='Y' && safeSrc != null &&
+        cricketBetMatchMarkets != undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets != '' && ((cricketBetMatchMarkets.start_date - _serverTime)<(2*60))">
+          <div class="accordion-body">
+            <iframe [src]="safeSrc" width="100%" height="280" frameborder="0" scrolling="no" marginwidth="0"
+              frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed all__match__tab__head" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-betcollapseTwo" aria-expanded="true"
+            aria-controls="panelsStayOpen-betcollapseTwo">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">
+                MY BETS
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-betcollapseTwo" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="accordion-body">
+            <b>India Women v Australia Women</b>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Market</th>
+                  <th scope="col">ODDS</th>
+                  <th scope="col">Stake</th>
+                  <th scope="col">P/L</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Match View Start -->
+</section>
+<section class="bFooter">
+  <div class="bottom-sticky">
+    <div class="navigation">
+      <ul class="listWrap">
+        <li class="list blt active">
+          <span class="mobile-btn">
+            <a href="/home">
+              <img src="./assets/img/home.svg" alt="Image" />
+              <p>Home</p>
+            </a>
+          </span>
+        </li>
+        <li class="list">
+          <span class="mobile-btn">
+            <a href="/inplay-matches">
+              <img src="./assets/img/inplay.svg" alt="Image" />
+              <p>InPlay</p>
+            </a>
+          </span>
+        </li>
+        <li class="list">
+          <span class="mobile-btn">
+            <a href="/casino">
+              <img src="./assets/img/mini_games.gif" alt="Image" />
+              <p>Casino</p>
+            </a>
+          </span>
+        </li>
+        <li class="list brt">
+          <span class="mobile-btn menu-toggle">
+            <img src="./assets/img/menu.svg" alt="Image" />
+            <p>Menu</p>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>

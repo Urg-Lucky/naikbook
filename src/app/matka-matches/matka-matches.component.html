@@ -1,0 +1,66 @@
+<div class="inmatchwrapp d-flex">
+  <div class="tabwrapp inmatchlft">
+    <section class="sportGame pt-3">
+      <div class="title">
+        <h2 style="color: white;">Matka</h2>
+      </div>
+      <div class="row mx-0" *ngIf="this._ListMatchbySport.InplayMatches.length>0">
+        <div class="col-sm-2 px-2 py-2 casino_image matka_image"
+          *ngFor="let slist of this._ListMatchbySport.InplayMatches">
+          <div class="images-box" [ngClass]="checkMatkaMatchOpen(slist)">
+            <a href="javascript:void(0)" (click)="slist.matkaCurrentlyClose?'':GoToDetailPage(slist)"
+              [ngStyle]="{'cursor': (slist.matkaCurrentlyClose?'not-allowed':'pointer')}">
+              <div class="box-desk-in">
+                <p class="text-info"><strong>START -
+                    {{this._sportService.timeConverter(slist.start_date) |
+                    date:'shortTime'}}
+                  </strong>&nbsp;|&nbsp;<strong>END -
+                    {{this._sportService.timeConverter(slist.end_date) |
+                    date:'shortTime'}}</strong> &nbsp;|&nbsp;
+                  <strong>DRAW -
+                    {{this._sportService.timeConverter(slist.draw_date) |
+                    date:'shortTime'}}</strong>
+                </p>
+                <hr>
+                <span class="for_mobile_result">{{slist.name}}</span>
+                <div>
+                  <span class="text-info1">**</span>
+                  <img src="./assets/images/new.gif"
+                    style="width: 62px;height:25px;margin-top: -8px;object-fit: contain;" alt />
+                  <span class="text-info1">**</span>
+                </div>
+                <table style="width: 100%;">
+                  <tbody>
+                    <tr style="padding-right: 3%;float: left;width: 100%;">
+                      <td style="width: 70%;float: left;">
+                        <p class="text-info2" id="markettiming_61"><strong>{{(slist.matkaCurrentlyClose>0)?(''):
+                            ('Left Time '+(slist.matkaLeftTime |
+                            hourminsecpipe))}}</strong></p>
+                      </td>
+                      <td style="width: 30%;float: left;">
+                        <p class="text-button"
+                          [ngClass]="{'text-button-close':slist.matkaCurrentlyClose==2,'text-button-upcoming':slist.matkaCurrentlyClose==1}">
+                          {{slist.matkaCurrentlyClose>0?(slist.matkaCurrentlyClose==2?'Close':'Upcoming'):
+                          'Open'}}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </a>
+          </div>
+          <div
+            *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N' || !isBetAllowPopular(slist))"
+            class="betbatcasino">
+            <span>{{slist.adminMessage!=''?slist.adminMessage:
+              (slist.InplayStatus=='CLOSE' ||
+              slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+              (slist.IsBetAllow=='N')?'Bet locked':''+ slist.remainTime}}</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>

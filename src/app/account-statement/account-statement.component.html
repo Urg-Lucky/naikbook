@@ -1,0 +1,121 @@
+<div class="mainDetailView">
+  <div class="accountST">
+    <div class="datePicker">
+      <div class="row">
+        <div class="col-sm-3 col-4 pr-0">
+          <input class="form-control" type="text" id="fromDate" [value]="fromDateValue" name="fromDate"
+            placeholder="From Date" style="background: #B9B9B3; ">
+        </div>
+        <div class="col-sm-3 col-4 pr-0">
+          <input class="form-control" type="text" placeholder="TO Date" id="toDate" [value]="toDateValue" name="toDate"
+            style="background: #B9B9B3; ">
+        </div>
+        <div class="col-sm-6 col-4 pr-0">
+          <button type="button" class="btn btn-primary" (click)="goToSerch()">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive tableMV">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Credit</th>
+            <th scope="col">Debit</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Remark</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="AccountStatementList.length>0">
+          <tr class="tdTXT" *ngFor="let list of AccountStatementList let i=index;">
+            <td style="color: #fff;">{{list.created_at!=undefined ?
+              (this._sportService.timeConverter(list.created_at) |
+              date:'d MMM, y hh:mm a') : ''}}</td>
+            <td class="creditAm" *ngIf="list.amount>0">{{list.amount |
+              number:'.2' }}</td>
+            <td class="debitAm" *ngIf="list.amount<0">-</td>
+            <td class="debitAm" *ngIf="list.amount<0">{{list.amount |
+              number:'.2' }}</td>
+            <td class="debitAm" *ngIf="list.amount>0">--</td>
+            <td class="creditAm" [ngClass]="list.available_balance> 0 ? 'creditAm' : 'debitAm'">{{list.available_balance
+              |
+              number:'.2'}}</td>
+            <td><a href="javascript:void(0);" (click)="getMatchBets(list)" *ngIf="list.match>0" data-bs-toggle="modal"
+                data-bs-target="#exampleModalMM">{{list.description}}</a>
+              <a href="javascript:void(0);" *ngIf="list.match==0" style="color: #0D6EFD;">{{list.description}}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal fade runModal exampleModalFancy betmodal" id="exampleModalMM" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="myBets">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{myBetsName}}</h1>
+            <!-- <span
+              *ngIf="myMarketname != undefined && myMarketname != null && myMarketname != ''">
+              -> {{betList[0].marketName}}</span> -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="padding: 0;">
+            <table class="table__box">
+              <thead>
+                <tr>
+                  <th>Market</th>
+                  <th>Type</th>
+                  <th>Odds</th>
+                  <th>Stake</th>
+                  <th>Profil/Loss</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of betList; index as i">
+                  <tr class="bg-light" [ngClass]="item.Type=='Back' ? 'back' : 'lay'">
+                    <td>
+                      <div class="proLmatchDetail">
+                        <span class="proLseriesname">
+                          {{item.marketName == 'OPEN' ? 'ANDAR' :
+                          (item.marketName == 'CLOSE' ? 'BAHAR' :
+                          item.marketName)}}
+                          <span style="color: #fff; font-size: 9px;" class="green_bg_1" *ngIf="item.marketType ==
+                        'F'">Fancy</span>
+                        </span>
+                        <br>
+                        <span class *ngIf="item.sportId != 2225">
+                          {{item.SelectionName}}</span><br>
+                        <span class="proLmatchdate">
+                          Bet id {{item.matchId |
+                          slice:0:4}}{{item.BetId}} |
+                          {{item.Placed!=undefined ?
+                          (this._sportService.timeConverter(item.Placed)
+                          | date:'medium') : ''}}
+                        </span><br>
+                      </div>
+                    </td>
+                    <td style="text-align: left; vertical-align:middle;" class="wd-20">{{item.Type}}</td>
+                    <td style="text-align: left; vertical-align:middle;" class="wd-20">{{item.Odds}}</td>
+                    <td style="text-align: left; vertical-align:middle;" class="wd-20">{{item.Stack}}</td>
+                    <td style="text-align: left; vertical-align:middle;" class="wd-10"><span class="won-btn"
+                        [ngClass]="item.PotentialProfit>0 ? 'table__own' : 'table__loss'">{{item.PotentialProfit}}</span>
+                    </td>
+                    <td style="text-align: left; vertical-align:middle;" class="wd-10">
+                      <span class="won-btn" [ngClass]="item.PotentialProfit>0 || item.PotentialProfit==0 ?
+                    'table__own' : 'table__loss'">
+                        {{(item.PotentialProfit
+                        >0?'WON':item.PotentialProfit ==0
+                        ?'-':'LOSS')}}
+                      </span>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

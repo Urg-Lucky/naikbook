@@ -1,0 +1,50 @@
+<h5>Unsettled Bet</h5>
+<div class="table__form">
+  <form>
+    <div class="table__form__box">
+      <input type="text" id="fromDate" [value]="fromDateValue" name="fromDate">
+      <input type="text" id="toDate" [value]="toDateValue" name="toDate">
+      <select (change)="selectGametype($event.target.value)">
+        <option value="0">All</option>
+        <option *ngFor="let sport of SportData" [value]="sport.sport_id">{{sport.name}}</option>
+      </select>
+      <button (click)="selectMatchType('P')">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="table">
+
+  <table class="table__box">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Market</th>
+        <th>Side</th>
+        <th>Odds</th>
+        <th>Amount</th>
+        <th>Potential Profit</th>
+        <th>Profil/Loss</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="matchList.length>0">
+      <tr *ngFor="let item of matchList; index as i"
+        [ngClass]="item.Type=='Back' ? 'back' : 'lay'">
+        <td>{{item.seriesName}} <br> {{item.matchName}}<br><i class="fa
+            fa-clock"></i> {{this._sportService.timeConverter(item.Placed)
+          | date:'d MMM, y hh:mm a'}}</td>
+        <td>{{item.marketName}} -- {{item.SelectionName}}</td>
+        <td [ngClass]="item.Type=='Back' ? 'backClass' : 'layClass'">{{item.Type}}</td>
+        <td>{{item.Odds}}</td>
+        <td>{{item.Stack}}</td>
+        <td><span [ngClass]="item.PotentialProfit>0 ? 'table__own' :
+            (item.PotentialProfit==0) ? '' : 'table__loss'">{{item.PotentialProfit}}</span></td>
+        <td style="text-align: left;"><span class="table__loss">{{item.Liability}}</span></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="matchList.length==0">
+      <tr>
+        <td colspan="8" class="no-match-fount-txt">No Record Found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

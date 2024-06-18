@@ -1,0 +1,615 @@
+<div class="main">
+  <div class="left-menu">
+    <div class="left_side_logo web-show">
+      <a class="navbar-brand" href="/home"> <img
+          src="./assets/images/sitelogo.png" alt> </a>
+    </div>
+    <div class="collapse d-block">
+      <div class="searcharea">
+        <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <!-- <img src="./assets/images/searchicon.svg" alt> -->
+        <input class="form-control mr-sm-2" type="search" placeholder="Search"
+          aria-label="Search" (keyup)="searchExchange($event)">
+        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+
+        <!--<input type="search" placeholder="Search..."
+          (keyup)="searchExchange($event)"> -->
+        <div class="aotocompelete_data" *ngIf="searchMatch.length>0">
+          <ul>
+            <ng-container *ngFor="let matches of searchMatch">
+              <li>
+                <a href="javascript:void(0);"
+                  (click)="GoToDetailPage(matches)">
+                  <span>{{matches.name}}</span>
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <ul class="navbar-nav scroll-wrap">
+        <ng-container *ngFor="let sport of sportsList; let i=index">
+          <li class="nav-item dropdown" *ngIf="sport.sport_id!=111">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle"
+              id="dropdownMenuButton1"
+              (click)="this._sportService.GetSeriesBySportIdOuter(sport,true);GoToElectionPage(sport);">
+              <div class="nav-linklft d-flex align-items-center">
+                <img src="{{sport.image}}" alt
+                  *ngIf="sport.name!='Election'">
+                <img src="{{sport.image}}" alt
+                  *ngIf="sport.name=='Election'">
+                {{sport.name}}</div>
+              <div> <span class="icon">
+                  <i class="fa-solid fa-angle-down"></i></span></div>
+            </a>
+            <div class="dropdown-menu sidebar__menu__submenu">
+              <ng-container
+                *ngFor='let series of this._sportService._SeriesList'>
+                <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                  href="javascript:void(0)"
+                  (click)="GetMatchBySeriesId(series);">{{series.name}}</a>
+                <div
+                  class="dropdown-menu dropdown2 sidebar__menu__submenu__submenu">
+                  <ng-container *ngFor="let match of _LeftMenuMatch">
+                    <a class="dropdown-item" href="javascript:void(0)"
+                      (click)="setActive(match.market_id);GoToDetailPage(match)">{{match.name}}</a>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </div>
+          </li>
+          <li class="nav-item dropdown" *ngIf="sport.sport_id==111">
+            <a href="javascript:void(0)" class="nav-link dropdown-toggle"
+              id="dropdownMenuButton1">
+              <div class="nav-linklft d-flex align-items-center">
+                <img src="./assets/images/casino-icon.png" alt
+                  *ngIf="sport.name=='Casino'">
+                Casino</div>
+              <div> <span class="icon">
+                  <i class="fa-solid fa-angle-down"></i></span></div>
+            </a>
+            <div class="dropdown-menu sidebar__menu__submenu">
+              <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                href="javascript:void(0)">Blackjack</a>
+              <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                href="javascript:void(0)">Roulette</a>
+              <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                href="javascript:void(0)">Andar Bahar</a>
+              <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                href="javascript:void(0)">Dragon Tiger</a>
+              <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                href="javascript:void(0)">Baccarat</a>
+              <a id="menu-btn-sub" class="dropdown-item menu-btn-sub"
+                href="javascript:void(0)">Roulette</a>
+            </div>
+          </li>
+        </ng-container>
+
+      </ul>
+    </div>
+    <div class="rightsidecard m-hide">
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/blackjack-card.png"
+            class="img-fluid" alt /></a> </div>
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-1.png"
+            class="img-fluid" alt /></a> </div>
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-2.png"
+            class="img-fluid" alt /> </a></div>
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-3.png"
+            class="img-fluid" alt /></a> </div>
+      <!-- <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-4.png"
+            class="img-fluid" alt /></a> </div>
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-5.png"
+            class="img-fluid" alt /> </a></div>
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-6.png"
+            class="img-fluid" alt /></a> </div>
+      <div class="card mb-3"><a href="javascript:void(0)"><img
+            src="./assets/img/card-7.png"
+            class="img-fluid" alt /></a> </div> -->
+    </div>
+    <div class="copyrighttxt">
+      <p>Copyright, All Rights Reserved.</p>
+    </div>
+  </div>
+  <div class="dashboard-wrap dashboard2-wrap homepage">
+    <header class="header">
+      <div class="headernav">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid mobile-menu">
+            <a href="javascript:void(0)" class="menu-button"
+              (click)="openSideMenu()"> <span></span> <span></span>
+              <span></span> </a>
+            <div class="left_side_logo mobile-show">
+              <a class="navbar-brand" href="/home"> <img
+                  src="./assets/images/sitelogo.png" alt> </a>
+            </div>
+            <div class="login-box mobile-show">
+              <button class="btn btn-primary reg"
+                (click)="showModalSign()">Register</button>
+              <button class="btn btn-primary d-none-desktop login"
+                (click)="showModalLog()">Login</button>
+            </div>
+            <div class="header-lft navbar-collapse web-show"
+              id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="/home"
+                    (click)="this._sportService.resetMatch();">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/inplay-matches">In-Play</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active"
+                    href="/upcoming-matches">Upcoming</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <section class="topwrap-header">
+        <div class="regist-loginWprapper">
+          <div class="slideContentRow">
+            <marquee scrollamount="6" class="bar_content">Welcome to Bigbet
+              Exchange</marquee>
+            <div class="icontextAnimate">
+              <img src="./assets/images/voice_d.png" class="img-fluid" alt>
+            </div>
+          </div>
+          <div class="main_logRegWapper web-show">
+            <div class="register_row"><a href="javascript:void(0)"
+                (click)="showModalSign()">register</a></div>
+            <div class="login_row" id="login_rowId">
+              <!-- -- -->
+              <form autocomplete="off" class="d-none-mobile"
+                [formGroup]="login_form"
+                (ngSubmit)="login()" name="loginForm" novalidate>
+                <div class="form-groups">
+                  <input type="text" placeholder="Username*"
+                    class="form-control" spellcheck="false"
+                    formControlName="username"
+                    autocomplete="username">
+                  <div class="error_txt"
+                    *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                    [ngClass]="error">Enter valid email.</div>
+                </div>
+                <div class="form-groups">
+                  <input type="password" placeholder="Password*"
+                    class="form-control" formControlName="password"
+                    autocomplete="current-password">
+                  <div class="error_txt"
+                    *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                    [ngClass]="error">Enter valid password.</div>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" id="customCheck"
+                    class="custom-control-input">
+                </div> <!---->
+                <button type="submit" id="loging"
+                  class="btn btn-primary">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+    <div class="inmatchwrapp d-flex">
+      <div class="tabwrapp inmatchlft">
+        <div class="play__match__head__bar">
+          <p>Upcoming Matches</p>
+        </div>
+        <div class="play__match__collapse">
+          <ng-container *ngFor="let sport of sportsList">
+            <div class="accordion mb-2" id="accordionExample"
+              *ngIf="sport.sport_id!=111 &&
+              this.CheckSportExist(sport.sport_id)==true">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="play__match__head accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#'+sport.name" aria-expanded="true"
+                    [attr.aria-controls]="sport.name">
+                    <img src="./assets/images/icon{{sport.name}}.webp" alt
+                      *ngIf="sport.name!='Election'">
+                    <img src="./assets/images/icon{{sport.name}}.png" alt
+                      *ngIf="sport.name=='Election'">
+                    {{sport.name}}
+                  </button>
+                </h2>
+
+                <div id="{{sport.name}}"
+                  class="accordion-collapse collapse show ProductNav_Wrapper"
+                  [attr.data-bs-parent]="'#'+accordionExample">
+                  <div class="bgwrapp matchodds matchoddsli overflowwrappin">
+                    <ul>
+                      <ng-container
+                        *ngFor="let slist of this._sportService._ListMatchbySport.UpCommingMatches; let i=index">
+                        <li
+                          class="matchtop d-flex align-items-center justify-content-between"
+                          *ngIf="slist.InplayStatus!='CLOSE' &&
+                          slist.sport_id==sport.sport_id ||
+                          slist.InplayStatus!='INACTIVE' &&
+                          slist.sport_id==sport.sport_id &&
+                          slist.InplayStatus!='CLOSE'"
+                          (click)="GoToDetailPage(slist)">
+                          <div
+                            class="matchoddslft d-flex upCommingMatches">
+                            <div class="timedatetxtb2">
+                              <div class="timedatetxt mobile-show">
+                                <span class="text-uppercase"> {{
+                                  slist.start_date+'000' | date:
+                                  'd MMM hh:mm a'}} </span>
+                              </div>
+                              <div class="timedatetxt web-show close">
+                                <ul>
+                                  <li> <span>{{ slist.start_date+'000' |
+                                      date:
+                                      'hh:mm a'}}</span>
+                                    <span>{{slist.start_date+'000' |
+                                      date:'d
+                                      MMM'}}</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div
+                              class="countryname2 d-flex flex-wrap">
+                              <h6><span>{{slist.name.toString().split(" v ")[0]}}</span>
+                                <em class="vstxt">Vs</em>
+                                {{slist.name.toString().split(" v ")[1]}}</h6>
+                              <span>{{slist.seriesName}}</span>
+                            </div>
+                          </div>
+                          <div
+                            class="matchoddsryt d-flex justify-content-end">
+                            <div class="tagwrapp d-flex web-show">
+                              <div class="tagtxt">
+                                <div class="tagno">
+                                  1
+                                </div>
+                                <p>MO</p>
+                              </div>
+                              <div class="tagtxt">
+                                <div class="tagno">
+                                  1
+                                </div>
+                                <p>F</p>
+                              </div>
+                              <div class="tagtxt">
+                                <div class="tagno">
+                                  1
+                                </div>
+                                <p>M</p>
+                              </div>
+                            </div>
+                            <div class="matchodds"
+                              *ngIf="slist.runner_json!=null">
+                              <div
+                                *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N')"
+                                class="ball-start-overly">
+                                <span>{{slist.adminMessage!=''?slist.adminMessage:
+                                  (slist.InplayStatus=='CLOSE'
+                                  ||
+                                  slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                                  (slist.IsBetAllow=='N')?'Bet locked':''+
+                                  slist.remainTime}}</span>
+                              </div>
+                              <div class="oddstxt">
+                                <em>{{slist.runner_json[0]!=undefined
+                                  &&
+                                  slist.runner_json[0].ex!=undefined
+                                  &&
+                                  slist.runner_json[0].ex.availableToBack!=undefined
+                                  ?
+                                  retrunValue('back',slist,(slist.runner_json[0].ex.availableToBack.length>
+                                  0) ?
+                                  slist.runner_json[0].ex.availableToBack[0].price
+                                  :
+                                  '--') : '--'}} </em>
+                                <span>{{slist.runner_json[0]!=undefined &&
+                                  slist.runner_json[0].ex!=undefined &&
+                                  slist.runner_json[0].ex.availableToBack!=undefined
+                                  ?
+                                  retrunValue('size',slist,(slist.runner_json[0].ex.availableToBack.length>0)
+                                  ?
+                                  slist.runner_json[0].ex.availableToBack[0].size
+                                  : '--') : '--'}}</span>
+                              </div>
+                              <div
+                                class="oddstxt oddstxtgray">
+                                <em>{{slist.runner_json[0]!=undefined
+                                  &&
+                                  slist.runner_json[0].ex!=undefined
+                                  &&
+                                  slist.runner_json[0].ex.availableToLay!=undefined
+                                  ?
+                                  retrunValue('lay',slist,(slist.runner_json[0].ex.availableToLay.length>
+                                  0) ?
+                                  slist.runner_json[0].ex.availableToLay[0].price
+                                  :
+                                  '--') : '--'}} </em>
+                                <span>{{slist.runner_json[0]!=undefined &&
+                                  slist.runner_json[0].ex!=undefined &&
+                                  slist.runner_json[0].ex.availableToLay!=undefined
+                                  ?
+                                  retrunValue('size',slist,(slist.runner_json[0].ex.availableToLay.length>0)
+                                  ?
+                                  slist.runner_json[0].ex.availableToLay[0].size
+                                  : '--') : '--'}}</span>
+                              </div>
+                              <div class="oddstxt">
+                                <em>{{slist.runner_json[2]!=undefined
+                                  &&
+                                  slist.runner_json[2].ex!=undefined
+                                  &&
+                                  slist.runner_json[2].ex.availableToBack!=undefined
+                                  ?
+                                  retrunValue('back',slist,(slist.runner_json[2].ex.availableToBack.length>
+                                  0) ?
+                                  slist.runner_json[2].ex.availableToBack[0].price
+                                  :
+                                  '--') : '--'}} </em>
+                                <span>{{slist.runner_json[2]!=undefined &&
+                                  slist.runner_json[2].ex!=undefined &&
+                                  slist.runner_json[2].ex.availableToBack!=undefined
+                                  ?
+                                  retrunValue('size',slist,(slist.runner_json[2].ex.availableToBack.length>
+                                  0) ?
+                                  slist.runner_json[2].ex.availableToBack[0].size
+                                  : '--') : '--'}}</span>
+                              </div>
+                              <div
+                                class="oddstxt oddstxtgray">
+                                <em>{{slist.runner_json[2]!=undefined
+                                  &&
+                                  slist.runner_json[2].ex!=undefined
+                                  &&
+                                  slist.runner_json[2].ex.availableToLay!=undefined
+                                  ?
+                                  retrunValue('lay',slist,(slist.runner_json[2].ex.availableToLay.length>
+                                  0) ?
+                                  slist.runner_json[2].ex.availableToLay[0].price
+                                  :
+                                  '--') : '--'}} </em>
+                                <span>{{slist.runner_json[2]!=undefined &&
+                                  slist.runner_json[2].ex!=undefined &&
+                                  slist.runner_json[2].ex.availableToLay!=undefined
+                                  ?
+                                  retrunValue('size',slist,(slist.runner_json[2].ex.availableToLay.length>
+                                  0) ?
+                                  slist.runner_json[2].ex.availableToLay[0].size
+                                  : '--') : '--'}}</span>
+                              </div>
+                              <div class="oddstxt">
+                                <em>{{slist.runner_json[1]!=undefined
+                                  &&
+                                  slist.runner_json[1].ex!=undefined
+                                  &&
+                                  slist.runner_json[1].ex.availableToBack!=undefined
+                                  ?
+                                  retrunValue('back',slist,(slist.runner_json[1].ex.availableToBack.length>
+                                  0) ?
+                                  slist.runner_json[1].ex.availableToBack[0].price
+                                  :
+                                  '--') : '--'}} </em>
+                                <span>{{slist.runner_json[1]!=undefined &&
+                                  slist.runner_json[1].ex!=undefined &&
+                                  slist.runner_json[1].ex.availableToBack!=undefined
+                                  ?
+                                  retrunValue('size',slist,(slist.runner_json[1].ex.availableToBack.length>
+                                  0) ?
+                                  slist.runner_json[1].ex.availableToBack[0].size
+                                  : '--') : '--'}}</span>
+                              </div>
+                              <div
+                                class="oddstxt oddstxtgray">
+                                <em>{{slist.runner_json[1]!=undefined
+                                  &&
+                                  slist.runner_json[1].ex!=undefined
+                                  &&
+                                  slist.runner_json[1].ex.availableToLay!=undefined
+                                  ?
+                                  retrunValue('lay',slist,(slist.runner_json[1].ex.availableToLay.length>
+                                  0) ?
+                                  slist.runner_json[1].ex.availableToLay[0].price
+                                  :
+                                  '--') : '--'}} </em>
+                                <span>{{slist.runner_json[1]!=undefined &&
+                                  slist.runner_json[1].ex!=undefined &&
+                                  slist.runner_json[1].ex.availableToLay!=undefined
+                                  ?
+                                  retrunValue('size',slist,(slist.runner_json[1].ex.availableToLay.length>
+                                  0) ?
+                                  slist.runner_json[1].ex.availableToLay[0].size
+                                  : '--') : '--'}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ng-container>
+                      <li
+                        *ngIf="this._sportService._ListMatchbySport.UpCommingMatches.length==0">
+                        <p>No In-Play matches</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="singupPopup" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><img
+            src="./assets/images/sitelogo.png"
+            alt /></h5>
+        <button type="button" class="btn-close"
+          (click)=" hideModalSignup()"></button>
+      </div>
+      <div class="modal-body">
+        <form class="login-main-bx-inner" [formGroup]="register_form"
+          (ngSubmit)="registerSave()" name="registerForm" novalidate>
+          <div class="form-group">
+            <input type="input" formControlName="name" placeholder="Full Name*"
+              class="form-control" id="name" autocomplete="off">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['name'].valid && register_form.controls['name'].touched) || (register_form.controls['name'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error"> Enter valid name.</div>
+          </div>
+
+          <!-- <div class="form-group position-relative">
+            <input type="text" class="form-control" placeholder="OTP" required>
+            <button class="btn position-absolute">Get OTP</button>
+          </div> -->
+          <!-- <div class="form-group" *ngIf="otpShow">
+            <input type="input" placeholder="OTP*" pattern="^0[1-9]|[1-9]\d$"
+              maxlength="6" (keyup)="onlyNumber($event)"
+              (keyup)="CheckValidOtp($event)"
+              (blur)="CheckValidOtp($event)" formControlName="otp"
+              class="form-control" id="otp" autocomplete="off">
+            <div class="error_txt otpvalid"></div>
+          </div> -->
+          <div class="form-group">
+            <input type="input" minlength="6" formControlName="username"
+              placeholder="User Name*"
+              (keypress)="keyPressAlphaNumericWithCharacters($event)"
+              (blur)="CheckUserNameExist($event)" class="form-control"
+              id="no-paste" autocomplete="off">
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['username'].valid && register_form.controls['username'].touched) || (register_form.controls['username'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Enter valid user name.</div>
+          </div>
+          <div class="form-group">
+            <input type="input" (keyup)="onlyNumber($event)"
+              minlength="10"
+              maxlength="10" formControlName="mobile"
+              placeholder="Mobile Number*" class="form-control" id="mobile"
+              autocomplete="off">
+            <!-- <a href="javascript:void(0);" (click)="resendOtp()" *ngIf="otpShow"
+              class="resendotp">Resend Otp</a> -->
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['mobile'].valid && register_form.controls['mobile'].touched) || (register_form.controls['mobile'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Enter valid mobile number.</div>
+            <div class="error_txt existnumber"></div>
+          </div>
+          <div class="form-group position-relative">
+            <input type="password" formControlName="newPassword"
+              [(ngModel)]="newPassword" placeholder="Password*"
+              class="form-control" id="password" autocomplete="off">
+            <!-- <span class="form-icon" id="show_hide_password"><i
+                class="fa-solid fa-eye"></i></span> -->
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['newPassword'].valid && register_form.controls['newPassword'].touched) || (register_form.controls['newPassword'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Enter Password.</div>
+          </div>
+          <div class="form-group position-relative">
+            <input type="password" formControlName="confPassword"
+              [(ngModel)]="confPassword" placeholder="Confirm Password*"
+              class="form-control" id="cpassword" autocomplete="off">
+            <!-- <span class="form-icon" id="show_hide_cnfpassword"><i
+                class="fa-solid fa-eye"></i></span> -->
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['confPassword'].valid && register_form.controls['confPassword'].touched) || (register_form.controls['confPassword'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error">Password Mismatch.</div>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="check1"
+              name="option1" value="something" formControlName="ageagree">
+            <label class="form-check-label">I'm over 18 years old.</label>
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['ageagree'].valid && register_form.controls['ageagree'].touched) || (register_form.controls['ageagree'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error"> Please check if you are 18+.
+            </div>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="check2"
+              name="option1" value="something" formControlName="termagree">
+            <label class="form-check-label">I agree to the Terms &
+              Conditions.</label>
+            <div class="error_txt"
+              *ngIf="(!register_form.controls['termagree'].valid && register_form.controls['termagree'].touched) || (register_form.controls['termagree'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+              [ngClass]="error"> Kindly accept terms and conditions.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">REGISTER</button>
+          <!-- <button type="button" class="btn btn-primary w-100"
+            (click)="CheckUserMobileExist()" *ngIf="!isUser">GET OTP</button> -->
+        </form>
+        <div class="text-center or-txt">
+          <span>or</span>
+        </div>
+        <h4 class="alreadysignup">Already have account? <a
+            href="javascript:void(0)"
+            (click)="showModalLog()">Log In</a></h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="loginPopup" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <img src="./assets/images/sitelogo.png" alt />
+        </h5>
+        <button type="button" class="btn-close"
+          (click)=" hideModalLogin()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="loginBx clearfix">
+          <form class="login-main-bx-inner" [formGroup]="login_form"
+            (ngSubmit)="login()" name="loginForm"
+            novalidate>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="User Name"
+                required formControlName="username">
+              <div class="error_txt"
+                *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                [ngClass]="error"> Enter valid user name.</div>
+            </div>
+            <div class="form-group" style="position: relative;">
+              <input type="password" class="form-control" placeholder="Password"
+                required formControlName="password">
+              <!-- <span class="form-icon Passcode-visible"
+                (click)="showHidePassword()"><i class="fa-solid fa-eye"></i></span> -->
+              <div class="error_txt"
+                *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                [ngClass]="error"> Enter valid password.</div>
+            </div>
+
+            <div class="form-group position-relative text-center">
+              <button type="submit" class="btn otp">Login</button>
+            </div>
+          </form>
+          <div class="text-center or-txt">
+            <span>or</span>
+          </div>
+          <div class="readymade clearfix">
+            <h4 class="alreadysignup">Don't have Account? <a
+                href="javascript:void(0)"
+                (click)="showModalSign()">Signup</a></h4>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

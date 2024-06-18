@@ -1,0 +1,45 @@
+.devtool-invalid {
+  position: fixed;
+  color: #fff;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background: #0000008a;
+  right: 0;
+  bottom: 0;
+}
+
+.devtool-invalid .wrongaction {
+  background: #2db33e;
+  margin-left: 39%;
+  width: 21%;
+  margin-top: 22%;
+  height: 49px;
+  border-radius: 11px;
+  padding-top: 7px;
+  font-size: 22px;
+  font-weight: 501;
+}
+#whatsapp-icon {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  z-index: 111;
+  backdrop-filter: drop-shadow(0 5px 10px #ccc);
+  animation: bounce 1s infinite alternate;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 768px) {
+  #whatsapp-icon {
+    position: fixed;
+    bottom: 105px;
+  }
+}

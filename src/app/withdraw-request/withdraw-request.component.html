@@ -1,0 +1,757 @@
+<!-- <link rel="stylesheet"
+  href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div class="inmatchwrapp d-flex">
+  <div class="tabwrapp inmatchlft">
+    <h4 class="bet-head main_heading">Withdraw Requests</h4>
+    <div class="st_overview_nav">
+      <ul>
+        <li tabindex="0" [ngClass]="{'active':isIMPS==true}">
+          <a class="img_box_wrapper"
+            (click)="openWithdrawForm('IMPS')">
+            <i class="icon icon-success"></i>
+            <img
+              src="./assets/images/bank-transfer.svg">
+          </a>
+        </li>
+        <li tabindex="0" [ngClass]="{'active':isGP==true}">
+          <a class="img_box_wrapper"
+            (click)="openWithdrawForm('GP')">
+            <i class="icon icon-success"></i>
+            <img
+              src="./assets/images/gpay.svg">
+          </a>
+        </li>
+        <li tabindex="0" [ngClass]="{'active':isPP==true}">
+          <a class="img_box_wrapper"
+            (click)="openWithdrawForm('PP')">
+            <i class="icon icon-success"></i>
+            <img
+              src="./assets/images/phonepe.svg">
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sat_content_wrap">
+      <section class="team_schedule_page">
+        <div class="container">
+          <div class="col-md-12 deposit-pad-mob">
+            <div class="st_blog_detail withdraw_section">
+              <div class="st_blog_detail_thumb">
+                <div class="st_featured_thumb">
+                  <div class="text_wrper">
+                    <div class="deposit-pad-mob">
+                      <div class="deposit_nav">
+                        <div class="tab-content account_detail_new">
+                          <h5>Enter your details below</h5>
+                          <div class="withdraw_form" *ngIf="isGP">
+                            <form [formGroup]="withdraw_form_gp"
+                              (ngSubmit)="submitGP()">
+                            
+                              <div class="input-form">
+                                <label>Phone No./UPI</label>
+                                <input type="text" formControlName="upiidgp"
+                                  placeholder="Phone No./UPI">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_gp.controls['upiidgp'].valid && withdraw_form_gp.controls['upiidgp'].touched) || (withdraw_form_gp.controls['upiidgp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Phone
+                                    No./UPI.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Name</label>
+                                <input type="text"
+                                  formControlName="accountnamegp"
+                                  placeholder="Account Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_gp.controls['accountnamegp'].valid && withdraw_form_gp.controls['accountnamegp'].touched) || (withdraw_form_gp.controls['accountnamegp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Account
+                                    Name.</p>
+                                </div>
+                              </div>
+                              <div class="withdraw_form withdraw_form2">
+                                <div class="input-form">
+                                  <label>Request Method</label>
+                                  <p><label>
+                                      <input type="radio" value="normal"
+                                        formControlName="requestmethodgp"
+                                        checked>
+                                      <span
+                                        style="margin-left: 10px; margin-right: 10px;">Normal</span>
+                                    </label>
+
+                                  </p>
+                                  <p><label>
+                                      <input type="radio" value="instant"
+                                        formControlName="requestmethodgp">
+                                      <span
+                                        style="margin-left: 10px;">Instant</span>
+                                    </label>
+                                  </p>
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_gp.controls['requestmethodgp'].valid && withdraw_form_gp.controls['requestmethodgp'].touched) || (withdraw_form_gp.controls['requestmethodgp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Account
+                                      Name.</p>
+                                  </div>
+                                </div>
+                                <div class="input-form">
+                                  <label>Amount</label>
+                                  <input type="text" formControlName="amountgp"
+                                    placeholder="Amount"
+                                    (keypress)="validateNumber($event)"
+                                    min="1000"
+                                    max="500000">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_gp.controls['amountgp'].valid && withdraw_form_gp.controls['amountgp'].touched) || (withdraw_form_gp.controls['amountgp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Min & Max
+                                      Amount.</p>
+                                  </div>
+                                </div>
+                                <div class="amount_process">
+                                  <p class="min_max_amount">MIN:100
+                                    MAX:99999</p>
+                                 
+                                </div>
+
+                               
+                                <div class="amount_process">
+                                  <p class="withdraw_processed">Instant
+                                    Withdrawl
+                                    will be
+                                    proessed in 30 minutes.</p>
+                                </div>
+                                <div class="submit_btn">
+                                  <button type="submit"
+                                    class="btn-process-payment">Withdraw
+                                 </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="withdraw_form" *ngIf="isPP">
+                            <form [formGroup]="withdraw_form_pp"
+                              (ngSubmit)="submitPP()">
+                            
+                              <div class="input-form">
+                                <label>Phone No./UPI</label>
+                                <input type="text" formControlName="upiidpp"
+                                  placeholder="Phone No./UPI">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_pp.controls['upiidpp'].valid && withdraw_form_pp.controls['upiidpp'].touched) || (withdraw_form_pp.controls['upiidpp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Phone
+                                    No./UPI.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Name</label>
+                                <input type="text"
+                                  formControlName="accountnamepp"
+                                  placeholder="Account Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_pp.controls['accountnamepp'].valid && withdraw_form_pp.controls['accountnamepp'].touched) || (withdraw_form_pp.controls['accountnamepp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Account
+                                    Name.</p>
+                                </div>
+                              </div>
+                              <div class="withdraw_form withdraw_form2">
+                                <div class="input-form">
+                                  <label>Request Method</label>
+                                  <p><label>
+                                      <input type="radio" value="normal"
+                                        formControlName="requestmethodpp"
+                                        checked>
+                                      <span
+                                        style="margin-left: 10px; margin-right: 10px;">Normal</span>
+                                    </label>
+
+                                  </p>
+                                  <p><label>
+                                      <input type="radio" value="instant"
+                                        formControlName="requestmethodpp">
+                                      <span
+                                        style="margin-left: 10px;">Instant</span>
+                                    </label>
+                                  </p>
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_pp.controls['requestmethodpp'].valid && withdraw_form_pp.controls['requestmethodpp'].touched) || (withdraw_form_pp.controls['requestmethodpp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Account
+                                      Name.</p>
+                                  </div>
+                                </div>
+                                <div class="input-form">
+                                  <label>Amount</label>
+                                  <input type="text" formControlName="amountpp"
+                                    placeholder="Amount"
+                                    (keypress)="validateNumber($event)"
+                                    min="1000"
+                                    max="500000">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_pp.controls['amountpp'].valid && withdraw_form_pp.controls['amountpp'].touched) || (withdraw_form_pp.controls['amountpp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Min & Max
+                                      Amount.</p>
+                                  </div>
+                                </div>
+                                <div class="amount_process">
+                                  <p class="min_max_amount">MIN:100
+                                    MAX:99999</p>
+                                  
+                                </div>
+
+                                <div class="amount_process">
+                                  <p class="withdraw_processed">Instant
+                                    Withdrawl
+                                    will be
+                                    proessed in 30 minutes.</p>
+                                </div>
+                                <div class="submit_btn">
+                                  <button type="submit"
+                                    class="btn-process-payment">Withdraw</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="withdraw_form" *ngIf="isIMPS">
+                            <form [formGroup]="withdraw_form_imps"
+                              (ngSubmit)="submitIMPS()">
+                            
+                              <div class="input-form">
+                                <label>Account Number</label>
+                                <input type="text"
+                                  formControlName="accountnumberimps"
+                                  placeholder="Account Number">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['accountnumberimps'].valid && withdraw_form_imps.controls['accountnumberimps'].touched) || (withdraw_form_imps.controls['accountnumberimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Account
+                                    Number.</p>
+                                </div>
+                              </div>
+                            
+                              <div class="input-form">
+                                <label>IFSC Code</label>
+                                <input type="text"
+                                  formControlName="ifsccodeimps"
+                                  maxlength="11" placeholder="IFSC Code">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['ifsccodeimps'].valid && withdraw_form_imps.controls['ifsccodeimps'].touched) || (withdraw_form_imps.controls['ifsccodeimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid ifsc
+                                    code.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Holder Name</label>
+                                <input type="text"
+                                  formControlName="accountholdernameimps"
+                                  placeholder="Account Holder Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['accountholdernameimps'].valid && withdraw_form_imps.controls['accountholdernameimps'].touched) || (withdraw_form_imps.controls['accountholdernameimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid account
+                                    holder
+                                    name.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Bank Name</label>
+                                <input type="text"
+                                  formControlName="banknameimps"
+                                  placeholder="Bank Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['banknameimps'].valid && withdraw_form_imps.controls['banknameimps'].touched) || (withdraw_form_imps.controls['banknameimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid bank
+                                    name.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Type</label>
+                                <p><label>
+                                    <input type="radio" value="saving"
+                                      formControlName="accounttypeimps" checked>
+                                    <span
+                                      style="margin-left: 10px; margin-right: 10px;">Saving</span>
+                                  </label>
+
+                                </p>
+                                <p><label>
+                                    <input type="radio" value="current"
+                                      formControlName="accounttypeimps">
+                                    <span
+                                      style="margin-left: 10px;">Current</span>
+                                  </label>
+                                </p>
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['accounttypeimps'].valid && withdraw_form_imps.controls['accounttypeimps'].touched) || (withdraw_form_imps.controls['accounttypeimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Select valid Account
+                                    Type.</p>
+                                </div>
+                              </div>
+                              <div class="withdraw_form withdraw_form2">
+                                <div class="input-form">
+                                  <label>Request Method</label>
+                                  <p><label>
+                                      <input type="radio" value="normal"
+                                        formControlName="requestmethodimps"
+                                        checked>
+                                      <span
+                                        style="margin-left: 10px; margin-right: 10px;">Normal</span>
+                                    </label>
+
+                                  </p>
+                                  <p><label>
+                                      <input type="radio" value="instant"
+                                        formControlName="requestmethodimps">
+                                      <span
+                                        style="margin-left: 10px;">Instant</span>
+                                    </label>
+                                  </p>
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_imps.controls['requestmethodimps'].valid && withdraw_form_imps.controls['requestmethodimps'].touched) || (withdraw_form_imps.controls['requestmethodimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Select valid Request
+                                      Method.</p>
+                                  </div>
+                                </div>
+                                <div class="input-form">
+                                  <label>Amount</label>
+                                  <input type="text"
+                                    formControlName="amountimps"
+                                    placeholder="Amount"
+                                    (keypress)="validateNumber($event)"
+                                    min="5000"
+                                    max="500000">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_imps.controls['amountimps'].valid && withdraw_form_imps.controls['amountimps'].touched) || (withdraw_form_imps.controls['amountimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Min & Max
+                                      Amount.</p>
+                                  </div>
+                                </div>
+                                <div class="amount_process">
+                                  <p class="min_max_amount">MIN:100
+                                    MAX:99999</p>
+                                  
+                                </div>
+
+                              
+                                <div class="amount_process">
+                                  <p class="withdraw_processed">Instant
+                                    Withdrawl
+                                    will be
+                                    proessed in 30 minutes.</p>
+                                </div>
+                                <div class="submit_btn">
+                                  <button type="submit"
+                                    class="btn-process-payment">Withdraw
+                                 </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div> -->
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div class="inmatchwrapp" style="background-color: black;">
+  <div class="tabwrapp inmatchlft">
+    <h4 class="bet-head main_heading" style="background-color: #F9D40A;">Withdraw Requests</h4>
+    <div class="st_overview_nav">
+      <ul>
+        <li tabindex="0" [ngClass]="{'active':isIMPS==true}">
+          <a class="img_box_wrapper" (click)="openWithdrawForm('IMPS')">
+            <i class="icon icon-success"></i>
+            <img src="./assets/images/bank-transfer.svg">
+          </a>
+        </li>
+        <li tabindex="0" [ngClass]="{'active':isGP==true}">
+          <a class="img_box_wrapper" (click)="openWithdrawForm('GP')">
+            <i class="icon icon-success"></i>
+            <img src="./assets/images/gpay.svg">
+          </a>
+        </li>
+        <li tabindex="0" [ngClass]="{'active':isPP==true}">
+          <a class="img_box_wrapper" (click)="openWithdrawForm('PP')">
+            <i class="icon icon-success"></i>
+            <img src="./assets/images/phonepe.svg">
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sat_content_wrap">
+      <section class="team_schedule_page">
+        <div class="container-fluid">
+          <div class="col-md-12 deposit-pad-mob">
+            <div class="st_blog_detail withdraw_section">
+              <div class="st_blog_detail_thumb">
+                <div class="st_featured_thumb">
+                  <div class="text_wrper">
+                    <div class="deposit-pad-mob">
+                      <div class="deposit_nav">
+                        <div class="tab-content account_detail_new">
+                          <h5>Enter your details below</h5>
+                          <div class="withdraw_form" *ngIf="isGP">
+                            <form [formGroup]="withdraw_form_gp" (ngSubmit)="submitGP()">
+                              <!-- <ng-container
+                                  *ngFor="let accounts of accountDatas;let i=index">
+                                  <div *ngIf="accounts.type=='GP'">
+                                    <div class="imps_detail">
+                                      <label>Phone No./UPI</label>
+                                      <div class="detail_upi">{{accounts.accountnumber}}</div>
+                                    </div>
+                                    <div class="imps_detail">
+                                      <label>Account Name</label>
+                                      <div class="detail_upi">{{accounts.acHname}}</div>
+                                    </div>
+                                  </div>
+                                </ng-container> -->
+                              <div class="input-form">
+                                <label>Phone No./UPI</label>
+                                <input type="text" formControlName="upiidgp" placeholder="Phone No./UPI">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_gp.controls['upiidgp'].valid && withdraw_form_gp.controls['upiidgp'].touched) || (withdraw_form_gp.controls['upiidgp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Phone
+                                    No./UPI.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Name</label>
+                                <input type="text" formControlName="accountnamegp" placeholder="Account Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_gp.controls['accountnamegp'].valid && withdraw_form_gp.controls['accountnamegp'].touched) || (withdraw_form_gp.controls['accountnamegp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Account
+                                    Name.</p>
+                                </div>
+                              </div>
+                              <div class="withdraw_form withdraw_form2">
+                                <div class="input-form">
+                                  <label>Request Method</label>
+                                  <p><label>
+                                      <input type="radio" value="normal" formControlName="requestmethodgp" checked>
+                                      <span style="margin-left: 10px; margin-right: 10px;">Normal</span>
+                                    </label>
+
+                                  </p>
+                                  <p><label>
+                                      <input type="radio" value="instant" formControlName="requestmethodgp">
+                                      <span style="margin-left: 10px;">Instant</span>
+                                    </label>
+                                  </p>
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_gp.controls['requestmethodgp'].valid && withdraw_form_gp.controls['requestmethodgp'].touched) || (withdraw_form_gp.controls['requestmethodgp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Account
+                                      Name.</p>
+                                  </div>
+                                </div>
+                                <div class="input-form">
+                                  <label>Amount</label>
+                                  <input type="text" formControlName="amountgp" placeholder="Amount"
+                                    (keypress)="validateNumber($event)" min="1000" max="500000">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_gp.controls['amountgp'].valid && withdraw_form_gp.controls['amountgp'].touched) || (withdraw_form_gp.controls['amountgp'].invalid && !isValidFormSubmittedGP && isValidFormSubmittedGP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Min & Max
+                                      Amount.</p>
+                                  </div>
+                                </div><!---->
+                                <div class="amount_process">
+                                  <p class="min_max_amount">MIN:100
+                                    MAX:99999</p>
+                                  <!-- <p class="withdraw_processed">Withdraw will be processed
+                                      in
+                                      24 hours.</p> -->
+                                </div>
+
+                                <!---->
+                                <div class="amount_process">
+                                  <p class="withdraw_processed">Instant
+                                    Withdrawl
+                                    will be
+                                    proessed in 30 minutes.</p>
+                                </div>
+                                <div class="submit_btn">
+                                  <button type="submit" class="btn-process-payment">Withdraw
+                                    <!----></button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="withdraw_form" *ngIf="isPP">
+                            <form [formGroup]="withdraw_form_pp" (ngSubmit)="submitPP()">
+                              <!-- <ng-container
+                                  *ngFor="let accounts of accountDatas;let i=index">
+                                  <div *ngIf="accounts.type=='PP'">
+                                    <div class="imps_detail">
+                                      <label>Phone No./UPI</label>
+                                      <div class="detail_upi">{{accounts.accountnumber}}</div>
+                                    </div>
+                                    <div class="imps_detail">
+                                      <label>Account Name</label>
+                                      <div class="detail_upi">{{accounts.acHname}}</div>
+                                    </div>
+                                  </div>
+                                </ng-container> -->
+                              <div class="input-form">
+                                <label>Phone No./UPI</label>
+                                <input type="text" formControlName="upiidpp" placeholder="Phone No./UPI">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_pp.controls['upiidpp'].valid && withdraw_form_pp.controls['upiidpp'].touched) || (withdraw_form_pp.controls['upiidpp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Phone
+                                    No./UPI.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Name</label>
+                                <input type="text" formControlName="accountnamepp" placeholder="Account Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_pp.controls['accountnamepp'].valid && withdraw_form_pp.controls['accountnamepp'].touched) || (withdraw_form_pp.controls['accountnamepp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Account
+                                    Name.</p>
+                                </div>
+                              </div>
+                              <div class="withdraw_form withdraw_form2">
+                                <div class="input-form">
+                                  <label>Request Method</label>
+                                  <p><label>
+                                      <input type="radio" value="normal" formControlName="requestmethodpp" checked>
+                                      <span style="margin-left: 10px; margin-right: 10px;">Normal</span>
+                                    </label>
+
+                                  </p>
+                                  <p><label>
+                                      <input type="radio" value="instant" formControlName="requestmethodpp">
+                                      <span style="margin-left: 10px;">Instant</span>
+                                    </label>
+                                  </p>
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_pp.controls['requestmethodpp'].valid && withdraw_form_pp.controls['requestmethodpp'].touched) || (withdraw_form_pp.controls['requestmethodpp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Account
+                                      Name.</p>
+                                  </div>
+                                </div>
+                                <div class="input-form">
+                                  <label>Amount</label>
+                                  <input type="text" formControlName="amountpp" placeholder="Amount"
+                                    (keypress)="validateNumber($event)" min="1000" max="500000">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_pp.controls['amountpp'].valid && withdraw_form_pp.controls['amountpp'].touched) || (withdraw_form_pp.controls['amountpp'].invalid && !isValidFormSubmittedPP && isValidFormSubmittedPP!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Min & Max
+                                      Amount.</p>
+                                  </div>
+                                </div><!---->
+                                <div class="amount_process">
+                                  <p class="min_max_amount">MIN:100
+                                    MAX:99999</p>
+                                  <!-- <p class="withdraw_processed">Withdraw will be processed
+                                      in
+                                      24 hours.</p> -->
+                                </div>
+
+                                <!---->
+                                <div class="amount_process">
+                                  <p class="withdraw_processed">Instant
+                                    Withdrawl
+                                    will be
+                                    proessed in 30 minutes.</p>
+                                </div>
+                                <div class="submit_btn">
+                                  <button type="submit" class="btn-process-payment">Withdraw</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="withdraw_form" *ngIf="isIMPS">
+                            <form [formGroup]="withdraw_form_imps" (ngSubmit)="submitIMPS()">
+                              <!-- <ng-container
+                                  *ngFor="let accounts of accountDatas;let i=index">
+                                  <div *ngIf="accounts.type=='IMPS'">
+                                    <div class="imps_detail">
+                                      <label>Account No.</label>
+                                      <div class="detail_upi">{{accounts.accountnumber}}</div>
+                                    </div>
+                                    <div class="imps_detail">
+                                      <label>IFSC Code</label>
+                                      <div class="detail_upi">{{accounts.ifsc}}</div>
+                                    </div>
+                                    <div class="imps_detail">
+                                      <label>Account Holder Name</label>
+                                      <div class="detail_upi">{{accounts.acHname}}</div>
+                                    </div>
+                                    
+                                  </div>
+                                </ng-container> -->
+                              <div class="input-form">
+                                <label>Account Number</label>
+                                <input type="text" formControlName="accountnumberimps" placeholder="Account Number">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['accountnumberimps'].valid && withdraw_form_imps.controls['accountnumberimps'].touched) || (withdraw_form_imps.controls['accountnumberimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid Account
+                                    Number.</p>
+                                </div>
+                              </div>
+                              <!-- <div class="input-form">
+                                  <label>Confirm Account No.</label>
+                                  <input type="text"
+                                    formControlName="accountnumberconfirmimps"
+                                    placeholder="Confirm Account No">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_imps.controls['accountnumberconfirmimps'].valid && withdraw_form_imps.controls['accountnumberconfirmimps'].touched) || (withdraw_form_imps.controls['accountnumberconfirmimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Confirm Account
+                                      Number.</p>
+                                  </div>
+                                </div> -->
+                              <div class="input-form">
+                                <label>IFSC Code</label>
+                                <input type="text" formControlName="ifsccodeimps" maxlength="11"
+                                  placeholder="IFSC Code">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['ifsccodeimps'].valid && withdraw_form_imps.controls['ifsccodeimps'].touched) || (withdraw_form_imps.controls['ifsccodeimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid ifsc
+                                    code.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Holder Name</label>
+                                <input type="text" formControlName="accountholdernameimps"
+                                  placeholder="Account Holder Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['accountholdernameimps'].valid && withdraw_form_imps.controls['accountholdernameimps'].touched) || (withdraw_form_imps.controls['accountholdernameimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid account
+                                    holder
+                                    name.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Bank Name</label>
+                                <input type="text" formControlName="banknameimps" placeholder="Bank Name">
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['banknameimps'].valid && withdraw_form_imps.controls['banknameimps'].touched) || (withdraw_form_imps.controls['banknameimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Enter valid bank
+                                    name.</p>
+                                </div>
+                              </div>
+                              <div class="input-form">
+                                <label>Account Type</label>
+                                <p><label>
+                                    <input type="radio" value="saving" formControlName="accounttypeimps" checked>
+                                    <span style="margin-left: 10px; margin-right: 10px;">Saving</span>
+                                  </label>
+
+                                </p>
+                                <p><label>
+                                    <input type="radio" value="current" formControlName="accounttypeimps">
+                                    <span style="margin-left: 10px;">Current</span>
+                                  </label>
+                                </p>
+                                <div class="error_block"
+                                  *ngIf="(!withdraw_form_imps.controls['accounttypeimps'].valid && withdraw_form_imps.controls['accounttypeimps'].touched) || (withdraw_form_imps.controls['accounttypeimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                  [ngClass]="error">
+                                  <p class="text-danger">Select valid Account
+                                    Type.</p>
+                                </div>
+                              </div>
+                              <div class="withdraw_form withdraw_form2">
+                                <div class="input-form">
+                                  <label>Request Method</label>
+                                  <p><label>
+                                      <input type="radio" value="normal" formControlName="requestmethodimps" checked>
+                                      <span style="margin-left: 10px; margin-right: 10px;">Normal</span>
+                                    </label>
+
+                                  </p>
+                                  <p><label>
+                                      <input type="radio" value="instant" formControlName="requestmethodimps">
+                                      <span style="margin-left: 10px;">Instant</span>
+                                    </label>
+                                  </p>
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_imps.controls['requestmethodimps'].valid && withdraw_form_imps.controls['requestmethodimps'].touched) || (withdraw_form_imps.controls['requestmethodimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Select valid Request
+                                      Method.</p>
+                                  </div>
+                                </div>
+                                <div class="input-form">
+                                  <label>Amount</label>
+                                  <input type="text" formControlName="amountimps" placeholder="Amount"
+                                    (keypress)="validateNumber($event)" min="5000" max="500000">
+                                  <div class="error_block"
+                                    *ngIf="(!withdraw_form_imps.controls['amountimps'].valid && withdraw_form_imps.controls['amountimps'].touched) || (withdraw_form_imps.controls['amountimps'].invalid && !isValidFormSubmittedimps && isValidFormSubmittedimps!=null)"
+                                    [ngClass]="error">
+                                    <p class="text-danger">Enter valid Min & Max
+                                      Amount.</p>
+                                  </div>
+                                </div><!---->
+                                <div class="amount_process">
+                                  <p class="min_max_amount">MIN:100
+                                    MAX:99999</p>
+                                  <!-- <p class="withdraw_processed">Withdraw will be processed
+                                      in
+                                      24 hours.</p> -->
+                                </div>
+
+                                <!---->
+                                <div class="amount_process">
+                                  <p class="withdraw_processed">Instant
+                                    Withdrawl
+                                    will be
+                                    proessed in 30 minutes.</p>
+                                </div>
+                                <div class="submit_btn">
+                                  <button type="submit" class="btn-process-payment">Withdraw
+                                    <!----></button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="mainDetailView">
+  <div class="accountST">
+    <div class="datePicker">
+      <div class="row">
+        <div class="col-sm-3 col-6 mb-1">
+          <input class="form-control" type="text" id="fromDate"
+            [value]="fromDateValue" name="fromDate" placeholder="From Date">
+        </div>
+        <div class="col-sm-3 col-6 mb-1">
+          <input class="form-control" type="text" placeholder="TO Date"
+            id="toDate" [value]="toDateValue" name="toDate">
+        </div>
+        <div class="col-sm-3 col-6 mb-1">
+          <select class="form-control" id="selectID"
+            (change)="selectGametype($event.target.value)">
+            <option value="0">All</option>
+            <option *ngFor="let sport of SportData"
+              [value]="sport.sport_id">{{sport.name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3 col-6 mb-1">
+          <button type="button" class="btn btn-primary"
+            (click)="selectMatchType('C')">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive tableMV">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Market</th>
+            <th scope="col">Side</th>
+            <th scope="col">Odds</th>
+            <th scope="col">Stack</th>
+            <th scope="col">Profit/Loss</th>
+            <th scope="col">Status</th>
+            <th scope="col">IP Address</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="matchList.length>0">
+          <tr *ngFor="let item of matchList; index as i"
+            [ngClass]="item.Type=='Back' ? 'back' : 'lay'">
+            <td>{{item.seriesName}} <br> {{item.matchName}}<br><i
+                class="fa
+            fa-clock"></i>
+              {{this._sportService.timeConverter(item.Placed)
+              | date:'d MMM, y hh:mm a'}}</td>
+            <td>{{item.marketName}} -- {{item.SelectionName}}<br>
+              <b>Result:</b> {{item.winResult}}</td>
+            <td
+              [ngClass]="item.Type=='Back' ? 'backClass' : 'layClass'">{{item.Type}}</td>
+            <td>{{item.Odds}}</td>
+            <td>{{item.Stack}}</td>
+            <td><span
+                [ngClass]="item.PotentialProfit>0 ? 'table__own' :
+            (item.PotentialProfit==0) ? '' : 'table__loss'">{{item.PotentialProfit}}</span></td>
+            <td><span
+                [ngClass]="item.PotentialProfit>0 || item.PotentialProfit==0 ?
+            'table__own' : 'table__loss'">{{(item.PotentialProfit >
+                0 ? 'WON' :
+                item.PotentialProfit == 0 ? '-' : 'LOSS' )}}</span></td>
+            <td
+              style="text-align: left;">{{item.ipAddress.toString().split(",")[1]}}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="matchList.length==0">
+          <tr>
+            <td colspan="8" class="no-match-fount-txt">No Record Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

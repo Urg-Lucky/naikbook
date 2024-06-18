@@ -1,0 +1,850 @@
+<div class="matchdetailpage d-flex">
+  <div class="mainDetailView">
+    <div class="center-box">
+      <span>{{soccerBetMatchMarkets.name}} -
+        {{soccerBetMatchMarkets.seriesName}}</span>
+      <span class="f-right">{{ soccerBetMatchMarkets.start_date+'000' | date:
+        'd MMM hh:mm a'}}</span>
+    </div>
+    <div class="accordion pt-3"
+      id="accordionPanelsStayOpenExample"
+      *ngIf="((soccerBetMatchMarkets.start_date - _serverTime)<(2*60))">
+      <div class="accordion-item"
+        *ngIf="cupBetUserSportsDetails.graphic=='Y' && safeGrapicSrc!= null && soccerBetMatchMarkets !=undefined && soccerBetMatchMarkets != null && soccerBetMatchMarkets!= ''">
+        <h2 class="accordion-header"
+          id="scoreGpanelsStayOpen-headingOneS">
+          <button class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#scoreGpanelsStayOpen-collapseOneS"
+            aria-expanded="true"
+            aria-controls="scoreGpanelsStayOpen-collapseOneS">
+            Score Board <i
+              class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="scoreGpanelsStayOpen-collapseOneS"
+          class="accordion-collapse collapse show"
+          aria-labelledby="scoreGpanelsStayOpen-headingOneS">
+          <div class="accordion-body"
+            *ngIf="cupBetUserSportsDetails.graphic=='Y' && safeGrapicSrc!= null && soccerBetMatchMarkets !=undefined && soccerBetMatchMarkets != null && soccerBetMatchMarkets!= ''">
+            <iframe [src]="safeGrapicSrc" width="100%" height="280"
+              frameborder="0" scrolling="auto" marginwidth="0"
+              frameborder="0" webkitallowfullscreen mozallowfullscreen
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div
+        class="accordion-item livestreaming mobile-show"
+        *ngIf="cupBetUserSportsDetails.is_show_tv=='Y' && safeSrc!= null && soccerBetMatchMarkets!=undefined && soccerBetMatchMarkets != null && soccerBetMatchMarkets!= '' &&((soccerBetMatchMarkets.start_date-_serverTime)<(2*60))">
+        <h2 class="accordion-header"
+          id="scoreGpanelsStayOpen-headingOne">
+          <button class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#scoreGpanelsStayOpen-collapseOne"
+            aria-expanded="true"
+            aria-controls="scoreGpanelsStayOpen-collapseOne">
+            Live Streaming <i
+              class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="scoreGpanelsStayOpen-collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="scoreGpanelsStayOpen-headingOne">
+          <div class="accordion-body"
+            *ngIf="cupBetUserSportsDetails.is_show_tv=='Y' && safeSrc!= null && soccerBetMatchMarkets !=undefined && soccerBetMatchMarkets != null && soccerBetMatchMarkets!= ''">
+            <iframe [src]="safeSrc" width="100%" height="280"
+              frameborder="0" scrolling="auto" marginwidth="0"
+              frameborder="0" webkitallowfullscreen mozallowfullscreen
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--Match View-->
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item" *ngIf="soccerBetMatchMarkets!=null">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li
+                class="all__match__tab__left">{{soccerBetMatchMarkets.marketName}}</li>
+              <li class="all__match__tab__right d-flex align-items-center">
+                <div class="all__match__info infoBL">
+                  <p>Min: {{soccerBetMatchMarkets.marketMinStack}} |
+                    Max:{{soccerBetMatchMarkets.marketMaxStack}} </p>
+                </div>
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <!-- matchBox start-->
+            <div class="matchboxBB">
+              <div class="matchDView">
+                <div
+                  *ngIf="(soccerBetMatchMarkets.InplayStatus=='CLOSE' || soccerBetMatchMarkets.InplayStatus=='SUSPENDED' || soccerBetMatchMarkets.adminMessage!='' || soccerBetMatchMarkets.IsBetAllow=='N' || matchStatus=='Stumps' || !isBetAllowPopular(soccerBetMatchMarkets))"
+                  class="ball-start-overly matchodds suspend-overly"
+                  [ngClass]="{'betbat_multy_matchodds_small':this._sessionService.hideExtraOdds}">
+                  <span>{{soccerBetMatchMarkets.adminMessage!=''?soccerBetMatchMarkets.adminMessage:
+                    (soccerBetMatchMarkets.InplayStatus=='CLOSE'
+                    ||
+                    soccerBetMatchMarkets.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                    (soccerBetMatchMarkets.IsBetAllow=='N'
+                    ||
+                    matchStatus=='Stumps')?'Bet
+                    locked':soccerBetMatchMarkets.remainTime}}</span>
+                </div>
+                <div class="matchMainBox mathcDetailView matDetailPadd">
+                  <div class="all__match__list">
+                    <div class="all__match__bar">
+                      <div
+                        class="d-flex align-items-center justify-content-between">
+                        <div class="all__match__bar__left">
+                        </div>
+                        <div class="tabback_lay">
+
+                          <ul class="d-flex align-items-center">
+                            <li id="all-match-tab"
+                              class="d-flex align-items-center justify-content-center bordertopLR">
+                              <div class="text-center">
+                                <p>Back</p>
+                              </div>
+                            </li>
+                            <li id="all-match-tab"
+                              class="d-flex align-items-center justify-content-center bordertopRR">
+                              <div class="text-center">
+                                <p>Lay</p>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-container
+                  *ngFor="let cricketrunners of soccerBetMatchMarkets.runner_json; let i=index">
+                  <div class="matchMainBox mathcDetailView matDetailPadd">
+                    <div class="all__match__list">
+                      <div class="all__match__bar">
+                        <div class="d-flex justify-content-between">
+                          <div class="all__match__bar__left">
+                            <p>{{cricketrunners.selectionName}}</p>
+                            <p *ngIf="(cricketrunners.WinAndLoss
+                                    +(this._sportService.stake2['field_'
+                                    +
+                                    cricketrunners.selectionId
+                                    +'_'+
+                                    soccerBetMatchMarkets.match_id+'_'+soccerBetMatchMarkets.market_id]))!=0"
+                              [ngClass]="{'green-txt':(cricketrunners.WinAndLoss
+                                    +(this._sportService.stake2['field_'
+                                    +
+                                    cricketrunners.selectionId
+                                    +'_'+
+                                    soccerBetMatchMarkets.match_id+'_'+soccerBetMatchMarkets.market_id]))>=0,'red-txt':(cricketrunners.WinAndLoss
+                                    +(this._sportService.stake2['field_'
+                                    +
+                                    cricketrunners.selectionId
+                                    +'_'+
+                                    soccerBetMatchMarkets.match_id+'_'+soccerBetMatchMarkets.market_id]))<0}">
+                              {{cricketrunners.WinAndLoss
+                              +(this._sportService.stake2["field_"
+                              +
+                              cricketrunners.selectionId
+                              +"_"+
+                              soccerBetMatchMarkets.match_id+"_"+soccerBetMatchMarkets.market_id])
+                              |
+                              number
+                              :
+                              '1.2-2'}}
+                            </p>
+                          </div>
+                          <div
+                            class="all__match__bar__right all__match__bar__right-box">
+
+                            <ul class="d-flex align-items-center">
+                              <li id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center back2"
+                                [ngClass]="this._sportService.needBlink(soccerBetMatchMarkets,i,2,'back')">
+                                <div class="text-center">
+                                  <p>{{retrunValue('back',soccerBetMatchMarkets,cricketrunners.ex.availableToBack[2].price)}}</p>
+                                  <span>{{retrunValue('size',soccerBetMatchMarkets,cricketrunners.ex.availableToBack[2].size)}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center back1"
+                                [ngClass]="this._sportService.needBlink(soccerBetMatchMarkets,i,1,'back')">
+                                <div class="text-center">
+                                  <p>{{retrunValue('back',soccerBetMatchMarkets,cricketrunners.ex.availableToBack[1].price)}}</p>
+                                  <span>{{retrunValue('size',soccerBetMatchMarkets,cricketrunners.ex.availableToBack[1].size)}}</span>
+                                </div>
+                              </li>
+                              <li data-color="#CFF1FF" id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center bidboxOP back"
+                                [ngClass]="this._sportService.needBlink(soccerBetMatchMarkets,i,0,'back')"
+                                (click)="setBetBox('back',cricketrunners);isShow=i">
+                                <div class="text-center">
+                                  <p>{{retrunValue('back',soccerBetMatchMarkets,cricketrunners.ex.availableToBack[0].price)}}</p>
+                                  <span>{{retrunValue('size',soccerBetMatchMarkets,cricketrunners.ex.availableToBack[0].size)}}</span>
+                                </div>
+                              </li>
+                              <li data-color="#FBD7E5" id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center lay"
+                                [ngClass]="this._sportService.needBlink(soccerBetMatchMarkets,i,0,'lay')"
+                                (click)="setBetBox('lay',cricketrunners);isShow=i">
+                                <div class="text-center">
+                                  <p>{{retrunValue('lay',soccerBetMatchMarkets,cricketrunners.ex.availableToLay[0].price)}}</p>
+                                  <span>{{retrunValue('size',soccerBetMatchMarkets,cricketrunners.ex.availableToLay[0].size)}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center lay1"
+                                [ngClass]="this._sportService.needBlink(soccerBetMatchMarkets,i,1,'lay')">
+                                <div class="text-center">
+                                  <p>{{retrunValue('lay',soccerBetMatchMarkets,cricketrunners.ex.availableToLay[1].price)}}</p>
+                                  <span>{{retrunValue('size',soccerBetMatchMarkets,cricketrunners.ex.availableToLay[1].size)}}</span>
+                                </div>
+                              </li>
+                              <li id="all-match-tab"
+                                class="d-flex align-items-center justify-content-center lay2"
+                                [ngClass]="this._sportService.needBlink(soccerBetMatchMarkets,i,2,'lay')">
+                                <div class="text-center">
+                                  <p>{{retrunValue('lay',soccerBetMatchMarkets,cricketrunners.ex.availableToLay[2].price)}}</p>
+                                  <span>{{retrunValue('size',soccerBetMatchMarkets,cricketrunners.ex.availableToLay[2].size)}}</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="all__match__content bgfirstBDbox"
+                        *ngIf="(cricketrunners.isBackBox==1 || cricketrunners.isLayBox==1) && isShow==i &&!this._sportService.oneClickShow"
+                        [ngClass]="{'bg-blue-box':cricketrunners.isBackBox==1,'bg-red-box':cricketrunners.isLayBox==1}">
+                        <ngx-loading [show]="this._sportService._loading"
+                          [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+                        <div class="all__match__content__container"
+                          *ngIf="!isEditStack">
+                          <div class="all__match__input">
+                            <div class="all__match__counter">
+                              <button
+                                (click)="updateOdds('min',cricketrunners)">-</button>
+                              <input type="text" readonly
+                                [(ngModel)]="cricketrunners.odds" min="0"
+                                max="10">
+                              <button
+                                (click)="updateOdds('max',cricketrunners)">+</button>
+                            </div>
+                            <div class="all__match__counter">
+                              <button
+                                (click)="updateRate('min',cricketrunners)">-</button>
+                              <input type="number"
+                                class="allownumericwithdecimal"
+                                (change)="updatePL(cricketrunners)"
+                                (keypress)="updatePL(cricketrunners)"
+                                (keyup)="updatePL(cricketrunners)"
+                                (keydown)="updatePL(cricketrunners)"
+                                [(ngModel)]="cricketrunners.stack"
+                                placeholder="0.00">
+                              <button
+                                (click)="updateRate('max',cricketrunners)">+</button>
+                            </div>
+                          </div>
+                          <div class="all__match__content__tag">
+                            <ng-container *ngFor="let stack of matchStack">
+                              <button class="btn btn-danger bidbb"
+                                (click)="updateStack(stack,cricketrunners)">{{stack}}</button>
+                            </ng-container>
+                            <!-- <button class="all__match__content__tag--clear-btn"
+                              (click)="cricketrunners.isBackBox=0;cricketrunners.isbackClass='';cricketrunners.isLayBox=0;isShow=-1;this._sportService.removeBackLay(cricketrunners)">Cancel</button>
+                            <button class=" btn-success"
+                              [ngStyle]="{'pointer-events':cricketrunners.odds<=0 ? 'none' : 'auto'}"
+                              (click)="saveSportBetData(cricketrunners,0)">Place
+                              Bet</button> -->
+                          </div>
+                          <div class="placebet_button all__match__content__tag">
+                            <button class="all__match__content__tag--clear-btn"
+                              (click)="cricketrunners.isBackBox=0;cricketrunners.isbackClass='';cricketrunners.isLayBox=0;isShow=-1;this._sportService.removeBackLay(cricketrunners)">Cancel</button>
+                            <button type="button"
+                              class="btn btn-warning btnbottom"
+                              (click)="isEditStack=true">Edit Stack</button>
+                            <button class=" btn-success"
+                              [ngStyle]="{'pointer-events':cricketrunners.odds<=0 ? 'none' : 'auto'}"
+                              (click)="saveSportBetData(cricketrunners,0)">Place
+                              Bet</button>
+                          </div>
+                        </div>
+                        <div class="all__match__content__tag EditStack"
+                          *ngIf="isEditStack">
+                          <form [formGroup]="oneMatchStack"
+                            (ngSubmit)="updateMatchStack(null)">
+                            <div class="inp-inner-bx">
+                              <input
+                                *ngFor="let stack of matchStack; let i=index;"
+                                type="text"
+                                formControlName="matchStack{{i+1}}"
+                                class="form-control inp-bx allownumericwithoutdecimal"
+                                [(ngModel)]="stack" value="{{stack}}" required>
+
+                            </div>
+                            <div
+                              class="placebet_button all__match__content__tag">
+                              <button id="Button" type="submit"
+                                [disabled]="!oneMatchStack.valid" value="Click"
+                                class=" btn-success"><i
+                                  class="fa fa-check-circle-o"
+                                  aria-hidden="true"></i>Save</button>
+                              <button type="button"
+                                class="all__match__content__tag--clear-btn"
+                                (click)="isEditStack=false">Cancel</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-container>
+
+                <!-- <div class="matchTopCatT">
+                <div class="row align-items-center">
+                  <div class="col-lg-8 col-12 ja">
+                  </div>
+                  <div class="col-lg-4 col-12 viewBTn matchDetailRed">
+                    <a href> Lok Sabha Election 2024 Bet Started In Our
+                      Exchange...</a>
+                  </div>
+                </div>
+              </div> -->
+              </div>
+            </div>
+            <!-- matchBox end-->
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="betFairMarket.length>0 && betFairMarketShow">
+        <ng-container *ngFor="let betfair of betFairMarket; let k=index">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseThree"
+                aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseThree">
+                <ul class="allMatchTView d-flex align-items-center">
+                  <li class="all__match__tab__left">{{betfair.marketName}}</li>
+                  <li class="all__match__tab__right d-flex align-items-center">
+                    <div class="all__match__info infoBL">
+                      <p>Min: {{betfair.marketMinStack}} | Max:
+                        {{betfair.marketMaxStack}} </p>
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree"
+              class="accordion-collapse collapse show"
+              aria-labelledby="panelsStayOpen-headingThree">
+              <div class="accordion-body">
+                <!-- matchBox start-->
+                <div class="matchboxBB">
+                  <div class="matchDView">
+                    <div style="z-index:3;"
+                      *ngIf="(betfair.InplayStatus=='CLOSE' || betfair.InplayStatus=='SUSPENDED' || betfair.adminMessage!='' || betfair.IsBetAllow=='N'|| !isBetAllowPopular(betfair))"
+                      class="ball-start-overly suspend-overly"
+                      [ngClass]="{'ball-start-overly_small':this._sessionService.hideExtraOdds}">
+                      <span>{{betfair.adminMessage!='' ?
+                        betfair.adminMessage:
+                        (betfair.InplayStatus=='CLOSE'
+                        ||
+                        betfair.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                        (betfair.IsBetAllow=='N')?'Bet locked':betfair.remainTime}}</span>
+                    </div>
+                    <div class="matchMainBox mathcDetailView matDetailPadd">
+                      <div class="all__match__list">
+                        <div class="all__match__bar">
+                          <div
+                            class="d-flex align-items-center justify-content-between">
+                            <div class="all__match__bar__left">
+
+                            </div>
+                            <div class="tabback_lay">
+
+                              <ul class="d-flex align-items-center">
+                                <li id="all-match-tab"
+                                  class="d-flex align-items-center justify-content-center bordertopLR">
+                                  <div class="text-center">
+                                    <p>Back</p>
+                                  </div>
+                                </li>
+                                <li id="all-match-tab"
+                                  class="d-flex align-items-center justify-content-center bordertopRR">
+                                  <div class="text-center">
+                                    <p>Lay</p>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-container
+                      *ngFor="let betFairRunner of betfair.runner_json; let i=index">
+                      <div class="matchMainBox mathcDetailView matDetailPadd">
+                        <div class="all__match__list">
+                          <div class="all__match__bar">
+                            <div class="d-flex justify-content-between">
+                              <div class="all__match__bar__left">
+                                <p
+                                  [ngClass]="{'betno':(betFairRunner.WinAndLoss
+                          +(this._sportService.stake2['field_'
+                          +
+                          betFairRunner.selectionId
+                          +'_'+
+                          betfair.match_id+'_'+betfair.market_id]))==0,'betyes':(betFairRunner.WinAndLoss
+                          +(this._sportService.stake2['field_'
+                          +
+                          betFairRunner.selectionId
+                          +'_'+
+                          betfair.match_id+'_'+betfair.market_id]))!=0}">{{betFairRunner.selectionName}}</p>
+                                <p
+                                  *ngIf="(betFairRunner.WinAndLoss
+                                              +(this._sportService.stake2['field_'
+                                              +
+                                              betFairRunner.selectionId
+                                              +'_'+
+                                              betfair.match_id+'_'+betfair.market_id]))!=0"
+                                  [ngClass]="{'green-txt green-txt-betfairmarket':(betFairRunner.WinAndLoss
+                                              +(this._sportService.stake2['field_'
+                                              +
+                                              betFairRunner.selectionId
+                                              +'_'+
+                                              betfair.match_id+'_'+betfair.market_id]))>=0,'red-txt red-txt-betfairmarket':(betFairRunner.WinAndLoss
+                                              +(this._sportService.stake2['field_'
+                                              +
+                                              betFairRunner.selectionId
+                                              +'_'+
+                                              betfair.match_id+'_'+betfair.market_id]))<0}">{{betFairRunner.WinAndLoss
+                                  +(this._sportService.stake2["field_"
+                                  +
+                                  betFairRunner.selectionId
+                                  +"_"+
+                                  betfair.match_id+"_"+betfair.market_id])
+                                  |
+                                  number
+                                  :
+                                  '1.2-2'}}</p>
+                              </div>
+                              <div
+                                class="all__match__bar__right all__match__bar__right-box">
+
+                                <ul class="d-flex align-items-center">
+                                  <li id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center back2">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <li id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center back1">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <li data-color="#CFF1FF" id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center bidboxOP back"
+                                    [ngClass]="this._sportService.needBlink(betfair,0,0,'back')"
+                                    (click)="setBetBoxBetFair('back',betFairRunner,betfair);isBetFairbet=k+'_'+i+'_'+betfair.market_id">
+                                    <div class="text-center">
+                                      <p>{{retrunValue('back',betfair,betFairRunner.ex.availableToBack[0].price)}}</p>
+                                      <span>{{retrunValue('size',betfair,betFairRunner.ex.availableToBack[0].size)}}</span>
+                                    </div>
+                                  </li>
+                                  <li data-color="#FBD7E5" id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center lay"
+                                    [ngClass]="this._sportService.needBlink(betfair,k,1,'lay')"
+                                    (click)="setBetBoxBetFair('lay',betFairRunner,betfair);isBetFairbet=k+'_'+i+'_'+betfair.market_id">
+                                    <div class="text-center">
+                                      <p>{{retrunValue('lay',betfair,betFairRunner.ex.availableToLay[0].price)}}</p>
+                                      <span>{{retrunValue('size',betfair,betFairRunner.ex.availableToLay[0].size)}}</span>
+                                    </div>
+                                  </li>
+                                  <li id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center lay1">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <li id="all-match-tab"
+                                    class="d-flex align-items-center justify-content-center lay2">
+                                    <div class="text-center">
+                                      <p>0</p>
+                                      <span>0</span>
+                                    </div>
+                                  </li>
+                                  <div
+                                    *ngIf="betFairRunner.GameStatus!=undefined && betFairRunner.GameStatus!=''"
+                                    class="ball-start-overly bookmakers suspend-overly text-center"
+                                    [ngClass]="{'betbatsmall':this._sessionService.hideExtraOdds}"><span>{{betFairRunner.GameStatus}}</span>
+                                  </div>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="all__match__content bgfirstBDbox"
+                            *ngIf="(betFairRunner.isBackBox==1 || betFairRunner.isLayBox==1) && isBetFairbet==k+'_'+i+'_'+betfair.market_id && !this._sportService.oneClickShow"
+                            [ngClass]="{'bg-blue-box':betFairRunner.isBackBox==1,'bg-red-box':betFairRunner.isLayBox==1}">
+                            <ngx-loading [show]="this._sportService._loading"
+                              [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+                            <div class="all__match__content__container"
+                              *ngIf="!isEditStack">
+                              <div class="all__match__input">
+                                <div class="all__match__counter">
+                                  <button
+                                    (click)="updateOdds('min',betFairRunner)">-</button>
+                                  <input type="text" readonly
+                                    [(ngModel)]="betFairRunner.odds" min="0"
+                                    max="10">
+                                  <button
+                                    (click)="updateOdds('max',betFairRunner)">+</button>
+                                </div>
+                                <div class="all__match__counter">
+                                  <button
+                                    (click)="updateRate('min',betFairRunner)">-</button>
+                                  <input type="number"
+                                    class="allownumericwithdecimal"
+                                    (change)="updatePL(betFairRunner)"
+                                    (keypress)="updatePL(betFairRunner)"
+                                    (keyup)="updatePL(betFairRunner)"
+                                    (keydown)="updatePL(betFairRunner)"
+                                    [(ngModel)]="betFairRunner.stack"
+                                    placeholder="0.00">
+                                  <button
+                                    (click)="updateRate('max',betFairRunner)">+</button>
+                                </div>
+                              </div>
+                              <div class="all__match__content__tag">
+                                <ng-container *ngFor="let stack of matchStack">
+                                  <button class="btn btn-danger bidbb"
+                                    (click)="updateStack(stack,betFairRunner)">{{stack}}</button>
+                                </ng-container>
+                                <!-- <button
+                                  class="all__match__content__tag--clear-btn"
+                                  (click)="betFairRunner.isBackBox=0;betFairRunner.isbackClass='';betFairRunner.isLayBox=0;isShow=-1;this._sportService.removeBackLay(betFairRunner)">Cancel</button>
+                                <button class=" btn-success"
+                                  [ngStyle]="{'pointer-events':betFairRunner.odds<=0 ? 'none' : 'auto'}"
+                                  (click)="saveSportBetData(betFairRunner,betfair)">Place
+                                  Bet</button> -->
+                              </div>
+                              <div
+                                class="placebet_button all__match__content__tag">
+                                <button
+                                  class="all__match__content__tag--clear-btn"
+                                  (click)="betFairRunner.isBackBox=0;betFairRunner.isbackClass='';betFairRunner.isLayBox=0;isShow=-1;this._sportService.removeBackLay(betFairRunner)">Cancel</button>
+                                <button type="button"
+                                  class="btn btn-warning btnbottom"
+                                  (click)="isEditStack=true">Edit Stack</button>
+                                <button class=" btn-success"
+                                  [ngStyle]="{'pointer-events':betFairRunner.odds<=0 ? 'none' : 'auto'}"
+                                  (click)="saveSportBetData(betFairRunner,betfair)">Place
+                                  Bet</button>
+                              </div>
+                            </div>
+                            <div class="all__match__content__tag EditStack"
+                              *ngIf="isEditStack">
+                              <form [formGroup]="oneMatchStack"
+                                (ngSubmit)="updateMatchStack(null)">
+                                <div class="inp-inner-bx">
+                                  <input
+                                    *ngFor="let stack of matchStack; let i=index;"
+                                    type="text"
+                                    formControlName="matchStack{{i+1}}"
+                                    class="form-control inp-bx allownumericwithoutdecimal"
+                                    [(ngModel)]="stack" value="{{stack}}"
+                                    required>
+
+                                </div>
+                                <div
+                                  class="placebet_button all__match__content__tag">
+                                  <button id="Button" type="submit"
+                                    [disabled]="!oneMatchStack.valid"
+                                    value="Click"
+                                    class=" btn-success"><i
+                                      class="fa fa-check-circle-o"
+                                      aria-hidden="true"></i>Save</button>
+                                  <button type="button"
+                                    class="all__match__content__tag--clear-btn"
+                                    (click)="isEditStack=false">Cancel</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- <div class="matchTopCatT">
+                    <div class="row align-items-center">
+                      <div class="col-lg-8 col-12 ja">
+                      </div>
+                      <div class="col-lg-4 col-12 viewBTn matchDetailRed">
+                        <a href> Lok Sabha Election 2024 Bet Started In Our
+                          Exchange...</a>
+                      </div>
+                    </div>
+                  </div> -->
+                  </div>
+                </div>
+                <!-- matchBox end-->
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+    <div class="accordion livestreaming" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item web-show">
+        <h2 class="accordion-header"
+          id="panelsStayOpen-headingOneTV">
+          <button class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOneTv"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOneTv">
+            Live Streaming <i
+              class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOneTv"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOneTV"
+          *ngIf="soccerBetMatchMarkets.sportShowTV=='Y' && safeSrc != null &&
+      soccerBetMatchMarkets != undefined && soccerBetMatchMarkets != null && soccerBetMatchMarkets != '' && ((soccerBetMatchMarkets.start_date - _serverTime)<(2*60))">
+          <div class="accordion-body">
+            <iframe
+              [src]="safeSrc"
+              width="100%"
+              height="280"
+              frameborder="0"
+              scrolling="no"
+              marginwidth="0"
+              frameborder="0"
+              webkitallowfullscreen
+              mozallowfullscreen
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed all__match__tab__head"
+            type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-betcollapseTwo" aria-expanded="true"
+            aria-controls="panelsStayOpen-betcollapseTwo">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">
+                MY BETS
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-betcollapseTwo"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="mybets" *ngIf="MatchBetList.MatchAndBetfair?.length>0 &&
+          soccerBetMatchMarkets.runner_json!=undefined &&
+          soccerBetMatchMarkets.runner_json!=null">
+
+            <div class="accordion-body">
+              <b>{{soccerBetMatchMarkets.name}}</b>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Market</th>
+                    <th scope="col">ODDS</th>
+                    <th scope="col">Stake</th>
+                    <th scope="col">P/L</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <ng-container
+                    *ngFor="let list of MatchBetList.MatchAndBetfair; let i=index;">
+                    <tr
+                      [ngClass]="{'bg-bg-blue':list.is_back==1,'bg-red-box':list.is_back==0}">
+                      <td>{{list.selectionName}} ({{list.marketName}})</td>
+                      <td>{{list.odds}}</td>
+                      <td>{{list.stack}}</td>
+                      <td>{{list.p_l}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+          <div class="mybets"
+            *ngIf="MatchBetList.MatchAndBetfair?.length==0">
+            <div class="accordion-body">
+              <b>{{soccerBetMatchMarkets.name}}</b>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col">Market</th>
+                    <th
+                      scope="col">ODDS</th>
+                    <th
+                      scope="col">Stake</th>
+                    <th scope="col">P/L</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="4">No Bet placed</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-menu">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item web-show">
+        <h2 class="accordion-header"
+          id="panelsStayOpen-headingOneTV">
+          <button class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOneTv"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOneTv">
+            Live Streaming <i
+              class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOneTv"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOneTV"
+          *ngIf="soccerBetMatchMarkets.sportShowTV=='Y' && safeSrc != null &&
+      soccerBetMatchMarkets != undefined && soccerBetMatchMarkets != null && soccerBetMatchMarkets != '' && ((soccerBetMatchMarkets.start_date - _serverTime)<(2*60))">
+          <div class="accordion-body">
+            <iframe
+              [src]="safeSrc"
+              width="100%"
+              height="280"
+              frameborder="0"
+              scrolling="no"
+              marginwidth="0"
+              frameborder="0"
+              webkitallowfullscreen
+              mozallowfullscreen
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed all__match__tab__head"
+            type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-betcollapseTwo" aria-expanded="true"
+            aria-controls="panelsStayOpen-betcollapseTwo">
+            <ul class="allMatchTView d-flex align-items-center">
+              <li class="all__match__tab__left">
+                MY BETS
+              </li>
+            </ul>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-betcollapseTwo"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="mybets" *ngIf="MatchBetList.MatchAndBetfair?.length>0 &&
+          soccerBetMatchMarkets.runner_json!=undefined &&
+          soccerBetMatchMarkets.runner_json!=null">
+
+            <div class="accordion-body">
+              <b>{{soccerBetMatchMarkets.name}}</b>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Market</th>
+                    <th scope="col">ODDS</th>
+                    <th scope="col">Stake</th>
+                    <th scope="col">P/L</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <ng-container
+                    *ngFor="let list of MatchBetList.MatchAndBetfair; let i=index;">
+                    <tr
+                      [ngClass]="{'bg-bg-blue':list.is_back==1,'bg-red-box':list.is_back==0}">
+                      <td>{{list.selectionName}} ({{list.marketName}})</td>
+                      <td>{{list.odds}}</td>
+                      <td>{{list.stack}}</td>
+                      <td>{{list.p_l}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+          <div class="mybets"
+            *ngIf="MatchBetList.MatchAndBetfair?.length==0">
+            <div class="accordion-body">
+              <b>{{soccerBetMatchMarkets.name}}</b>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col">Market</th>
+                    <th
+                      scope="col">ODDS</th>
+                    <th
+                      scope="col">Stake</th>
+                    <th scope="col">P/L</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="4">No Bet placed</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

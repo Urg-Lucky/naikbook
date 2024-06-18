@@ -1,0 +1,332 @@
+<div class="matchdetailpage d-flex">
+  <div class="mainDetailView matkadetail" *ngIf="matchDetail!=null">
+
+    <div class="matkadetail_header" [ngClass]="checkMatkaMatchOpen(matchDetail)">
+      <h5>{{matchDetail.name}}</h5>
+      <h5>{{(matchDetail.matkaCurrentlyClose)?(''): ('Left Time '+(tsTmeH < 10 ? '0' +tsTmeH : tsTmeH)+':'+(tsTmeM < 10
+          ? '0' +tsTmeM : tsTmeM)+ ':' + (tsTmeS < 10 ? '0' +tsTmeS : tsTmeS) )}}</h5>
+    </div>
+
+    <ul class="nav nav-tabs matkadetail_tabs" id="marketTabs" role="tablist">
+      <li class="nav-item matkadetail_tabs_item">
+        <a class="nav-link active" id="haroof-tab" data-toggle="tab" href="#haroofmarket" role="tab"
+          aria-controls="haroofmarket" aria-selected="true">
+          <div>
+            <h6 class="tab_title">Haroof</h6>
+            <h6 class="tab_subtitle">{{haroofRate}}</h6>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item matkadetail_tabs_item">
+        <a class="nav-link" id="jodi-tab" data-toggle="tab" href="#jodimarket" role="tab" aria-controls="jodimarket"
+          aria-selected="false">
+          <div>
+            <h6 class="tab_title">Jodi Digits</h6>
+            <h6 class="tab_subtitle">{{joidRate}}</h6>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content matkadetail_tabs_content" id="marketTabsContent">
+      <ngx-loading [show]="this._sportService._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+      <div class="tab-pane fade show active" id="haroofmarket" role="tabpanel" aria-labelledby="haroof-tab"
+        style="float: left;height: 100%;">
+        <div class="haroof_min_mx_bet">
+          <div>
+            <h5>Min Bet Amount :&nbsp;</h5>
+            <h5>{{matchDetail.minBetAmount}}</h5>
+          </div>
+          <div>
+            <h5>Max Bet Amount :&nbsp;</h5>
+            <h5>{{matchDetail.maxBetAmount}}</h5>
+          </div>
+        </div>
+        <div class="haroof_selections"
+          *ngIf="!nullUndefined(matchDetail.close_market) && !nullUndefined(matchDetail.close_market.runner_json) && (matchDetail.close_market.runner_json.length > 0)">
+          <div class="haroof_selections_close">
+            <div class="haroof_selections_item" *ngFor="let selection of matchDetail.close_market.runner_json">
+              <h5 style="color: white;">{{selection.SelectionName}}</h5>
+              <input type="text" value="{{nullUndefined(selection.inputAmount)?'':selection.inputAmount}}"
+                (input)="(selection.inputAmount=$event.target.value); onHaroofDataChange()"
+                (keypress)="allowedNumberOnly($event)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="haroof_selections"
+          *ngIf="!nullUndefined(matchDetail.open_market) && !nullUndefined(matchDetail.open_market.runner_json) && (matchDetail.open_market.runner_json.length > 0)">
+          <div class="haroof_selections_open">
+            <div class="haroof_selections_item" *ngFor="let selection of matchDetail.open_market.runner_json">
+              <h5 style="color: white;">{{selection.SelectionName}}</h5>
+              <input type="text" value="{{nullUndefined(selection.inputAmount)?'':selection.inputAmount}}"
+                (input)="(selection.inputAmount=$event.target.value); onHaroofDataChange()"
+                (keypress)="allowedNumberOnly($event)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="haroof_total_amount">
+          <h5 class="haroof_total_amount_title" style="color: white;">Total Amount</h5>
+          <h5 class="haroof_total_amount_value">{{totalAmountHaroof}}</h5>
+        </div>
+
+        <div class="haroof_bets_btn">
+          <h5 class="haroof_add_bet" (click)="saveHaroofTempBets()">Add Bet</h5>
+          <h5 class="haroof_clear_bet" (click)="onHaroofDataClear()"> Clear
+            Bet</h5>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="jodimarket" role="tabpanel" aria-labelledby="jodi-tab"
+        style="float: left;height: 100%; position: relative;">
+        <div class="haroof_min_mx_bet">
+          <div>
+            <h5>Min Bet Amount :&nbsp;</h5>
+            <h5>{{matchDetail.minBetAmount}}</h5>
+          </div>
+          <div>
+            <h5>Max Bet Amount :&nbsp;</h5>
+            <h5>{{matchDetail.maxBetAmount}}</h5>
+          </div>
+        </div>
+
+        <div class="jodi_other_bets_btns">
+
+          <h5 class="jodi_number" (click)="showPopupNumber=1">NUMBER</h5>
+          <h5 class="jodi_range" (click)="showPopupNumber=2">RANGE</h5>
+          <h5 class="jodi_crossing" (click)="showPopupNumber=3">CROSSING</h5>
+
+        </div>
+        <div class="haroof_selections"
+          *ngIf="!nullUndefined(matchDetail.jodi_market) && !nullUndefined(matchDetail.jodi_market.runner_json) && (matchDetail.jodi_market.runner_json.length > 0)">
+          <div class="haroof_selections_close">
+            <div class="haroof_selections_item" *ngFor="let selection of matchDetail.jodi_market.runner_json">
+              <h5>{{selection.SelectionName}}</h5>
+              <input type="text" value="{{nullUndefined(selection.inputAmount)?'':selection.inputAmount}}"
+                (input)="(selection.inputAmount=$event.target.value); onJodiDataChange()"
+                (keypress)="allowedNumberOnly($event)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="haroof_total_amount">
+          <h5 class="haroof_total_amount_title">Total Amount</h5>
+          <h5 class="haroof_total_amount_value">{{totalAmountJodi}}</h5>
+        </div>
+
+        <div class="haroof_bets_btn">
+          <h5 class="haroof_add_bet" (click)="saveJodiTempBets()">Add Bet</h5>
+          <h5 class="haroof_clear_bet" (click)="onJodiDataClear()"> Clear
+            Bet</h5>
+        </div>
+
+        <div class="jodi_popup_container" *ngIf="showPopupNumber==1 || showPopupNumber==2 ||showPopupNumber==3">
+          <app-jodinumber [jodiNumberdata]=matchDetail.jodi_market
+            (dialogClose)="($event == 'SUCCESS' ? callGetMarketTempBets() : ''); ($event == 'SUCCESS' ? '' : showPopupNumber=0)"
+            *ngIf="showPopupNumber==1"></app-jodinumber>
+          <app-jodirange [jodiRangeNumberdata]=matchDetail.jodi_market
+            (dialogClose)="($event == 'SUCCESS' ? callGetMarketTempBets() : '');  ($event == 'SUCCESS' ? '' : showPopupNumber=0)"
+            *ngIf="showPopupNumber==2"></app-jodirange>
+          <app-jodicrossing [jodiCrossNumberdata]=matchDetail.jodi_market
+            (dialogClose)="($event == 'SUCCESS' ? callGetMarketTempBets() : '');showPopupNumber=0"
+            *ngIf="showPopupNumber==3"></app-jodicrossing>
+        </div>
+
+      </div>
+    </div>
+    <div class="accordion livestreaming" id="accordionPanelsStayOpenExample">
+
+      <div class="matkadetail_localbet">
+        <div class="matkadetail_localbet_header">
+          <h5>Local Bet</h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#matkadetail_localbet_data" aria-expanded="true"
+            aria-controls="matkadetail_localbet_data">
+            <span class="fa fa-caret-down fa-2x"></span>
+          </a>
+        </div>
+
+        <div class="matkadetail_localbet_data collapse show" id="matkadetail_localbet_data">
+          <div class="localbet_data_nodata" *ngIf="localBetDataList.length==0">
+            <h5>No bets found</h5>
+          </div>
+
+          <div *ngIf="localBetDataList.length>0">
+
+            <div class="localbet_data_header" *ngIf="localBetDataList.length>0">
+
+              <h5>S.No.</h5>
+              <h5>Number</h5>
+              <h5>Amount</h5>
+              <h5>Action</h5>
+
+            </div>
+            <div class="middive">
+              <div class="localbet_data_detail" *ngFor="let item of localBetDataList; let i=index">
+
+                <h5>{{i+1}}</h5>
+                <h5>{{item.selectionName}} {{ item.patti_type == 'JODI' ? '(J)'
+                  :
+                  '(H)' }}</h5>
+                <h5>{{item.stack}}</h5>
+                <h5><img src="./assets/img/delete.svg" (click)="deleteTempBets(item.id, item.stack)"
+                    style="width: 20px;"></h5>
+              </div>
+            </div>
+            <div class="localbet_data_detail_total">
+
+              <h5 (click)="saveAllTempBets()">Place Bets</h5>
+              <h5>TOTAL</h5>
+              <h5>{{localBetTotalAmount}}</h5>
+              <h5 (click)="deleteAllTempBets()">Delete All</h5>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="matkadetail_placedbet">
+        <div class="matkadetail_placedbet_header">
+          <h5>Placed Bet</h5>
+          <a data-toggle="collapse" data-parent="#accordion" href="#matkadetail_placedbet_data" aria-expanded="true"
+            aria-controls="matkadetail_placedbet_data">
+            <span class="fa fa-caret-down fa-2x"></span>
+          </a>
+        </div>
+
+        <div class="matkadetail_placedbet_data collapse show" id="matkadetail_placedbet_data">
+          <div class="placedbet_data_nodata" *ngIf="placedBetDataList.length==0">
+            <h5>No bets found</h5>
+          </div>
+
+          <div *ngIf="placedBetDataList.length>0">
+
+            <div class="placedbet_data_header" *ngIf="placedBetDataList.length>0">
+              <h5>S.No.</h5>
+              <h5>Number</h5>
+              <h5>Amount</h5>
+            </div>
+            <div class="middive">
+              <div class="placedbet_data_detail" *ngFor="let item of placedBetDataList; let i=index">
+
+                <h5>{{i+1}}</h5>
+                <h5>{{item.selectionName}} {{ item.patti_type == 'JODI' ? '(J)'
+                  :
+                  '(H)' }}</h5>
+                <h5>{{item.stack}}</h5>
+
+              </div>
+            </div>
+            <div class="placedbet_data_detail_total">
+              <h5></h5>
+              <h5>TOTAL</h5>
+              <h5>{{placedBetTotalAmount}}</h5>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="right-menu">
+    <div class="matkadetail_localbet">
+      <div class="matkadetail_localbet_header">
+        <h5>Local Bet</h5>
+        <a data-toggle="collapse" data-parent="#accordion" href="#matkadetail_localbet_data" aria-expanded="true"
+          aria-controls="matkadetail_localbet_data">
+          <span class="fa fa-caret-down fa-2x"></span>
+        </a>
+      </div>
+
+      <div class="matkadetail_localbet_data collapse show" id="matkadetail_localbet_data">
+        <div class="localbet_data_nodata" *ngIf="localBetDataList.length==0">
+          <h5>No bets found</h5>
+        </div>
+
+        <div *ngIf="localBetDataList.length>0">
+
+          <div class="localbet_data_header" *ngIf="localBetDataList.length>0">
+
+            <h5>S.No.</h5>
+            <h5>Number</h5>
+            <h5>Amount</h5>
+            <h5>Action</h5>
+
+          </div>
+          <div class="middive">
+            <div class="localbet_data_detail" *ngFor="let item of localBetDataList; let i=index">
+
+              <h5>{{i+1}}</h5>
+              <h5>{{item.selectionName}} {{ item.patti_type == 'JODI' ? '(J)' :
+                '(H)' }}</h5>
+              <h5>{{item.stack}}</h5>
+              <h5><img src="./assets/img/delete.svg" (click)="deleteTempBets(item.id, item.stack)" style="width: 20px;">
+              </h5>
+            </div>
+          </div>
+          <div class="localbet_data_detail_total">
+
+            <h5 (click)="saveAllTempBets()">Place Bets</h5>
+            <h5>TOTAL</h5>
+            <h5>{{localBetTotalAmount}}</h5>
+            <h5 (click)="deleteAllTempBets()">Delete All</h5>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="matkadetail_placedbet">
+      <div class="matkadetail_placedbet_header">
+        <h5>Placed Bet</h5>
+        <a data-toggle="collapse" data-parent="#accordion" href="#matkadetail_placedbet_data" aria-expanded="true"
+          aria-controls="matkadetail_placedbet_data">
+          <span class="fa fa-caret-down fa-2x"></span>
+        </a>
+      </div>
+
+      <div class="matkadetail_placedbet_data collapse show" id="matkadetail_placedbet_data">
+        <div class="placedbet_data_nodata" *ngIf="placedBetDataList.length==0">
+          <h5>No bets found</h5>
+        </div>
+
+        <div *ngIf="placedBetDataList.length>0">
+
+          <div class="placedbet_data_header" *ngIf="placedBetDataList.length>0">
+            <h5>S.No.</h5>
+            <h5>Number</h5>
+            <h5>Amount</h5>
+          </div>
+          <div class="middive">
+            <div class="placedbet_data_detail" *ngFor="let item of placedBetDataList; let i=index">
+
+              <h5>{{i+1}}</h5>
+              <h5>{{item.selectionName}} {{ item.patti_type == 'JODI' ? '(J)' :
+                '(H)' }}</h5>
+              <h5>{{item.stack}}</h5>
+
+            </div>
+          </div>
+          <div class="placedbet_data_detail_total">
+            <h5></h5>
+            <h5>TOTAL</h5>
+            <h5>{{placedBetTotalAmount}}</h5>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

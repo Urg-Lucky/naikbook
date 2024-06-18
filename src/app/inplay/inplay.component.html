@@ -1,0 +1,233 @@
+<div class="mainDetailView">
+  <div class="matchboxBB">
+    <div class="matchDView">
+      <div class="sub_path center-box inplayMHTxt">
+        <p>In-Play</p>
+      </div>
+      <div class="inplayHeadSec">
+        <div class="inplayHeadSecBox" (click)="showInplayDiv(0)">
+          <img src="./assets/img/inplay.png">
+          <h3>Watch Live</h3>
+        </div>
+        <!-- <div class="inplayHeadSecBox">
+          <img src="./assets/img/game-icon.png">
+          <h3>All Games</h3>
+        </div> -->
+        <ng-container
+          *ngFor="let sport of this._sportService.SportList; let i=index">
+          <div class="inplayHeadSecBox"
+            (click)="showInplayDiv(sport.sport_id)"
+            *ngIf="sport.sport_id!=9994&&sport.sport_id!=9999&&sport.sport_id!=2224">
+            <img src="{{sport.image}}">
+            <h3>{{sport.name}}</h3>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!--match Detail InPlay-->
+  <ng-container *ngFor="let sport of this._sportService.SportList; let i=index">
+    <div class="matchboxBB matchboxBB2" id="sports_{{sport.sport_id}}"
+      *ngIf="sport.sport_id!=9999&&sport.sport_id!=2224&&sport.sport_id!=9994&&CheckSportExist(sport.sport_id)==true">
+      <div class="matchDView">
+        <div class="sub_path center-box">
+          <p>{{sport.name}}</p>
+        </div>
+        <div class="matchMainBox matchTopCatT">
+          <div class="row align-items-center">
+            <div class="col-lg-8 col-12 ja">
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="row">
+                <div class="col-lg-4 text-center pl-0 pr-0 matchDetTTxt">
+                  <span>1</span>
+                </div>
+                <div class="col-lg-4 text-center pl-0 pr-0 matchDetTTxt">
+                  <span>X</span>
+                </div>
+                <div class="col-lg-4 text-center pl-0 pr-0 matchDetTTxt">
+                  <span>2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-container
+          *ngFor="let slist of this._sportService._ListInPlayMatch; let i=index">
+          <div class="matchMainBox" *ngIf="slist.sport_id==sport.sport_id"
+            (click)="GoToDetailPage(slist)">
+            <div class="row align-items-center">
+              <div class="col-lg-8 col-12 ja">
+                <div class="eventInfo">
+                  <div class="matchTxt">
+                    <p class="mtime">{{ slist.start_date+'000' | date:
+                      'd MMM hh:mm'}} | </p>
+                    <span class="lvnow"
+                      *ngIf="slist.InplayStatus=='OPEN'"></span>
+                    <h1>{{slist.name}} </h1>
+                    <div class="livenow ml-2 livenownew"
+                      *ngIf="slist.InplayStatus=='OPEN'">Live Now</div>
+                  </div>
+                  <div class>
+                    <span class="l-tv"><img alt="TV"
+                        src="./assets/img/tv.svg"></span>
+                    <span class="bm1" *ngIf="slist.sport_id==4">
+                      <img alt="BM"
+                        src="./assets/img/bm-icon1.svg">
+                    </span>
+                    <span class="fancy1 mr-1" *ngIf="slist.sport_id==4">
+                      <img alt="Fancy"
+                        src="./assets/img/fancy-icon1.svg">
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mobileTMatch">
+                <div class="matchTxt mobMtxt">
+                  <p><img src="./assets/img/clock.png" /> {{
+                    slist.start_date+'000' | date: 'd MMM hh:mm'}} |
+                    {{slist.seriesName}}</p>
+                </div>
+              </div>
+              <div class="col-lg-4 col-12">
+                <div class="matchodds" *ngIf="slist.runner_json!=null">
+                  <div
+                    *ngIf="(slist.InplayStatus=='CLOSE' || slist.InplayStatus=='SUSPENDED' || slist.adminMessage!='' || slist.IsBetAllow=='N')"
+                    class="ball-start-overly">
+                    <span>{{slist.adminMessage!=''?slist.adminMessage:
+                      (slist.InplayStatus=='CLOSE'
+                      ||
+                      slist.InplayStatus=='SUSPENDED')?'SUSPENDED':
+                      (slist.IsBetAllow=='N')?'Bet locked':''+
+                      slist.remainTime}}</span>
+                  </div>
+                  <div class="oddstxt">
+                    <span>{{slist.runner_json[0]!=undefined
+                      &&
+                      slist.runner_json[0].ex!=undefined
+                      &&
+                      slist.runner_json[0].ex.availableToBack!=undefined
+                      ?
+                      retrunValue('back',slist,(slist.runner_json[0].ex.availableToBack.length>
+                      0) ?
+                      slist.runner_json[0].ex.availableToBack[0].price
+                      :
+                      '--') : '--'}}</span>
+                  </div>
+                  <div class="oddstxtgray">
+                    <span>{{slist.runner_json[0]!=undefined
+                      &&
+                      slist.runner_json[0].ex!=undefined
+                      &&
+                      slist.runner_json[0].ex.availableToLay!=undefined
+                      ?
+                      retrunValue('lay',slist,(slist.runner_json[0].ex.availableToLay.length>
+                      0) ?
+                      slist.runner_json[0].ex.availableToLay[0].price
+                      :
+                      '--') : '--'}}</span>
+                  </div>
+                  <div class="oddstxt">
+                    <span>{{slist.runner_json[2]!=undefined
+                      &&
+                      slist.runner_json[2].ex!=undefined
+                      &&
+                      slist.runner_json[2].ex.availableToBack!=undefined
+                      ?
+                      retrunValue('back',slist,(slist.runner_json[2].ex.availableToBack.length>
+                      0) ?
+                      slist.runner_json[2].ex.availableToBack[0].price
+                      :
+                      '--') : '--'}}</span>
+                  </div>
+                  <div class="oddstxtgray">
+                    <span>{{slist.runner_json[2]!=undefined
+                      &&
+                      slist.runner_json[2].ex!=undefined
+                      &&
+                      slist.runner_json[2].ex.availableToLay!=undefined
+                      ?
+                      retrunValue('lay',slist,(slist.runner_json[2].ex.availableToLay.length>
+                      0) ?
+                      slist.runner_json[2].ex.availableToLay[0].price
+                      :
+                      '--') : '--'}}</span>
+                  </div>
+                  <div class="oddstxt">
+                    <span>{{slist.runner_json[1]!=undefined
+                      &&
+                      slist.runner_json[1].ex!=undefined
+                      &&
+                      slist.runner_json[1].ex.availableToBack!=undefined
+                      ?
+                      retrunValue('back',slist,(slist.runner_json[1].ex.availableToBack.length>
+                      0) ?
+                      slist.runner_json[1].ex.availableToBack[0].price
+                      :
+                      '--') : '--'}}</span>
+                  </div>
+                  <div class="oddstxtgray">
+                    <span>{{slist.runner_json[1]!=undefined
+                      &&
+                      slist.runner_json[1].ex!=undefined
+                      &&
+                      slist.runner_json[1].ex.availableToLay!=undefined
+                      ?
+                      retrunValue('lay',slist,(slist.runner_json[1].ex.availableToLay.length>
+                      0) ?
+                      slist.runner_json[1].ex.availableToLay[0].price
+                      :
+                      '--') : '--'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+  </ng-container>
+  <!--match Detail InPlay-->
+</div>
+<div class="right-menu">
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button class="accordion-button collapsed all__match__tab__head"
+          type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-betcollapseTwo" aria-expanded="true"
+          aria-controls="panelsStayOpen-betcollapseTwo">
+          <ul class="allMatchTView d-flex align-items-center">
+            <li class="all__match__tab__left">
+              Matched Bet
+            </li>
+          </ul>
+        </button>
+      </h2>
+      <div id="panelsStayOpen-betcollapseTwo"
+        class="accordion-collapse collapse show"
+        aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Matched Bet</th>
+                <th scope="col">ODDS</th>
+                <th scope="col">Stake</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

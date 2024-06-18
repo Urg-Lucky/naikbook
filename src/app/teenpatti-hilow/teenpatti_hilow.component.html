@@ -1,0 +1,603 @@
+<div class="row no-gutters">
+  <ngx-loading [show]="this._sportService._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+  <div class="center_screen_main nopadding">
+    <div class="all-category-bx">
+      <h5 *ngIf="matchDetail!=null" class="team-time-bx"><span
+          [ngClass]="{'inPlayMatchBlink':_serverTime > matchDetail.start_date }">{{matchDetail.name}}
+          #{{matchDetail.market_id}}</span>
+        <span class="time-top-bx"><img src="/assets/images/time-icon.png"
+            alt="">{{matchDetail.start_date!=undefined ? (this._sportService.timeConverter(matchDetail.start_date) | date:'medium') : ''}}</span>
+      </h5>
+
+      <div *ngIf="matchDetail!=null" class="card casino">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-content-tsp tab-table-data">
+
+            <div class="bg-black-bx table-data-inn mb-0 clearfix casinotv_space">
+              <div class="box">
+                <div class="embed-responsive embed-responsive-casino iframe-container">
+                  <iframe class="embed-responsive-item" scrolling="no" frameborder="0" [src]="safeSrc"></iframe>
+
+                </div>
+
+
+                <div *ngIf="matchDetail!=null" class="player-outer">
+                  <div *ngIf="matchDetail.indexCard!=null" class="play-one">
+                    <h5>Joker</h5>
+                    <div>
+                      <img  *ngIf="matchDetail.indexCard.length>0" src="/assets/images/cards/{{matchDetail.indexCard[0]}}.png"
+                        alt="{{matchDetail.indexCard[0]}}">
+                    </div>
+                  </div>
+                  <div *ngIf="matchDetail.indexCard!=null" class="play-two">
+                    <h5>Ante</h5>
+                    <div>
+                      <img *ngIf="matchDetail.indexCard.length>1" src="/assets/images/cards/{{matchDetail.indexCard[1]}}.png"
+                        alt="{{matchDetail.indexCard[1]}}">
+                    </div>
+                  </div>
+
+                </div>
+                
+                <div *ngIf="matchDetail!=null" class="clock clock2digit flip-clock-wrapper">
+                  <ul [ngClass]="timer_pos_0 ? 'flip play' : 'flip'">
+                    <li class="flip-clock-before"><a href="#">
+                        <div class="up">
+                          <div class="shadow"></div>
+                          <div class="inn">
+                            {{(matchDetail.timer_previous>9?(matchDetail.timer_previous+''): '00') | slice:-2:-1}}</div>
+                        </div>
+                        <div class="down">
+                          <div class="shadow"></div>
+                          <div class="inn">
+                            {{(matchDetail.timer_previous>9?(matchDetail.timer_previous+''): '00') | slice:-2:-1}}</div>
+                        </div>
+                      </a></li>
+                    <li class="flip-clock-active"><a href="#">
+                        <div class="up">
+                          <div class="shadow"></div>
+                          <div class="inn">{{(matchDetail.timer>9?(matchDetail.timer+''): '00') | slice:-2:-1}}</div>
+                        </div>
+                        <div class="down">
+                          <div class="shadow"></div>
+                          <div class="inn">{{(matchDetail.timer>9?(matchDetail.timer+''): '00') | slice:-2:-1}}</div>
+                        </div>
+                      </a></li>
+                  </ul>
+                  <ul [ngClass]="timer_pos_1 ? 'flip play' : 'flip'">
+                    <li class="flip-clock-before"><a href="#">
+                        <div class="up">
+                          <div class="shadow"></div>
+                          <div class="inn">{{(matchDetail.timer_previous+'') | slice:-1}}</div>
+                        </div>
+                        <div class="down">
+                          <div class="shadow"></div>
+                          <div class="inn">{{(matchDetail.timer_previous+'') | slice:-1}}</div>
+                        </div>
+                      </a></li>
+                    <li class="flip-clock-active"><a href="#">
+                        <div class="up">
+                          <div class="shadow"></div>
+                          <div class="inn">{{(matchDetail.timer+'') | slice:-1}}</div>
+                        </div>
+                        <div class="down">
+                          <div class="shadow"></div>
+                          <div class="inn">{{(matchDetail.timer+'') | slice:-1}}</div>
+                        </div>
+                      </a></li>
+                  </ul>
+                </div>
+
+                <div *ngIf="matchResult!=null" class="casinotv_match_result">
+                  <div class="casinotv_winner">
+                    <h5>Winner : {{matchResult.winner}}</h5>
+                    <h6 *ngIf="matchResult.winner_desc!=''">{{matchResult.winner_desc}}</h6>
+                  </div>
+                </div>
+                <div *ngIf="matchDetail!=null" class="casinotv_reload">
+                  <a href="javascript:void(0)" (click)="reloadtv()"><span class="fa fa-refresh"></span></a>
+                </div>
+                
+              </div>
+            </div>
+
+            <div *ngIf="playerAData!=null && playerBData!=null && playerCData!=null" class="bg-black-bx table-data-inn mb-2 clearfix"
+              style="border-top:none; margin-bottom: 0px !important;">
+
+              <div class="draggable-element">
+                <div class="table-data-inn table-data-inn-2 table-new-bat mb-2">
+                  <div class=" table-responsive drag-list bets-expand">
+
+                    <table class="table">
+                      <thead class="thead-yello">
+                        <tr>
+                          <th class="wd-bx"><span class="bg-bx">{{matchDetail.displayName}}</span></th>
+                          <th colspan="2" class="text-center casino_backlay"><span
+                              class="w-5 text-center">{{this._sessionService.backTitleName}}</span><span class="w-5 text-center">{{this._sessionService.layTitleName}}</span></th>
+                          <th colspan="2" class="text-center matchodds_collapse" style="display: none;">&nbsp;<span><a
+                                class="collapsed faq-links" data-toggle="collapse" data-parent="#accordion"
+                                href="#collapseFive" aria-expanded="true" aria-controls="collapseFive"><i
+                                  class="fa fa-caret-up fa-2x"></i></a></span><span class="drag-area"></span></th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <div id="collapseFive" class="panel-collapse collapse in show" role="tabpanel"
+                      aria-labelledby="headingFive">
+                      <table class="table no-mar" style="overflow: hidden;">
+                        <tbody>
+                          <ng-container>
+                            <div *ngIf="playerAData.superStatus!='OPEN'" class="betbat_multy_matchodds">
+                              <span>SUSPENDED</span>
+                            </div>
+
+                            <tr>
+                              <th class="com-bx casino">
+
+                                <h6>{{playerAData.name}}</h6>
+
+                                <div *ngIf="getSelectionPL(playerAData)!=0"
+                                  [ngClass]="{'green-txt-casino':getSelectionPL(playerAData)>=0,'red-txt-casino':getSelectionPL(playerAData)<0}">
+                                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                  {{getSelectionPL(playerAData) | number : '1.0-2'}}
+                                </div>
+
+                              </th>
+
+                              <td class="bg-blue mx-wd click-bx isbackclass"><a href="javascript:void(0)"
+                                  (click)="setBetBox(1,playerAData)">
+                                  <div class="casino">
+                                    <h6>
+                                      {{playerAData.back[0].price}}
+                                    </h6>
+                                    <span>{{playerAData.back[0].size}}</span>
+
+                                  </div>
+                                </a>
+                                <i
+                                  [ngClass]="{'blue-bdr casinoback':(betBoxPlayerData!=null && betBoxPlayerData.id==playerAData.id && betBoxType==1) && !this._sportService.oneClickShow}"></i>
+                              </td>
+                              <td class="bg-red mx-wd click-bx islayclass"><a href="javascript:void(0)"
+                                  (click)="setBetBox(0,playerAData)">
+                                  <div class="casino">
+                                    <h6>
+                                      {{playerAData.lay[0].price}}
+                                    </h6>
+                                    <span>{{playerAData.lay[0].size}}</span>
+
+                                  </div>
+                                </a>
+                                <i
+                                  [ngClass]="{'red-bdr casinolay':(betBoxPlayerData!=null && betBoxPlayerData.id==playerAData.id && betBoxType==0) && !this._sportService.oneClickShow}"></i>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="betBoxPlayerData!=null && betBoxPlayerData.id==playerAData.id">
+                              <td colspan="8">
+                                <div [ngClass]="{'bg-blue':betBoxType==1,'bg-red-box':betBoxType==0}"
+                                  class="p-2 bdr-black editstakeform bet_buttons_main">
+                                  <div class="drop-panel-bx">
+                                    <ul class="d-flex flex-wrap" *ngIf="!isEditStack">
+                                      <li><strong>Odds</strong><span (click)="updateOddsValue('min')"
+                                          class="input-number-decrement">–</span>
+                                        <input class="input-number" type="text" readonly
+                                          [(ngModel)]="betBoxPlayerData.odds" min="0" max="10">
+                                        <span class="input-number-increment" (click)="updateOddsValue('max')">+</span>
+                                      </li>
+                                      <li>
+                                        <div class=" d-flex"><strong>Stake</strong>
+                                          <input type="number" class="form-control width allownumericwithdecimal"
+                                            (change)="updatePL()" [(ngModel)]="betBoxPlayerData.stack"
+                                            placeholder="0.00">
+                                        </div>
+                                      </li>
+                                      <li class="profit_bx_dv">
+                                        <strong>{{betBoxType==1 ? 'Profit' : 'Liability'}}</strong>
+                                        <span>{{getCurrentBetboxPL() | number : '1.0-2'}}</span>
+                                      </li>
+                                      <li *ngFor="let stack of serverMatchStack">
+                                        <a class="wid-70" href="javascript:void(0)"
+                                          (click)="updateStackValue(stack)"><span
+                                            class="amount-bx">+{{stack}}</span></a></li>
+                                      <li><button type="button" class="btn btn-green"
+                                          [disabled]="betBoxPlayerData.odds<=0" href="javascript:void(0)"
+                                          (click)="saveSportBetData()"><span><img src="assets/images/check-box-wht.png"
+                                              alt="Place Bet"></span>Place</button></li>
+
+                                      <li><a class="btn btn-rad edit-stake" (click)="isEditStack=true"><span><img src=""
+                                              alt=""></span>Edit Stake</a></li>
+                                    </ul>
+                                    <a class="btn btn-rad close-btn close_icon_btn" (click)="closeBetBox()"><span
+                                        class="fa fa-close"></span></a>
+
+                                    <ul class="d-flex flex-wrap" *ngIf="isEditStack">
+                                      <li>
+                                        <form [formGroup]="serverMatchStackForm" (ngSubmit)="updateServerMatchStack()">
+                                          <div class="inp-inner-bx">
+                                            <input *ngFor="let stack of serverMatchStack; let i = index;" type="text"
+                                              formControlName="matchStack{{i+1}}"
+                                              class="form-control inp-bx allownumericwithoutdecimal" [(ngModel)]="stack"
+                                              value="{{stack}}" required>
+                                            <button id="Button" type="submit" [disabled]="!serverMatchStackForm.valid"
+                                              value="Click" class="btn btn-green"><i class="fa fa-check-circle-o"
+                                                aria-hidden="true"></i> Save
+                                            </button>
+
+                                          </div>
+
+
+                                        </form>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+
+                      </table>
+                      <table class="table no-mar" style="overflow: hidden;">
+                        <tbody>
+                          <ng-container>
+                            <div *ngIf="playerBData.superStatus!='OPEN'" class="betbat_multy_matchodds">
+                              <span>SUSPENDED</span>
+                            </div>
+
+                            <tr>
+                              <th class="com-bx casino">
+
+                                <h6>{{playerBData.name}}</h6>
+
+                                <div *ngIf="getSelectionPL(playerBData)!=0"
+                                  [ngClass]="{'green-txt-casino':getSelectionPL(playerBData)>=0,'red-txt-casino':getSelectionPL(playerBData)<0}">
+                                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                  {{getSelectionPL(playerBData) | number : '1.0-2'}}
+                                </div>
+                              </th>
+
+                              <td class="bg-blue mx-wd click-bx isbackclass"><a href="javascript:void(0)"
+                                  (click)="setBetBox(1,playerBData)">
+                                  <div class="casino">
+                                    <h6>
+                                      {{playerBData.back[0].price}}
+                                    </h6>
+                                    <span>{{playerBData.back[0].size}}</span>
+
+
+                                  </div>
+                                </a>
+                                <i
+                                  [ngClass]="{'blue-bdr casinoback':(betBoxPlayerData!=null && betBoxPlayerData.id==playerBData.id && betBoxType==1) && !this._sportService.oneClickShow}"></i>
+                              </td>
+                              <td class="bg-red mx-wd click-bx islayclass"><a href="javascript:void(0)"
+                                  (click)="setBetBox(0,playerBData)">
+                                  <div class="casino">
+                                    <h6>
+                                      {{playerBData.lay[0].price}}
+                                    </h6>
+                                    <span>{{playerBData.lay[0].size}}</span>
+
+                                  </div>
+                                </a>
+                                <i
+                                  [ngClass]="{'red-bdr casinolay':(betBoxPlayerData!=null && betBoxPlayerData.id==playerBData.id && betBoxType==0) && !this._sportService.oneClickShow}"></i>
+                              </td>
+
+                            </tr>
+
+                            <tr *ngIf="betBoxPlayerData!=null && betBoxPlayerData.id==playerBData.id">
+                              <td colspan="8">
+                                <div [ngClass]="{'bg-blue':betBoxType==1,'bg-red-box':betBoxType==0}"
+                                  class="p-2 bdr-black editstakeform bet_buttons_main">
+                                  <div class="drop-panel-bx">
+                                    <ul class="d-flex flex-wrap" *ngIf="!isEditStack">
+                                      <li><strong>Odds</strong><span (click)="updateOddsValue('min')"
+                                          class="input-number-decrement">–</span>
+                                        <input class="input-number" type="text" readonly
+                                          [(ngModel)]="betBoxPlayerData.odds" min="0" max="10">
+                                        <span class="input-number-increment" (click)="updateOddsValue('max')">+</span>
+                                      </li>
+                                      <li>
+                                        <div class=" d-flex"><strong>Stake</strong>
+                                          <input type="number" class="form-control width allownumericwithdecimal"
+                                            (change)="updatePL()" [(ngModel)]="betBoxPlayerData.stack"
+                                            placeholder="0.00">
+                                        </div>
+                                      </li>
+                                      <li class="profit_bx_dv">
+                                        <strong>{{betBoxType==1 ? 'Profit' : 'Liability'}}</strong>
+                                        <span>{{getCurrentBetboxPL() | number : '1.0-2'}}</span>
+                                      </li>
+                                      <li *ngFor="let stack of serverMatchStack">
+                                        <a class="wid-70" href="javascript:void(0)"
+                                          (click)="updateStackValue(stack)"><span
+                                            class="amount-bx">+{{stack}}</span></a></li>
+                                      <li><button type="button" class="btn btn-green"
+                                          [disabled]="betBoxPlayerData.odds<=0" href="javascript:void(0)"
+                                          (click)="saveSportBetData()"><span><img src="assets/images/check-box-wht.png"
+                                              alt="Place Bet"></span>Place</button></li>
+
+                                      <li><a class="btn btn-rad edit-stake" (click)="isEditStack=true"><span><img src=""
+                                              alt=""></span>Edit Stake</a></li>
+                                    </ul>
+                                    <a class="btn btn-rad close-btn close_icon_btn" (click)="closeBetBox()"><span
+                                        class="fa fa-close"></span></a>
+
+                                    <ul class="d-flex flex-wrap" *ngIf="isEditStack">
+                                      <li>
+                                        <form [formGroup]="serverMatchStackForm" (ngSubmit)="updateServerMatchStack()">
+                                          <div class="inp-inner-bx">
+                                            <input *ngFor="let stack of serverMatchStack; let i = index;" type="text"
+                                              formControlName="matchStack{{i+1}}"
+                                              class="form-control inp-bx allownumericwithoutdecimal" [(ngModel)]="stack"
+                                              value="{{stack}}" required>
+                                            <button id="Button" type="submit" [disabled]="!serverMatchStackForm.valid"
+                                              value="Click" class="btn btn-green"><i class="fa fa-check-circle-o"
+                                                aria-hidden="true"></i> Save
+                                            </button>
+
+                                          </div>
+
+
+                                        </form>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+
+                      <table class="table no-mar" style="overflow: hidden;">
+                        <tbody>
+                          <ng-container>
+                            <div *ngIf="playerCData.superStatus!='OPEN'" class="betbat_multy_matchodds">
+                              <span>SUSPENDED</span>
+                            </div>
+
+                            <tr>
+                              <th class="com-bx casino">
+
+                                <h6>{{playerCData.name}}</h6>
+
+                                <div *ngIf="getSelectionPL(playerCData)!=0"
+                                  [ngClass]="{'green-txt-casino':getSelectionPL(playerCData)>=0,'red-txt-casino':getSelectionPL(playerCData)<0}">
+                                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                  {{getSelectionPL(playerCData) | number : '1.0-2'}}
+                                </div>
+
+                              </th>
+
+                              <td class="bg-blue mx-wd click-bx isbackclass"><a href="javascript:void(0)"
+                                  (click)="setBetBox(1,playerCData)">
+                                  <div class="casino">
+                                    <h6>
+                                      {{playerCData.back[0].price}}
+                                    </h6>
+                                    <span>{{playerCData.back[0].size}}</span>
+
+                                  </div>
+                                </a>
+                                <i
+                                  [ngClass]="{'blue-bdr casinoback':(betBoxPlayerData!=null && betBoxPlayerData.id==playerCData.id && betBoxType==1) && !this._sportService.oneClickShow}"></i>
+                              </td>
+                              <td class="bg-red mx-wd click-bx islayclass"><a href="javascript:void(0)"
+                                  (click)="setBetBox(0,playerCData)">
+                                  <div class="casino">
+                                    <h6>
+                                      {{playerCData.lay[0].price}}
+                                    </h6>
+                                    <span>{{playerCData.lay[0].size}}</span>
+
+                                  </div>
+                                </a>
+                                <i
+                                  [ngClass]="{'red-bdr casinolay':(betBoxPlayerData!=null && betBoxPlayerData.id==playerCData.id && betBoxType==0) && !this._sportService.oneClickShow}"></i>
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="betBoxPlayerData!=null && betBoxPlayerData.id==playerCData.id">
+                              <td colspan="8">
+                                <div [ngClass]="{'bg-blue':betBoxType==1,'bg-red-box':betBoxType==0}"
+                                  class="p-2 bdr-black editstakeform bet_buttons_main">
+                                  <div class="drop-panel-bx">
+                                    <ul class="d-flex flex-wrap" *ngIf="!isEditStack">
+                                      <li><strong>Odds</strong><span (click)="updateOddsValue('min')"
+                                          class="input-number-decrement">–</span>
+                                        <input class="input-number" type="text" readonly
+                                          [(ngModel)]="betBoxPlayerData.odds" min="0" max="10">
+                                        <span class="input-number-increment" (click)="updateOddsValue('max')">+</span>
+                                      </li>
+                                      <li>
+                                        <div class=" d-flex"><strong>Stake</strong>
+                                          <input type="number" class="form-control width allownumericwithdecimal"
+                                            (change)="updatePL()" [(ngModel)]="betBoxPlayerData.stack"
+                                            placeholder="0.00">
+                                        </div>
+                                      </li>
+                                      <li class="profit_bx_dv">
+                                        <strong>{{betBoxType==1 ? 'Profit' : 'Liability'}}</strong>
+                                        <span>{{getCurrentBetboxPL() | number : '1.0-2'}}</span>
+                                      </li>
+                                      <li *ngFor="let stack of serverMatchStack">
+                                        <a class="wid-70" href="javascript:void(0)"
+                                          (click)="updateStackValue(stack)"><span
+                                            class="amount-bx">+{{stack}}</span></a></li>
+                                      <li><button type="button" class="btn btn-green"
+                                          [disabled]="betBoxPlayerData.odds<=0" href="javascript:void(0)"
+                                          (click)="saveSportBetData()"><span><img src="assets/images/check-box-wht.png"
+                                              alt="Place Bet"></span>Place</button></li>
+
+                                      <li><a class="btn btn-rad edit-stake" (click)="isEditStack=true"><span><img src=""
+                                              alt=""></span>Edit Stake</a></li>
+                                    </ul>
+                                    <a class="btn btn-rad close-btn close_icon_btn" (click)="closeBetBox()"><span
+                                        class="fa fa-close"></span></a>
+
+                                    <ul class="d-flex flex-wrap" *ngIf="isEditStack">
+                                      <li>
+                                        <form [formGroup]="serverMatchStackForm" (ngSubmit)="updateServerMatchStack()">
+                                          <div class="inp-inner-bx">
+                                            <input *ngFor="let stack of serverMatchStack; let i = index;" type="text"
+                                              formControlName="matchStack{{i+1}}"
+                                              class="form-control inp-bx allownumericwithoutdecimal" [(ngModel)]="stack"
+                                              value="{{stack}}" required>
+                                            <button id="Button" type="submit" [disabled]="!serverMatchStackForm.valid"
+                                              value="Click" class="btn btn-green"><i class="fa fa-check-circle-o"
+                                                aria-hidden="true"></i> Save
+                                            </button>
+
+                                          </div>
+
+
+                                        </form>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+
+                      </table>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right_screen_main">
+    <div class="patti-main-bx mx-auto text-center mCustomScrollbar light" data-mcs-theme="minimal-dark">
+      <div class="main-drop-colps">
+        <div class="pad-2 casino">
+          <ul class="drag-list">
+
+
+            <li class="mb-3">
+              <div class="table-data-inn clearfix">
+                <div class="last-box">
+                  <span class="result-left">Last Result</span>
+                  <a href="javascript:void(0)"><span class="text-right view-right">View All</span></a>
+                </div>
+                <div class="dotes">
+                  <a *ngFor="let result of marketLast10Result; let i = index;" href="javascript:void(0)"
+                    (click)="openMatchResult(result)" [title]="'RoundID #'+result.match_id">
+                    <span
+                      [ngClass]="{'selected': (selectedResult!=null && selectedResult.match_id==result.match_id)}">{{(result.winner!=undefined && result.winner!=null)? result.winner:'NA'}}</span>
+                  </a>
+                </div>
+                <div *ngIf="selectedResult!=null" class="selected_result">
+                  <span class="title">RoundID #{{selectedResult.match_id}}</span>
+                  <a href="javascript:void(0)" (click)="closeMatchResult()"><span class="fa fa-times-circle close_btn"></span></a>
+                  <div class="player_data">
+                    <div class="player">
+                      <span *ngIf="selectedResult.playerA!=null"
+                        class="player_title">Joker</span>
+                      <div *ngIf="selectedResult.indexCard!=null && selectedResult.indexCard.length>0" class="card_data">
+                        <img src="/assets/images/cards/{{selectedResult.indexCard[0]}}.png"
+                          alt="{{selectedResult.indexCard[0]}}">
+                      </div>
+                    </div>
+
+                    <div class="player">
+                      <span *ngIf="selectedResult.playerB!=null"
+                        class="player_title">Ante</span>
+                      <div *ngIf="selectedResult.indexCard!=null && selectedResult.indexCard.length>1" class="card_data">
+                        <img src="/assets/images/cards/{{selectedResult.indexCard[1]}}.png"
+                          alt="{{selectedResult.indexCard[1]}}">
+                      </div>
+                    </div>
+
+                    <div class="player">
+                      <span *ngIf="selectedResult.playerB!=null"
+                        class="player_title">Winner</span>
+                      <div class="card_data card_data_hilow">
+                        <span>{{selectedResult.WinnerName}}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-3">
+              <div class="live-score-bx bets-expand">
+                <div class="live-inner">
+                  <h5><span class="bg-bx"> My Bets ({{MatchBetList.MatchAndBetfair?.length}}) </span> <span><a
+                        class="collapsed faq-links" data-toggle="collapse" data-parent="#accordion"
+                        href="#collapseFive8" aria-expanded="true" aria-controls="collapseFive8"><i
+                          class="fa fa-caret-down fa-2x"></i></a></span></h5>
+                </div>
+                <div id="collapseFive8"
+                  [ngClass]="{'panel-collapse collapse show':MatchBetList.MatchAndBetfair?.length >0,'panel-collapse collapse':MatchBetList.MatchAndBetfair?.length ==0}"
+                  role="tabpanel" aria-labelledby="headingFive8">
+                  <div class="match-bea-sec" *ngIf="MatchBetList.MatchAndBetfair?.length > 0 ">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="wd-5">S.N</th>
+                          <th class="wd-50">Runner</th>
+                          <th class="wd-20">Odds</th>
+                          <th class="wd-20">Stake</th>
+                          <th class="wd-30">P&amp;L </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="scr-bx">
+                    <div class="scrol-table testDiv mCustomScrollbar light" data-mcs-theme="minimal-dark">
+                      <table class="table">
+                        <tbody *ngIf="MatchBetList.MatchAndBetfair?.length > 0 ">
+                          <tr *ngFor="let list of MatchBetList.MatchAndBetfair let i = index;"
+                            [ngClass]="{'bg-blue':list.is_back==1,'bg-red-box':list.is_back==0}">
+                            <td class="wd-5">{{i+1}}</td>
+                            <td class="wd-50">
+                              <span style="font-size: 11px;">{{list.marketName}}</span> -> <b>{{list.selectionName}}</b>
+                              <p>
+                                {{list.created_at!=undefined ? (this._sportService.timeConverter(list.created_at) | date:'medium') : ''}}
+                              </p>
+                            </td>
+                            <td class="wd-20">{{list.odds}}</td>
+                            <td class="wd-20">{{ list.stack }} </td>
+                            <td class="wd-20">{{list.p_l}}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="MatchBetList.MatchAndBetfair?.length ==0 ">
+                          <tr>
+                            <td colspan="6" class="wd-50">
+                              <p class="pagddingParag">No Record Found!</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div><span class="drag-area"></span>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

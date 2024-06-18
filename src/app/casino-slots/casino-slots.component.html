@@ -1,0 +1,746 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content login-popup">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="login-main-bx-inner" [formGroup]="login_form" (ngSubmit)="login()" name="loginForm" novalidate>
+        <div class="modal-body">
+          <div class="titelModal text-center">
+            <h2>Login</h2>
+          </div>
+          <div class>
+            <label for="exampleFormControlInput1" class="form-label">User
+              ID</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="User ID"
+              formControlName="username">
+            <div class="error_txt"
+              *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+              [ngClass]="error"> Enter valid user name.</div>
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password"
+              formControlName="password">
+            <div class="error_txt"
+              *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+              [ngClass]="error"> Enter valid password.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="signBTn w-100 pt-2 pb-2" type="submit">
+            <i class="fa fa-user mr1" aria-hidden="true"></i> LOG IN
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Mobile Modal -->
+<div class="dashboard-nav">
+  <nav class="dashboard-nav-list">
+    <div class="menuHead">
+      <h4>Popular</h4>
+      <img class="menu-toggle" src="./assets/img/close_icon.png" />
+    </div>
+    <ul class="sidebar__menu">
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/inplay-matches">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/inplay.png" />
+            In-Play
+          </div>
+        </a>
+      </li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li id="menu" *ngIf="sport.sport_id!=111&&sport.sport_id!=222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="/game/{{sport.sport_id}}">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+        <li id="menu" *ngIf="sport.sport_id==222">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+
+      </ng-container>
+      <!-- <li id="menu">
+        <a id="menu-btn"
+          class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Diamond Casino
+          </div>
+        </a>
+      </li> -->
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Live Casino
+          </div>
+        </a>
+      </li>
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/aviator-icon.svg" />
+            Aviator
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            AE SEXY
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            EZUGI
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Virtual Sports
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+<!-- Mobile Modal -->
+<!-- header start -->
+<header class="header sticky-top">
+  <div class="breaking-box">
+    <div class="d-flex w-100 mr5">
+      <img src="./assets/img/voice_d.png">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseleave="this.start();">
+        <a class="h6 fw-normal mr-5" href="#" style="color: white;">Welcome TO Naikbook</a>
+      </marquee>
+    </div>
+    <div class="header-time" style="color: white;"><span>{{ time | date: 'd MMM, y hh:mm:ss a'
+        }}</span></div>
+  </div>
+  <div class="mainHead">
+    <div class="brand-logo d-flex align-items-center">
+      <button id="toggle-menu" class="me-3 active mobilemenuactiv menu-toggle">
+        <img src="./assets/img/menu-icon.png" />
+      </button>
+      <a href="/home">
+        <img src="{{adminLink}}{{sitelogo}}" alt class="dark-version-logo">
+      </a>
+    </div>
+    <div class="loginSide">
+      <button class="signBTn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-user mr1" aria-hidden="true"></i> LOG IN
+      </button>
+    </div>
+  </div>
+  <div class="menuLink">
+    <ul class="links">
+      <li><a href="/home"><img src="./assets/img/home.png" />
+          <p>Home</p>
+        </a></li>
+      <li><a href="/inplay-matches"><img src="./assets/img/inplay.png" />
+          <p>In-Play</p>
+        </a></li>
+      <ng-container *ngFor="let sport of sportsList; let i=index">
+        <li *ngIf="sport.sport_id!=111&&sport.sport_id!=222"><a href="/game/{{sport.sport_id}}"><img
+              src="{{sport.image}}" /><span id="tagLive" class="tag-live">
+              <strong></strong>0
+            </span>
+            <p>{{sport.name}}</p>
+          </a></li>
+      </ng-container>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Matka</p>
+        </a>
+      </li>
+      <!-- <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal"
+          data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" /><p>Diamond Casino</p></a>
+      </li> -->
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Live Casino</p>
+        </a>
+      </li>
+
+      <li>
+        <a class="aviator" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/aviator-icon.svg" />
+          Aviator
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>AE SEXY</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>EZUGI</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Live Casino</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+            src="./assets/img/poker.png" />
+          <p>Virtual Sports</p>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</header>
+
+<!-- Slider Start -->
+<section class="slider">
+  <div id="carouselExampleIndicators" class="carousel slide web-show" data-ride="carousel">
+    <div class="carousel-indicators">
+      <ng-container *ngFor="let bannerlist of banner; let i=index">
+        <button type="button" attr.data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}"
+          [ngClass]="{'active':i==0}"></button>
+      </ng-container>
+    </div>
+    <div class="carousel-inner">
+      <ng-container *ngFor="let bannerlist of banner; let j=index">
+        <div class="carousel-item" [ngClass]="{'active':j==0}">
+          <img src="{{bannerlist.attachment}}" class="d-block w-100 bannerStyle" alt="{{bannerlist.title}}">
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div id="carouselExampleIndicators" class="carousel slide mobile-show" data-ride="carousel">
+    <div class="carousel-indicators">
+      <ng-container *ngFor="let bannerlist of bannerMobile; let i=index">
+        <button type="button" attr.data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}"
+          [ngClass]="{'active':i==0}"></button>
+      </ng-container>
+    </div>
+    <div class="carousel-inner">
+      <ng-container *ngFor="let bannerlist of bannerMobile; let j=index">
+        <div class="carousel-item" [ngClass]="{'active':j==0}">
+          <img src="{{bannerlist.attachment}}" class="d-block w-100 bannerStyle" alt="{{bannerlist.title}}">
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
+<!-- Slider Start -->
+
+<!-- Button trigger modal -->
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #363438;">
+        <h5 class="modal-title" id="exampleModalLabel">REGISTRATION</h5>
+        <a data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></a>
+      </div>
+      <div class="modal-body modalbg">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="login-main-bx-inner" [formGroup]="register_form" (ngSubmit)="registerSave()"
+              name="registerForm" novalidate>
+              <input type="hidden" formControlName="referralid" id="referralid" aria-describedby="referralidHelp">
+              <div class="mt-2">
+                <!-- <label for="name"
+                  class="form-label">Full
+                  Name</label> -->
+                <input type="text" formControlName="name" class="form-control formsty" placeholder="Full Name" id="name"
+                  aria-describedby="nameHelp">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['name'].valid && register_form.controls['name'].touched) || (register_form.controls['name'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error"> Enter valid name.</div>
+              </div>
+              <div class="mt-2">
+                <!-- <label for="username"
+                  class="form-label">User
+                  Name</label> -->
+                <input type="text" formControlName="username" (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                  (blur)="CheckUserNameExist($event)" class="form-control formsty" placeholder="User Name" id="username"
+                  aria-describedby="usernameHelp">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['username'].valid && register_form.controls['username'].touched) || (register_form.controls['username'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error">Enter valid user name.</div>
+              </div>
+              <div class="mt-2">
+                <!-- <label for="email"
+                  class="form-label">Email
+                  address</label> -->
+                <input type="email" formControlName="email" (blur)="CheckUserNameExist($event)"
+                  class="form-control formsty" placeholder="Email" id="email" aria-describedby="emailHelp">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['email'].valid && register_form.controls['email'].touched) || (register_form.controls['email'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error">Enter valid email.</div>
+              </div>
+              <div class="mt-2">
+                <!-- <label for="phone"
+                  class="form-label">Phone
+                  Number</label> -->
+                <input type="text" (keyup)="onlyNumber($event)" formControlName="mobile" class="form-control formsty"
+                  placeholder="Phone Number" id="phone" aria-describedby="phoneHelp">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['mobile'].valid && register_form.controls['mobile'].touched) || (register_form.controls['mobile'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error">Enter valid mobile number.</div>
+                <a href="javascript:void(0);" (click)="resendOtp()" *ngIf="otpShow" class="resendotp">Resend Otp</a>
+                <div class="error_txt existnumber"></div>
+              </div>
+              <div class="mt-2" *ngIf="otpShow">
+                <input type="input" placeholder="OTP*" pattern="^0[1-9]|[1-9]\d$" maxlength="6"
+                  (keyup)="onlyNumber($event)" (keyup)="CheckValidOtp($event)" (blur)="CheckValidOtp($event)"
+                  formControlName="otp" class="form-control formsty" id="otp" autocomplete="off">
+                <!-- <div class="error_txt"
+                  *ngIf="(!register_form.controls['otp'].valid && register_form.controls['otp'].touched) || (register_form.controls['otp'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error">Enter valid otp.</div> -->
+                <div class="error_txt otpvalid"></div>
+              </div>
+              <div class="mt-2">
+                <!-- <label for="newPassword"
+                  class="form-label">Password</label> -->
+                <input type="password" formControlName="newPassword" [(ngModel)]="newPassword"
+                  class="form-control formsty" placeholder="Password" id="newPassword"
+                  aria-describedby="newPasswordHelp">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['newPassword'].valid && register_form.controls['newPassword'].touched) || (register_form.controls['newPassword'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error">Enter Password.</div>
+              </div>
+              <div class="mt-2">
+                <!-- <label for="confPassword"
+                  class="form-label">Repeat
+                  Password</label> -->
+                <input type="password" formControlName="confPassword" [(ngModel)]="confPassword"
+                  class="form-control formsty" placeholder="Repeat Password" id="confPassword"
+                  aria-describedby="confPasswordHelp">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['confPassword'].valid && register_form.controls['confPassword'].touched) || (register_form.controls['confPassword'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error">Password Mismatch.</div>
+              </div>
+              <div class="mt-2 form-check">
+                <input type="checkbox" formControlName="ageagree" name="option1" class="form-check-input" id="check1">
+                <label class="form-check-label formlabelTxt" for="exampleCheck1">I
+                  confirm that I am over 18
+                  years old and accept <a href="/page/general-terms-and-conditions">the
+                    terms and
+                    conditions*</a></label>
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['ageagree'].valid && register_form.controls['ageagree'].touched) || (register_form.controls['ageagree'].invalid && !isValidFormSubmittedR && isValidFormSubmittedR!=null)"
+                  [ngClass]="error"> Please check if you are 18+.
+                </div>
+              </div>
+              <button id="continue_btn" type="submit" class="rigisterBtn" *ngIf="isUser">Register</button>
+              <button type="button" class="rigisterBtn" *ngIf="!isUser" (click)="CheckUserMobileExist()"
+                style="margin-top: 10px;">GET OTP</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Register Modal -->
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #363438;">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <a data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></a>
+      </div>
+      <div class="modal-body modalbg">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="login-main-bx-inner" [formGroup]="login_form" (ngSubmit)="login()" name="loginForm" novalidate>
+              <div class="mt-4">
+                <label for="username" class="form-label">User
+                  Name</label>
+                <input type="email" formControlName="username" class="form-control formsty" placeholder="User Name"
+                  id="username" aria-describedby="username">
+                <div class="error_txt"
+                  *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error"> Enter valid user name.</div>
+              </div>
+              <div class="mt-4">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" formControlName="password" class="form-control formsty" placeholder="Password"
+                  id="password" aria-describedby="password">
+                <div class="error_txt"
+                  *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error"> Enter valid password.</div>
+              </div>
+              <div class="mt-4 d-flex">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+                <label id="checkboxLabel" class="form-check-label" for="exampleCheck1"> I am at least <a
+                    href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#plusmodal"> <b>18 years</b></a> of
+                  age
+                  and I have read, accept and agree to the <a href="/page/general-terms-and-conditions">Terms
+                    and Conditions</a> , <a href="/page/responsible-gaming">Responsible Gaming</a>
+                  ,<a href="https://www.gamcare.org.uk/" target="_blank">GamCare</a> ,<a
+                    href="https://www.gamblingtherapy.org/en" target="_blank">Gambling Therapy</a></label>
+              </div>
+              <button class="rigisterBtn mt-4 mb-4" type="submit" id="continue_btn">Login</button>
+              <div class="loginTxt priva_termsWrap">
+                <p>This site is protected by reCAPTCHA and the Google Privacy
+                  Polic and Terms of Service apply.</p>
+                <!-- <p><a href="javascript:void(0);">Forgot your
+                      Password</a></p> -->
+                <!-- <p>Don't have accountyet? <a href="javascript:void(0);"
+                      (click)="showModalSign()">Sign Up Here</a></p> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Login Modal -->
+<div class="modal fade" id="plusmodal" tabindex="-1" aria-labelledby="plusmodal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #363438;">
+        <h5 class="modal-title" id="exampleModalLabel">Lord999.com</h5>
+        <a data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></a>
+      </div>
+      <div class="modal-body modalbg">
+        <div class="row">
+          <div class="col-md-12">
+            <div><img src="https://wver.sprintstaticdata.com/v33/static/front/img/18plus.png"></div>
+            <p><b>Over 18s only</b> <br> <br>It is an offence for anyone under
+              the age of 18 to open an account or to gamble on Lord999.
+              Lord999
+              takes
+              its age-verification responsibilities very seriously. We carry out
+              age-verification checks on all
+              customers
+              who use payment mechanisms which are available to under 18s and
+              additionally perform random
+              age-verification
+              checks on customers using other forms of funding mechanisms. We
+              may ask for information to verify your
+              age
+              and
+              could restrict or suspend your account until your age is
+              confirmed.
+              <br> <br>PLEASE NOTE THAT ANYONE UNDER THE AGE OF 18 YEARS OLD
+              FOUND TO BE USING THIS SITE WILL HAVE ANY
+              WINNINGS
+              FORFEITED AND MAY ALSO BE REPORTED TO THE POLICE.
+              <br> <br> <b>Filtering systems</b> <br> <br>Lord999 advises and
+              encourages its customers to prevent minors from accessing gambling
+              websites.
+              <br> <br>Filtering solutions allow parents to regulate access to
+              the internet, based on chosen criteria.
+              Parents
+              can use filters to prevent their children from accessing, amongst
+              other things, gambling websites.
+              Because
+              our
+              pages are 'labelled', filtering solutions being used to prevent
+              gambling access are able to detect our
+              site
+              content, and block our pages. If you share your computer with
+              friends or family who are under the legal
+              age
+              to
+              register or bet with our site, please consider parental filtering
+              solutions such as:
+              <br> <br>Net Nanny™
+              <a href="https://www.netnanny.com" target="_blank">www.netnanny.com</a> <br> <br>CyberPatrol
+              <a href="https://www.cyberpatrol.com" target="_blank">www.cyberpatrol.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Services Start-->
+<!-- <section class="servicesSec">
+  <div class="partner-slider casinocategory owl-carousel owl-loaded owl-drag">
+    <div class="single-slider">
+      <a href="/sports">
+        <div class="service-img">
+          <img src="./assets/img/footballSport_icon.png" alt="Image">
+          <p>SPORTS</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider roulette">
+      <a href="javascript:void(0);" (click)="GetCasinoList('roulette')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/roulette.svg" alt="Image">
+          <p>ROULETTE</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider lightning">
+      <a href="javascript:void(0);" (click)="GetCasinoList('lightning')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/lightning.svg" alt="Image">
+          <p>LIGHTNING</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider live-casino">
+      <a href="javascript:void(0);" (click)="GetCasinoList('live-casino')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/live-casino.svg" alt="Image">
+          <p>LIVE CASINO</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider teen-patti">
+      <a href="javascript:void(0);" (click)="GetCasinoList('teen-patti')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/CardGames.svg" alt="Image">
+          <p>TEEN PATTI</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider andhar-bahar">
+      <a href="javascript:void(0);" (click)="GetCasinoList('andar-bahar')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/andhar-bahar.svg" alt="Image">
+          <p>ANDHAR BAHAR</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider dragon-tiger">
+      <a href="javascript:void(0);" (click)="GetCasinoList('dragon-tiger')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/Dragon.svg" alt="Image">
+          <p>DRAGON TIGER</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider baccarat">
+      <a href="javascript:void(0);" (click)="GetCasinoList('baccarat')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/baccarat.svg" alt="Image">
+          <p>BACCARAT</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider blackjack">
+      <a href="javascript:void(0);" (click)="GetCasinoList('blackjack')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/blackjack.svg" alt="Image">
+          <p>BLACK JACK</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider table-games">
+      <a href="javascript:void(0);" (click)="GetCasinoList('table-games')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/board.svg" alt="Image">
+          <p>TABLE GAME</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider poker">
+      <a href="javascript:void(0);" (click)="GetCasinoList('poker')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/poker.svg" alt="Image">
+          <p>POKER</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider holdem">
+      <a href="javascript:void(0);" (click)="GetCasinoList('holdem')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/holdem.svg" alt="Image">
+          <p>HOLD'EM</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider lottery">
+      <a href="javascript:void(0);" (click)="GetCasinoList('lottery')">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/lottery.svg" alt="Image">
+          <p>LOTTERY GAMES</p>
+        </div>
+      </a>
+    </div>
+    <div class="single-slider">
+      <a href="/sports">
+        <div class="service-img">
+          <img src="./assets/img/casinogameimage/roulette.svg"
+            alt="Image">
+          <p>PROVIDER</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section> -->
+<!-- Services End -->
+
+<section class="bg-lightTheme">
+  <div class="content-container ng-star-inserted">
+    <ngx-loading [show]="loading" [config]="{backdropBorderRadius: '3px' }"></ngx-loading>
+    <ng-container *ngFor="let casinoData of casinoGames; let i=index">
+      <div class="card-wrapper ng-star-inserted">
+        <div class="card-container">
+          <div class="img-container">
+            <img alt src="{{casinoData.Url}}">
+          </div>
+          <div class="game-desc">
+            <div class="details">
+              <span>{{casinoData.category}}</span>
+            </div>
+            <p>{{casinoData.game_name}}</p>
+          </div>
+          <div class="detail-content">
+            <button class="btn m-auto d-block demo ng-star-inserted" data-bs-toggle="modal"
+              data-bs-target="#loginModal">
+              Login</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>
+<section class="footerSec">
+  <div class="row_support">
+    <div class="col-md-12">
+      <div class="suport_24_7">
+        <a href="javascript:void(0)"><span class="twentY_four">24</span><span class="x_textlass">X</span><span
+            class="seven_text">7</span><span class="support_t">Support</span></a>
+
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row_support">
+      <div class="col-md-12">
+        <div class="footer-menu">
+          <ul>
+            <li><a href="/page/about-us" class target="_blank">About
+                Us</a></li>
+            <li><a href="/page/general-terms-and-conditions" class target="_blank">Terms
+                and Conditions</a></li>
+            <li><a href="/page/responsible-gaming" class target="_blank">Responsible Gaming</a></li> <!---->
+          </ul>
+        </div>
+        <!-- <div class="numbersPH">
+        +447403777777 /+447365278899
+      </div> -->
+      </div>
+    </div>
+    <!-- footer start -->
+    <div class="footer">
+      <div class="secure_safeRow">
+        <div class="secure-logo">
+          <div class="secure_safeCol1">
+            <img src="./assets/images/ssl_secure.png" class="img-fluid" alt="ssl_secure">
+          </div>
+          <div class="secure_safeCol2">
+            <h6>100% SAFE</h6>
+            <p>Protected connection and encrypted data.</p>
+          </div>
+        </div>
+        <div class="eightenplus">
+          <img src="./assets/images/footer_img1.jpg" alt="footer_img1">
+        </div>
+      </div>
+
+      <!-- <div class="eightenplus social">
+        <a href="javascript:void(0);" target="_blank"><img
+            src="./assets/images/whatsapp-green.png" alt="WhatsApp"></a>
+        <a href="javascript:void(0)" target="_blank"><img
+            src="./assets/images/telegram-blue.png" alt="Telegram"></a>
+        <a
+          href="javascript:void(0)"
+          target="_blank"><img src="./assets/images/instagram.png"
+            alt="Instagram"></a>
+      </div> -->
+      <div class="disclamer">
+        © Copyright {{ time | date:'y' }} Magesticcasino All Rights Reserved.
+      </div>
+    </div>
+    <!-- ffoter end -->
+  </div>
+</section>
+
+<section class="bFooter">
+  <div class="bottom-sticky">
+    <div class="navigation">
+      <ul class="listWrap">
+        <li class="list blt active">
+          <span class="mobile-btn">
+            <a href="/home">
+              <img src="./assets/img/home.svg" alt="Image" />
+              <p>Home</p>
+            </a>
+          </span>
+        </li>
+        <li class="list">
+          <span class="mobile-btn">
+            <a href="/inplay-matches">
+              <img src="./assets/img/inplay.svg" alt="Image" />
+              <p>InPlay</p>
+            </a>
+          </span>
+        </li>
+        <li class="list">
+          <span class="mobile-btn">
+            <a href="/casino">
+              <img src="./assets/img/mini_games.gif" alt="Image" />
+              <p>Casino</p>
+            </a>
+          </span>
+        </li>
+        <li class="list brt">
+          <span class="mobile-btn menu-toggle">
+            <img src="./assets/img/menu.svg" alt="Image" />
+            <p>Menu</p>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>

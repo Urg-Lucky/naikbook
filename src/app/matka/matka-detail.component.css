@@ -1,0 +1,594 @@
+.matkadetail .matkadetail_header {
+  background-color: #f9d40a;
+  color: #fff;
+  float: left;
+  width: 100%;
+  margin-left: 0%;
+  margin-top: 0px;
+  border-radius: 0px;
+  padding: 8px 0;
+}
+
+.matkadetail_header h5 {
+  margin-bottom: 0px;
+  width: 50%;
+  float: left;
+  font-size: 15px;
+  font-weight: 601;
+  padding: 3px 0px 3px 5px;
+}
+
+.matkadetail_header h5:nth-child(2) {
+  font-weight: 400;
+  text-align: right;
+  padding: 3px 5px 3px 0px;
+}
+
+.matkadetail_tabs {
+  float: left;
+  width: 98%;
+  margin-left: 1%;
+  margin-top: 10px;
+  border: 0px solid;
+}
+
+.matkadetail_tabs_item {
+  float: left;
+  text-align: center;
+  width: 50%;
+}
+
+.matkadetail_tabs_item a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 5px 5px 3px 5px;
+  background: #f9d40a;
+  border: 0px;
+}
+
+.matkadetail_tabs_item a h6.tab_title {
+  font-size: 15px;
+  font-weight: 601;
+  margin-bottom: 3px;
+}
+
+.matkadetail_tabs_item a h6.tab_subtitle {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+
+.matkadetail_tabs_item a.active {
+  background-color: #f9d40a;
+  color: #000;
+  font-weight: 601;
+}
+
+.matkadetail_tabs_content {
+  float: left;
+  width: 100%;
+  margin-left: 0%;
+  margin-top: 10px;
+  /* overflow: hidden;
+    height: 84%; */
+}
+
+.haroof_min_mx_bet {
+  float: left;
+  width: 35%;
+  margin-left: 2%;
+}
+
+.haroof_min_mx_bet div {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.haroof_min_mx_bet div h5 {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 401;
+  margin-bottom: 0px;
+}
+
+.haroof_min_mx_bet div h5:last-child {
+  font-weight: 601;
+}
+
+.jodi_other_bets_btns {
+  display: flex;
+  float: right;
+  margin-top: 7px;
+  margin-right: 10px;
+}
+
+.jodi_other_bets_btns h5 {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  font-size: 14px;
+  margin-bottom: 0px;
+  padding: 6px 12px 6px 12px;
+  border-radius: 5px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.jodi_other_bets_btns h5.jodi_range {
+  color: #ffffff;
+  background-color: #427401;
+  border-color: #427401;
+}
+
+.jodi_other_bets_btns h5.jodi_crossing {
+  color: #ffffff;
+  background-color: #d02727;
+  border-color: #d02727;
+}
+
+.haroof_selections {
+  float: left;
+  width: 100%;
+  background: #10122e;
+  padding: 10px 4px 14px 4px;
+  margin-top: 10px;
+  /* overflow-y: auto;
+    max-height: 73%; */
+}
+
+.haroof_selections_close,
+.haroof_selections_open {
+  float: left;
+  width: 100%;
+}
+
+.haroof_selections_open {
+  margin-top: 0px;
+}
+
+.haroof_selections_item {
+  float: left;
+  width: 10%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.haroof_selections_item h5 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 1px;
+}
+
+.haroof_selections_item input {
+  width: 95%;
+}
+
+.haroof_selections_item input:focus {
+  outline-width: 0px;
+}
+
+.haroof_bets_btn {
+  float: right;
+  margin-top: 35px;
+  display: flex;
+}
+
+.haroof_total_amount {
+  float: left;
+  margin-top: 14px;
+  width: 50%;
+}
+
+.haroof_total_amount h5.haroof_total_amount_title {
+  font-size: 17px;
+  margin-bottom: 2px;
+  font-weight: 500;
+  color: #000;
+}
+
+.haroof_total_amount h5.haroof_total_amount_value {
+  font-size: 21px;
+  margin-bottom: 2px;
+  font-weight: 601;
+  background-color: #cccccc;
+  border: 1px solid #000;
+  text-align: center;
+  padding: 5px 0 5px 0;
+  height: 35px;
+  width: 40%;
+  color: #000;
+}
+
+.haroof_bets_btn h5 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.haroof_bets_btn h5.haroof_add_bet {
+  background-color: #427401;
+  margin-right: 20px;
+}
+
+.haroof_bets_btn h5.haroof_clear_bet {
+  background-color: #d02727;
+}
+
+.jodi_popup_container {
+  float: left;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.matkadetail_localbet {
+  float: left;
+  width: 100%;
+}
+
+.matkadetail_localbet_header {
+  background-color: #f9d40a;
+  color: #000000;
+  float: left;
+  width: 100%;
+  border-radius: 0px;
+  padding: 10px;
+}
+
+.matkadetail_localbet_header h5 {
+  float: left;
+  font-size: 15px;
+  font-weight: 601;
+  margin-bottom: 0px;
+  margin-top: 3px;
+}
+
+.matkadetail_localbet_header a {
+  color: #000;
+  float: right;
+  margin-right: 5px;
+  transition: transform 0.2s linear;
+  transform: rotate(180deg);
+  transform-origin: 50% 10px;
+}
+
+.matkadetail_localbet_header a.collapsed {
+  transform: rotate(0deg);
+  transform-origin: 50% 10px;
+}
+
+.matkadetail_localbet_header span {
+  width: 20px;
+  height: 17px;
+  text-align: center;
+  margin-top: 0px;
+  font-size: 22px !important;
+}
+
+.matkadetail_localbet_data {
+  float: left;
+  width: 100%;
+}
+
+.localbet_data_nodata {
+  width: 100%;
+  background: #fff;
+  float: left;
+}
+
+.localbet_data_nodata h5 {
+  font-size: 13px;
+  margin-bottom: 0px;
+  width: 100%;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  color: #0000009f;
+}
+
+.localbet_data_header {
+  width: 100%;
+  display: flex;
+  background: #b5b5b5;
+  float: left;
+}
+
+.localbet_data_header h5 {
+  font-size: 13px;
+  margin-bottom: 0px;
+  width: 24.2%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.localbet_data_header h5:last-child {
+  border-right: 0px solid;
+}
+
+.localbet_data_detail {
+  width: 100%;
+  display: flex;
+  background: #fff;
+  float: left;
+}
+
+.middive {
+  float: left;
+  width: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+}
+
+.localbet_data_detail h5 {
+  font-size: 15px;
+  margin-bottom: 0px;
+  width: 25%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  border-top: 1px solid #00000026;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display: grid;
+  align-items: center;
+  float: left;
+  color: #000;
+}
+
+.localbet_data_detail h5:last-child {
+  border-right: 0px solid;
+  cursor: pointer;
+  color: #ff0000;
+  font-size: 22px;
+}
+
+.localbet_data_detail_total {
+  width: 100%;
+  display: flex;
+  background: #fff;
+  float: left;
+}
+
+.localbet_data_detail_total h5 {
+  font-size: 16px;
+  font-weight: 601;
+  margin-bottom: 0px;
+  width: 25%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  border-top: 1px solid #00000026;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: grid;
+  align-items: center;
+  float: left;
+}
+
+.localbet_data_detail_total h5:nth-child(1) {
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  background-size: 400%;
+  animation: glowing 20s linear infinite;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* @-webkit-keyframes bounce {
+    to { -webkit-transform: scale(1.2); }
+  }
+  @-moz-keyframes bounce {
+    to { -moz-transform: scale(1.2); }
+  }
+  @keyframes bounce {
+    to { transform: scale(1.2); }
+  } */
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.localbet_data_detail_total h5:nth-child(2),
+.localbet_data_detail_total h5:nth-child(3) {
+  background-color: #fdba06;
+}
+
+.localbet_data_detail_total h5:last-child {
+  border-right: 0px solid;
+  background-color: #d02727;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.placedbet_data_detail_total {
+  width: 100%;
+  display: flex;
+  background: #fff;
+  float: left;
+}
+
+.placedbet_data_detail_total h5 {
+  font-size: 16px;
+  font-weight: 601;
+  margin-bottom: 0px;
+  width: 25%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  border-top: 1px solid #00000026;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: grid;
+  align-items: center;
+  float: left;
+}
+
+.placedbet_data_detail_total h5:nth-child(1) {
+  background-color: #427401;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.placedbet_data_detail_total h5:nth-child(2),
+.placedbet_data_detail_total h5:nth-child(3) {
+  background-color: #fdba06;
+}
+
+.placedbet_data_detail_total h5:last-child {
+  border-right: 0px solid;
+  background-color: #d02727;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.placedbet_data_detail_total h5 {
+  font-size: 16px;
+  font-weight: 601;
+  margin-bottom: 0px;
+  width: 34%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  border-top: 1px solid #00000026;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: grid;
+  align-items: center;
+  float: left;
+}
+
+.matkadetail_placedbet {
+  float: left;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.matkadetail_placedbet_header {
+  background-color: #f9d40a;
+  color: #000000;
+  float: left;
+  width: 100%;
+  border-radius: 0px;
+  padding: 7px;
+}
+
+.matkadetail_placedbet_header h5 {
+  float: left;
+  font-size: 15px;
+  font-weight: 601;
+  margin-bottom: 0px;
+  margin-top: 3px;
+}
+
+.matkadetail_placedbet_header a {
+  color: #000;
+  float: right;
+  margin-right: 5px;
+  transition: transform 0.2s linear;
+  transform: rotate(180deg);
+  transform-origin: 50% 10px;
+}
+
+.matkadetail_placedbet_header a.collapsed {
+  transform: rotate(0deg);
+  transform-origin: 50% 10px;
+}
+
+.matkadetail_placedbet_header span {
+  width: 20px;
+  height: 17px;
+  text-align: center;
+  margin-top: 0px;
+  font-size: 22px !important;
+}
+
+.matkadetail_placedbet_data {
+  float: left;
+  width: 100%;
+}
+
+.placedbet_data_nodata {
+  width: 100%;
+  background: #fff;
+  float: left;
+}
+
+.placedbet_data_nodata h5 {
+  font-size: 13px;
+  margin-bottom: 0px;
+  width: 100%;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  color: #0000009f;
+}
+
+.placedbet_data_header {
+  width: 100%;
+  display: flex;
+  background: #b5b5b5;
+  float: left;
+}
+
+.placedbet_data_header h5 {
+  font-size: 13px;
+  margin-bottom: 0px;
+  width: 33%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.placedbet_data_header h5:last-child {
+  border-right: 0px solid;
+}
+
+.placedbet_data_detail {
+  width: 100%;
+  display: flex;
+  background: #fff;
+  float: left;
+}
+
+.placedbet_data_detail h5 {
+  font-size: 15px;
+  margin-bottom: 0px;
+  width: 33%;
+  text-align: center;
+  border-right: 1px solid #00000026;
+  border-top: 1px solid #00000026;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display: grid;
+  align-items: center;
+  float: left;
+  color: #000;
+}
+
+.placedbet_data_detail h5:last-child {
+  border-right: 0px solid;
+}

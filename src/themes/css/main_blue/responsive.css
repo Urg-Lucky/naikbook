@@ -1,0 +1,690 @@
+@media screen and (max-width: 1025px) {
+    header {
+        height: 70px;
+    }
+    .profile-bx a {
+        margin-right: 7px;
+    }
+    .name-amount span {
+        font-size: 11px;
+    }
+    .name-amount {
+        margin-right: 6px;
+    }
+    .name-amount h5 {
+        font-size: 13px;
+        line-height: 8px;
+    }
+    .head-menu-bx {
+        padding-right: 7px;
+    }
+    .head-menu-bx::before {
+        border-top: 35px solid #000000;
+    }
+    .custom-select-trigger {
+        padding: 0 16px 0 11px;
+        font-size: 11px;
+        line-height: 33px;
+        width: 130px;
+    }
+    .custom-select-trigger:after {
+        width: 7px;
+        height: 7px;
+        right: 6px;
+        margin-top: -2px;
+    }
+    .custom-option {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    .head-menu-bx ul.oneclick-div {
+        width: calc(100% - 268px) !important;
+    }
+    .head-menu-bx ul.marque-slide li {
+        font-size: 14px;
+        padding: 8px 0 0;
+    }
+    .head-menu-bx ul {
+        width: 130px !important;
+    }
+    .head-menu-bx ul.onclickbar {
+        width: 127px !important;
+    }
+    .head-menu-bx ul.onclickbar .btn-dark {
+        padding: 5% 0px 0px 12%;
+        width: 135px;
+    }
+
+    .btn-dark {
+        font-size: 12px;
+    }
+
+    .right-menu-bx li .form-group {
+        margin: 0 0 0 10px;
+    }
+
+    .profile-bx .profile-detail {
+        top: 35px;
+        right: 8px;
+        width: 220px;
+    }
+    .profile-list li {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    .profile-list li a img {
+        margin-right: 4px;
+        width: 18px;
+    }
+    .logou-bx .btn.btn-red {
+        font-size: 12px;
+        padding: 4px;
+    }
+    .btn.btn-red img {
+        width: 14px;
+    }
+
+    .sort-by-bx,
+     .sidenav2 ul li.match_heading {
+        font-size: 12px;
+    }
+
+    .sort-by-bx::after,
+     .sidenav2 ul li.match_heading:after {
+        border-top: 26px solid #4b5a6a;
+    }
+    ul.my-tree li a {
+        padding: 6px 5px;
+        font-size: 12px;
+    }
+    ul.my-tree li a img {
+        width: 17px;
+        margin-right: 8px;
+    }
+    .sort-by-bx img,
+     .match_heading img {
+        height: 19px;
+    }
+    .sidenav2 ul li.back_heading {
+        padding: 3px 4px 4px 8px;
+        font-size: 11px;
+    }
+    .sidenav2 ul li.sidebar-dropdown a {
+        font-size: 12px;
+    }
+    .sidebar-dropdown .badge {
+        min-width: 15px;
+        min-height: 15px;
+        line-height: 10px;
+        font-size: 10px;
+    }
+    .sidenav2 ul li.sidebar-dropdown .sidebar-submenu ul li a {
+        font-size: 11px;
+    }
+    .all-category-bx .nav-tabs>li {
+        font-size: 14px;
+    }
+    .all-category-bx .nav>li>a>img {
+        max-width: 24px;
+    }
+    .inplay-bx {
+        font-size: 12px;
+    }
+    .inplay-bx span img {
+        max-width: 18px;
+    }
+    .bg-bx {
+        padding: 3px 5px;
+        font-size: 12px;
+    }
+    .view_all_matchs_btn {
+        font-size: 10px;
+    }
+    .wd-bx .bg-bx::after {
+        border-top: 22px solid transparent;
+    }
+    .table-data-inn .table tbody th {
+        font-size: 12px;
+    }
+    .table-data-inn .table td {
+        width: 8.2%;
+        height: 37px;
+    }
+    .wd-13 {
+        width: 16.4%;
+        font-size: 12px;
+    }
+    .mx-wd h6 {
+        font-size: 11px;
+        font-weight: 600;
+    }
+    .mx-wd span {
+        font-size: 8px;
+    }
+    .HorseId .table .match_name_td {
+        height: 37px;
+    }
+    .table-data-inn .table tbody th .time-time {
+        font-size: 9px;
+    }
+    .bg-black-bx .betbat {
+        height: 37px;
+        width: 49%;
+        left: 51%;
+    }
+    .bg-black-bx .betbat_multy_matchodds {
+        width: 49%;
+        left: 51%;
+    }
+    .table td.no-match-fount-txt,
+     .no-match-fount-txt {
+        font-size: 12px !important;
+        height: auto;
+    }
+    .team-time-bx {
+        padding: 3px 2px;
+        font-size: 13px;
+        min-height: 22px;
+    }
+    .team-time-bx span a img {
+        width: 17px;
+    }
+    .time-top-bx {
+        margin-left: 10px;
+        font-size: 11px;
+        line-height: 17px;
+    }
+    .com-bx h6 {
+        font-size: 12px;
+    }
+    .green-txt {
+        font-size: 10px;
+    }
+    .green-txt {
+        font-size: 10px;
+    }
+    .red-txt {
+        font-size: 10px;
+    }
+    .drop-panel-bx strong {
+        font-size: 11px;
+        margin-right: 3px;
+    }
+    .bet_buttons_main .flex-wrap li.profit_bx_dv span {
+        font-size: 11px;
+    }
+
+    .drag-list .drag-area {
+        width: 18px;
+        height: 18px;
+        top: 4px;
+    }
+
+    .bets-expand a.faq-links {
+        right: 18px;
+    }
+
+    .fa-2x,
+     .fa-chevron-circle-up,
+      .fa-chevron-circle-down {
+        font-size: 13px !important;
+    }
+
+    .bdr-black {
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+        padding-bottom: 2px !important;
+    }
+
+    .input-number-decrement,
+     .input-number-increment {
+        width: 19px;
+        line-height: 20px;
+        height: 19px;
+    }
+
+    .input-number,
+     .input-number-decrement, 
+     .input-number-increment{
+        height: 20px;
+        font-size: 11px;
+    }
+
+    .width {
+        width: 50px;
+    }
+
+    .all-category-bx .card li .width.form-control {
+        font-size: 11px;
+        line-height: 17px;
+    }
+
+    .drop-panel-bx strong {
+        line-height: 20px;
+    }
+
+    .all-category-bx .card li a.wid-70 {
+        min-width: 35px;
+    }
+
+    .all-category-bx .card li .amount-bx {
+        font-size: 11px;
+        line-height: 14px;
+    }
+
+    .bet_buttons_main .flex-wrap li:nth-child(10), 
+    .bet_buttons_main .flex-wrap li:nth-child(11) {
+        margin: 0px;
+        margin-right: 2px;
+        margin-top: 0px;
+        margin-bottom: 4px;
+    }
+
+    .all-category-bx .card li .btn {
+        font-size: 11px;
+        line-height: 20px;
+    }
+
+    .btn.btn-green span img {
+        max-width: 12px;
+    }
+    .wd_26_8 {
+        font-size: 12px;
+    }
+
+    .towcol a.faq-links {
+        right: 18px;
+    }
+
+    .bet-col a.faq-links {
+        right: 0px;
+    }
+
+    .title-bet {
+        font-size: 9px;
+    }
+
+    a.faq-links {
+        margin: 2px 5px 0 0;
+    }
+
+    .table-data-inn .table tbody th.com-bx {
+        line-height: 19px;
+    }
+
+    .bet-col .com-bx h6 {
+        line-height: 10px;
+        font-size: 11px;
+    }
+    .green-txt-betfairmarket {
+        font-size: 11px;
+    }
+
+    .red-txt i,
+     .green-txt i,
+      .green-txt-betfairmarket i,
+       .red-txt-betfairmarket i {
+        font-size: 13px;
+    }
+    .marketrate .market-txt {
+        font-size: 8px;
+    }
+
+    .live-score-bx {
+        margin-bottom: 6px;
+    }
+
+    .live-inner h5 {
+        font-size: 14px;
+    }
+
+    .live-inner .bg-bx {
+        font-size: 12px;
+    }
+    .live-inner .bg-bx::after {
+        right: -17px;
+        top: 0px;
+        border-top: 9px solid transparent;
+        border-bottom: 15px solid transparent;
+    }
+
+    .live-inner .drag-area {
+        top: 2px;
+    }
+
+    .match-bea-sec .table {
+        font-size: 10px;
+    }
+
+    .scrol-table .table tbody tr td {
+        font-size: 10px;
+    }
+
+    .scrol-table .table tbody tr td p {
+        font-size: 8px;
+    }
+    .pagddingParag {
+        font-size: 12px !important;
+    }
+
+    .colm_bet_6 .drop-panel-bx .close-btn {
+        right: 1px;
+        width: 18px;
+        height: 18px;
+        top: 1px;
+        font-size: 10px;
+        line-height: 13px;
+        padding: 0px;
+    }
+
+    .colm_bet_6 .new-btn-set li {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 21px;
+    }
+
+    .colm_bet_6 .new-btn-set li strong {
+        line-height: 20px;
+        font-size: 8px;
+        margin-right: 2px;
+    }
+    .colm_bet_6 .new-btn-set li span.input-number-decrement, 
+    .colm_bet_6 .new-btn-set li span.input-number-increment {
+        width: 15px;
+        line-height: 19px;
+    }
+    .colm_bet_6 .new-btn-set li input.input-number {
+        font-size: 9px;
+        width: 31px;
+    }
+
+    .colm_bet_6 .new-btn-set li:nth-child(2) {
+        margin-left: 4px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .colm_bet_6 .new-btn-set li:nth-child(3) {
+        margin: 0px;
+        margin-left: 0px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    .colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(3) {
+        width: 25%;
+    }
+
+    .drop-panel-bx span.pro-txt {
+        font-size: 11px;
+        line-height: 20px;
+    }
+
+    .colm_bet_6 .new-btn-set li:nth-child(4),
+     .colm_bet_6 .new-btn-set li:nth-child(5),
+      .colm_bet_6 .new-btn-set li:nth-child(6),
+       .colm_bet_6 .new-btn-set li:nth-child(7),
+        .colm_bet_6 .new-btn-set li:nth-child(8),
+         .colm_bet_6 .new-btn-set li:nth-child(9) {
+        margin-right: 3px;
+        margin-top: 4px;
+    }
+
+    .colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(4),.colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(5),.colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(6),.colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(7),.colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(8),.colm_bet_6 .new-btn-set.new-btn-set-fancy li:nth-child(9) {
+        margin-right: 3px;
+      }
+
+    .colm_bet_6 .new-btn-set li a.wid-70 {
+        min-width: 30px;
+    }
+
+    .colm_bet_6 .new-btn-set li a span.amount-bx {
+        font-size: 9px;
+        line-height: 13px;
+    }
+
+    .colm_bet_6 .new-btn-set li .btn {
+        font-size: 9px;
+        line-height: 17px;
+        padding: 0px 5px;
+        margin-right: 2px;
+    }
+
+    .colm_bet_6 .new-btn-set li button.btn.btn-green span img {
+        max-width: 9px;
+    }
+    .bet-head img {
+        width: 17px;
+    }
+    .bet-head {
+        font-size: 13px;
+        padding: 4px 0px 4px 5px;
+    }
+    .bet-head::after {
+        border-top: 27px solid #4b5a6a;
+    }
+    .calc-wrap label {
+        font-size: 11px;
+        margin-bottom: 0px;
+    }
+    .calc-wrap .form-control {
+        height: 29px;
+        line-height: 29px;
+        font-size: 12px;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height: 29px;
+        line-height: 18px;
+    }
+    .bet-cent li a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    .my-bet-tab2.table td,
+     .my-bet-tab2.table th {
+        padding: 4px 5px;
+        font-size: 10px;
+    }
+    .my-bet-tab2.table td {
+        padding: 1px 5px;
+    }
+    .proLseriesname {
+        font-size: 9px !important;
+    }
+    .proLmatchname {
+        font-size: 10px;
+    }
+    .proLmatchdate {
+        font-size: 9px !important;
+    }
+    .my-bet-tabl.table td,
+     .my-bet-tabl.table th {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+    .tb_rightnew tr td:nth-of-type(1) {
+        width: 41px;
+    }
+    .tb_rightnew tr td:nth-of-type(2) {
+        font-size: 9px;
+    }
+    .my-bet-tabl.table td {
+        padding: 1px 4px;
+    }
+    .change_password_pop_up.active {
+        max-width: 248px;
+    }
+    .change_password_pop_up .closebtn {
+        left: -30px;
+        width: 30px;
+        height: 30px;
+        font-size: 27px;
+        line-height: 30px;
+    }
+    .change_password_pop_up .form_panel {
+        padding: 5px 10px;
+    }
+    .change_password_pop_up label {
+        font-size: 13px;
+        margin-bottom: 0px;
+    }
+
+    .change_password_pop_up input.form-control {
+        padding: 4px;
+        font-size: 13px;
+        line-height: 22px;
+    }
+    .change_password_pop_up div.form-group {
+        margin-bottom: 4px;
+    }
+    .change_password_pop_up button.btn {
+        font-size: 13px;
+        padding: 4px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .casino .table-data-inn .table th.casino_backlay {
+        font-size: 12px;
+    }
+    .casino .drag-list .last-box span.result-left {
+        padding: 2px 5px !important;
+        font-size: 12px !important;
+    }
+    .casino .drag-list .last-box span.view-right {
+        font-size: 9px !important;
+        margin-top: 2px;
+    }
+    .last-box span.result-left::after {
+        border-top: 12px solid transparent;
+        border-bottom: 10px solid transparent;
+    }
+    .casino .play-one, 
+    .casino .play-two,
+     .casino .play-three,
+      .casino .play-four {
+        position: absolute !important;
+        top: 3px !important;
+        left: 3px !important;
+    }
+    .casino .play-two {
+        top: 56px !important;
+    }
+    .casino .play-two.poker{
+        top: 3px !important;
+        left: 64px !important;
+    }
+    .casino .play-three.poker{
+        top: 56px !important;
+    }
+    .casino .play-two.card32{
+        top: 41px !important;
+    }
+    .casino .play-three.card32{
+        top: 79px !important;
+    }
+    .casino .play-four.card32{
+        top: 116px !important;
+    }
+    .casino .play-three.ab{
+        right: 5px !important;
+        left: unset !important;
+    }
+    .play-one h5, 
+    .play-two h5,
+     .play-three h5,
+      .play-four h5 {
+        font-size: 12px !important;
+        margin-bottom: 2px !important;
+    }
+    .play-one img,
+     .play-two img, 
+     .play-three img,
+      .play-four img {
+        height: 32px !important;
+    }
+    .play-one span, 
+    .play-two span, 
+    .play-three span,
+     .play-four span {
+        font-size: 20px !important;
+        line-height: 36px !important;
+    }
+    .play-one span.totalnumber,
+     .play-two span.totalnumber,
+      .play-three span.totalnumber,
+       .play-four span.totalnumber {
+        font-size: 12px !important;
+        min-width: 24px !important;
+        height: 24px !important;
+        line-height: 24px !important;
+    }
+
+    .flip-clock-wrapper ul {
+        width: 51px !important;
+        height: 73px !important;
+        font-size: 35px !important;
+        line-height: 77px !important;
+    }
+    .flip-clock-wrapper ul li {
+        line-height: 77px !important;
+    }
+    .flip-clock-wrapper ul li a div div.inn {
+        font-size: 55px !important;
+    }
+    .casinotv_reload {
+        font-size: 12px;
+        bottom: 24%;
+    }
+    .dotes span {
+        width: 22px;
+        height: 22px;
+        line-height: 23px;
+        font-size: 11px;
+        margin: 0 2px;
+    }
+    .selected_result span.title {
+        margin-left: 6px;
+        font-size: 12px;
+    }
+    .selected_result .close_btn {
+        top: 3px;
+        right: 6px;
+        font-size: 18px;
+    }
+    .selected_result .player_data {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+    .selected_result span.player_title {
+        font-size: 11px;
+    }
+    .selected_result .player .card_data {
+        margin-top: 7px;
+    }
+    .selected_result .player img {
+        height: 36px;
+    }
+    .selected_result .player .card_data_hilow {
+        line-height: 18px;
+        font-size: 13px;
+    }
+
+    .table-data-inn .table td .runs_pnl_table th {
+        line-height: 16px;
+        font-size: 10px;
+    }
+    .table-data-inn .table td .runs_pnl_table td {
+        font-size: 10px;
+    }
+    .table td.valign_md .marketrate .market-txt.cricket_fancy {
+        font-size: 6px;
+    }
+
+    .termsrules .rulesmodaldialog{
+        width: 66%;
+        margin-left: 17%;
+    }
+    .termsrules .rulestitle{
+        left: 17%;
+        right: 17%;
+    }
+}

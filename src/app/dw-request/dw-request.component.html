@@ -1,0 +1,156 @@
+<div class="mainDetailView">
+  <div class="accountST">
+    <div class="datePicker">
+      <div class="row">
+
+        <div class="col-sm-2 col-6 pr-0 mb-3">
+          <input class="form-control" type="text" id="fromDate" name="fromDate"
+            [value]="fromDateValue">
+        </div>
+        <div class="col-sm-2 col-6 pr-0 mb-3">
+          <input class="form-control" type="text" id="toDate" name="toDate"
+            [value]="toDateValue">
+        </div>
+        <div class="col-sm-2 col-4 pr-0 mb-3">
+          <select id="type" name="selectedType" [(ngModel)]="selectedType"
+            (change)="page=1;this._sessionService.selectedType=selectedType"
+            class="custom-select2 sources form-control">
+            <option value="AL"> All </option>
+            <option value="D"> Deposit </option>
+            <option value="W"> Withdrawal </option>
+          </select>
+        </div>
+        <div class="col-sm-2 col-4 pr-0 mb-3">
+          <select id="status" name="selectedStatus"
+            [(ngModel)]="selectedStatus"
+            (change)="page=1;this._sessionService.selectedStatus=selectedStatus"
+            class="custom-select2 sources form-control">
+            <option value="AL"> All </option>
+            <option value="P"> Pending </option>
+            <option value="C"> Cancelled </option>
+            <option value="A"> Approved </option>
+            <option value="D"> Decline </option>
+          </select>
+        </div>
+        <div class="col-sm-2 col-4 pr-0 mb-3">
+          <button type="button" class="btn btn-primary"
+            (click)="goToSerch()">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive tableMV">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">S No.</th>
+            <th scope="col">Account Detail</th>
+            <th scope="col">Payment</th>
+            <th scope="col">Status</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="this._sessionService.DWStatement.length>0">
+          <ng-container
+            *ngFor="let list of this._sessionService.DWStatement let i = index;">
+            <tr>
+              <td>{{i+1}}</td>
+              <td>
+                <span>Account Holder Name : {{list.accountHolder}}<br>
+                  Account Number : {{list.accountNumber}} <br> IFSC Code
+                  : {{list.ifscCode}} <br></span>
+              </td>
+              <td>{{list.paymentMethod}}</td>
+              <td>
+                {{list.status=='P' ? 'Pending' : ''}}
+                <a href="javascript:void(0)"
+                  *ngIf="list.status=='P'"
+                  (click)="cancelId=list.id;isCancelShow=i;"
+                  data-toggle="collapse" aria-expanded="true"
+                  class="btn_click_top btn-gren">Cancel & Reason</a>
+
+                {{list.status=='C' ? 'Cancelled' :
+                list.status=='D'?'Decline':
+                list.status=='A' ? 'Approved' : ''}}
+                <!-- <span *ngIf="list.status!='P'"
+                      [ngClass]="{'btn_click_top btn-gren':(list.status=='C' || list.status=='D')}"
+                      [ngStyle]="{'cursor':(list.status=='C' || list.status=='D')? 'pointer' : ''}"
+                      (click)="(list.status=='C' || list.status=='D') ? isCancelShow=i : isCancelShow=-1">Reason</span> -->
+              </td>
+              <td>{{list.reason}}</td>
+              <td>{{list.type}}</td>
+              <td
+                [ngClass]="list.amount > 0 ? 'green' : 'red'">{{list.amount
+                | number:'.2'}}</td>
+              <td>{{list.created_at!=undefined ?
+                (this._sportService.timeConverter(list.created_at) |
+                date:'medium')
+                : ''}}</td>
+              <!-- <td><span *ngIf="list.attachment!=''"><img width="50px"
+                        height="auto"
+                        src="https://easybet24.com/uploads{{list.attachment}}"></span></td> -->
+              <!--<td [ngClass]= "list.available_balance > 0 ? 'green' : 'red'" > {{list.available_balance}}</td> =='D' ? 'Deposit' : 'Withdraw'-->
+            </tr>
+            <tr *ngIf="isCancelShow==i">
+              <td colspan="8"
+                style="padding: 0px; background-color: transparent;">
+                <div class="cancelPopup table_popup1">
+                  <div *ngIf="list.status=='C' || list.status=='D'">
+                    <div class="form-group">
+                      <textarea class="form-control message-input"
+                        readonly
+                        disabled>{{list.reason}}</textarea>
+                    </div>
+                    <button _ngcontent-c2 class="btn btn-danger"
+                      (click)="isCancelShow=-1"
+                      style="margin-left:5px"
+                      data-toggle="collapse" type="button"
+                      aria-expanded="true">Cancel</button>
+                  </div>
+                  <div *ngIf="list.status=='P'">
+                    <form [formGroup]="cancel_form"
+                      (ngSubmit)="CancelRequest()" name="cancel_form"
+                      novalidate>
+
+                      <div class="form-group">
+
+                        <textarea class="form-control message-input"
+                          formControlName="description"
+                          placeholder="Enter reason"></textarea>
+                        <div style="color:red;"
+                          *ngIf="(!cancel_form.controls['description'].valid && cancel_form.controls['description'].touched) || (cancel_form.controls['description'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                          [ngClass]="error">
+
+                          Enter reason.
+
+                        </div>
+                      </div>
+
+                      <button type="submit"
+                        class="btn btn-default submit"><i
+                          class="fa fa-paper-plane-o"
+                          aria-hidden="true"></i> Submit</button>
+                      <button _ngcontent-c2 class="btn btn-danger"
+                        (click)="isCancelShow=-1"
+                        style="margin-left:5px"
+                        data-toggle="collapse" type="button"
+                        aria-expanded="true">Cancel</button>
+                    </form>
+                  </div>
+
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <tbody *ngIf="this._sessionService.DWStatement.length == 0">
+          <tr>
+            <td colspan="8" class="no-match-fount-txt">No Record Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

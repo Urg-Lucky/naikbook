@@ -1,0 +1,47 @@
+<div class="modal fade show modal_container" role="dialog">
+  <div class="modal-dialog dialog_container">
+    <div class="modal-content dialog_content_container"
+      [ngClass]="{'dialogclose':isDialogClose}">
+      <div class="modal-header dialog_header_container">
+        <h4 class="modal-title">Number</h4>
+        <button type="button" class="close"
+          (click)="callDialogClose()">×</button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="onSubmit()">
+
+          <div class="row">
+            <div class="form-group col-md-6 col-sm-6 col-xs-6 form_item">
+              <label>Number</label>
+              <span class="mandatory"> *</span>
+              <div>
+                <input class="form-control" type="text"
+                  (input)="userInputData.number=$event.target.value"
+                  (keypress)="allowedNumberOnly($event)">
+              </div>
+              <span class="mandatory_error">{{userInputData.numberError}}</span>
+            </div>
+            <div class="form-group col-md-6 col-sm-6 col-xs-6 form_item">
+              <label>Amount</label>
+              <span class="mandatory"> *</span>
+              <div>
+                <input class="form-control" type="text"
+                  value="{{userInputData.amount}}"
+                  (input)="userInputData.amount=$event.target.value"
+                  (keypress)="allowedNumberOnly($event)">
+              </div>
+              <span class="mandatory_error">{{userInputData.amountError}}</span>
+            </div>
+          </div>
+          <div class="clearfix">&nbsp;</div>
+          <button type="button" class="form_cancel_btn"
+            (click)="callDialogClose()">Close</button>
+          <button type="submit" class="form_submit_btn">Submit</button>
+          <div class="clearfix">&nbsp;</div>
+        </form>
+      </div>
+      <!-- <ngx-loading [show]="this.sportServiceNumber._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading> -->
+    </div>
+  </div>
+</div>

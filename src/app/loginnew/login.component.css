@@ -1,0 +1,756 @@
+.landing_bg {
+    background-color: #1c1d23;
+}
+
+/****************COLOR THEME********************/
+
+.homemain .bg-color {
+    background-color: #1c1d23;
+}
+
+.homemain .gold-color {
+    color: gold;
+}
+
+.homemain .bg-red {
+    background-color: #ac202b;
+}
+
+.homemain .theme_color {
+    background: #ab202a;
+}
+
+.homemain .bg-light-blue {
+    background: #e5f9fb;
+}
+
+.homemain .bg-blue {
+    background: #a2d5ee;
+}
+
+.homemain .bg-red {
+    background: #f8c0c1;
+}
+
+.homemain .bg-light-red {
+    background: #fde3e3;
+}
+
+.homemain .bg-lightBlue {
+    background-color: #aae0fa;
+}
+
+.homemain .bg-pink {
+    background-color: #f8c0c1;
+}
+
+/***************HEDAER***********************/
+
+.homemain .logo {
+    margin-top: 10px;
+}
+
+.homemain .logo img {
+    width: 60px;
+}
+
+.homemain .landing_right_top .navbar {
+    float: right;
+    padding-right: 5px;
+}
+
+.homemain .landing_right_top .navbar .btn_login {
+    background: #f9d74f;
+    font-weight: bold;
+    color: #000;
+}
+
+.homemain .login-set {
+    position: relative;
+    float: right;
+    margin-top: 8px;
+    align-items: baseline;
+}
+
+.homemain .login-text {
+    font-weight: bold;
+    float: right;
+    margin: 0px 0px 3px 0px;
+    font-size: 14px;
+}
+
+.homemain .marquee_bx .marquee {
+    margin-top: 5px;
+}
+
+.homemain .header_landing {
+    position: relative;
+}
+
+.homemain .live_mtch_tab {
+    padding: 8px 10px;
+    font-size: 20px;
+    position: absolute;
+    margin: 0 auto;
+    width: 180px;
+    left: 0;
+    right: 0;
+    color: #fff;
+    top: 40px;
+}
+
+.homemain .live_mtch_tab button {
+    color: #fff;
+    background: #1c1d23;
+    border: 0;
+    padding: 3px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.homemain .live_mtch_tab button.active {
+    border-bottom: 2px solid #f9d74f;
+    color: #f9d74f;
+}
+
+.homemain .live_mtch_tab button:focus {
+    outline: none;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.homemain .error_txt {
+    font-size: 12px;
+    color: red;
+    margin-top: 3px;
+    min-height: 17px;
+}
+
+.homemain .signup_data {
+    position: fixed;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.homemain .signup_data .login-main-bx {
+    padding: 25px;
+    width: 35%;
+    margin-top: 19px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.42) 0px 2px 20px 5px;
+    max-width: 35%;
+    position: absolute;
+    right: 50%;
+    top: 5%;
+    transform: translateX(-50%);
+}
+
+.homemain .signup_data .lab-user-signup {
+    color: #000000;
+    text-transform: unset;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.homemain .signup_data .input-bx-signup {
+    font-size: 15px;
+    width: 100%;
+    border: 0px none;
+    padding: 10px 10px;
+    caret-color: #000000;
+    background-color: #e9e9e9;
+    text-transform: none;
+    border-radius: 0px;
+    color: #000;
+}
+
+.homemain .signup_data .btn-in-bx-signup {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 601;
+    background-color: #f9d74f;
+    background-image: linear-gradient(to right top, #af9a44, #f9d74f);
+    color: #111111;
+    padding: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: 0px none;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+/******************Middle Section***************************/
+
+.homemain .center_content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.homemain .tab_content_left {
+    float: left;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 76%;
+    flex: 0 0 76%;
+    max-width: 76%;
+    height: auto;
+}
+
+.homemain .left_sidemenu {
+    float: left;
+    background-color: #111;
+    padding-left: 10px;
+    color: white;
+    width: 25%;
+    height: auto;
+}
+
+.homemain .middle_data {
+    float: left;
+    width: 75%;
+    height: auto;
+}
+
+.homemain .right_side_list {
+    float: left;
+    background-color: #111;
+    color: white;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 24%;
+    flex: 0 0 24%;
+    max-width: 24%;
+    height: auto;
+}
+
+.homemain .right_side_list .live_deal {
+    border: 2px solid #ab202a;
+}
+
+.homemain .right_side_list .match_ad_list {
+    padding: 10px 10px 20px 15px;
+    display: grid;
+    background: #585858;
+    border-bottom: 1px solid #b3afaf;
+}
+
+.homemain .right_side_list .match_ad_list a {
+    color: #fff;
+}
+
+.homemain .right_side_list .match_ad_list a h4 {
+    font-size: 16px;
+}
+
+.homemain .right_side_list .match_ad_list .mtch_img {
+    float: left;
+    margin-right: 15px;
+    width: 30%;
+}
+
+.homemain .right_side_list .match_ad_list .ad_txt {
+    font-size: 12px;
+}
+
+/***************LEFT SIDE MENUS************************/
+
+.homemain .menu-list {
+    background-color: #111;
+    margin: 0px;
+    padding: 0px;
+}
+
+.homemain .menu-list li {
+    display: block;
+    padding: 8px 10px;
+    width: 100%;
+    text-align: left;
+    transition: 0.3s;
+    font-size: 16px;
+    border-bottom: 1px solid #3c3a3a;
+    position: relative;
+}
+
+.homemain .menu-list li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.homemain .menu-list li .m_name {
+    display: block;
+    color: #ffffff;
+}
+
+.homemain .menu-list li .m_name.active {
+    color: #f9d74f;
+}
+
+.homemain .menu-list li .fa-star {
+    position: absolute;
+    color: #f8cf2c;
+    right: 10px;
+    top: 25%;
+}
+
+.homemain .menu-list li a:hover {
+    color: #f8cf2c;
+}
+
+.homemain .menu-list li.active {
+    color: gold;
+}
+
+/***************END************************/
+
+/*********MATCH BOX LIST************/
+
+
+.homemain .match_list_bx {
+    margin-bottom: 15px;
+}
+
+.homemain .match_heading {
+    color: #fff;
+    text-align: left;
+    width: 200px;
+    height: 35px;
+    border-right: 35px solid transparent;
+    border-bottom: 34px solid #ac202b;
+    margin-bottom: 2px;
+}
+
+.homemain .match_heading .m_name {
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+.homemain .table-data .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    background: #fff;
+}
+
+.homemain .table-data .table th {
+    padding: 0px;
+    border-top: none;
+}
+
+.homemain .table-data .table thead th {
+    border-bottom: 0px solid #dee2e6;
+    padding: 3px 0;
+    width: 11%;
+}
+.homemain .table-data .table thead th:nth-child(1) {
+    width:auto;
+}
+
+.homemain .table-data .table td {
+    padding: 0px;
+    border-top: none;
+    width: 11%;
+}
+
+
+.homemain .table-data .table td.nomatchfound {
+    padding: 10px;
+    color: #0000008c;
+    font-size: 13px;
+}
+
+.homemain .table-data .table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.homemain .table-data .table td .click-bx {
+    cursor: pointer;
+    text-align: center;
+    padding: 0px;
+    border-left: 1px solid #e0e0e0;
+}
+
+.homemain .table-data .table td .click-bx h6 {
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.homemain .table-data .table td .click-bx span {
+    display: block;
+    font-size: 11px;
+    margin-top: 4px;
+    padding-bottom: 8px;
+}
+
+.homemain .time-bx {
+    padding: 9px 2px;
+    text-align: center;
+    background: none;
+    margin-bottom: 0;
+    height: 100%;
+    cursor: pointer;
+    color: #09a41d;
+    border-radius: 2px;
+    font-size: 14px;
+    margin: 1px 3px;
+}
+
+.homemain .time-bx.f-bx img {
+    max-width: 20px;
+}
+
+.homemain .table-data .table tbody th {
+    line-height: 2;
+    font-weight: 500;
+    padding: 3px 5px;
+    vertical-align: top;
+    font-size: 14px;
+    max-width: 1px;
+    width: 67%;
+}
+
+.homemain .table-data .table tbody th img {
+    vertical-align: baseline;
+}
+
+.homemain .table-data .table tbody th span {
+    font-size: 12px;
+    margin-left: 20px;
+    font-weight: 500;
+    float: right;
+    margin-top: 0;
+}
+
+.homemain .thead-red {
+    background: #ab202a;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.homemain .md-text {
+    padding-left: 10px;
+}
+
+.homemain .match_name_td {
+    position: relative;
+}
+
+.homemain .table-data .table tbody th span.heart-bx {
+    float: left;
+    font-size: 16px;
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.homemain .table-data .match_name_td a {
+    padding-bottom: 5px;
+    color: #000;
+}
+
+.homemain .table-data .table tbody th .time-time {
+    font-size: 11px;
+    position: absolute;
+    width: 100%;
+    left: 5px;
+    bottom: -15px;
+    color: #0000009c;
+}
+
+.homemain .table-data .table .inpay_link {
+    color: #26a608;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+/*********END*********/
+
+/*************FOOTER******************/
+
+.landing_bg footer {
+    background-color: #303032;
+    padding-top: 50px;
+    font-size: 14px;
+}
+
+.landing_bg footer h6 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #797979;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.landing_bg footer ul li a {
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.landing_bg footer ul li a:hover {
+    color: gold;
+    text-decoration: none;
+}
+
+.landing_bg .media-icon ul {
+    color: #ccc;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+.landing_bg .hr_line {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0
+}
+
+.landing_bg .f_about_company {
+    margin: 20px 0;
+    border-top: #ccc solid 1px;
+    padding-top: 25px;
+}
+
+.landing_bg .f_about_company p {
+    margin-bottom: 7px;
+}
+
+.landing_bg .f_about_company .f_logo {
+    float: left;
+    margin-right: 20px;
+    height: 150px;
+}
+
+.landing_bg .InPlay_tab .middle_data {
+    width: 99%;
+}
+
+.landing_bg .InPlay_bx_sec .pd0 {
+    padding: 0px;
+}
+
+.landing_bg .getliveSport {}
+
+.landing_bg .getliveSport .frame {
+    height: 80px;
+    line-height: 60px;
+    overflow: hidden;
+}
+
+.landing_bg .getliveSport .frame ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 12px;
+}
+
+.landing_bg .getliveSport .frame ul li {
+    float: left;
+    width: 120px;
+    height: 100%;
+    margin: 0 1px 0 0;
+    padding: 0 1px;
+    background: #333;
+    color: #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+
+.landing_bg .getliveSport .frame ul li a span {
+    height: 30px;
+    display: inline-block;
+    width: 60px;
+}
+
+.landing_bg .getliveSport .frame ul li.active {
+    color: #fff;
+    background: #a03232;
+}
+
+.landing_bg .getliveSport .BarButton_Text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: inherit;
+    font-size: 12px;
+    line-height: 17px;
+    padding-top: 6px;
+    text-align: center;
+    white-space: nowrap;
+    bottom: 8px;
+    position: relative;
+}
+
+.landing_bg .getliveSport .scrollbar {
+    margin: 0 0 1em 0;
+    height: 2px;
+    background: #ccc;
+    line-height: 0;
+}
+
+.landing_bg .getliveSport .scrollbar .handle {
+    width: 100px;
+    height: 100%;
+    background: #292a33;
+    cursor: pointer;
+}
+
+.landing_bg .getliveSport .scrollbar .handle .mousearea {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+.landing_bg .getliveSport .pages {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    text-align: center;
+}
+
+.landing_bg .getliveSport .pages li {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 0 4px;
+    text-indent: -999px;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2);
+}
+
+.landing_bg .getliveSport .pages li:hover {
+    background: #aaa;
+}
+
+.landing_bg .getliveSport .pages li.active {
+    background: #666;
+}
+
+.landing_bg .getliveSport .controls {
+    margin: 0px 0;
+    text-align: center;
+}
+
+.landing_bg .getliveSport .controls .btn {
+    position: absolute;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0;
+}
+
+.landing_bg .getliveSport .controls .btn i {
+    font-size: 30px;
+    color: #f9d74f;
+}
+
+.landing_bg .getliveSport .controls .prevPage {
+    left: 10px;
+    top: 0;
+}
+
+.landing_bg .getliveSport .controls .nextPage {
+    right: 15px;
+    top: 0;
+}
+
+.landing_bg .getliveSport .oneperframe {
+    height: 300px;
+    line-height: 300px;
+}
+
+.landing_bg .getliveSport .oneperframe ul li {
+    width: 1140px;
+}
+
+.landing_bg .getliveSport .oneperframe ul li.active {
+    background: #333;
+}
+
+.landing_bg .getliveSport .crazy ul li:nth-child(2n) {
+    width: 100px;
+    margin: 0 4px 0 20px;
+}
+
+.landing_bg .getliveSport .crazy ul li:nth-child(3n) {
+    width: 300px;
+    margin: 0 10px 0 5px;
+}
+
+.landing_bg .getliveSport .crazy ul li:nth-child(4n) {
+    width: 400px;
+    margin: 0 30px 0 2px;
+}
+
+/****************END*******************/
+
+@media screen and (max-width: 767px) {
+    .homemain .landing_right_top .navbar {}
+    .homemain .landing_right_top .navbar .navbar-toggler {
+        background: #d9af09;
+        position: absolute;
+        right: 0px;
+        top: 5px;
+    }
+    .homemain .landing_right_top .navbar-collapse {
+        margin-top: 15px;
+        padding: 20px;
+        position: fixed;
+        right: 0;
+        min-width: 280px;
+        max-width: 300px;
+        top: 35px;
+        z-index: 9999;
+        background: #ac202b;
+    }
+    .homemain .login-set {
+        float: left;
+    }
+    .homemain .tab_content_left {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .homemain .left_sidemenu {
+        width: 100%;
+    }
+    .homemain .middle_data {
+        width: 100%;
+    }
+    .homemain .right_side_list {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .homemain .match_list_bx {
+        overflow-y: scroll;
+    }
+    .homemain .login-set .form-control {
+        margin-top: 5px;
+    }
+    .homemain .theme_color {
+        padding-bottom: 10px;
+    }
+    .homemain .live_mtch_tab {
+        text-align: right;
+    }
+}

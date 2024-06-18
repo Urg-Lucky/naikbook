@@ -1,0 +1,123 @@
+@keyframes slide-in{
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-out{
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.modal_container{
+    display: block;
+    /* position: absolute; */
+    padding-top: 12px;
+    background-color: #000000a6;
+}
+
+.dialog_container{
+    margin: 0 auto;
+}
+
+.dialog_content_container{
+    background-color:#9d0701 !important;
+    width: 100%;
+    animation-name: slide-in;
+}
+
+.dialog_content_container.dialogclose{
+    background-color: #cacaca;
+    width: 100%;
+    animation-name: slide-out;
+}
+
+.dialog_header_container{
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 2px solid #ffffff;
+}
+.dialog_header_container h4{
+    color: #fff;
+    font-weight: 601;
+    font-size: 20px;
+}
+.dialog_header_container button{
+    padding: 7px;
+    opacity: 1.0;
+    color: #fff;
+    margin-right: -2rem;
+    font-size: 32px;
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
+form .form_item label{
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+form .form_item span.mandatory{
+    color: #ff0000;
+}
+
+form button.form_submit_btn{
+    color: #ffffff;
+    background-color: #161637;
+    outline: 0px auto -webkit-focus-ring-color;
+    border: 0px;
+    border-radius: 4px;
+    min-width: 92px;
+    min-height: 32px;
+    margin-left: 0px;
+    float: left;
+    cursor: pointer;
+}
+
+form button.form_cancel_btn{
+    color: #000000;
+    background-color:#ffc107;
+    outline: 0px auto -webkit-focus-ring-color;
+    border: 0px;
+    border-radius: 4px;
+    min-width: 92px;
+    min-height: 32px;
+    margin-left: 15px;
+    float: left;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #161637;
+    border-color: #161637;
+}
+.signupformlabel {
+    font-weight: bold !important;
+    margin-top: 11px;
+    color: #fff;
+}
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.titli_inner_it .no_btns a {
+    width: 52px !important;
+    margin-right: 7px;
+}
+.titli_inner_it .no_btns a:nth-child(4) {
+    margin-right: 0px;
+}
+.titli_inner_it .no_btns a:nth-child(5) {
+    margin-top: 7px;
+}
+.mandatory { color: #fff;}

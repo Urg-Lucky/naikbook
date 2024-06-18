@@ -1,0 +1,213 @@
+/* Portrait and Landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    /* .mb-app-containerChildren {
+        width: calc(100% - 228px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 69%;
+    }
+
+    .QuickLinks-module_main {
+        width: 295px;
+    }
+}
+
+/* Portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+    /* .mb-app-containerChildren {
+        width: calc(100% - 228px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 69%;
+    }
+
+    .QuickLinks-module_main {
+        width: 169px;
+    }
+
+    .QuickLinkModule {
+        min-height: 95px;
+    }
+
+    .QuickLinkTitle {
+        height: auto;
+        padding: 4px 7px;
+    }
+
+    .EventTime-module_closed,
+    .EventTime-module_inPlay,
+    .EventTime-module_loading,
+    .EventTime-module_suspended,
+    .EventTime-module_time {
+        height: 37px;
+        width: 61px;
+    }
+
+    .EventTime-module_time span:first-child {
+        font-size: 10px;
+    }
+
+    .EventTime-module_time span:last-child {
+        font-size: 10px;
+        font-weight: 400;
+    }
+
+    .Event-module__participantName___JX7AR {
+        font-size: 11px;
+    }
+
+    .Runner-module__main {
+        font-size: 10px;
+    }
+
+    .PricesMain li {
+        height: auto;
+    }
+
+    .PriceAmount {
+        font-size: 8px;
+    }
+}
+
+/* Landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+    /* .mb-app-containerChildren {
+        width: calc(100% - 228px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 69%;
+    }
+
+    .QuickLinks-module_main {
+        width: 217px;
+    }
+
+    .QuickLinkModule {
+        min-height: 109px;
+    }
+
+    .QuickLinkTitle {
+        height: auto;
+        padding: 4px 7px;
+        font-size: 11px;
+    }
+
+    .EventTime-module_closed,
+    .EventTime-module_inPlay,
+    .EventTime-module_loading,
+    .EventTime-module_suspended,
+    .EventTime-module_time {
+        height: 37px;
+        width: 61px;
+    }
+
+    .EventTime-module_time span:first-child {
+        font-size: 10px;
+    }
+
+    .EventTime-module_time span:last-child {
+        font-size: 10px;
+        font-weight: 400;
+    }
+
+    .Event-module__participantName___JX7AR {
+        font-size: 11px;
+    }
+
+    .Runner-module__main {
+        font-size: 10px;
+    }
+
+    .PricesMain li {
+        height: auto;
+    }
+
+    .PriceAmount {
+        font-size: 8px;
+    }
+}
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+
+    /* .mb-app-containerChildren {
+        width: calc(100% - 234px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 75.6%;
+    }
+
+    .QuickLinks-module_main {
+        width: 295px;
+    }
+
+    .left_menu_main {
+        overflow-y: scroll;
+        height: 600px;
+        overflow-x: hidden;
+    }
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+
+    /* .mb-app-containerChildren {
+        width: calc(100% - 228px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 75%;
+    }
+
+    .QuickLinks-module_main {
+        width: 295px;
+    }
+}
+
+@media screen and (min-device-width: 1500px) and (max-device-width: 1720px) {
+    /* .mb-app-containerChildren {
+        width: calc(100% - 256px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 76%;
+    }
+}
+
+@media screen and (min-device-width: 1560px) and (max-device-width: 1760px) {
+    /* .mb-app-containerChildren {
+        width: calc(100% - 298px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 76.3%;
+    }
+}
+
+@media screen and (min-device-width: 1560.30px) and (max-device-width: 1600px) {
+    /* .mb-app-containerChildren {
+        width: calc(100% - 252px);
+        float: right;
+    } */
+
+    .Homepage-module-content {
+        width: 77.8%;
+    }
+
+    .left_menu_main {
+        overflow-y: scroll;
+        height: 655px;
+        overflow-x: hidden;
+    }
+}

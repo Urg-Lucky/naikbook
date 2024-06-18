@@ -1,0 +1,47 @@
+<div class="modal fade show modal_container" role="dialog">
+  <div class="modal-dialog dialog_container">
+    <div class="modal-content dialog_content_container" [ngClass]="{'dialogclose':isDialogClose}">
+      <div class="modal-header dialog_header_container">
+        <h4 class="modal-title">Place Bet</h4>
+        <div class="form-group" style="font-size: 15px;font-weight: bold;color: #fff; line-height: 22px;margin-right: 22%">
+          <span id="min_bet_amount_res">Min Bet Amount: {{ selectionData.minBetAmount }}</span><br/>
+          <span id="max_bet_amount_res">Max Bet Amount: {{ selectionData.maxBetAmount }}</span>
+        </div>
+        <button type="button" class="close" (click)="callDialogClose()">×</button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()">
+          <div class="container1">
+            <div class="titli_inner_it">
+              <div class="row">
+                <div class="col-md-5 col-sm-3 col-12" style="text-align: center;">
+                  <img src="/assets/images/titli_photos/{{selectionData.SelectionName}}" class="selected_image_show_in_popup" style="width: 120px; height: 120px" />
+                </div>
+                <div class="col-md-7 col-sm-9 col-12">  
+                  <div class="no_btns">                    
+                    <a href="javascript:void(0);" *ngFor="let stacks of titliStack" class="btn btn-primary btn-sm click_shortkey">
+                      <span (click)="storeTitliValue(stacks)">{{ stacks }}</span></a>                              
+                  </div>
+                  
+                </div> 
+              </div>                   
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <label class="control-label signupformlabel" for="first_town">Amount:</label> <span class="mandatory">*</span>
+              <input type="text" (input)="(userInputData.amount=$event.target.value);" class="form-control" value="{{userInputData.amount == 0 ? '' : userInputData.amount }}"id="titli_number_amt" name="titli_number_amt" readonly>
+            </div>  
+           
+          </div>
+          <span class="mandatory_error">{{userInputData.amountError}}</span>
+          <div class="clearfix">&nbsp;</div>
+          <button type="submit" class="form_submit_btn">Submit</button>
+          <button type="button" class="form_cancel_btn" (click)="callDialogClose()">Close</button>
+          <div class="clearfix">&nbsp;</div>
+        </form>
+      </div>
+      <ngx-loading [show]="this._sportService._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+    </div>
+  </div>
+</div>

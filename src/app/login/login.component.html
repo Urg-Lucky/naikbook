@@ -1,0 +1,62 @@
+<section class="loginpage clearfix">
+  <div class="LoginLeft clearfix">
+    <div class="logo">
+      <a href="/"><img src="./assets/images/logo.png" alt /></a>
+    </div>
+    <div class="LoginSlider clearfix">
+      <div class="slider login-slider">
+        <div class="slick-slide slick-current slick-active" data-slick-index="1"
+          aria-hidden="false" style="width: 401px;" tabindex="-1" role="option"
+          aria-describedby="slick-slide01">Manage <br>every bet <br>at one stop.</div>
+      </div>
+    </div>
+    <div class="loginFooter">
+      Copyright 2023, All Rights Reserved. | <a href="#">Terms of Service</a>
+    </div>
+  </div>
+  <div class="LoginRight clearfix">
+    <div class="m-logo">
+      <a href="/"><img src="./assets/images/logo.webp" alt /></a>
+    </div>
+    <div class="loginCard clearfix">
+      <h2>Login</h2>
+      <p>Login your account to Employees Dashboard</p>
+      <form class="login-main-bx-inner" [formGroup]="login_form"
+        (ngSubmit)="login()" name="loginForm" novalidate>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" spellcheck="false" formControlName="username"
+            autocomplete="username" value class="form-control"
+            placeholder="info@bigbet.com">
+          <div class="error_txt"
+            *ngIf="(!login_form.controls['username'].valid && login_form.controls['username'].touched) || (login_form.controls['username'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+            [ngClass]="error">Enter valid email.</div>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" placeholder="**********"
+            placeholder="Password" formControlName="password"
+            autocomplete="current-password" id="show_hide_password">
+          <div class="show_password">
+            <a href="javascript:void(0);" class="Passcode-visible"
+              (click)="showHidePassword()"><i class="fa fa-eye-slash"
+                aria-hidden="true"></i></a></div>
+          <div class="error_txt"
+            *ngIf="(!login_form.controls['password'].valid && login_form.controls['password'].touched) || (login_form.controls['password'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+            [ngClass]="error">Enter valid password.</div>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck"
+            name="example1" checked>
+          <label class="custom-control-label" for="customCheck">Remember me</label>
+        </div>
+        <div class="w-100 mt-3">
+          <button type="submit" class="btn btn-login">Login</button>
+        </div>
+      </form>
+      <ngx-loading [show]="loading" [config]="{backdropBorderRadius:'3px'}"></ngx-loading>
+    </div>
+  </div>
+</section>

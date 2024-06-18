@@ -1,0 +1,539 @@
+<div class="inmatchwrapp d-flex">
+  <div class="tabwrapp inmatchlft">
+    <div class="breaking-box">
+      <img src="./assets/img/voice_d.png">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();"
+        onmouseleave="this.start();">
+        <a class="h6 fw-normal" href="javascript:void(0);">{{siteMessage}}</a>
+      </marquee>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="allmatch"
+        role="tabpanel" aria-labelledby="allmatch-tab">
+        <section class="sportGame"
+          *ngIf="cricketBetMatchMarkets.runner_json!=undefined && cricketBetMatchMarkets.runner_json!=null">
+          <div class="countryname">
+            <div class="matchDtxt">
+              <h5>{{cricketBetMatchMarkets.name.toString().split(" v ")[0]}}</h5>
+              <span>
+                <em>Vs</em>
+              </span>
+              <h5>{{cricketBetMatchMarkets.name.toString().split(" v ")[1]}}</h5>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="fancy-market">
+
+      <div class="tab-content" id="myTabContent"
+        *ngIf="cricketBetMatchMarkets.runner_json!=undefined && cricketBetMatchMarkets.runner_json!=null && fancyList.length>0">
+
+        <div class="tab-pane fade show active" id="allFancy" role="tabpanel"
+          aria-labelledby="allFancy-tab" tabindex="0">
+          <div class="mt-4">
+            <ng-container *ngFor="let fancy of fancyList; let i=index">
+              <div class="matchBox" *ngIf="i==0">
+                <div class="row">
+                  <div
+                    class="col-lg-8 col-md-8 col-6 align-self-center">
+                    <!-- <div class="fancy-body">
+                      <div class="row w-200 mrl-0">
+                        <label class="col-12 p-0 m-0">
+                          <b>Stake Limit : </b>
+                          <span class="mr-2"> {{fancyList[0].minStack}} -
+                            {{fancyList[0].maxStack}} </span>
+                        </label>
+                      </div>
+                      <div _class="row w-200 mrl-0">
+                        <label class="col-12 p-0 m-0">
+                          <b>Max Profit
+                            &nbsp;&nbsp;:</b>
+                          <span class="mr-2"> {{fancyList[0].maxProfit}}</span>
+                        </label>
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-6">
+                    <div
+                      class="matchodds justify-content-end fancyodss">
+                      <div class="oddstxtgray">
+                        <h6>NO</h6>
+                      </div>
+                      <div class="oddstxt">
+                        <h6>YES</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="matchBox">
+                <div class="row">
+                  <div
+                    class="col-lg-4 col-md-6 col-5 align-self-center">
+                    <div class="teamName mobcenter">
+                      <a href="javascript:void(0)" class="mobcenter mdetail">
+                        <p>{{fancy.RunnerName}}</p>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-1 col-md-6 col-1 mobile-show tooltipSec">
+                    <div class="infoicon ">
+                      <div class="popover-body">
+                        <div class="row w-200"
+                          style="margin-left: 0px; margin-right: 0px;">
+                          <label class="col-12 p-0 m-0">
+                            <b>STAKE LIMIT :</b>
+                            <span class="mr-2">
+                              {{fancy.minStack}} -
+                              {{fancy.maxStack}}
+                            </span>
+                          </label>
+                        </div>
+                        <div class="row w-200"
+                          style="margin-left: 0px; margin-right: 0px;">
+                          <label class="col-12 p-0 m-0">
+                            <b>MAX PROFIT &nbsp;&nbsp;:</b>
+                            <span class="mr-2">
+                              {{fancy.maxProfit}}</span>
+                          </label>
+                        </div>
+                      </div>
+                      <a class="tooltipOP" href="javascript:void(0)"><i
+                          class="fa fa-info"></i></a>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-6 col-6">
+                    <div
+                      class="matchodds justify-content-end">
+                      <div
+                        class="fancy-body d-none d-xl-block">
+                        <div class="row w-200 mrl-0">
+                          <label
+                            class="col-12 p-0 m-0">
+                            <b>Stake Limit : </b>
+                            <span class="mr-2"> {{fancy.minStack}}
+                              - {{fancy.maxStack}} </span>
+                          </label>
+                        </div>
+                        <div _class="row w-200 mrl-0">
+                          <label
+                            class="col-12 p-0 m-0">
+                            <b>Max Profit
+                              &nbsp;&nbsp;:</b>
+                            <span class="mr-2">
+                              {{fancy.maxProfit}}</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="bidtable d-lx-block">
+                        <a *ngIf="fancy.scorePostion!=null"
+                          href="javascript:void(0)" data-bs-toggle="modal"
+                          data-bs-target="#exampleModalMK"
+                          (click)="(showScorePosition=(showScorePosition==fancy.SelectionId?-1:fancy.SelectionId))"><i
+                            class="fa fa-table"></i></a>
+                      </div>
+                      <div class="fancyodss justify-content-end">
+                        <div
+                          *ngIf="fancy.inplayStatus=='CLOSE' || fancy.inplayStatus=='SUSPENDED' || fancy.adminMessage!='' || fancy.IsBetAllow=='N' || fancy.inplayStatus!=''|| !isBetAllowPopular(fancy)"
+                          class="ball-start-overly session_detsil"
+                          [ngClass]="{'session_detsil_withoutmarketinfo':this._sessionService.showMarketInfo}">
+                          <span>{{fancy.adminMessage!=''?
+                            fancy.adminMessage :
+                            (fancy.inplayStatus=='CLOSE' ||
+                            fancy.inplayStatus=='SUSPENDED'
+                            )?'SUSPENDED': (fancy.IsBetAllow=='N')?'Bet locked':
+                            (!isBetAllowPopular(fancy))?fancy.remainTime:
+                            fancy.inplayStatus}}</span>
+                        </div>
+                        <div class="oddstxtgray"
+                          (click)="setBetBoxForSession('lay',fancy,betfair);isSessionBet=i">
+                          <em>{{fancy.LayPrice1==""?"--":fancy.LayPrice1|number:'1.0-0'}}
+                          </em>
+                          <span>[{{fancy.LaySize1==""?"--":fancy.LaySize1}}]</span>
+                        </div>
+                        <div class="oddstxt bidboxOP"
+                          (click)="setBetBoxForSession('back',fancy,betfair);isSessionBet=i">
+                          <em>{{fancy.BackPrice1==""?"--":fancy.BackPrice1|number:'1.0-0'}}
+                          </em>
+                          <span>[{{fancy.BackSize1==""?"--":fancy.BackSize1}}]</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row bgfirstBDbox"
+                  *ngIf="(fancy.isBackBox==1 || fancy.isLayBox==1) && isSessionBet==i && !this._sportService.oneClickShow && fancy.inplayStatus!='SUSPENDED'"
+                  [ngClass]="{'bg-blue-box':fancy.isBackBox==1,'bg-red-box':fancy.isLayBox==1}">
+                  <ngx-loading [show]="this._sportService._loading"
+                    [config]="{backdropBorderRadius:'3px' }"></ngx-loading>
+
+                  <div class="offset-lg-6 col-lg-6 col-md-12">
+
+                    <div class="bidbox" *ngIf="!isEditStack">
+                      <div class="bitplace">
+                        <div class="all__match__counter">
+                          <button (click)="updateOdds('min',fancy)">-</button>
+                          <input type="text" readonly [(ngModel)]="fancy.odds"
+                            min="0" max="10">
+                          <button (click)="updateOdds('max',fancy)">+</button>
+                        </div>
+                        <div class="all__match__counter">
+                          <button (click)="updateRate('min',fancy)">-</button>
+                          <input type="text" class="allownumericwithdecimal"
+                            (change)="updatePL(fancy)"
+                            (keypress)="updatePL(fancy)"
+                            (keyup)="updatePL(fancy)"
+                            (keydown)="updatePL(fancy)"
+                            [(ngModel)]="fancy.stack"
+                            placeholder="0.00">
+                          <button (click)="updateRate('max',fancy)">+</button>
+                        </div>
+                      </div>
+                      <div class="bidBTN" *ngIf="!isSessionEditStack">
+                        <ng-container *ngFor="let stack of matchStack;">
+                          <button class="btn btn-danger bidbb"
+                            (click)="updateStack(stack,fancy)">{{stack}}</button>
+                        </ng-container>
+
+                      </div>
+                      <div class="bottomBTN">
+                        <button type="button"
+                          class="btn btn-secondary btnbottom"
+                          (click)="fancy.isBackBox=0;fancy.isbackClass='';fancy.isLayBox=0;isShow=-1;this._sportService.removeBackLay(fancy)">Cancel</button>
+                        <button type="button"
+                          class="btn btn-warning btnbottom"
+                          (click)="isEditStack=true">Edit
+                          Stack</button>
+                        <button type="button"
+                          class="btn btn-success btnbottom"
+                          [ngStyle]="{'pointer-events':fancy.odds<=0 ? 'none' : 'auto'}"
+                          (click)="saveSportBetDataManual(fancy,'session')">Place
+                          Bet</button>
+                      </div><!---->
+                    </div>
+                    <div class="all__match__content__tag EditStack"
+                      *ngIf="isEditStack">
+                      <form [formGroup]="oneMatchStack"
+                        (ngSubmit)="updateMatchStack(null)">
+                        <div class="inp-inner-bx">
+                          <input
+                            *ngFor="let stack of matchStack; let i=index;"
+                            type="text" formControlName="matchStack{{i+1}}"
+                            class="form-control inp-bx allownumericwithoutdecimal"
+                            [(ngModel)]="stack" value="{{stack}}" required>
+                          <button id="Button" type="submit"
+                            [disabled]="!oneMatchStack.valid" value="Click"
+                            class="btn btn-green"><i
+                              class="fa fa-check-circle-o"
+                              aria-hidden="true"></i>
+                            Save
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade runModal exampleModalFancy show"
+                  id="exampleModalMK"
+                  tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                  *ngIf="showScorePosition==fancy.SelectionId">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5"
+                          id="exampleModalLabel">Run
+                          Position</h1>
+                        <button type="button" class="btn-close"
+                          (click)="showScorePosition=-1"></button>
+                      </div>
+                      <div class="modal-body">
+                        <table width="100%" border="0"
+                          class="text-center table table-bordered">
+                          <tbody>
+                            <tr>
+                              <td>Run</td>
+                              <td>Value</td>
+                            </tr>
+                            <ng-container
+                              *ngFor="let postion of fancy.scorePostion">
+                              <tr class="bg-light">
+                                <td>{{postion.key}}</td>
+                                <td
+                                  [ngClass]="{'green-color':postion.value>0,'red-color':postion.value<0}">{{postion.value}}</td>
+                              </tr>
+                            </ng-container>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="accordion-item livestreaming">
+      <h2 class="accordion-header"
+        id="panelsStayOpenB-headingOne">
+        <button class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpenB-collapseOne"
+          aria-expanded="true"
+          aria-controls="panelsStayOpenB-collapseOne">
+          My Bets <i
+            class="fas fa-chevron-down"></i>
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpenB-collapseOne"
+        class="accordion-collapse collapse show"
+        aria-labelledby="panelsStayOpenB-headingOne">
+        <div class *ngIf="MatchBetList.MatchAndBetfair?.length>0 &&
+          cricketBetMatchMarkets.runner_json!=undefined &&
+          cricketBetMatchMarkets.runner_json!=null">
+          <ng-container
+            *ngFor="let list of MatchBetList.MatchAndBetfair; let i=index;">
+            <div class="accordion-body">
+              <b>{{cricketBetMatchMarkets.name}}</b>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col">Market</th>
+                    <th
+                      scope="col">ODDS</th>
+                    <th
+                      scope="col">Stake</th>
+                    <th scope="col">P/L</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{list.selectionName}} ({{list.marketName}})</td>
+                    <td>{{list.odds}}</td>
+                    <td>{{list.stack}}</td>
+                    <td>{{list.p_l}}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </ng-container>
+        </div>
+        <div class
+          *ngIf="MatchBetList.MatchFancy?.length>0 && cricketBetMatchMarkets.runner_json!=undefined && cricketBetMatchMarkets.runner_json!=null">
+          <ng-container
+            *ngFor="let list of MatchBetList.MatchFancy; let i=index;">
+            <div class="accordion-body">
+              <b>{{cricketBetMatchMarkets.name}}</b>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col">Market</th>
+                    <th
+                      scope="col">Runs</th>
+                    <th
+                      scope="col">ODDS</th>
+                    <th
+                      scope="col">Stake</th>
+                    <th scope="col">P/L</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{list.fancy_name}}</td>
+                    <td>{{list.run}}</td>
+                    <td>{{list.size}}</td>
+                    <td>{{list.stack}}</td>
+                    <td>{{list.profit}}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </ng-container>
+        </div>
+        <div class
+          *ngIf="MatchBetList.MatchAndBetfair?.length==0 && MatchBetList.MatchFancy?.length==0">
+          <div class="accordion-body">
+            <b>{{cricketBetMatchMarkets.name}}</b>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th
+                    scope="col">Market</th>
+                  <th
+                    scope="col">ODDS</th>
+                  <th
+                    scope="col">Stake</th>
+                  <th scope="col">P/L</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4">No Bet placed</td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-menu d-none d-md-block inneSbar">
+    <div class="accordion"
+      id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+          id="panelsStayOpen-headingOne">
+          <button class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+            Live Streaming <i
+              class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingOne"
+          *ngIf="cupBetUserSportsDetails.is_show_tv=='Y' && safeSrc != null &&
+        cricketBetMatchMarkets != undefined && cricketBetMatchMarkets != null && cricketBetMatchMarkets != '' && ((cricketBetMatchMarkets.start_date - _serverTime)<(2*60))">
+          <div class="accordion-body">
+            <iframe
+              [src]="safeSrc"
+              width="100%"
+              height="280"
+              frameborder="0"
+              scrolling="no"
+              marginwidth="0"
+              frameborder="0"
+              webkitallowfullscreen
+              mozallowfullscreen
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+          id="panelsStayOpen-headingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseTwo"
+            aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseTwo">
+            MY BETS <i
+              class="fas fa-chevron-down"></i>
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo"
+          class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class *ngIf="MatchBetList.MatchAndBetfair?.length>0 &&
+            cricketBetMatchMarkets.runner_json!=undefined &&
+            cricketBetMatchMarkets.runner_json!=null">
+            <ng-container
+              *ngFor="let list of MatchBetList.MatchAndBetfair; let i=index;">
+              <div class="accordion-body">
+                <b>{{cricketBetMatchMarkets.name}}</b>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th
+                        scope="col">Market</th>
+                      <th
+                        scope="col">ODDS</th>
+                      <th
+                        scope="col">Stake</th>
+                      <th scope="col">P/L</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{list.selectionName}} ({{list.marketName}})</td>
+                      <td>{{list.odds}}</td>
+                      <td>{{list.stack}}</td>
+                      <td>{{list.p_l}}</td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </ng-container>
+          </div>
+          <div class
+            *ngIf="MatchBetList.MatchFancy?.length>0 && cricketBetMatchMarkets.runner_json!=undefined && cricketBetMatchMarkets.runner_json!=null">
+            <ng-container
+              *ngFor="let list of MatchBetList.MatchFancy; let i=index;">
+              <div class="accordion-body">
+                <b>{{cricketBetMatchMarkets.name}}</b>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th
+                        scope="col">Market</th>
+                      <th
+                        scope="col">Runs</th>
+                      <th
+                        scope="col">ODDS</th>
+                      <th
+                        scope="col">Stake</th>
+                      <th scope="col">P/L</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{list.fancy_name}}</td>
+                      <td>{{list.run}}</td>
+                      <td>{{list.size}}</td>
+                      <td>{{list.stack}}</td>
+                      <td>{{list.profit}}</td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="addSideBanner">
+          <a href="javascript:void(0)">
+            <img src="./assets/img/sportPlay_img.webp">
+          </a>
+          <a href="javascript:void(0)">
+            <img
+              src="./assets/img/choose_your_bonus_journey_img.webp">
+          </a>
+          <a href="javascript:void(0)">
+            <img src="./assets/img/livecasino_img.webp">
+          </a>
+          <a href="javascript:void(0)">
+            <img
+              src="./assets/img/choose_your_bonus_journey_img.webp">
+          </a>
+          <a href="javascript:void(0)">
+            <img src="./assets/img/sportPlay_img.webp">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

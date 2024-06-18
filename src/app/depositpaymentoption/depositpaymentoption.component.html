@@ -1,0 +1,575 @@
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div class="inmatchwrapp d-flex">
+  <div class="tabwrapp inmatchlft">
+    <h4 class="bet-head main_heading">Payment Options</h4>
+    <div class="st_overview_nav">
+      <ul>
+        <ng-container *ngFor="let acData of accountData; let i=index">
+          <li tabindex="0" class="pp_{{acData.account_type}} pptab" [ngClass]="{'active':i==0}">
+            <a class="img_box_wrapper" (click)="openPaymentMethod(acData.account_type)">
+              <i class="icon icon-success"></i>
+              <img src="https://admin.lord999.com/storage/app/public/payment/{{acData.ac_type_image}}">
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="sat_content_wrap">
+      <section class="team_schedule_page">
+        <div class="container">
+          <div class="col-md-12 deposit-pad-mob">
+            <div class="st_blog_detail withdraw_section">
+              <div class="st_blog_detail_thumb">
+                <div class="st_featured_thumb">
+                  <div class="text_wrper">
+                    <div class="deposit-pad-mob">
+                      <div class="deposit_nav">
+                        <div class="tab-content">
+                          <ng-container *ngFor="let acData of accountData; let j=index">
+                            <div id="paymentType_" [ngClass]="{'active':j==0}"
+                              *ngIf="acData.account_type==selectPaymentType">
+                              <form class="p-4" [formGroup]="deposite_form" (ngSubmit)="submit(acData)">
+                                <input type="hidden" formControlName="account_type" value="{{acData.account_type}}"
+                                  ngModel>
+                                <div class="st_blog_detail" style="position: relative;">
+                                  <div class="row-parallel">
+                                    <div style="width: 100%;">
+                                      <div class="st_blog_detail_thumb">
+                                        <div class="st_featured_thumb">
+                                          <div class="qr-section" *ngIf="acData.account_type!='IMPS'">
+                                            <div class="bb_overall_transfer" style="display: block !important;">
+                                              <div>
+                                                <div class="bb_tran_subdiv">
+                                                  <img
+                                                    src="https://admin.lord999.com/storage/app/public/payment/{{acData.attachment}}"
+                                                    class="qrcodeImage" alt="No QR code available">
+                                                </div>
+                                              </div>
+                                              <div class="download_btn_wrapper">
+                                                <a href="https://admin.lord999.com/storage/app/public/payment/{{acData.attachment}}"
+                                                  target="_blank">Download &amp;
+                                                  Pay</a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="text_wrper">
+                                            <div class="bb_transfer_div">
+                                              <div class="bb_transfer_subsection" style="margin-top: 0px !important;"
+                                                *ngIf="acData.account_type=='IMPS'">
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Number:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_phone_number)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_phone_number}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Holder Name:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_holder_name)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_holder_name}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Bank
+                                                      Name:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.bank_name)" class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.bank_name}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">IFSC
+                                                      Code:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_ifsc_code)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_ifsc_code}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="bb_transfer_subsection" style="margin-top: 0px !important;"
+                                                *ngIf="acData.account_type!='IMPS'">
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Number:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_phone_number)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_phone_number}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Holder Name:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_holder_name)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_holder_name}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="note_wrapper">
+                                        <span> Please Note: </span>
+                                        <ul>
+                                          <li> Deposit money only in the above
+                                            available account to get the fastest
+                                            credit &amp; avoid possible delays.
+                                          </li>
+                                          <li> After Deposit, upload your
+                                            deposit
+                                            slip screenshot to receive balance.
+                                          </li>
+                                          <li> Requested amount should be the
+                                            same
+                                            as deposit slip amount for smooth
+                                            deposit process. </li>
+                                          <li> NFT receiving time is from 40
+                                            minutes
+                                            to 2 hours. </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div class="borderLine"></div>
+                                    <div class="st_blog_detail_thumb">
+                                      <div class="st_featured_thumb">
+                                        <div class="text_wrper">
+                                          <div class="bb_transfer_subsection">
+                                            <p class="bb_head" style="margin-top: 12px;">Upload
+                                              File</p>
+                                            <div class="bb_overall_transfer">
+                                              <input type="hidden" name="panPath" formControlName="panPath"
+                                                value="{{panImagePath}}">
+                                              <input type="file" name="screen_short" accept=".png, .jpg, .jpeg"
+                                                class="image_upload6" (change)="fileProgressPan($event);"
+                                                formControlName="deposite" id="paytm_image">
+                                              <label for="paytm_image">
+                                                <img class="cam" src="../../assets/img/cam.svg">
+                                                <span id="imgtext">Upload or
+                                                  drop a file right here</span>
+                                              </label>
+                                              <div class="error_block"
+                                                *ngIf="(!deposite_form.controls['deposite'].valid && deposite_form.controls['deposite'].touched) || (deposite_form.controls['deposite'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                                                [ngClass]="error">
+                                                <p class="text-danger">Please
+                                                  upload
+                                                  payment screenshot.</p>
+                                              </div>
+                                            </div>
+                                            <div class="withdraw_text">
+                                              <p class="bb_head">Amount</p>
+                                              <div class="input_dec select_dec2 marg-dec">
+                                                <input id="deposit_amount" formcontrolname="amount" type="number"
+                                                  name="deposit_amount" autocomplete="off" class="amount number_only"
+                                                  placeholder="0" min="500">
+                                              </div>
+                                              <div class="error_block"
+                                                *ngIf="(!deposite_form.controls['amount'].valid && deposite_form.controls['amount'].touched) || (deposite_form.controls['amount'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                                                [ngClass]="error">
+                                                <p class="text-danger">Enter
+                                                  valid
+                                                  amount.</p>
+                                              </div>
+                                            </div>
+                                            <div class="month_tab">
+                                              <div class="quick_amt offline_amount label2" tabindex="0"
+                                                (click)="fillAmount(500)">+500
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="1"
+                                                (click)="fillAmount(1000)">+1000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="2"
+                                                (click)="fillAmount(2000)">+2000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="3"
+                                                (click)="fillAmount(5000)">+5000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="4"
+                                                (click)="fillAmount(10000)">+10000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="5"
+                                                (click)="fillAmount(20000)">+20000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="6"
+                                                (click)="fillAmount(25000)">+25000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="7"
+                                                (click)="fillAmount(50000)">+50000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="8"
+                                                (click)="fillAmount(100000)">+100000
+                                              </div>
+                                            </div>
+                                            <div class="withdraw_text">
+                                              <p class="bb_head">Unique
+                                                Transaction
+                                                Reference</p>
+                                              <div class="input_dec select_dec2 marg-dec">
+                                                <input type="text" formControlName="utrnumber" name="utr_number"
+                                                  placeholder="6 to 12 Digits UTR Number" autocomplete="off"
+                                                  class="amount number_only" id="reference_id">
+                                              </div>
+                                              <div class="error_block"
+                                                *ngIf="(!deposite_form.controls['utrnumber'].valid && deposite_form.controls['utrnumber'].touched) || (deposite_form.controls['utrnumber'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                                                [ngClass]="error">
+                                                <p class="text-danger">Enter
+                                                  valid
+                                                  UTR number.</p>
+                                              </div>
+                                            </div>
+                                            <div class="submit-sec">
+                                              <input type="submit" class="button input-btn card_submit" value="Submit">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div> -->
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div class="inmatchwrapp d--flex">
+  <div class="tabwrapp inmatchlft">
+    <h4 class="bet-head main_heading">Payment Options</h4>
+    <div class="st_overview_nav">
+      <ul>
+        <ng-container *ngFor="let acData of accountData; let i=index">
+          <li tabindex="0" class="pp_{{acData.account_type}} pptab" [ngClass]="{'active':i==0}">
+            <a class="img_box_wrapper" (click)="openPaymentMethod(acData.account_type)">
+              <i class="icon icon-success"></i>
+              <img src="https://admin.magesticcasino.com/storage/app/public/{{acData.attachment}}">
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="sat_content_wrap">
+      <section class="team_schedule_page">
+        <div class="container">
+          <div class="col-md-12 deposit-pad-mob">
+            <div class="st_blog_detail withdraw_section">
+              <div class="st_blog_detail_thumb">
+                <div class="st_featured_thumb">
+                  <div class="text_wrper">
+                    <div class="deposit-pad-mob">
+                      <div class="deposit_nav">
+                        <div class="tab-content">
+                          <ng-container *ngFor="let acData of accountData; let j=index">
+                            <div id="paymentType_" [ngClass]="{'active':j==0}"
+                              *ngIf="acData.account_type==selectPaymentType">
+                              <form class="p-4" [formGroup]="deposite_form" (ngSubmit)="submit(acData)">
+                                <input type="hidden" formControlName="account_type" value="{{acData.account_type}}"
+                                  ngModel>
+                                <div class="st_blog_detail" style="position: relative;">
+                                  <div class="row-parallel">
+                                    <div style="width: 100%;">
+                                      <div class="st_blog_detail_thumb">
+                                        <div class="st_featured_thumb">
+                                          <div class="qr-section" *ngIf="acData.account_type!='IMPS'">
+                                            <div class="bb_overall_transfer" style="display: block !important;">
+                                              <div>
+                                                <div class="bb_tran_subdiv">
+                                                  <!-- <img
+                                                    src="https://admin.lord999.com/storage/app/public/payment/{{acData.attachment}}"
+                                                    class="qrcodeImage" alt="No QR code available"> -->
+                                                  <img src="{{adminLink}}payment/{{acData.attachment}}"
+                                                    class="qrcodeImage" alt="No QR code available">
+                                                </div>
+                                              </div>
+                                              <div class="download_btn_wrapper">
+                                                <!-- <a href="https://admin.lord999.com/storage/app/public/payment/{{acData.attachment}}"
+                                                  target="_blank">Download &amp;
+                                                  Pay</a> -->
+                                                <a href="{{adminLink}}payment/{{acData.attachment}}"
+                                                  target="_blank">Download
+                                                  &amp;
+                                                  Pay</a>
+                                              </div>
+                                            </div>
+                                          </div><!---->
+                                          <div class="text_wrper">
+                                            <div class="bb_transfer_div">
+                                              <div class="bb_transfer_subsection" style="margin-top: 0px !important;"
+                                                *ngIf="acData.account_type=='IMPS'">
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Number:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_phone_number)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_phone_number}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Holder Name:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_holder_name)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_holder_name}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Bank
+                                                      Name:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.bank_name)" class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.bank_name}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">IFSC
+                                                      Code:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_ifsc_code)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_ifsc_code}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="bb_transfer_subsection" style="margin-top: 0px !important;"
+                                                *ngIf="acData.account_type!='IMPS'">
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Number:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_phone_number)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_phone_number}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                                <div class="sectionList">
+                                                  <div class="bb_tran_subdiv">
+                                                    <div class="bb_bank_name">Account
+                                                      Holder Name:</div>
+                                                  </div>
+                                                  <div (click)="copyMessage(acData.account_holder_name)"
+                                                    class="bb_copy_txt">
+                                                    <div class="bb_tran_subdiv_sec">
+                                                      {{acData.account_holder_name}}
+                                                    </div>
+                                                    <img class="click_btn"
+                                                      src="https://dqqdyv927mezc.cloudfront.net/kheloyar/copy.svg">
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="note_wrapper">
+                                        <span> Please Note: </span>
+                                        <ul>
+                                          <li> Deposit money only in the above
+                                            available account to get the fastest
+                                            credit &amp; avoid possible delays.
+                                          </li>
+                                          <li> After Deposit, upload your
+                                            deposit
+                                            slip screenshot to receive balance.
+                                          </li>
+                                          <li> Requested amount should be the
+                                            same
+                                            as deposit slip amount for smooth
+                                            deposit process. </li>
+                                          <li> NFT receiving time is from 40
+                                            minutes
+                                            to 2 hours. </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div class="borderLine"></div>
+                                    <div class="st_blog_detail_thumb">
+                                      <div class="st_featured_thumb">
+                                        <div class="text_wrper">
+                                          <div class="bb_transfer_subsection">
+                                            <p class="bb_head" style="margin-top: 12px;">Upload
+                                              File</p>
+                                            <div class="bb_overall_transfer">
+                                              <input type="hidden" name="panPath" formControlName="panPath"
+                                                value="{{panImagePath}}">
+                                              <input type="file" name="screen_short" accept=".png, .jpg, .jpeg"
+                                                class="image_upload6" (change)="fileProgressPan($event);"
+                                                formControlName="deposite" id="paytm_image">
+                                              <label for="paytm_image">
+                                                <img class="cam"
+                                                  src="https://dqqdyv927mezc.cloudfront.net/kheloyar/cam.svg">
+                                                <span id="imgtext">Upload or
+                                                  drop a file right here</span>
+                                              </label>
+                                              <div class="error_block"
+                                                *ngIf="(!deposite_form.controls['deposite'].valid && deposite_form.controls['deposite'].touched) || (deposite_form.controls['deposite'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                                                [ngClass]="error">
+                                                <p class="text-danger">Please
+                                                  upload
+                                                  payment screenshot.</p>
+                                              </div>
+                                            </div>
+                                            <div class="withdraw_text">
+                                              <p class="bb_head">Amount</p>
+                                              <div class="input_dec select_dec2 marg-dec">
+                                                <input id="deposit_amount" formcontrolname="amount" type="number"
+                                                  name="deposit_amount" autocomplete="off" class="amount number_only"
+                                                  placeholder="0" min="500">
+                                              </div>
+                                              <div class="error_block"
+                                                *ngIf="(!deposite_form.controls['amount'].valid && deposite_form.controls['amount'].touched) || (deposite_form.controls['amount'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                                                [ngClass]="error">
+                                                <p class="text-danger">Enter
+                                                  valid
+                                                  amount.</p>
+                                              </div>
+                                            </div>
+                                            <div class="month_tab">
+                                              <div class="quick_amt offline_amount label2" tabindex="0"
+                                                (click)="fillAmount(500)">+500
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="1"
+                                                (click)="fillAmount(1000)">+1000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="2"
+                                                (click)="fillAmount(2000)">+2000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="3"
+                                                (click)="fillAmount(5000)">+5000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="4"
+                                                (click)="fillAmount(10000)">+10000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="5"
+                                                (click)="fillAmount(20000)">+20000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="6"
+                                                (click)="fillAmount(25000)">+25000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="7"
+                                                (click)="fillAmount(50000)">+50000
+                                              </div>
+                                              <div class="quick_amt offline_amount label2" tabindex="8"
+                                                (click)="fillAmount(100000)">+100000
+                                              </div>
+                                            </div>
+                                            <div class="withdraw_text">
+                                              <p class="bb_head">Unique
+                                                Transaction
+                                                Reference</p>
+                                              <div class="input_dec select_dec2 marg-dec">
+                                                <input type="text" formControlName="utrnumber" name="utr_number"
+                                                  placeholder="6 to 12 Digits UTR Number" autocomplete="off"
+                                                  class="amount number_only" id="reference_id">
+                                              </div>
+                                              <div class="error_block"
+                                                *ngIf="(!deposite_form.controls['utrnumber'].valid && deposite_form.controls['utrnumber'].touched) || (deposite_form.controls['utrnumber'].invalid && !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                                                [ngClass]="error">
+                                                <p class="text-danger">Enter
+                                                  valid
+                                                  UTR number.</p>
+                                              </div>
+                                            </div>
+                                            <div class="submit-sec">
+                                              <input type="submit" class="button input-btn card_submit" value="Submit">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

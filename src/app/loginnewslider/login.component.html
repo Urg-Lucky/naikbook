@@ -1,0 +1,231 @@
+<div class="login_slider_full">
+  <div id="maximage">
+    <div><img src="./assets/images/login_slider_1.jpg" alt="" /><span
+        class="title_name">Roulette </span></div>
+    <div><img src="./assets/images/login_slider_2.jpg" alt="" /><span
+        class="title_name">Andar Bahar </span></div>
+    <div><img src="./assets/images/login_slider_3.jpg" alt="" /><span
+        class="title_name">Cricket, Soccer and Tennis
+      </span></div>
+    <div><img src="./assets/images/login_slider_4.jpg" alt="" /><span
+        class="title_name">Baccarat </span></div>
+    <div><img src="./assets/images/login_slider_5.jpg" alt="" /><span
+        class="title_name">Poker </span></div>
+
+  </div>
+</div>
+
+<div class="login_background login_background_slider"
+  style="float: left;">
+  <div class="row">
+    <div class="hidden-xs col-sm-7 col-md-8 clearfix">
+      <div class="clearfix left_welcome_logo">
+        <div class="logo-title-container">
+          <img class="img-responsive pull-left flip logo hidden-xs animated
+            fadeIn"
+            src="./assets/images/nxhzW2iWpIAViRTskQ3x.gif" alt="Logo Icon">
+          <div class="copy animated fadeIn">
+            <h1>Welcome to <span><img src="assets/images/logo.png"
+                  class="welcome_smail_logo"></span></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-5 col-md-4 login_sidebar login_sidebar_slider"
+      style="background-image: url(./assets/images/game-background-img2.jpg);
+      background-size: cover; background-position: right;">
+      <div *ngIf="!IsRegistrationShow">
+        <div class="login-main-bx">
+          <form [formGroup]="login_form" (ngSubmit)="login()" name="loginForm"
+            novalidate>
+            <!-- <span class=" login-head">Login</span>
+          <div class=" wel-bx">Welcome !</div> -->
+            <div class="logo_intop"><img src="assets/images/logo.png" class="logo-bx
+                boxlogin"></div>
+
+            <div class="row">
+              <div class="col-md-12 pdlft0">
+                <label class="lab-user"><span>Username</span>
+                  <input spellcheck="false" type="text" placeholder="Enter
+                    Username" formControlName="username"
+                    autocomplete="username" class="input-bx" value="">
+                  <div class="error_txt"
+                    *ngIf="(!login_form.controls['username'].valid &&
+                    login_form.controls['username'].touched) ||
+                    (login_form.controls['username'].invalid &&
+                    !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                    [ngClass]="error">
+                    Enter valid name.
+                  </div>
+                </label>
+              </div>
+
+              <div class="col-md-12 pdlft0">
+                <label class="lab-user"><span>Password</span>
+                  <input spellcheck="false" type="password" placeholder="Enter
+                    Password" formControlName="password"
+                    autocomplete="current-password" class="input-bx">
+                  <div class="error_txt"
+                    *ngIf="(!login_form.controls['password'].valid &&
+                    login_form.controls['password'].touched) ||
+                    (login_form.controls['password'].invalid &&
+                    !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                    [ngClass]="error">
+                    Enter password.
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pdlft0">
+                <button type="submit" id="gtm-login_button" class="btn-in-bx
+                  full_btn">Login</button>
+                <div *ngIf="IsRegistration=='Y'" class="reg_bx">
+                  <span>OR</span>
+                  <button type="button" class="btn btn-in-bx"
+                    (click)="IsRegistrationShow=true;formReset()">Don't have
+                    Account?</button></div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px'
+          }"></ngx-loading>
+      </div>
+
+      <div *ngIf="IsRegistrationShow">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px'
+          }"></ngx-loading>
+        <form [formGroup]="register_form" (ngSubmit)="registerSave()"
+          name="registerForm" novalidate
+          class="login-main-bx">
+          <div class="logo_intop reg_title"><img src="/assets/images/logo.png"
+              class="logo-bx boxlogin"></div>
+          <!--<h5  class="reg_title">Sign up</h5> -->
+
+          <div class="row">
+            <div class="col-md-6 pdlft0">
+              <label for="name" class="lab-user lab-user-reg"><span>Your Name
+                </span> <input type="input"
+                  formControlName="name" class="input-bx" id="name">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['name'].valid &&
+                  register_form.controls['name'].touched) ||
+                  (register_form.controls['name'].invalid &&
+                  !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid name.
+                </div>
+              </label>
+            </div>
+
+            <div class="col-md-6 pdlft0">
+              <label for="mobile" class="lab-user lab-user-reg"><span>Mobile
+                  Number </span> <input type="input"
+                  (keyup)="onlyNumber($event)" minlength="10" maxlength="10"
+                  formControlName="mobile" class="input-bx"
+                  id="mobile">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['mobile'].valid &&
+                  register_form.controls['mobile'].touched) ||
+                  (register_form.controls['mobile'].invalid &&
+                  !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid mobile number.
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pdlft0">
+              <label for="email" class="lab-user lab-user-reg"><span>Email
+                  Address </span> <input type="email"
+                  formControlName="email" class="input-bx" id="email">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['email'].valid &&
+                  register_form.controls['email'].touched) ||
+                  (register_form.controls['email'].invalid &&
+                  !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid email.
+                </div>
+              </label> </div>
+            <div class="col-md-12 pdlft0">
+              <label for="username" class="lab-user lab-user-reg"><span>User
+                  Name </span> <input type="input"
+                  minlength="6" formControlName="username"
+                  (blur)="CheckUserExist($event)" class="input-bx"
+                  id="username">
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['username'].valid &&
+                  register_form.controls['username'].touched) ||
+                  (register_form.controls['username'].invalid &&
+                  !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Enter valid user name.
+                </div>
+              </label></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 pdlft0">
+              <label for="Password" class="lab-user lab-user-reg"><span>Password
+                </span> <input type="password"
+                  formControlName="newPassword" [(ngModel)]="newPassword"
+                  class="input-bx" id="Password">
+                <span class="error_txt"
+                  *ngIf="(!register_form.controls['newPassword'].valid &&
+                  register_form.controls['newPassword'].touched) ||
+                  (register_form.controls['newPassword'].invalid &&
+                  !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+
+                  Enter password.
+
+                </span>
+              </label></div>
+            <div class="col-md-6 pdlft0">
+              <label for="cPassword" class="lab-user lab-user-reg"><span>Confirm
+                  Password </span> <input type="password"
+                  formControlName="confPassword" [(ngModel)]="confPassword"
+                  class="input-bx" id="cPassword">
+                <span class="error_txt"
+                  *ngIf="(!register_form.controls['confPassword'].valid &&
+                  register_form.controls['confPassword'].touched) ||
+                  (register_form.controls['confPassword'].invalid &&
+                  !isValidFormSubmitted && isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+
+                  Enter Confirm Password. </span>
+              </label>
+              <div class="error_txt" *ngIf="confPassword != newPassword &&
+                confPassword!='' && newPassword!=''"
+                [ngClass]="error">
+
+                Password Mismatch.
+
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pdlft0">
+
+              <button type="submit" class="btn btn-in-bx full_btn"
+                [disabled]="!isUser">REGISTER</button>
+              <div class="reg_bx full_btn"><span>OR</span> <button type="button"
+                  class="btn btn-in-bx"
+                  (click)="IsRegistrationShow=false">Already have account?</button></div>
+            </div>
+          </div>
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,159 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "1dd56c62-9f8d-47a4-9896-153d687f5a92"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "inddubaiexchang": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "showCircularDependencies": false,
+            "outputPath": "dist/inddubaiexchang",
+            "index": "src/inddubaiexchang/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/inddubaiexchang/projectimages/",
+                "output": "/assets/images"
+              },
+              {
+                "glob": "favicon.png.ico",
+                "input": "src/inddubaiexchang/",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "src/assets/css/style.css",
+              "src/assets/css/owl.carousel.min.css",
+              "src/assets/css/bootstrap-icons.css",
+              "src/assets/css/responsive.css",
+              "node_modules/angular-notifier/styles/core.css",
+              "node_modules/angular-notifier/styles/themes/theme-material.css",
+              "node_modules/angular-notifier/styles/types/type-default.css",
+              "node_modules/angular-notifier/styles/types/type-success.css",
+              "node_modules/angular-notifier/styles/types/type-error.css"
+            ],
+            "scripts": [
+              "src/assets/js/vendor/jquery.min.js",
+              "src/assets/js/jquery-ui.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/owl.carousel.min.js",
+              "src/assets/js/jquery.scrollUp.min.js",
+              "src/assets/js/aos.js",
+              "src/assets/js/main-menu.js",
+              "src/assets/js/main.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/inddubaiexchang_environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/inddubaiexchang_environment.development.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "inddubaiexchang:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "inddubaiexchang:build:production"
+            },
+            "development": {
+              "browserTarget": "inddubaiexchang:build:development"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "inddubaiexchang:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/assets/css/style.css",
+              "src/assets/css/owl.carousel.min.css",
+              "src/assets/css/bootstrap-icons.css",
+              "src/assets/css/responsive.css",
+              "node_modules/angular-notifier/styles/core.css",
+              "node_modules/angular-notifier/styles/themes/theme-material.css",
+              "node_modules/angular-notifier/styles/types/type-default.css",
+              "node_modules/angular-notifier/styles/types/type-success.css",
+              "node_modules/angular-notifier/styles/types/type-error.css"
+            ],
+            "scripts": [
+              "src/assets/js/vendor/jquery.min.js",
+              "src/assets/js/jquery-ui.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/owl.carousel.min.js",
+              "src/assets/js/jquery.scrollUp.min.js",
+              "src/assets/js/aos.js",
+              "src/assets/js/main-menu.js",
+              "src/assets/js/main.js"
+            ],
+            "assets": ["src/favicon.png.ico", "src/assets"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "betsis"
+}

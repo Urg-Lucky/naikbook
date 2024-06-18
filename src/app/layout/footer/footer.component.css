@@ -1,0 +1,97 @@
+.openpopUp {
+    display: block;
+}
+
+.closepopUp {
+    display: none;
+}
+
+.available_int {
+    display: none;
+}
+
+.no_int {
+    display: block;
+}
+
+.no_int .modal-body {
+    text-align: center;
+}
+
+.no_int .modal-body img {
+    padding-left: 72px;
+    max-width: 76%;
+}
+
+.Uh_Ohtext {
+    text-align: center;
+    padding-top: 23px;
+}
+
+.Uh_Ohtext h4 {
+    font-size: 20px;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.Uh_Ohtext p {
+    font-size: 16px;
+    color: #a0a0a0;
+    line-height: 22px;
+}
+
+.no_int .modal.fade.show {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #0000009c;
+}
+
+.search-bx .payment_info {
+    background: #f6ce60;
+    color: #000000;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 18px;
+    padding-top: 3px;
+    margin-left: 5px;
+}
+
+
+
+.payment_detail {
+    visibility: hidden;
+    position: absolute;
+    right: -5px;
+    top: 33px;
+    background: #ffffff;
+    color: #000000;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 33%;
+    font-size: 14px;
+}
+
+.payment_detail:after {
+    position: absolute;
+    content: "";
+    top: -10px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid #fff;
+    margin: 0 auto;
+    width: 23px;
+    left: auto;
+    right: 6px;
+    height: 10px;
+}
+
+.search-bx .payment_info:hover .payment_detail {
+    visibility: visible !important;
+}

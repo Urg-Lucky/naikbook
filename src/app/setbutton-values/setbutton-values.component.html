@@ -1,0 +1,82 @@
+<link rel="stylesheet"
+  href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<div class="row no-gutters">
+  <div class="center_screen_main nopadding">
+    <div class="my-beat-main pt--1" infiniteScroll
+      [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()" [scrollWindow]="false">
+      <div class="casino_match_names"> D/W Requests</div>
+      <div class="bg-black-bx">
+        <div class="table-responsive price_lable_value">
+          <table class="table table-bordered nowrap table-sm mb-1
+            addpadding" style="width: 100%;">
+            <thead>
+              <tr class="bg-dark text-white">
+                <th>ID</th>
+                <th>Button Name</th>
+                <th>Button Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="w-8">1</td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+              <tr>
+                <td class="w-8">2</td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+              <tr>
+                <td class="w-8">3</td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+              <tr>
+                <td class="w-8">4</td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+              <tr>
+                <td class="w-8">5</td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+              <tr>
+                <td class="w-8">6</td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+                <td class="w-46">
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="submit-btn"><button class="btn btn-primary">Submit</button></div>
+      </div>
+    </div>
+  </div>
+</div>

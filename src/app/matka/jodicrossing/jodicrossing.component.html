@@ -1,0 +1,70 @@
+<div class="modal fade show modal_container" role="dialog">
+  <div class="modal-dialog dialog_container">
+    <div class="modal-content dialog_content_container"
+      [ngClass]="{'dialogclose':isDialogClose}">
+      <div class="modal-header dialog_header_container">
+        <h4 class="modal-title">Crossing</h4>
+        <button type="button" class="close"
+          (click)="callDialogClose()">×</button>
+      </div>
+      <div class="modal-body">
+
+        <form (ngSubmit)="onSubmit()">
+
+          <div class="row">
+            <div class="form-group col-1 form_item"
+              *ngFor="let item of crossingLayer1">
+              <label>{{item.name}}</label>
+              <div class="checkbox_div">
+                <input class type="checkbox" [value]="item.name"
+                  (change)="item.selected =!item.selected; ">
+              </div>
+            </div>
+          </div>
+          <div class="clearfix divider">&nbsp;</div>
+          <div class="row" style="margin-top: 10px;">
+            <div class="form-group col-1 form_item"
+              *ngFor="let item of crossingLayer2">
+              <label>{{item.name}}</label>
+              <div class="checkbox_div">
+                <input class type="checkbox" [value]="item.name"
+                  (change)="item.selected =!item.selected;">
+              </div>
+            </div>
+          </div>
+          <span class="mandatory_error"
+            style="color:red;font-size: 10px;height: 15px;display: block;">{{userInputData.numberError}}</span>
+          <div class="row"
+            style="margin-top: 15px;margin-left: -15px;margin-right: -15px;">
+            <div class="form-group col-md-4 col-sm-4 col-xs-12 form_item">
+              <label>Amount</label>
+              <span class="mandatory"> *</span>
+              <div>
+                <input class="form-control" type="text"
+                  value="{{userInputData.amount == 0 ? '' : userInputData.amount}}"
+                  (input)="userInputData.amount=$event.target.value"
+                  (keypress)="allowedNumberOnly($event)">
+              </div>
+              <span class="mandatory_error"
+                style="color:red;font-size: 10px;height: 15px;display: block;">{{userInputData.amountError}}</span>
+            </div>
+            <div class="form-group col-md-4 col-sm-4 col-xs-12 form_item">
+              <label>Jodi Cut</label>
+              <div class="checkbox_div_jodicut">
+                <input class type="checkbox"
+                  (change)="userInputData.jodicut=$event.target.value">
+              </div>
+            </div>
+          </div>
+
+          <div class="clearfix">&nbsp;</div>
+          <button type="button" class="form_cancel_btn"
+            (click)="callDialogClose()">Close</button>
+          <button type="submit" class="form_submit_btn">Submit</button>
+          <div class="clearfix">&nbsp;</div>
+        </form>
+      </div>
+      <!-- <ngx-loading [show]="this.sportServiceCross._loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading> -->
+    </div>
+  </div>
+</div>

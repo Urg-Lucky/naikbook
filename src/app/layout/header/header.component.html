@@ -1,0 +1,377 @@
+<!-- Mobile Modal -->
+<div class="dashboard-nav">
+  <nav class="dashboard-nav-list">
+    <div class="menuHead">
+      <h4>Popular</h4>
+      <img class="menu-toggle" src="./assets/img/close_icon.png" />
+    </div>
+    <ul class="sidebar__menu">
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/inplay">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/inplay.png" />
+            In-Play
+          </div>
+        </a>
+      </li>
+      <ng-container *ngFor="let sport of this._sportService.SportList; let i=index">
+        <li id="menu" *ngIf="sport.sport_id!=9994&&sport.sport_id!=9999&&sport.sport_id!=2224">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="/sport/{{sport.sport_id}}">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+        <li id="menu" *ngIf="sport.sport_id==9994">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="javascript:void(0)" (click)="getDiamondCasino('3031');">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+        <li id="menu" *ngIf="sport.sport_id==2224">
+          <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+            href="/matka-matches">
+            <div class="menuLView d-flex align-items-center gap-2">
+              <img src="{{sport.image}}" />
+              {{sport.name}}
+            </div>
+          </a>
+        </li>
+      </ng-container>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/casino/games/live-casino">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Live Casino
+          </div>
+        </a>
+      </li>
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" (click)="casinoLobby(201206, 'AVIATOR')">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/aviator-icon.svg" />
+            Aviator
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" (click)="casinoLobby(400000, 'AE SEXY')">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            AE SEXY
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" (click)="casinoLobby(100000, 'EZUGI')">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            EZUGI
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/casino/games/virtual">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/poker.png" />
+            Virtual Sports
+          </div>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+<!-- Mobile Modal -->
+<!-- My Profile Mobile Modal *ngIf="signUpStatus==1" -->
+<div class="myProgile">
+  <nav class="dashboard-nav-list">
+    <div class="menuHead">
+      <h4 style="margin: 0;">{{this._sessionService.get('userName')}}</h4>
+      <img class="BtnProgile" src="./assets/img/close_icon.png" />
+    </div>
+    <div class="myProfileBTN">
+      <a href="/withdraw" class="myprogileModalBTn" style="background-color: #F8DB10;"> Withdrawal</a>
+      <a href="/payment/deposit" class="myprogileModalBTn">Deposit</a>
+    </div>
+    <ul class="sidebar__menu">
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/account-statement">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              Account Statement
+            </div>
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/profit-loss">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              Profit & Loss
+            </div>
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/my-bets">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              Bet History
+            </div>
+          </div>
+        </a>
+      </li>
+      <li id="menu" *ngIf="signUpStatus==1">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/transactions">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              Transaction History
+            </div>
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="/change-password">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              Change Password
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="https://wa.me/message/3NKDYJWPOYT2I1" target="_blank">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="../../../assets/Banner/whatsapp.png" />
+            <div class="myProfileMDTxt">
+              Help
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" (click)="goToRules();">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              Rules
+            </div>
+          </div>
+        </a>
+      </li>
+      <li id="menu">
+        <a id="menu-btn" class="d-flex align-items-center justify-content-between ps-2 pe-3 text-uppercase"
+          href="javascript:void(0)" (click)="logout()">
+          <div class="menuLView d-flex align-items-center gap-2">
+            <img src="./assets/img/wallet.png" />
+            <div class="myProfileMDTxt">
+              LogOut
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<!-- My Profile Mobile Modal -->
+<!-- header start -->
+<header class="header">
+  <div class="breaking-box">
+    <div class="d-flex w-100 mr5">
+      <img src="./assets/img/voice_d.png">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseleave="this.start();">
+        <a class="h6 fw-normal mr-5" href="javascript:void(0);">WELCOME TO Naikbook</a>
+      </marquee>
+    </div>
+    <div class="header-time"><span style="color: #fff; font-weight:bolder">{{ time | date: 'd MMM, y hh:mm:ss a'
+        }}</span></div>
+  </div>
+  <div class="mainHead">
+
+    <div class="brand-logo d-flex align-items-center">
+      <button id="toggle-menu" class="me-3 active mobilemenuactiv menu-toggle">
+        <img src="./assets/img/menu-icon.png" />
+      </button>
+      <a href="/userdashboard">
+        <!-- <img src="{{adminLink}}{{sitelogo}}" alt class="dark-version-logo"> -->
+        <img src="../../../assets/logo/logo.png" alt class="dark-version-logo">
+      </a>
+    </div>
+    <div class="loginSide d-flex">
+      <button class="btn btnBalance d-flex" type="button" (click)="showPendingBets()">
+        <img src="./assets/img/money.png">
+        <div class="bBalanceTxt">
+          <p>Exposure</p>
+          <span>{{this._sessionService.convertToAbs(this._sessionService.get('liability'))}}</span>
+        </div>
+
+      </button>
+      <button class="btn btnBalance d-flex" type="button">
+        <img src="./assets/img/money.png">
+        <div class="bBalanceTxt">
+          <p>Balance</p>
+          <span>{{this._sessionService.get('balance') | number :
+            '1.2-2'}}</span>
+
+        </div>
+
+      </button>
+      <div class="dropdown">
+        <a class="btn dropdown-toggle pe-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="true">
+          {{this._sessionService.get('userName')}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+          style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(-0.25px, 38px); background-color:#15172B !important;"
+          data-popper-placement="bottom-end">
+          <li><a class="dropdown-item lngfl" href="/account-statement"> Account
+              Statement </a></li>
+          <li><a class="dropdown-item lngfl" href="/my-bets"> Bets History
+            </a></li>
+          <li><a class="dropdown-item lngfl" href="/profit-loss"> Profit & Loss
+            </a></li>
+          <li *ngIf="signUpStatus==1"><a class="dropdown-item lngfl" href="/transactions"> Transaction
+              History </a></li>
+          <li><a class="dropdown-item lngfl" href="/change-password"> Change
+              Password </a></li>
+          <li><a class="dropdown-item lngfl" href="/withdraw">
+              Withdrawal </a></li>
+          <li><a class="dropdown-item lngfl" href="/payment/deposit"> Deposit
+            </a></li>
+
+
+          <li><a class="dropdown-item lngfl" href="javascript:void(0);" (click)="goToRules();"> Rules </a></li>
+          <li><a class="dropdown-item lngfl" href="javascript:void(0);" (click)="logout()"> Logouts </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="menuLink">
+    <ul class="links">
+      <li><a href="/userdashboard"><img src="./assets/img/home.png" />
+          <p>Home</p>
+        </a></li>
+      <li><a href="/inplay"><img src="./assets/img/inplay.png" />
+          <p>In-Play</p>
+        </a></li>
+      <ng-container *ngFor="let sport of this._sportService.SportList; let i=index">
+        <li *ngIf="sport.sport_id!=9999&&sport.sport_id!=9994&&sport.sport_id!=2224"><a
+            href="/sport/{{sport.sport_id}}">
+            <img src="{{sport.image}}" />
+            <span id="tagLive" class="tag-live">
+              <strong></strong>0
+            </span>
+            <p>{{sport.name}}</p>
+          </a>
+        </li>
+        <li *ngIf="sport.sport_id==9994">
+          <a href="javascript:void(0)" (click)="getDiamondCasino('3031');"><img src="{{sport.image}}" />
+            <p>{{sport.name}}</p>
+          </a>
+        </li>
+        <li *ngIf="sport.sport_id==2224">
+          <a href="/matka-matches"><img src="{{sport.image}}" />
+            <p>{{sport.name}}</p>
+          </a>
+        </li>
+      </ng-container>
+      <li>
+        <a class href="/casino/games/live-casino"><img src="./assets/img/poker.png" />
+          <p>Live Casino</p>
+        </a>
+      </li>
+      <li>
+        <a class="aviator" href="javascript:void(0)" (click)="casinoLobby(201206, 'AVIATOR')">
+          <img src="./assets/img/aviator-icon.svg" />
+          Aviator
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" (click)="casinoLobby(400000, 'AE SEXY')"><img src="./assets/img/poker.png" />
+          <p>AE SEXY</p>
+        </a>
+      </li>
+      <li>
+        <a class href="javascript:void(0)" (click)="casinoLobby(100000, 'EZUGI')"><img src="./assets/img/poker.png" />
+          <p>EZUGI</p>
+        </a>
+      </li>
+
+      <li>
+        <a class href="/casino/games/virtual"><img src="./assets/img/poker.png" />
+          <p>Virtual Sports</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+<!-- header end -->
+<div class="modal fade runModal exampleModalRules" id="exampleModalRules" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="(rulescmsContent!=null && rulescmsContent!='')"
+  style="display: block; opacity: 1;">
+  <div class="modal-dialog" style="max-width: 707px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{rulescmsTitle}}</h1>
+        <!-- <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <div class="termsrules">
+          <div class="rulesmodaldialog" tabindex="-1" role="dialog" aria-labelledby="rulesmodaldialog">
+            <div class="rulesmodaldialog_document" role="document">
+              <div class="rulesmodaldialog_document_content">
+                <div class="rulesmodaldialog_document_content_body">
+                  <div class="rulescontent" [innerHtml]="rulescmsContent">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div *ngIf="ruleAutoLoad" class="rulesbuttonlay">
+          <a href="javascript:void(0)" class="btn-in-bx full_btn"><span class="rulesbuttonaccept"
+              (click)="onRulesAccept()">ACCEPT</span></a>
+          <a href="javascript:void(0)" class="btn-in-bx full_btn"><span class="rulesbuttondecline"
+              (click)="onRulesDecline()">DECLINE</span></a>
+        </div>
+        <div *ngIf="!ruleAutoLoad" class="rulesbuttonlay rulesbuttonoklay">
+          <a href="javascript:void(0)" class="btn-in-bx full_btn"><span class="rulesbuttonok"
+              (click)="onRulesOk()">OK</span></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- header-end -->

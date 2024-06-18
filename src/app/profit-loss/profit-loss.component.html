@@ -1,0 +1,135 @@
+<div class="mainDetailView">
+  <div class="accountST">
+    <div class="datePicker">
+      <div class="row">
+
+        <div class="col-md-12 mt-1">
+          <input class="form-control" type="text" id="fromDate" name="fromDate" [value]="fromDateValue"
+            style="background: #B9B9B3;">
+        </div>
+        <div class="col-md-12 mt-1">
+          <input class="form-control" type="text" id="toDate" name="toDate" [value]="toDateValue"
+            style="background: #B9B9B3;">
+        </div>
+        <div class="col-md-12 mt-1">
+          <select class="form-select form-control" aria-label="Default select example"
+            (change)="selectGametype($event.target.value)" style="background: #B9B9B3;">
+            <option value="0">All</option>
+            <ng-container *ngFor="let sport of SportData">
+              <option [value]="sport.sport_id" *ngIf="sport.sport_id!=9994">{{sport.name}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="col-sm-2 col-4 pr-0 mt-1">
+          <button type="button" class="btn btn-primary" (click)="selectMatchType('P')">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive tableMV">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Match</th>
+            <th scope="col">Stack</th>
+            <th scope="col">Profil/Loss</th>
+            <th scope="col">Commission</th>
+            <th scope="col">Show bets</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="matchList.length>0">
+          <tr class="tdTXT" *ngFor="let item of matchList;let position=index">
+            <td><span class="proLseriesname">{{item.sportName}}
+                | {{item.seriesName}}</span><br>
+              <span class="proLmatchname" *ngIf="item.sportId == 2225">{{this._sportService.timeConverter(item.drawTime)
+                | date:'hh:mm a'}} #{{item.matchId}}</span>
+              <span class="proLmatchname" *ngIf="item.sportId != 2225">{{item.matchName}}</span><br>
+              <span class="proLmatchdate">
+                {{item.matchDate!=undefined ?
+                (this._sportService.timeConverter(item.matchDate)
+                | date:'medium') : ''}}
+                <!-- {{item.matchDate *1000 | date}} -->
+              </span>
+            </td>
+            <td>{{item.stack}}</td>
+            <td [ngClass]="item.userPL>0 ? 'creditAm' : 'debitAm'">{{item.userPL}}</td>
+            <td>
+              <span *ngIf="item.userComm != null">{{item.userComm}}</span>
+              <span *ngIf="item.userComm == null">0</span>
+            </td>
+            <td><button class="btn-primary" data-toggle="modal" data-target="#profitLossStatemet"
+                (click)="getMatchBets(item)">Bets</button></td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="matchList.length==0">
+          <tr>
+            <td colspan="8" class="no-match-fount-txt" style="color: #fff;">No Record Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="StatementWrapper">
+      <div class="modal fade" id="profitLossStatemet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="runtitle">
+                <h5>{{myBetsName}} <span
+                    *ngIf="myMarketname != undefined && myMarketname != null && myMarketname != ''">
+                    -> {{myMarketname}}</span>
+                </h5>
+              </div>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="stateTabelWrap" id="innerTabelWraper">
+                <div class="table-responsive">
+                  <table class="table text-nowrap">
+                    <thead>
+                      <tr>
+                        <th scope="col">Market</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Odds</th>
+                        <th scope="col">Stake</th>
+                        <th scope="col">Profit/Loss</th>
+                        <th scope="col">status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let item of betList; index as i">
+                        <tr [ngClass]="item.Type=='Back' ? 'back' : 'lay'">
+                          <td>{{item.marketName}}
+                            <span style="color: #fff; font-size: 9px;" class="green_bg_1"
+                              *ngIf="item.marketType =='F'">Fancy</span><br>
+                            <span class *ngIf="item.sportId != 2225">{{item.SelectionName}}</span><br>
+                            <span class="proLmatchdate">Bet id {{item.matchId |
+                              slice:0:4}}{{item.BetId}} |
+                              {{item.Placed!=undefined
+                              ? (this._sportService.timeConverter(item.Placed) |
+                              date:'medium') : ''}}</span><br>
+
+                          </td>
+                          <td>{{item.Type}}</td>
+                          <td>{{item.Odds}}</td>
+                          <td>{{item.Stack}}</td>
+                          <td><span class="won-btn"
+                              [ngClass]="item.PotentialProfit>0 ? 'creditAm' : 'debitAm'">{{item.PotentialProfit}}</span>
+                          </td>
+                          <td *ngIf="matchType =='P'"><span class="won-btn"
+                              [ngClass]="item.PotentialProfit>0 || item.PotentialProfit==0 ? 'creditAm' : 'debitAm'">
+                              {{(item.PotentialProfit
+                              >0?'WON':item.PotentialProfit
+                              ==0 ?'-':'LOSS')}}</span></td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

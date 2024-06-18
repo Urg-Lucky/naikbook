@@ -1,0 +1,527 @@
+<div class="login_background" id="login_div">
+  <div class="justify-content-center login-reg-div">
+    <div class="login_sidebar">
+      <div>
+        <div class="login-main-bx registration_div">
+          <div class="mb-login__section mb-login__section--left">
+            <div class="logo_intop" style="width: 110px; margin:7px
+              auto auto
+              auto;"> <a href="/"><img
+                  src="../../assets/imagess/logo.png"></a></div>
+            <form class="login-main-bx-inner" *ngIf="!isSupport"
+              style="padding:
+              20px 20px 20px 20px;"
+              [formGroup]="register_form"
+              (ngSubmit)="registerSave()"
+              name="registerForm" novalidate>
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-in-bx
+                    full_btn"
+                    style="background-color:#007bff;width:
+                    150px; margin-bottom: 8px; margin-left:
+                    157px;"
+                    (click)="isSupport=true;">Support</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="group">
+                    <input type="input"
+                      formControlName="name"
+                      placeholder="Name*"
+                      class="input-bx inputMaterial"
+                      id="name" autocomplete="off">
+
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['name'].valid
+                      &&
+                      register_form.controls['name'].touched)
+                      ||
+                      (register_form.controls['name'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid name.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="group">
+
+                    <input type="input"
+                      minlength="6"
+                      formControlName="username"
+                      placeholder="User Name*"
+                      (blur)="CheckUserNameExist($event)"
+                      (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                      class="input-bx inputMaterial"
+                      id="no-paste" autocomplete="off">
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['username'].valid
+                      &&
+                      register_form.controls['username'].touched)
+                      ||
+                      (register_form.controls['username'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid user name.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="group">
+                    <input
+                      type="email"
+                      formControlName="email"
+                      placeholder="Email Address"
+                      class="input-bx inputMaterial"
+                      (blur)="CheckUserExist($event)"
+                      id="email" autocomplete="off">
+
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['email'].valid
+                      &&
+                      register_form.controls['email'].touched)
+                      ||
+                      (register_form.controls['email'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid email.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="group"> <input
+                      type="input"
+                      (keyup)="onlyNumber($event)"
+                      (blur)="CheckUserMobileExist($event)"
+                      minlength="10"
+                      maxlength="10"
+                      formControlName="mobile"
+                      placeholder="Mobile Number*"
+                      class="input-bx inputMaterial"
+                      id="mobile" autocomplete="off">
+                    <a href="javascript:void(0);"
+                      (click)="resendOtp()"
+                      *ngIf="otpShow"
+                      class="resendotp">Resend Otp</a>
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['mobile'].valid
+                      &&
+                      register_form.controls['mobile'].touched)
+                      ||
+                      (register_form.controls['mobile'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid mobile number.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12" *ngIf="otpShow">
+                  <div class="group"> <input
+                      type="input"
+                      placeholder="OTP*"
+                      pattern="^0[1-9]|[1-9]\d$"
+                      maxlength="6"
+                      (keyup)="onlyNumber($event)"
+                      (blur)="CheckValidOtp($event)"
+                      formControlName="otp"
+                      class="input-bx inputMaterial"
+                      id="otp" autocomplete="off">
+
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['otp'].valid
+                      &&
+                      register_form.controls['otp'].touched)
+                      ||
+                      (register_form.controls['otp'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid otp.
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-12">
+                                    <div class="group">
+                                        <input type="input"
+                                            formControlName="referralcode"
+                                            placeholder="Referral Code"
+                                            class="input-bx inputMaterial"
+                                            id="referralcode"
+                                            autocomplete="off">
+                                    </div>
+                                </div> -->
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="group">
+                    <select formControlName="state"
+                      class="form-control"
+                      (change)="getCities($event.target.value)">
+                      <option selected value="null">Select
+                        State</option>
+                      <option *ngFor="let slist of states"
+                        value="{{slist.id}}">{{slist.name}}</option>
+                    </select>
+                    <!-- <input type="input"
+                                            formControlName="state"
+                                            placeholder="State*"
+                                            class="input-bx inputMaterial"
+                                            id="state" autocomplete="off"> -->
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['state'].valid
+                      &&
+                      register_form.controls['state'].touched)
+                      ||
+                      (register_form.controls['state'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Select state.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="group">
+                    <select formControlName="city"
+                      class="form-control">
+                      <option selected value="null">Select
+                        city</option>
+                      <option *ngFor="let clist of cities"
+                        value="{{clist.id}}">{{clist.city}}</option>
+                    </select>
+                    <!-- <input type="input"
+                                            formControlName="city"
+                                            placeholder="City*"
+                                            class="input-bx inputMaterial"
+                                            id="city" autocomplete="off"> -->
+                    <div class="error_txt"
+                      *ngIf="(!register_form.controls['city'].valid
+                      &&
+                      register_form.controls['city'].touched)
+                      ||
+                      (register_form.controls['city'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Select city.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="group">
+                    <div class="input-group"
+                      id="show_hide_password2">
+
+                      <input type="password"
+                        formControlName="newPassword"
+                        [(ngModel)]="newPassword"
+                        placeholder="Password*"
+                        class="input-bx inputMaterial"
+                        id="Password"
+                        autocomplete="off">
+                      <div class="input-group-addon"
+                        style="position: absolute;
+                        right: 5px; top: 11px;font-size:
+                        15px;">
+                        <a href="javascript:void(0);"><i
+                            class="fa fa-eye-slash"
+                            aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                    <span class="error_txt"
+                      *ngIf="(!register_form.controls['newPassword'].valid
+                      &&
+                      register_form.controls['newPassword'].touched)
+                      ||
+                      (register_form.controls['newPassword'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+
+                      Enter Password.
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="group">
+                    <div class="input-group"
+                      id="show_hide_password3">
+
+                      <input
+                        type="password"
+                        formControlName="confPassword"
+                        [(ngModel)]="confPassword"
+                        placeholder="Confirm Password*"
+                        class="input-bx inputMaterial"
+                        id="cPassword"
+                        autocomplete="off">
+                      <div class="input-group-addon"
+                        style="position: absolute;
+                        right: 5px; top: 11px;font-size:
+                        15px;">
+                        <a href="javascript:void(0);"><i
+                            class="fa fa-eye-slash"
+                            aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                    <span class="error_txt"
+                      *ngIf="(!register_form.controls['confPassword'].valid
+                      &&
+                      register_form.controls['confPassword'].touched)
+                      ||
+                      (register_form.controls['confPassword'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+
+                      Enter Confirm Password. </span>
+                    <div class="error_txt"
+                      *ngIf="confPassword
+                      !=
+                      newPassword &&
+                      confPassword!='' && newPassword!=''"
+                      [ngClass]="error">
+                      Password Mismatch.
+                    </div>
+                  </div>
+
+                </div>
+                <input type="checkbox" id="ageagree"
+                  formControlName="ageagree"
+                  style="margin-left: 16px;"><span
+                  class="check-box">I am of legal age 18+ to
+                  gamble and I accept the
+                  <a href="/page/general-terms-and-conditions"
+                    class="text-decoration-none">Terms
+                    and
+                    Conditions</a>
+                  and
+                  <a href="/page/aml-policy"
+                    class="text-decoration-none">Privacy
+                    Policy</a>.</span>
+                <div class="error_txt"
+                  *ngIf="(!register_form.controls['ageagree'].valid
+                  &&
+                  register_form.controls['ageagree'].touched)
+                  ||
+                  (register_form.controls['ageagree'].invalid
+                  &&
+                  !isValidFormSubmitted &&
+                  isValidFormSubmitted!=null)"
+                  [ngClass]="error">
+                  Kindly accept terms and conditions.
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button type="submit" class="btn btn-in-bx
+                    full_btn" [disabled]="!isUser" onclick="dht('Register',
+                    {})">REGISTER</button>
+                  <!-- <div class="reg_bx full_btn"><span>OR</span>
+                                        <button type="button" class="btn
+                                            btn-in-bx"
+                                            (click)="IsRegistrationShow=false">Already
+                                            have account?</button></div> -->
+                </div>
+              </div>
+            </form>
+            <form class="login-main-bx-inner" *ngIf="isSupport"
+              style="padding:
+              20px 20px 20px 20px;"
+              [formGroup]="support_form"
+              (ngSubmit)="sendSupport()"
+              name="supportForm" novalidate>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="group">
+                    <input type="input"
+                      formControlName="supportname"
+                      placeholder="Name*"
+                      class="input-bx inputMaterial"
+                      id="supportname" autocomplete="off">
+                    <div class="error_txt"
+                      *ngIf="(!support_form.controls['supportname'].valid
+                      &&
+                      support_form.controls['supportname'].touched)
+                      ||
+                      (support_form.controls['supportname'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid name.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="group">
+                    <input type="input"
+                      (keyup)="onlyNumber($event)"
+                      formControlName="supportphone"
+                      placeholder="Mobile Number*"
+                      class="input-bx inputMaterial"
+                      id="supportphone"
+                      autocomplete="off">
+
+                    <div class="error_txt"
+                      *ngIf="(!support_form.controls['supportphone'].valid
+                      &&
+                      support_form.controls['supportphone'].touched)
+                      ||
+                      (support_form.controls['supportphone'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter valid mobile number.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="group">
+                    <textarea
+                      formControlName="supportmessage"
+                      placeholder="Message*"
+                      class="input-bx inputMaterial"
+                      id="supportmessage"></textarea>
+
+                    <div class="error_txt"
+                      *ngIf="(!support_form.controls['supportmessage'].valid
+                      &&
+                      support_form.controls['supportmessage'].touched)
+                      ||
+                      (support_form.controls['supportmessage'].invalid
+                      &&
+                      !isValidFormSubmitted &&
+                      isValidFormSubmitted!=null)"
+                      [ngClass]="error">
+                      Enter message.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+
+                  <button type="submit" class="btn btn-in-bx
+                    full_btn"
+                    style="background-color:#007bff">SEND</button>
+                  <button type="submit" class="btn btn-in-bx
+                    full_btn"
+                    (click)="isSupport=false;">GO TO
+                    REGISTER</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="mb-login__container-join"
+              *ngIf="IsRegistration=='Y'">
+              <div class="mb-login__join-text"><p><strong>New to
+                    Fairbets?</strong></p>
+                <span class="mb-login__join-text-sub">Already
+                  have account?</span>
+              </div>
+              <a href="/login" class="btn btn-in-bx">Login</a>
+            </div>
+          </div>
+        </div>
+
+        <ngx-loading [show]="loading"
+          [config]="{backdropBorderRadius:'3px'}"></ngx-loading>
+      </div>
+      <div *ngIf="IsRegistrationCompelete">
+        <div class="login-main-bx">
+          <!-- <a href="/" class="back_button">BACK</a> -->
+          <div class="mb-login__section mb-login__section--left"
+            style="height:auto">
+            <!-- <div class="logo_intop" style="font-size: 25px;
+                                color:#000; text-align: center;margin-top:
+                                10px;">
+                                FairBets
+                               
+                            </div> -->
+            <form class="login-main-bx-inner form-container"
+              [formGroup]="otp_form"
+              (ngSubmit)="otp()" name="otpForm"
+              novalidate>
+              <div class="pdlft0">
+                <div class="group">
+                  <input type="text" placeholder
+                    formControlName="otp"
+                    autocomplete="otp" class="input-bx
+                    inputMaterial" value>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label>Otp</label>
+                  <div class="error_txt"
+                    *ngIf="(!otp_form.controls['otp'].valid
+                    &&
+                    otp_form.controls['otp'].touched)
+                    ||
+                    (otp_form.controls['otp'].invalid
+                    &&
+                    !isValidFormSubmitted &&
+                    isValidFormSubmitted!=null)"
+                    [ngClass]="error">
+                    Enter valid otp.
+                  </div>
+                </div>
+              </div>
+              <div class="pdlft0">
+                <button type="submit"
+                  id="gtm-login_button"
+                  class="btn-in-bx
+                  full_btn">Verify Otp</button>
+              </div>
+
+            </form>
+            <div class="mb-login__container-join"
+              *ngIf="IsRegistration=='Y'">
+              <div class="mb-login__join-text"><p><strong>New
+                    to Fairbets?</strong></p>
+                <span class="mb-login__join-text-sub">Join
+                  now and get access to the best odds
+                  available anywhere.</span>
+              </div>
+              <button type="button" class="btn btn-in-bx"
+                (click)="IsRegistrationShow=true;formReset()">Join
+                Now</button>
+            </div>
+          </div>
+
+        </div>
+        <ngx-loading [show]="loading"
+          [config]="{backdropBorderRadius:'3px'}"></ngx-loading>
+      </div>
+    </div>
+  </div>
+</div>

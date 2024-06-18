@@ -1,0 +1,43 @@
+<app-header></app-header>
+<section class="innerSidebar">
+    <div class="overly" (click)="closeSideMenu()"></div>
+    <!-- Slider Start -->
+    <!-- <section class="slider">
+
+        <div id="carouselExampleIndicators" class="carousel slide web-show" data-ride="carousel">
+            <div class="carousel-indicators">
+                <ng-container>
+                    <button type="button" class="active" attr.data-target="#carouselExampleIndicators"></button>
+                </ng-container>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let image of imagess; let i = index" [class.active]="i === 0">
+                    <img [src]="image.attachment" class="d-block w-100" [alt]="'Slide ' + (i + 1)"
+                        style="filter: hue-rotate(205deg);">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide mobile-show" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <ng-container>
+                    <button type="button" class="active" attr.data-target="#carouselExampleSlidesOnly"></button>
+                </ng-container>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let image of imagess; let i = index" [class.active]="i === 0">
+                    <img [src]="image.attachment" class="d-block w-100" [alt]="'Slide ' + (i + 1)"
+                        style="filter: hue-rotate(205deg);">
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Slider Start -->
+    <section class="{{dashboardClass}}">
+        <app-sidebar></app-sidebar>
+        <router-outlet></router-outlet>
+    </section>
+</section>
+<app-footer></app-footer>
